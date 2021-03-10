@@ -13,15 +13,7 @@ class DepartmentsSeeder extends Seeder
     public function run()
     {
         $input = [
-            'Admin',
-            'Doctor',
-            'Patient',
-            'Nurse',
-            'Receptionist',
-            'Pharmacist',
-            'Accountant',
-            'Case Manager',
-            'Lab Technician',
+            'Admin'
         ];
 
         foreach ($input as $value) {

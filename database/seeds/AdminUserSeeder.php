@@ -20,6 +20,7 @@ class AdminUserSeeder extends Seeder
             'first_name'        => 'Super',
             'last_name'         => 'Admin',
             'email'             => 'admin@hms.com',
+            'username'          => 'adminhms',
             'password'          => Hash::make('123456789'),
             'phone'             => '7878454512',
             'gender'            => 1,

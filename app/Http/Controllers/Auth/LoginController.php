@@ -41,6 +41,18 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function login(Request $request)
+    {
+        $request->validate(['username' => 'required|string', 'password' => 'required']);
+        $login = [
+            'username' => $request->username,
+            'password' => $request->password
+        ];
+        if (Auth::attempt($login)) {
+            $this->sendLoginResponse($request);
+        }
+        $this->sendFailedLoginResponse($request);
+    }
 
     /**
      * Send the response after the user was authenticated.
@@ -73,19 +85,19 @@ class LoginController extends Controller
             }
         }
 
-        if (! isset($request->remember)) {
+        if (!isset($request->remember)) {
 
             return $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended($this->redirectPath())
-                    ->withCookie(\Cookie::forget('email'))
-                    ->withCookie(\Cookie::forget('password'))
-                    ->withCookie(\Cookie::forget('remember'));
+                ->withCookie(\Cookie::forget('username'))
+                ->withCookie(\Cookie::forget('password'))
+                ->withCookie(\Cookie::forget('remember'));
         }
 
         return $this->authenticated($request, $this->guard()->user())
             ?: redirect()->intended($this->redirectPath())
-                ->withCookie(\Cookie::make('email', $request->email, 3600))
-                ->withCookie(\Cookie::make('password', $request->password, 3600))
-                ->withCookie(\Cookie::make('remember', 1, 3600));
+            ->withCookie(\Cookie::make('username', $request->username, 3600))
+            ->withCookie(\Cookie::make('password', $request->password, 3600))
+            ->withCookie(\Cookie::make('remember', 1, 3600));
     }
 }

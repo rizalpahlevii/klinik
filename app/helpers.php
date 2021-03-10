@@ -53,7 +53,7 @@ function getAvatarUrl()
  */
 function getUserImageInitial($userId, $name)
 {
-    return getAvatarUrl()."?name=$name&size=100&rounded=true&color=fff&background=".getRandomColor($userId);
+    return getAvatarUrl() . "?name=$name&size=100&rounded=true&color=fff&background=" . getRandomColor($userId);
 }
 
 /**
@@ -78,7 +78,7 @@ function getRandomColor($userId)
  */
 function removeCommaFromNumbers($number)
 {
-    return (gettype($number) == 'string' && ! empty($number)) ? str_replace(',', '', $number) : $number;
+    return (gettype($number) == 'string' && !empty($number)) ? str_replace(',', '', $number) : $number;
 }
 
 /**
@@ -146,7 +146,6 @@ function getLogoUrl()
     }
 
     return $appLogo->logo_url;
-
 }
 
 /**
@@ -183,7 +182,6 @@ function getAppName()
     }
 
     return $appName;
-
 }
 
 /**
@@ -250,10 +248,9 @@ function getCurrenciesClass($currency = null)
     static $defaultCurrency;
 
     if (empty($defaultCurrency)) {
-        if (! $currency) {
+        if (!$currency) {
             $defaultCurrency = Setting::where('key', 'current_currency')->first()->value;
         }
-
     }
 
     switch ($defaultCurrency) {
@@ -273,7 +270,6 @@ function getCurrenciesClass($currency = null)
             return 'fas fa-dollar-sign';
         default:
             return 'fas fa-dollar-sign';
-
     }
 }
 
@@ -284,7 +280,7 @@ function getCurrenciesClass($currency = null)
  */
 function getCurrenciesForSetting($currency = null)
 {
-    if (! $currency) {
+    if (!$currency) {
         $defaultCurrency = Setting::where('key', 'current_currency')->first()->value;
     }
 
@@ -315,7 +311,7 @@ function getCurrenciesForSetting($currency = null)
  */
 function getCurrencyForPDF($currency = null)
 {
-    if (! $currency) {
+    if (!$currency) {
         $currency = Setting::where('key', 'current_currency')->first()->value;
     }
 
@@ -350,7 +346,6 @@ function getCurrentCurrency()
     }
 
     return $currentCurrency->value;
-
 }
 
 // number formatted code
@@ -387,7 +382,7 @@ function formatCurrency($currencyValue)
         $currencySuffix = "Cr";
     }
 
-    return $formattedAmount." ".$currencySuffix;
+    return $formattedAmount . " " . $currencySuffix;
 }
 
 /**
@@ -429,7 +424,7 @@ function divider($numberOfDigits)
  */
 function preparePhoneNumber($input, $key)
 {
-    return (! empty($input[$key])) ? '+'.$input['prefix_code'].$input[$key] : null;
+    return (!empty($input[$key])) ? '+' . $input['prefix_code'] . $input[$key] : null;
 }
 
 /**
@@ -449,11 +444,17 @@ function getDoctorDepartment($doctorDepartmentId)
  */
 function getPatientsList($userOwnerId)
 {
-    $patientCase = PatientCase::with('patient.user')->where('doctor_id', '=',
-        $userOwnerId)->where('status', '=', 1)->get()->pluck('patient.user_id', 'id');
+    $patientCase = PatientCase::with('patient.user')->where(
+        'doctor_id',
+        '=',
+        $userOwnerId
+    )->where('status', '=', 1)->get()->pluck('patient.user_id', 'id');
 
-    $patientAdmission = PatientAdmission::with('patient.user')->where('doctor_id', '=',
-        $userOwnerId)->where('status', '=', 1)->get()->pluck('patient.user_id', 'id');
+    $patientAdmission = PatientAdmission::with('patient.user')->where(
+        'doctor_id',
+        '=',
+        $userOwnerId
+    )->where('status', '=', 1)->get()->pluck('patient.user_id', 'id');
 
     $arrayMerge = array_merge($patientAdmission->toArray(), $patientCase->toArray());
     $patientIds = array_unique($arrayMerge);
@@ -471,7 +472,7 @@ function getPatientsList($userOwnerId)
  */
 function getCurrencies()
 {
-    $currencyPath = file_get_contents(storage_path()."/currencies/defaultCurrency.json");
+    $currencyPath = file_get_contents(storage_path() . "/currencies/defaultCurrency.json");
     $currenciesData = json_decode($currencyPath, true);
     $currencies = [];
 
@@ -492,11 +493,13 @@ function getCurrencies()
  */
 function getCurrencySymbol()
 {
-    $currencyPath = file_get_contents(storage_path()."/currencies/defaultCurrency.json");
+    $currencyPath = file_get_contents(storage_path() . "/currencies/defaultCurrency.json");
     $currenciesData = json_decode($currencyPath, true)['currencies'];
 
-    $currencySymbol = collect($currenciesData)->where('code',
-        strtoupper(getCurrentCurrency()))->pluck('symbol')->first();
+    $currencySymbol = collect($currenciesData)->where(
+        'code',
+        strtoupper(getCurrentCurrency())
+    )->pluck('symbol')->first();
 
     return $currencySymbol;
 }
@@ -526,9 +529,9 @@ function getFileName($fileName, $attachment)
 {
     $fileNameExtension = $attachment->getClientOriginalExtension();
 
-    $newName = $fileName.'-'.time();
+    $newName = $fileName . '-' . time();
 
-    return $newName.'.'.$fileNameExtension;
+    return $newName . '.' . $fileNameExtension;
 }
 
 /**
@@ -552,8 +555,10 @@ function addNotification($data)
  */
 function getNotification($role)
 {
-    return Notification::whereUserId(Auth::id())->whereNotificationFor(Notification::NOTIFICATION_FOR[$role])->where('read_at',
-        null)->orderByDesc('created_at')->get();
+    return Notification::whereUserId(Auth::id())->whereNotificationFor(Notification::NOTIFICATION_FOR[$role])->where(
+        'read_at',
+        null
+    )->orderByDesc('created_at')->get();
 }
 
 /**
@@ -641,9 +646,11 @@ function checkVaccinatePatientValidation($input, $vaccinatedPatient = null, $isC
     }
 
     foreach ($patients as $patient) {
-        if ($input['patient_id'] == $patient->patient_id &&
+        if (
+            $input['patient_id'] == $patient->patient_id &&
             $input['vaccination_id'] == $patient->vaccination_id &&
-            $input['dose_number'] == $patient->dose_number) {
+            $input['dose_number'] == $patient->dose_number
+        ) {
             $returnValue = true;
             break;
         }
@@ -651,4 +658,3 @@ function checkVaccinatePatientValidation($input, $vaccinatedPatient = null, $isC
 
     return $returnValue;
 }
-

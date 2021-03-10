@@ -24,7 +24,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->middleware('verified');
 
-Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], function () {
+Route::group(['middleware' => ['auth', 'xss']], function () {
     Route::get('profile', 'UserController@editProfile');
     Route::post('change-password', 'UserController@changePassword');
     Route::post('profile-update', 'UserController@profileUpdate');
@@ -36,21 +36,25 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
     Route::get('failed-payment', 'StripeController@handleFailedPayment')->name('failed-payment');
 
 
-    Route::group(['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Nurse|Accountant|Lab Technician|Pharmacist|Case Manager']],
+    Route::group(
+        ['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Nurse|Accountant|Lab Technician|Pharmacist|Case Manager']],
         function () {
             Route::group(['prefix' => 'employee', 'namespace' => 'Employee'], function () {
                 Route::get('notice-board', 'NoticeBoardController@index')->name('noticeboard')->middleware('modules');
                 Route::get('notice-board/{id}', 'NoticeBoardController@show')->name('noticeboard.show');
                 Route::get('export-my-payrolls', 'PayrollController@userPayrollExport')->name('my.payrolls.excel');
             });
-        });
+        }
+    );
 
-    Route::group(['middleware' => ['role:Admin|Doctor|Receptionist|Nurse|Accountant|Lab Technician|Pharmacist|Case Manager']],
+    Route::group(
+        ['middleware' => ['role:Admin|Doctor|Receptionist|Nurse|Accountant|Lab Technician|Pharmacist|Case Manager']],
         function () {
             Route::group(['prefix' => 'employee', 'namespace' => 'Employee'], function () {
                 Route::get('payroll', 'PayrollController@index')->name('payroll')->middleware('modules');
             });
-        });
+        }
+    );
 
     Route::group(['middleware' => ['role:Admin|Patient|Doctor']], function () {
         Route::resource('documents', 'DocumentController');
@@ -73,12 +77,16 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
     Route::group(['middleware' => ['role:Admin|Patient|Doctor|Receptionist']], function () {
         // Listing common routes to be accessible by Admin, Doctor, Receptionist and Patient for IPD Patient modules.
         Route::get('ipd-diagnosis', 'IpdDiagnosisController@index')->name('ipd.diagnosis.index');
-        Route::get('ipd-consultant-register',
-            'IpdConsultantRegisterController@index')->name('ipd.consultant.index');
+        Route::get(
+            'ipd-consultant-register',
+            'IpdConsultantRegisterController@index'
+        )->name('ipd.consultant.index');
         Route::get('ipd-charges', 'IpdChargeController@index')->name('ipd.charge.index');
         Route::get('ipd-prescription', 'IpdPrescriptionController@index')->name('ipd.prescription.index');
-        Route::get('ipd-prescription/{ipdPrescription}',
-            'IpdPrescriptionController@show')->name('ipd.prescription.show');
+        Route::get(
+            'ipd-prescription/{ipdPrescription}',
+            'IpdPrescriptionController@show'
+        )->name('ipd.prescription.show');
         Route::get('ipd-timelines', 'IpdTimelineController@index')->name('ipd.timelines.index');
         Route::get('ipd-payments', 'IpdPaymentController@index')->name('ipd.payments.index');
         Route::get('ipd-bills/{ipdPatientDepartment}/pdf', 'IpdBillController@ipdBillConvertToPdf')
@@ -93,22 +101,27 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('opd-diagnosis-download/{opdDiagnosis}', 'OpdDiagnosisController@downloadMedia');
         Route::get('opd-timelines', 'OpdTimelineController@index')->name('opd.timelines.index');
         Route::get('opd-timelines-download/{opdTimeline}', 'OpdTimelineController@downloadMedia');
-
     });
 
     // excel export routes.
     Route::group(['middleware' => ['role:Patient']], function () {
         Route::group(['prefix' => 'patient'], function () {
-            Route::get('export-prescription',
-                'Patient\PrescriptionController@prescriptionExport')->name('prescription.excel');
+            Route::get(
+                'export-prescription',
+                'Patient\PrescriptionController@prescriptionExport'
+            )->name('prescription.excel');
 
             Route::get('my-ipds', 'Patient\IpdPatientDepartmentController@index')->name('patient.ipd');
-            Route::get('my-ipds/{ipdPatientDepartment}',
-                'Patient\IpdPatientDepartmentController@show')->name('patient.ipd.show');
+            Route::get(
+                'my-ipds/{ipdPatientDepartment}',
+                'Patient\IpdPatientDepartmentController@show'
+            )->name('patient.ipd.show');
 
             Route::get('my-opds', 'Patient\OpdPatientDepartmentController@index')->name('patient.opd');
-            Route::get('my-opds/{opdPatientDepartment}',
-                'Patient\OpdPatientDepartmentController@show')->name('patient.opd.show');
+            Route::get(
+                'my-opds/{opdPatientDepartment}',
+                'Patient\OpdPatientDepartmentController@show'
+            )->name('patient.opd.show');
 
             Route::get('my-vaccinated', 'Patient\VaccinatedController@index')->name('patient.vaccinated');
         });
@@ -133,8 +146,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
 
     // excel export routes.
     Route::group(['middleware' => ['role:Admin|Doctor|Case Manager|Receptionist']], function () {
-        Route::get('export-patient-admissions',
-            'PatientAdmissionController@patientAdmissionExport')->name('patient.admissions.excel');
+        Route::get(
+            'export-patient-admissions',
+            'PatientAdmissionController@patientAdmissionExport'
+        )->name('patient.admissions.excel');
     });
 
     // excel export routes.
@@ -151,8 +166,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
 
     // excel export routes.
     Route::group(['middleware' => ['role:Receptionist|Lab Technician']], function () {
-        Route::get('export-patient-diagnosis-test',
-            'PatientDiagnosisTestController@patientDiagnosisTestExport')->name('patient.diagnosis.test.excel');
+        Route::get(
+            'export-patient-diagnosis-test',
+            'PatientDiagnosisTestController@patientDiagnosisTestExport'
+        )->name('patient.diagnosis.test.excel');
     });
 
     // excel export routes.
@@ -161,8 +178,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
             Route::get('export-insurances', 'InsuranceController@insuranceExport')->name('insurances.excel');
             Route::get('export-packages', 'PackageController@packageExport')->name('packages.excel');
             Route::get('export-charges', 'ChargeController@chargeExport')->name('charges.excel');
-            Route::get('export-doctor-opd-charges',
-                'DoctorOPDChargeController@doctorOPDChargeExport')->name('doctor.opd.charges.excel');
+            Route::get(
+                'export-doctor-opd-charges',
+                'DoctorOPDChargeController@doctorOPDChargeExport'
+            )->name('doctor.opd.charges.excel');
         });
     });
 
@@ -177,36 +196,50 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
     // excel export routes.
     Route::group(['middleware' => ['role:Accountant']], function () {
         Route::group(['prefix' => 'accountant'], function () {
-            Route::get('export-employee-payrolls',
-                'EmployeePayrollController@employeePayrollExport')->name('employee.payrolls.excel');
+            Route::get(
+                'export-employee-payrolls',
+                'EmployeePayrollController@employeePayrollExport'
+            )->name('employee.payrolls.excel');
             Route::get('export-services', 'ServiceController@serviceExport')->name('services.excel');
         });
     });
 
     // excel export routes.
     Route::group(['middleware' => ['role:Case Manager']], function () {
-        Route::get('export-ambulance-calls',
-            'AmbulanceCallController@ambulanceCallExport')->name('ambulance.calls.excel');
+        Route::get(
+            'export-ambulance-calls',
+            'AmbulanceCallController@ambulanceCallExport'
+        )->name('ambulance.calls.excel');
     });
 
     // excel export routes.
     Route::group(['middleware' => ['role:Lab Technician']], function () {
         Route::get('export-blood-banks', 'BloodBankController@bloodBankExport')->name('blood.banks.excel');
         Route::get('export-blood-donors', 'BloodDonorController@bloodDonorExport')->name('blood.donors.excel');
-        Route::get('export-blood-donations',
-            'BloodDonationController@bloodDonationExport')->name('blood.donations.excel');
+        Route::get(
+            'export-blood-donations',
+            'BloodDonationController@bloodDonationExport'
+        )->name('blood.donations.excel');
         Route::get('export-blood-issues', 'BloodIssueController@export')->name('blood.issues.excel');
-        Route::get('export-radiology-tests',
-            'RadiologyTestController@radiologyTestExport')->name('radiology.tests.excel');
-        Route::get('export-pathology-tests',
-            'PathologyTestController@pathologyTestExport')->name('pathology.tests.excel');
+        Route::get(
+            'export-radiology-tests',
+            'RadiologyTestController@radiologyTestExport'
+        )->name('radiology.tests.excel');
+        Route::get(
+            'export-pathology-tests',
+            'PathologyTestController@pathologyTestExport'
+        )->name('pathology.tests.excel');
     });
 
-    Route::group(['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Nurse|Case Manager|Accountant']],
+    Route::group(
+        ['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Nurse|Case Manager|Accountant']],
         function () {
-            Route::get('patients/{patient}', 'PatientController@show')->where('patient',
-                '[0-9]+')->name('patients.show');
-        });
+            Route::get('patients/{patient}', 'PatientController@show')->where(
+                'patient',
+                '[0-9]+'
+            )->name('patients.show');
+        }
+    );
 
     Route::group(['middleware' => ['role:Admin|Doctor|Receptionist|Accountant']], function () {
         Route::get('doctors/{doctor}', 'DoctorController@show')->where('doctor', '[0-9]+');
@@ -219,8 +252,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('doctors-list', 'AppointmentController@getDoctors');
         Route::get('appointment-calendars', 'AppointmentCalendarController@index')->name('appointment-calendars.index');
         Route::get('calendar-list', 'AppointmentCalendarController@calendarList');
-        Route::get('appointment-detail/{appointment}',
-            'AppointmentCalendarController@getAppointmentDetails')->name('appointment.details');
+        Route::get(
+            'appointment-detail/{appointment}',
+            'AppointmentCalendarController@getAppointmentDetails'
+        )->name('appointment.details');
         Route::post('appointments/{appointment}/status', 'AppointmentController@status')
             ->name('appointment.status');
     });
@@ -260,24 +295,34 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
 
     Route::group(['middleware' => ['role:Admin|Receptionist']], function () {
         Route::resource('charge-categories', 'ChargeCategoryController');
-        Route::get('charge-categories',
-            'ChargeCategoryController@index')->name('charge-categories.index')->middleware('modules');
+        Route::get(
+            'charge-categories',
+            'ChargeCategoryController@index'
+        )->name('charge-categories.index')->middleware('modules');
 
         Route::resource('charges', 'ChargeController');
         Route::get('charges', 'ChargeController@index')->name('charges.index')->middleware('modules');
         Route::get('get-charge-categories', 'ChargeController@getChargeCategory');
 
         //Doctor OPD Charge Routes
-        Route::get('doctor-opd-charges',
-            'DoctorOPDChargeController@index')->name('doctor-opd-charges.index')->middleware('modules');
+        Route::get(
+            'doctor-opd-charges',
+            'DoctorOPDChargeController@index'
+        )->name('doctor-opd-charges.index')->middleware('modules');
         Route::post('doctor-opd-charges', 'DoctorOPDChargeController@store')->name('doctor-opd-charges.store');
         Route::get('doctor-opd-charges/create', 'DoctorOPDChargeController@create')->name('doctor-opd-charges.create');
-        Route::delete('doctor-opd-charges/{doctorOPDCharge}',
-            'DoctorOPDChargeController@destroy')->name('doctor-opd-charges.destroy');
-        Route::patch('doctor-opd-charges/{doctorOPDCharge}',
-            'DoctorOPDChargeController@update')->name('doctor-opd-charges.update');
-        Route::get('doctor-opd-charges/{doctorOPDCharge}/edit',
-            'DoctorOPDChargeController@edit')->name('doctor-opd-charges.edit');
+        Route::delete(
+            'doctor-opd-charges/{doctorOPDCharge}',
+            'DoctorOPDChargeController@destroy'
+        )->name('doctor-opd-charges.destroy');
+        Route::patch(
+            'doctor-opd-charges/{doctorOPDCharge}',
+            'DoctorOPDChargeController@update'
+        )->name('doctor-opd-charges.update');
+        Route::get(
+            'doctor-opd-charges/{doctorOPDCharge}/edit',
+            'DoctorOPDChargeController@edit'
+        )->name('doctor-opd-charges.edit');
 
         Route::get('doctors', 'DoctorController@index')->name('doctors.index')->middleware('modules');
         Route::post('doctors', 'DoctorController@store')->name('doctors.store');
@@ -297,37 +342,61 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('enquiry/{enquiry}', 'EnquiryController@show')->name('enquiry.show');
 
         // Radiology Categories routes
-        Route::get('radiology-categories',
-            'RadiologyCategoryController@index')->name('radiology.category.index')->middleware('modules');
+        Route::get(
+            'radiology-categories',
+            'RadiologyCategoryController@index'
+        )->name('radiology.category.index')->middleware('modules');
         Route::post('radiology-categories', 'RadiologyCategoryController@store')->name('radiology.category.store');
-        Route::get('radiology-categories/{radiologyCategory}/edit',
-            'RadiologyCategoryController@edit')->name('radiology.category.edit');
-        Route::patch('radiology-categories/{radiologyCategory}',
-            'RadiologyCategoryController@update')->name('radiology.category.update');
-        Route::delete('radiology-categories/{radiologyCategory}',
-            'RadiologyCategoryController@destroy')->name('radiology.category.destroy');
+        Route::get(
+            'radiology-categories/{radiologyCategory}/edit',
+            'RadiologyCategoryController@edit'
+        )->name('radiology.category.edit');
+        Route::patch(
+            'radiology-categories/{radiologyCategory}',
+            'RadiologyCategoryController@update'
+        )->name('radiology.category.update');
+        Route::delete(
+            'radiology-categories/{radiologyCategory}',
+            'RadiologyCategoryController@destroy'
+        )->name('radiology.category.destroy');
 
         // Pathology Categories routes
-        Route::get('pathology-categories',
-            'PathologyCategoryController@index')->name('pathology.category.index')->middleware('modules');
+        Route::get(
+            'pathology-categories',
+            'PathologyCategoryController@index'
+        )->name('pathology.category.index')->middleware('modules');
         Route::post('pathology-categories', 'PathologyCategoryController@store')->name('pathology.category.store');
-        Route::get('pathology-categories/{pathologyCategory}/edit',
-            'PathologyCategoryController@edit')->name('pathology.category.edit');
-        Route::patch('pathology-categories/{pathologyCategory}',
-            'PathologyCategoryController@update')->name('pathology.category.update');
-        Route::delete('pathology-categories/{pathologyCategory}',
-            'PathologyCategoryController@destroy')->name('pathology.category.destroy');
+        Route::get(
+            'pathology-categories/{pathologyCategory}/edit',
+            'PathologyCategoryController@edit'
+        )->name('pathology.category.edit');
+        Route::patch(
+            'pathology-categories/{pathologyCategory}',
+            'PathologyCategoryController@update'
+        )->name('pathology.category.update');
+        Route::delete(
+            'pathology-categories/{pathologyCategory}',
+            'PathologyCategoryController@destroy'
+        )->name('pathology.category.destroy');
 
-        Route::get('doctor-opd-charges',
-            'DoctorOPDChargeController@index')->name('doctor-opd-charges.index')->middleware('modules');
+        Route::get(
+            'doctor-opd-charges',
+            'DoctorOPDChargeController@index'
+        )->name('doctor-opd-charges.index')->middleware('modules');
         Route::post('doctor-opd-charges', 'DoctorOPDChargeController@store')->name('doctor-opd-charges.store');
         Route::get('doctor-opd-charges/create', 'DoctorOPDChargeController@create')->name('doctor-opd-charges.create');
-        Route::delete('doctor-opd-charges/{doctorOPDCharge}',
-            'DoctorOPDChargeController@destroy')->name('doctor-opd-charges.destroy');
-        Route::patch('doctor-opd-charges/{doctorOPDCharge}',
-            'DoctorOPDChargeController@update')->name('doctor-opd-charges.update');
-        Route::get('doctor-opd-charges/{doctorOPDCharge}/edit',
-            'DoctorOPDChargeController@edit')->name('doctor-opd-charges.edit');
+        Route::delete(
+            'doctor-opd-charges/{doctorOPDCharge}',
+            'DoctorOPDChargeController@destroy'
+        )->name('doctor-opd-charges.destroy');
+        Route::patch(
+            'doctor-opd-charges/{doctorOPDCharge}',
+            'DoctorOPDChargeController@update'
+        )->name('doctor-opd-charges.update');
+        Route::get(
+            'doctor-opd-charges/{doctorOPDCharge}/edit',
+            'DoctorOPDChargeController@edit'
+        )->name('doctor-opd-charges.edit');
 
         Route::get('patients', 'PatientController@index')->name('patients.index')->middleware('modules');
         Route::post('patients', 'PatientController@store')->name('patients.store');
@@ -347,13 +416,15 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('export-case-handlers', 'CaseHandlerController@caseHandlerExport')->name('case.handler.excel');
     });
 
-    Route::group(['middleware' => ['role:Admin|Doctor|Lab Technician|Pharmacist|Case Manager|Accountant']],
+    Route::group(
+        ['middleware' => ['role:Admin|Doctor|Lab Technician|Pharmacist|Case Manager|Accountant']],
         function () {
             Route::group(['prefix' => 'employee', 'namespace' => 'Employee'], function () {
                 Route::get('doctor', 'DoctorController@index')->name('doctor');
                 Route::get('doctor/{id}', 'DoctorController@show')->name('doctor.show');
             });
-        });
+        }
+    );
 
     Route::group(['middleware' => ['role:Admin|Lab Technician|Pharmacist']], function () {
         Route::resource('medicines', 'MedicineController')->parameters(['medicines' => 'medicine']);
@@ -361,8 +432,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
 
         Route::resource('categories', 'CategoryController')->parameters(['categories' => 'category']);
         Route::get('categories', 'CategoryController@index')->name('categories.index')->middleware('modules');
-        Route::post('categories/{category_id}/active-deactive',
-            'CategoryController@activeDeActiveCategory')->name('active.deactive');
+        Route::post(
+            'categories/{category_id}/active-deactive',
+            'CategoryController@activeDeActiveCategory'
+        )->name('active.deactive');
 
         Route::get('brands', 'BrandController@index')->name('brands.index')->middleware('modules');
         Route::post('brands', 'BrandController@store')->name('brands.store');
@@ -373,8 +446,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('brands/{brand}', 'BrandController@show')->name('brands.show');
     });
     Route::group(['middleware' => ['role:Admin|Doctor|Case Manager|Patient|Receptionist']], function () {
-        Route::get('patient-admissions',
-            'PatientAdmissionController@index')->name('patient-admissions.index')->middleware('modules');
+        Route::get(
+            'patient-admissions',
+            'PatientAdmissionController@index'
+        )->name('patient-admissions.index')->middleware('modules');
         Route::get('insurances/{insurance}', 'InsuranceController@show')->where('insurance', '[0-9]+');
         Route::get('packages/{package}', 'PackageController@show')->where('package', '[0-9]+');
     });
@@ -411,8 +486,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
 
     Route::group(['middleware' => ['role:Admin|Doctor']], function () {
         Route::resource('document-types', 'DocumentTypeController')->parameters(['document-types' => 'documentType']);
-        Route::get('document-types',
-            'DocumentTypeController@index')->name('document-types.index')->middleware('modules');
+        Route::get(
+            'document-types',
+            'DocumentTypeController@index'
+        )->name('document-types.index')->middleware('modules');
 
         Route::resource('schedules', 'ScheduleController')->parameters(['schedules' => 'schedule']);
         Route::get('schedules', 'ScheduleController@index')->name('schedules.index')->middleware('modules');
@@ -423,15 +500,23 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::resource('birth-reports', 'BirthReportController')->parameters(['birth-reports' => 'birthReport']);
         Route::get('birth-reports', 'BirthReportController@index')->name('birth-reports.index')->middleware('modules');
 
-        Route::resource('operation-reports',
-            'OperationReportController')->parameters(['operation-reports' => 'operationReport']);
-        Route::get('operation-reports',
-            'OperationReportController@index')->name('operation-reports.index')->middleware('modules');
+        Route::resource(
+            'operation-reports',
+            'OperationReportController'
+        )->parameters(['operation-reports' => 'operationReport']);
+        Route::get(
+            'operation-reports',
+            'OperationReportController@index'
+        )->name('operation-reports.index')->middleware('modules');
 
-        Route::resource('investigation-reports',
-            'InvestigationReportController')->parameters(['investigation-reports' => 'investigationReport']);
-        Route::get('investigation-reports',
-            'InvestigationReportController@index')->name('investigation-reports.index')->middleware('modules');
+        Route::resource(
+            'investigation-reports',
+            'InvestigationReportController'
+        )->parameters(['investigation-reports' => 'investigationReport']);
+        Route::get(
+            'investigation-reports',
+            'InvestigationReportController@index'
+        )->name('investigation-reports.index')->middleware('modules');
 
         // Route for Prescription
         Route::resource('prescriptions', 'PrescriptionController');
@@ -451,26 +536,42 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('vaccinations/{vaccination}/edit', 'VaccinationController@edit')->name('vaccinations.edit');
 
         //Route for Vaccinated Patients
-        Route::get('vaccinated-patients',
-            'VaccinatedPatientController@index')->name('vaccinated-patients.index')->middleware('modules');
+        Route::get(
+            'vaccinated-patients',
+            'VaccinatedPatientController@index'
+        )->name('vaccinated-patients.index')->middleware('modules');
         Route::post('vaccinated-patients', 'VaccinatedPatientController@store')->name('vaccinated-patients.store');
-        Route::get('vaccinated-patients/create',
-            'VaccinatedPatientController@create')->name('vaccinated-patients.create');
-        Route::get('vaccinated-patients/{vaccinatedPatient}',
-            'VaccinatedPatientController@show')->name('vaccinated-patients.show');
-        Route::delete('vaccinated-patients/{vaccinatedPatient}',
-            'VaccinatedPatientController@destroy')->name('vaccinated-patients.destroy');
-        Route::post('vaccinated-patients/{vaccinatedPatient}/update',
-            'VaccinatedPatientController@update')->name('vaccinated-patients.update');
-        Route::get('vaccinated-patients/{vaccinatedPatient}/edit',
-            'VaccinatedPatientController@edit')->name('vaccinated-patients.edit');
+        Route::get(
+            'vaccinated-patients/create',
+            'VaccinatedPatientController@create'
+        )->name('vaccinated-patients.create');
+        Route::get(
+            'vaccinated-patients/{vaccinatedPatient}',
+            'VaccinatedPatientController@show'
+        )->name('vaccinated-patients.show');
+        Route::delete(
+            'vaccinated-patients/{vaccinatedPatient}',
+            'VaccinatedPatientController@destroy'
+        )->name('vaccinated-patients.destroy');
+        Route::post(
+            'vaccinated-patients/{vaccinatedPatient}/update',
+            'VaccinatedPatientController@update'
+        )->name('vaccinated-patients.update');
+        Route::get(
+            'vaccinated-patients/{vaccinatedPatient}/edit',
+            'VaccinatedPatientController@edit'
+        )->name('vaccinated-patients.edit');
     });
 
-    Route::group(['middleware' => ['role:Admin|Accountant|Doctor|Nurse|Receptionist|Lab Technician|Pharmacist|Case Manager']],
+    Route::group(
+        ['middleware' => ['role:Admin|Accountant|Doctor|Nurse|Receptionist|Lab Technician|Pharmacist|Case Manager']],
         function () {
-            Route::get('employee-payrolls/{employeePayroll}',
-                'EmployeePayrollController@show')->where('employeePayroll', '[0-9]+');
-        });
+            Route::get(
+                'employee-payrolls/{employeePayroll}',
+                'EmployeePayrollController@show'
+            )->where('employeePayroll', '[0-9]+');
+        }
+    );
 
     Route::group(['middleware' => ['role:Admin|Accountant|Receptionist']], function () {
 
@@ -484,8 +585,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('accounts', 'AccountController@index')->name('accounts.index')->middleware('modules');
         Route::post('accounts/{account}/active-deactive', 'AccountController@activeDeactiveAccount');
 
-        Route::get('employee-payrolls',
-            'EmployeePayrollController@index')->name('employee-payrolls.index')->middleware('modules');
+        Route::get(
+            'employee-payrolls',
+            'EmployeePayrollController@index'
+        )->name('employee-payrolls.index')->middleware('modules');
         Route::post('employee-payrolls', 'EmployeePayrollController@store')->name('employee-payrolls.store');
         Route::get('employee-payrolls/create', 'EmployeePayrollController@create')->name('employee-payrolls.create');
         Route::delete('employee-payrolls/{employeePayroll}', 'EmployeePayrollController@destroy')
@@ -511,8 +614,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('bills', 'BillController@index')->name('bills.index')->middleware('modules');
         Route::post('bills/{bill}', 'BillController@update');
         Route::get('bills/{bill}/pdf', 'BillController@convertToPdf')->name('bills.pdf');
-        Route::get('patient-admission-details',
-            'BillController@getPatientAdmissionDetails')->name('patient.admission.details');
+        Route::get(
+            'patient-admission-details',
+            'BillController@getPatientAdmissionDetails'
+        )->name('patient.admission.details');
 
         //Expense Rout
         Route::get('expenses', 'ExpenseController@index')->name('expenses.index')->middleware('modules');
@@ -570,10 +675,11 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::post('send-mail', 'MailController@store')->name('mail.send');
 
         Route::resource('ambulance-calls', 'AmbulanceCallController');
-        Route::get('ambulance-calls',
-            'AmbulanceCallController@index')->name('ambulance-calls.index')->middleware('modules');
+        Route::get(
+            'ambulance-calls',
+            'AmbulanceCallController@index'
+        )->name('ambulance-calls.index')->middleware('modules');
         Route::get('driver-name', 'AmbulanceCallController@getDriverName')->name('driver.name');
-
     });
 
     Route::group(['middleware' => ['role:Admin|Receptionist|Case Manager|Doctor|Accountant|Pharmacist']], function () {
@@ -587,34 +693,54 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
 
     Route::group(['middleware' => ['role:Admin|Receptionist|Lab Technician|Pharmacist']], function () {
         // radiology test routes
-        Route::get('radiology-tests',
-            'RadiologyTestController@index')->name('radiology.test.index')->middleware('modules');
+        Route::get(
+            'radiology-tests',
+            'RadiologyTestController@index'
+        )->name('radiology.test.index')->middleware('modules');
         Route::get('radiology-tests/create', 'RadiologyTestController@create')->name('radiology.test.create');
         Route::post('radiology-tests', 'RadiologyTestController@store')->name('radiology.test.store');
         Route::get('radiology-tests/{radiologyTest}', 'RadiologyTestController@show')->name('radiology.test.show');
-        Route::get('radiology-tests/{radiologyTest}/edit',
-            'RadiologyTestController@edit')->name('radiology.test.edit');
-        Route::patch('radiology-tests/{radiologyTest}',
-            'RadiologyTestController@update')->name('radiology.test.update');
-        Route::delete('radiology-tests/{radiologyTest}',
-            'RadiologyTestController@destroy')->name('radiology.test.destroy');
-        Route::get('radiology-tests/get-standard-charge/{id}',
-            'RadiologyTestController@getStandardCharge')->name('radiology.test.standard.charge');
+        Route::get(
+            'radiology-tests/{radiologyTest}/edit',
+            'RadiologyTestController@edit'
+        )->name('radiology.test.edit');
+        Route::patch(
+            'radiology-tests/{radiologyTest}',
+            'RadiologyTestController@update'
+        )->name('radiology.test.update');
+        Route::delete(
+            'radiology-tests/{radiologyTest}',
+            'RadiologyTestController@destroy'
+        )->name('radiology.test.destroy');
+        Route::get(
+            'radiology-tests/get-standard-charge/{id}',
+            'RadiologyTestController@getStandardCharge'
+        )->name('radiology.test.standard.charge');
 
         // pathology test routes
-        Route::get('pathology-tests',
-            'PathologyTestController@index')->name('pathology.test.index')->middleware('modules');
+        Route::get(
+            'pathology-tests',
+            'PathologyTestController@index'
+        )->name('pathology.test.index')->middleware('modules');
         Route::get('pathology-tests/create', 'PathologyTestController@create')->name('pathology.test.create');
         Route::post('pathology-tests', 'PathologyTestController@store')->name('pathology.test.store');
         Route::get('pathology-tests/{pathologyTest}', 'PathologyTestController@show')->name('pathology.test.show');
-        Route::get('pathology-tests/{pathologyTest}/edit',
-            'PathologyTestController@edit')->name('pathology.test.edit');
-        Route::patch('pathology-tests/{pathologyTest}',
-            'PathologyTestController@update')->name('pathology.test.update');
-        Route::delete('pathology-tests/{pathologyTest}',
-            'PathologyTestController@destroy')->name('pathology.test.destroy');
-        Route::get('pathology-tests/get-standard-charge/{id}',
-            'PathologyTestController@getStandardCharge')->name('pathology.test.standard.charge');
+        Route::get(
+            'pathology-tests/{pathologyTest}/edit',
+            'PathologyTestController@edit'
+        )->name('pathology.test.edit');
+        Route::patch(
+            'pathology-tests/{pathologyTest}',
+            'PathologyTestController@update'
+        )->name('pathology.test.update');
+        Route::delete(
+            'pathology-tests/{pathologyTest}',
+            'PathologyTestController@destroy'
+        )->name('pathology.test.destroy');
+        Route::get(
+            'pathology-tests/get-standard-charge/{id}',
+            'PathologyTestController@getStandardCharge'
+        )->name('pathology.test.standard.charge');
     });
 
     Route::group(['middleware' => ['role:Admin|Receptionist']], function () {
@@ -652,15 +778,23 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('blood-donors', 'BloodDonorController@index')->name('blood-donors.index')->middleware('modules');
 
         //blood Donations route
-        Route::get('blood-donations',
-            'BloodDonationController@index')->name('blood-donations.index')->middleware('modules');
+        Route::get(
+            'blood-donations',
+            'BloodDonationController@index'
+        )->name('blood-donations.index')->middleware('modules');
         Route::post('blood-donations', 'BloodDonationController@store')->name('blood-donations.store');
-        Route::get('blood-donations/{bloodDonation}/edit',
-            'BloodDonationController@edit')->name('blood-donations.edit');
-        Route::post('blood-donations/{bloodDonation}',
-            'BloodDonationController@update')->name('blood-donations.update');
-        Route::delete('blood-donations/{bloodDonation}',
-            'BloodDonationController@destroy')->name('blood-donations.destroy');
+        Route::get(
+            'blood-donations/{bloodDonation}/edit',
+            'BloodDonationController@edit'
+        )->name('blood-donations.edit');
+        Route::post(
+            'blood-donations/{bloodDonation}',
+            'BloodDonationController@update'
+        )->name('blood-donations.update');
+        Route::delete(
+            'blood-donations/{bloodDonation}',
+            'BloodDonationController@destroy'
+        )->name('blood-donations.destroy');
 
         //blood-issue routes
         Route::get('blood-issues', 'BloodIssueController@index')->name('blood-issues.index')->middleware('modules');
@@ -669,7 +803,6 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::post('blood-issues/{bloodIssue}', 'BloodIssueController@update')->name('blood-issues.update');
         Route::delete('blood-issues/{bloodIssue}', 'BloodIssueController@destroy')->name('blood-issues.destroy');
         Route::get('blood-group-list', 'BloodIssueController@getBloodGroup')->name('blood-issues.list');
-
     });
 
     Route::group(['middleware' => ['role:Admin|Accountant']], function () {
@@ -678,8 +811,8 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
     });
 
     Route::group(['middleware' => ['role:Admin']], function () {
-//        Route::resource('departments', 'DepartmentController');
-//        Route::post('departments/{department}/active-deactive', 'DepartmentController@activeDeactiveDepartment');
+        //        Route::resource('departments', 'DepartmentController');
+        //        Route::post('departments/{department}/active-deactive', 'DepartmentController@activeDeactiveDepartment');
 
         Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
 
@@ -695,8 +828,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::post('modules/{module}/active-deactive', 'SettingController@activeDeactiveStatus')
             ->name('module.activeDeactiveStatus');
 
-        Route::get('doctor-departments',
-            'DoctorDepartmentController@index')->name('doctor-departments.index')->middleware('modules');
+        Route::get(
+            'doctor-departments',
+            'DoctorDepartmentController@index'
+        )->name('doctor-departments.index')->middleware('modules');
         Route::post('doctor-departments', 'DoctorDepartmentController@store')->name('doctor-departments.store');
         Route::get('doctor-departments/create', 'DoctorDepartmentController@create')->name('doctor-departments.create');
         Route::delete('doctor-departments/{doctorDepartment}', 'DoctorDepartmentController@destroy')
@@ -717,11 +852,15 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('export-nurses', 'NurseController@nurseExport')->name('nurses.excel');
 
         Route::resource('lab-technicians', 'LabTechnicianController');
-        Route::get('lab-technicians',
-            'LabTechnicianController@index')->name('lab-technicians.index')->middleware('modules');
+        Route::get(
+            'lab-technicians',
+            'LabTechnicianController@index'
+        )->name('lab-technicians.index')->middleware('modules');
         Route::post('lab-technicians/{labTechnician}/active-deactive', 'LabTechnicianController@activeDeactiveStatus');
-        Route::get('export-lab-technicians',
-            'LabTechnicianController@labTechnicianExport')->name('lab.technicians.excel');
+        Route::get(
+            'export-lab-technicians',
+            'LabTechnicianController@labTechnicianExport'
+        )->name('lab.technicians.excel');
 
         Route::resource('receptionists', 'ReceptionistController');
         Route::get('receptionists', 'ReceptionistController@index')->name('receptionists.index')->middleware('modules');
@@ -731,8 +870,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('export-ambulances', 'AmbulanceController@ambulanceExport')->name('ambulance.excel');
         Route::get('export-incomes', 'IncomeController@incomeExport')->name('incomes.excel');
         Route::get('export-expenses', 'ExpenseController@expenseExport')->name('expenses.excel');
-        Route::get('export-payment-reports',
-            'PaymentReportController@paymentReportExport')->name('payment.report.excel');
+        Route::get(
+            'export-payment-reports',
+            'PaymentReportController@paymentReportExport'
+        )->name('payment.report.excel');
 
         Route::resource(
             'advanced-payments',
@@ -745,8 +886,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
 
         // Inventory Management routes.
         Route::resource('item-categories', 'ItemCategoryController')->parameters(['item-categories' => 'itemCategory']);
-        Route::get('item-categories',
-            'ItemCategoryController@index')->name('item-categories.index')->middleware('modules');
+        Route::get(
+            'item-categories',
+            'ItemCategoryController@index'
+        )->name('item-categories.index')->middleware('modules');
         Route::get('items-list', 'ItemCategoryController@getItemsList')->name('items.list');
 
         Route::get('items', 'ItemController@index')->name('items.index')->middleware('modules');
@@ -765,8 +908,10 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::patch('item-stocks/{itemStock}', 'ItemStockController@update')->name('item.stock.update');
         Route::get('item-stocks/{itemStock}/edit', 'ItemStockController@edit')->name('item.stock.edit');
         Route::get('item-stocks/{itemStock}', 'ItemStockController@show')->name('item.stock.show');
-        Route::get('item-stocks-download/{itemStock}',
-            'ItemStockController@downloadMedia')->name('item.stock.download');
+        Route::get(
+            'item-stocks-download/{itemStock}',
+            'ItemStockController@downloadMedia'
+        )->name('item.stock.download');
 
         Route::get('issued-items', 'IssuedItemController@index')->name('issued.item.index')->middleware('modules');
         Route::post('issued-items', 'IssuedItemController@store')->name('issued.item.store');
@@ -779,53 +924,89 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
 
     Route::group(['middleware' => ['role:Admin|Patient']], function () {
         Route::group(['prefix' => 'employee', 'namespace' => 'Employee'], function () {
-            Route::get('patient-diagnosis-test',
-                'PatientDiagnosisTestController@index')->name('patient-diagnosis-test');
-            Route::get('patient-diagnosis-test/{patientDiagnosisTest}',
-                'PatientDiagnosisTestController@show')->name('patient-diagnosis-test.show');
-            Route::get('patient-diagnosis-test/{patientDiagnosisTest}/pdf',
-                'PatientDiagnosisTestController@convertToPdf')->name('patient.diagnosis.test.pdf');
+            Route::get(
+                'patient-diagnosis-test',
+                'PatientDiagnosisTestController@index'
+            )->name('patient-diagnosis-test');
+            Route::get(
+                'patient-diagnosis-test/{patientDiagnosisTest}',
+                'PatientDiagnosisTestController@show'
+            )->name('patient-diagnosis-test.show');
+            Route::get(
+                'patient-diagnosis-test/{patientDiagnosisTest}/pdf',
+                'PatientDiagnosisTestController@convertToPdf'
+            )->name('patient.diagnosis.test.pdf');
         });
     });
 
     Route::group(['middleware' => ['role:Admin|Doctor|Receptionist|Lab Technician']], function () {
         //Patient Diagnosis Test
-        Route::get('patient-diagnosis-test',
-            'PatientDiagnosisTestController@index')->name('patient.diagnosis.test.index')->middleware('modules');
-        Route::post('patient-diagnosis-test',
-            'PatientDiagnosisTestController@store')->name('patient.diagnosis.test.store');
-        Route::get('patient-diagnosis-test/create',
-            'PatientDiagnosisTestController@create')->name('patient.diagnosis.test.create');
-        Route::get('patient-diagnosis-test/{patientDiagnosisTest}',
-            'PatientDiagnosisTestController@show')->name('patient.diagnosis.test.show');
-        Route::delete('patient-diagnosis-test/{patientDiagnosisTest}',
-            'PatientDiagnosisTestController@destroy')->name('patient.diagnosis.test.destroy');
-        Route::post('patient-diagnosis-test/{patientDiagnosisTest}/update',
-            'PatientDiagnosisTestController@update')->name('patient.diagnosis.test.update');
-        Route::get('patient-diagnosis-test/{patientDiagnosisTest}/edit',
-            'PatientDiagnosisTestController@edit')->name('patient.diagnosis.test.edit');
-        Route::get('patient-diagnosis-test/{patientDiagnosisTest}/pdf',
-            'PatientDiagnosisTestController@convertToPdf')->name('patient.diagnosis.test.pdf');
+        Route::get(
+            'patient-diagnosis-test',
+            'PatientDiagnosisTestController@index'
+        )->name('patient.diagnosis.test.index')->middleware('modules');
+        Route::post(
+            'patient-diagnosis-test',
+            'PatientDiagnosisTestController@store'
+        )->name('patient.diagnosis.test.store');
+        Route::get(
+            'patient-diagnosis-test/create',
+            'PatientDiagnosisTestController@create'
+        )->name('patient.diagnosis.test.create');
+        Route::get(
+            'patient-diagnosis-test/{patientDiagnosisTest}',
+            'PatientDiagnosisTestController@show'
+        )->name('patient.diagnosis.test.show');
+        Route::delete(
+            'patient-diagnosis-test/{patientDiagnosisTest}',
+            'PatientDiagnosisTestController@destroy'
+        )->name('patient.diagnosis.test.destroy');
+        Route::post(
+            'patient-diagnosis-test/{patientDiagnosisTest}/update',
+            'PatientDiagnosisTestController@update'
+        )->name('patient.diagnosis.test.update');
+        Route::get(
+            'patient-diagnosis-test/{patientDiagnosisTest}/edit',
+            'PatientDiagnosisTestController@edit'
+        )->name('patient.diagnosis.test.edit');
+        Route::get(
+            'patient-diagnosis-test/{patientDiagnosisTest}/pdf',
+            'PatientDiagnosisTestController@convertToPdf'
+        )->name('patient.diagnosis.test.pdf');
 
         //Diagnosis test Category
-        Route::get('diagnosis-categories',
-            'DiagnosisCategoryController@index')->name('diagnosis.category.index')->middleware('modules');
-        Route::post('diagnosis-categories',
-            'DiagnosisCategoryController@store')->name('diagnosis.category.store');
-        Route::get('diagnosis-categories/{diagnosisCategory}',
-            'DiagnosisCategoryController@show')->name('diagnosis.category.show');
-        Route::delete('diagnosis-categories/{diagnosisCategory}',
-            'DiagnosisCategoryController@destroy')->name('diagnosis.category.destroy');
-        Route::patch('diagnosis-categories/{diagnosisCategory}',
-            'DiagnosisCategoryController@update')->name('diagnosis.category.update');
-        Route::get('diagnosis-categories/{diagnosisCategory}/edit',
-            'DiagnosisCategoryController@edit')->name('diagnosis.category.edit');
+        Route::get(
+            'diagnosis-categories',
+            'DiagnosisCategoryController@index'
+        )->name('diagnosis.category.index')->middleware('modules');
+        Route::post(
+            'diagnosis-categories',
+            'DiagnosisCategoryController@store'
+        )->name('diagnosis.category.store');
+        Route::get(
+            'diagnosis-categories/{diagnosisCategory}',
+            'DiagnosisCategoryController@show'
+        )->name('diagnosis.category.show');
+        Route::delete(
+            'diagnosis-categories/{diagnosisCategory}',
+            'DiagnosisCategoryController@destroy'
+        )->name('diagnosis.category.destroy');
+        Route::patch(
+            'diagnosis-categories/{diagnosisCategory}',
+            'DiagnosisCategoryController@update'
+        )->name('diagnosis.category.update');
+        Route::get(
+            'diagnosis-categories/{diagnosisCategory}/edit',
+            'DiagnosisCategoryController@edit'
+        )->name('diagnosis.category.edit');
     });
 
-    Route::group(['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Accountant|Case Manager|Nurse']],
+    Route::group(
+        ['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Accountant|Case Manager|Nurse']],
         function () {
             Route::get('document-download/{document}', 'DocumentController@downloadMedia');
-        });
+        }
+    );
 
     Route::group(['middleware' => ['role:Admin|Accountant']], function () {
         Route::get('expense-download/{expense}', 'ExpenseController@downloadMedia');
@@ -836,111 +1017,167 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::get('investigation-download/{investigationReport}', 'InvestigationReportController@downloadMedia');
     });
 
-    Route::group(['middleware' => ['role:Admin|Doctor|Receptionist']],
+    Route::group(
+        ['middleware' => ['role:Admin|Doctor|Receptionist']],
         function () {
             // IPD Patient routes
-            Route::get('ipds',
-                'IpdPatientDepartmentController@index')->name('ipd.patient.index')->middleware('modules');
+            Route::get(
+                'ipds',
+                'IpdPatientDepartmentController@index'
+            )->name('ipd.patient.index')->middleware('modules');
             Route::get('ipds/create', 'IpdPatientDepartmentController@create')->name('ipd.patient.create');
             Route::post('ipds', 'IpdPatientDepartmentController@store')->name('ipd.patient.store');
-            Route::get('ipds/{ipdPatientDepartment}',
-                'IpdPatientDepartmentController@show')->name('ipd.patient.show');
-            Route::get('ipds/{ipdPatientDepartment}/edit',
-                'IpdPatientDepartmentController@edit')->name('ipd.patient.edit');
-            Route::patch('ipds/{ipdPatientDepartment}',
-                'IpdPatientDepartmentController@update')->name('ipd.patient.update');
-            Route::delete('ipds/{ipdPatientDepartment}',
-                'IpdPatientDepartmentController@destroy')->name('ipd.patient.destroy');
-            Route::get('patient-cases-list',
-                'IpdPatientDepartmentController@getPatientCasesList')->name('patient.cases.list');
-            Route::get('patient-beds-list',
-                'IpdPatientDepartmentController@getPatientBedsList')->name('patient.beds.list');
+            Route::get(
+                'ipds/{ipdPatientDepartment}',
+                'IpdPatientDepartmentController@show'
+            )->name('ipd.patient.show');
+            Route::get(
+                'ipds/{ipdPatientDepartment}/edit',
+                'IpdPatientDepartmentController@edit'
+            )->name('ipd.patient.edit');
+            Route::patch(
+                'ipds/{ipdPatientDepartment}',
+                'IpdPatientDepartmentController@update'
+            )->name('ipd.patient.update');
+            Route::delete(
+                'ipds/{ipdPatientDepartment}',
+                'IpdPatientDepartmentController@destroy'
+            )->name('ipd.patient.destroy');
+            Route::get(
+                'patient-cases-list',
+                'IpdPatientDepartmentController@getPatientCasesList'
+            )->name('patient.cases.list');
+            Route::get(
+                'patient-beds-list',
+                'IpdPatientDepartmentController@getPatientBedsList'
+            )->name('patient.beds.list');
 
             // IPD Diagnosis routes
             Route::post('ipd-diagnosis', 'IpdDiagnosisController@store')->name('ipd.diagnosis.store');
             Route::get('ipd-diagnosis/{ipdDiagnosis}/edit', 'IpdDiagnosisController@edit')->name('ipd.diagnosis.edit');
             Route::post('ipd-diagnosis/{ipdDiagnosis}', 'IpdDiagnosisController@update')->name('ipd.diagnosis.update');
-            Route::delete('ipd-diagnosis/{ipdDiagnosis}',
-                'IpdDiagnosisController@destroy')->name('ipd.diagnosis.destroy');
+            Route::delete(
+                'ipd-diagnosis/{ipdDiagnosis}',
+                'IpdDiagnosisController@destroy'
+            )->name('ipd.diagnosis.destroy');
 
             // IPD Consultant Register routes.
-            Route::post('ipd-consultant-register',
-                'IpdConsultantRegisterController@store')->name('ipd.consultant.store');
-            Route::get('ipd-consultant-register/{ipdConsultantRegister}/edit',
-                'IpdConsultantRegisterController@edit')->name('ipd.consultant.edit');
-            Route::post('ipd-consultant-register/{ipdConsultantRegister}',
-                'IpdConsultantRegisterController@update')->name('ipd.consultant.update');
-            Route::delete('ipd-consultant-register/{ipdConsultantRegister}',
-                'IpdConsultantRegisterController@destroy')->name('ipd.consultant.destroy');
+            Route::post(
+                'ipd-consultant-register',
+                'IpdConsultantRegisterController@store'
+            )->name('ipd.consultant.store');
+            Route::get(
+                'ipd-consultant-register/{ipdConsultantRegister}/edit',
+                'IpdConsultantRegisterController@edit'
+            )->name('ipd.consultant.edit');
+            Route::post(
+                'ipd-consultant-register/{ipdConsultantRegister}',
+                'IpdConsultantRegisterController@update'
+            )->name('ipd.consultant.update');
+            Route::delete(
+                'ipd-consultant-register/{ipdConsultantRegister}',
+                'IpdConsultantRegisterController@destroy'
+            )->name('ipd.consultant.destroy');
 
             // IPD Charges routes.
             Route::post('ipd-charges', 'IpdChargeController@store')->name('ipd.charge.store');
             Route::get('ipd-charges/{ipdCharge}/edit', 'IpdChargeController@edit')->name('ipd.charge.edit');
             Route::post('ipd-charges/{ipdCharge}', 'IpdChargeController@update')->name('ipd.charge.update');
             Route::delete('ipd-charges/{ipdCharge}', 'IpdChargeController@destroy')->name('ipd.charge.destroy');
-            Route::get('charge-category-list',
-                'IpdChargeController@getChargeCategoryList')->name('charge.category.list');
+            Route::get(
+                'charge-category-list',
+                'IpdChargeController@getChargeCategoryList'
+            )->name('charge.category.list');
             Route::get('charge', 'IpdChargeController@getChargeList')->name('charge.list');
-            Route::get('charge-standard-rate',
-                'IpdChargeController@getChargeStandardRate')->name('charge.standard.rate');
+            Route::get(
+                'charge-standard-rate',
+                'IpdChargeController@getChargeStandardRate'
+            )->name('charge.standard.rate');
 
             // IPD Prescription routes
             Route::post('ipd-prescription', 'IpdPrescriptionController@store')->name('ipd.prescription.store');
-            Route::get('ipd-prescription/{ipdPrescription}/edit',
-                'IpdPrescriptionController@edit')->name('ipd.prescription.edit');
-            Route::post('ipd-prescription/{ipdPrescription}',
-                'IpdPrescriptionController@update')->name('ipd.prescription.update');
-            Route::delete('ipd-prescription/{ipdPrescription}',
-                'IpdPrescriptionController@destroy')->name('ipd.prescription.destroy');
+            Route::get(
+                'ipd-prescription/{ipdPrescription}/edit',
+                'IpdPrescriptionController@edit'
+            )->name('ipd.prescription.edit');
+            Route::post(
+                'ipd-prescription/{ipdPrescription}',
+                'IpdPrescriptionController@update'
+            )->name('ipd.prescription.update');
+            Route::delete(
+                'ipd-prescription/{ipdPrescription}',
+                'IpdPrescriptionController@destroy'
+            )->name('ipd.prescription.destroy');
             Route::get('medicine-list', 'IpdPrescriptionController@getMedicineList')->name('medicine.list');
 
             // IPD Timelines routes
             Route::post('ipd-timelines', 'IpdTimelineController@store')->name('ipd.timelines.store');
             Route::get('ipd-timelines/{ipdTimeline}/edit', 'IpdTimelineController@edit')->name('ipd.timelines.edit');
             Route::post('ipd-timelines/{ipdTimeline}', 'IpdTimelineController@update')->name('ipd.timelines.update');
-            Route::delete('ipd-timelines/{ipdTimeline}',
-                'IpdTimelineController@destroy')->name('ipd.timelines.destroy');
+            Route::delete(
+                'ipd-timelines/{ipdTimeline}',
+                'IpdTimelineController@destroy'
+            )->name('ipd.timelines.destroy');
 
             // IPD Payment routes
             Route::post('ipd-payments', 'IpdPaymentController@store')->name('ipd.payments.store');
             Route::get('ipd-payments/{ipdPayment}/edit', 'IpdPaymentController@edit')->name('ipd.payments.edit');
             Route::post('ipd-payments/{ipdPayment}', 'IpdPaymentController@update')->name('ipd.payments.update');
-            Route::delete('ipd-payments/{ipdPayment}',
-                'IpdPaymentController@destroy')->name('ipd.payments.destroy');
+            Route::delete(
+                'ipd-payments/{ipdPayment}',
+                'IpdPaymentController@destroy'
+            )->name('ipd.payments.destroy');
 
             // IPD Bill
             Route::post('ipd-bills', 'IpdBillController@store')->name('ipd.bills.store');
 
             // OPD Patient routes
-            Route::get('opds',
-                'OpdPatientDepartmentController@index')->name('opd.patient.index')->middleware('modules');
+            Route::get(
+                'opds',
+                'OpdPatientDepartmentController@index'
+            )->name('opd.patient.index')->middleware('modules');
             Route::get('opds/create', 'OpdPatientDepartmentController@create')->name('opd.patient.create');
             Route::post('opds', 'OpdPatientDepartmentController@store')->name('opd.patient.store');
-            Route::get('opds/{opdPatientDepartment}',
-                'OpdPatientDepartmentController@show')->name('opd.patient.show');
-            Route::get('opds/{opdPatientDepartment}/edit',
-                'OpdPatientDepartmentController@edit')->name('opd.patient.edit');
-            Route::patch('opds/{opdPatientDepartment}',
-                'OpdPatientDepartmentController@update')->name('opd.patient.update');
-            Route::delete('opds/{opdPatientDepartment}',
-                'OpdPatientDepartmentController@destroy')->name('opd.patient.destroy');
-            Route::get('get-doctor-opd-charge',
-                'OpdPatientDepartmentController@getDoctorOPDCharge')->name('getDoctor.OPDcharge');
+            Route::get(
+                'opds/{opdPatientDepartment}',
+                'OpdPatientDepartmentController@show'
+            )->name('opd.patient.show');
+            Route::get(
+                'opds/{opdPatientDepartment}/edit',
+                'OpdPatientDepartmentController@edit'
+            )->name('opd.patient.edit');
+            Route::patch(
+                'opds/{opdPatientDepartment}',
+                'OpdPatientDepartmentController@update'
+            )->name('opd.patient.update');
+            Route::delete(
+                'opds/{opdPatientDepartment}',
+                'OpdPatientDepartmentController@destroy'
+            )->name('opd.patient.destroy');
+            Route::get(
+                'get-doctor-opd-charge',
+                'OpdPatientDepartmentController@getDoctorOPDCharge'
+            )->name('getDoctor.OPDcharge');
 
             // OPD Diagnosis routes
             Route::post('opd-diagnosis', 'OpdDiagnosisController@store')->name('opd.diagnosis.store');
             Route::get('opd-diagnosis/{opdDiagnosis}/edit', 'OpdDiagnosisController@edit')->name('opd.diagnosis.edit');
             Route::post('opd-diagnosis/{opdDiagnosis}', 'OpdDiagnosisController@update')->name('opd.diagnosis.update');
-            Route::delete('opd-diagnosis/{opdDiagnosis}',
-                'OpdDiagnosisController@destroy')->name('opd.diagnosis.destroy');
+            Route::delete(
+                'opd-diagnosis/{opdDiagnosis}',
+                'OpdDiagnosisController@destroy'
+            )->name('opd.diagnosis.destroy');
 
             // OPD Timelines routes
             Route::post('opd-timelines', 'OpdTimelineController@store')->name('opd.timelines.store');
             Route::get('opd-timelines/{opdTimeline}/edit', 'OpdTimelineController@edit')->name('opd.timelines.edit');
             Route::post('opd-timelines/{opdTimeline}', 'OpdTimelineController@update')->name('opd.timelines.update');
-            Route::delete('opd-timelines/{opdTimeline}',
-                'OpdTimelineController@destroy')->name('opd.timelines.destroy');
-        });
+            Route::delete(
+                'opd-timelines/{opdTimeline}',
+                'OpdTimelineController@destroy'
+            )->name('opd.timelines.destroy');
+        }
+    );
     Route::group(['middleware' => ['role:Admin|Receptionist']], function () {
         //Call-log routes
         Route::get('call-logs', 'CallLogController@index')->name('call_logs.index')->middleware('modules');
@@ -988,55 +1225,95 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
         Route::post('testimonials/{testimonial}', 'TestimonialController@update')->name('testimonials.update');
         Route::delete('testimonials/{testimonial}', 'TestimonialController@destroy')->name('testimonials.destroy');
     });
-    Route::group(['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Nurse|Accountant|Lab Technician|Pharmacist|Case Manager']],
+    Route::group(
+        ['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Nurse|Accountant|Lab Technician|Pharmacist|Case Manager']],
         function () {
 
             //Notification routes
-            Route::get('/notification/{notification}/read',
-                'NotificationController@readNotification')->name('read.notification');
-            Route::post('/read-all-notification',
-                'NotificationController@readAllNotification')->name('read.all.notification');
+            Route::get(
+                '/notification/{notification}/read',
+                'NotificationController@readNotification'
+            )->name('read.notification');
+            Route::post(
+                '/read-all-notification',
+                'NotificationController@readAllNotification'
+            )->name('read.all.notification');
             // Live Meeting
-            Route::get('live-meeting',
-                'LiveMeetingController@index')->name('live.meeting.index')->middleware('modules');;
+            Route::get(
+                'live-meeting',
+                'LiveMeetingController@index'
+            )->name('live.meeting.index')->middleware('modules');;
             Route::post('live-meeting', 'LiveMeetingController@liveMeetingStore')->name('live.meeting.store');
-            Route::get('live-meeting/change-status',
-                'LiveMeetingController@getChangeStatus')->name('live.meeting.change.status');
-            Route::get('live-meeting/{liveMeeting}/start',
-                'LiveMeetingController@getLiveStatus')->name('live.meeting.get.live.status');
+            Route::get(
+                'live-meeting/change-status',
+                'LiveMeetingController@getChangeStatus'
+            )->name('live.meeting.change.status');
+            Route::get(
+                'live-meeting/{liveMeeting}/start',
+                'LiveMeetingController@getLiveStatus'
+            )->name('live.meeting.get.live.status');
             Route::get('live-meeting/{liveMeeting}', 'LiveMeetingController@show')->name('live.meeting.show');
 
-            Route::get('live-meeting/{liveMeeting}/edit',
-                'LiveMeetingController@edit')->name('live.meeting.edit');
-            Route::post('live-meeting/{liveMeeting}',
-                'LiveMeetingController@update')->name('live.meeting.update');
-            Route::delete('live-meeting/{liveMeeting}',
-                'LiveMeetingController@destroy')->name('live.meeting.destroy');
-        });
+            Route::get(
+                'live-meeting/{liveMeeting}/edit',
+                'LiveMeetingController@edit'
+            )->name('live.meeting.edit');
+            Route::post(
+                'live-meeting/{liveMeeting}',
+                'LiveMeetingController@update'
+            )->name('live.meeting.update');
+            Route::delete(
+                'live-meeting/{liveMeeting}',
+                'LiveMeetingController@destroy'
+            )->name('live.meeting.destroy');
+        }
+    );
 
-    Route::group(['middleware' => ['role:Admin|Patient|Doctor']],
+    Route::group(
+        ['middleware' => ['role:Admin|Patient|Doctor']],
         function () {
             //  Live Consultation
-            Route::get('live-consultation',
-                'LiveConsultationController@index')->name('live.consultation.index')->middleware('modules');;
+            Route::get(
+                'live-consultation',
+                'LiveConsultationController@index'
+            )->name('live.consultation.index')->middleware('modules');;
             Route::post('live-consultation', 'LiveConsultationController@store')->name('live.consultation.store');
-            Route::get('live-consultation/{liveConsultation}/edit',
-                'LiveConsultationController@edit')->name('live.consultation.edit');
-            Route::post('live-consultation/{liveConsultation}',
-                'LiveConsultationController@update')->name('live.consultation.update');
-            Route::delete('live-consultation/{liveConsultation}',
-                'LiveConsultationController@destroy')->name('live.consultation.destroy');
-            Route::get('live-consultation-list',
-                'LiveConsultationController@getTypeNumber')->name('live.consultation.list');
-            Route::get('live-consultation/change-status',
-                'LiveConsultationController@getChangeStatus')->name('live.consultation.change.status');
-            Route::get('live-consultation/{liveConsultation}/start',
-                'LiveConsultationController@getLiveStatus')->name('live.consultation.get.live.status');
-            Route::get('live-consultation/{liveConsultation}',
-                'LiveConsultationController@show')->name('live.consultation.show');
-            Route::get('user-zoom-credential/{userZoomCredential}/fetch',
-                'LiveConsultationController@zoomCredential')->name('zoom.credential');
-            Route::post('user-zoom-credential',
-                'LiveConsultationController@zoomCredentialCreate')->name('zoom.credential.create');
-        });
+            Route::get(
+                'live-consultation/{liveConsultation}/edit',
+                'LiveConsultationController@edit'
+            )->name('live.consultation.edit');
+            Route::post(
+                'live-consultation/{liveConsultation}',
+                'LiveConsultationController@update'
+            )->name('live.consultation.update');
+            Route::delete(
+                'live-consultation/{liveConsultation}',
+                'LiveConsultationController@destroy'
+            )->name('live.consultation.destroy');
+            Route::get(
+                'live-consultation-list',
+                'LiveConsultationController@getTypeNumber'
+            )->name('live.consultation.list');
+            Route::get(
+                'live-consultation/change-status',
+                'LiveConsultationController@getChangeStatus'
+            )->name('live.consultation.change.status');
+            Route::get(
+                'live-consultation/{liveConsultation}/start',
+                'LiveConsultationController@getLiveStatus'
+            )->name('live.consultation.get.live.status');
+            Route::get(
+                'live-consultation/{liveConsultation}',
+                'LiveConsultationController@show'
+            )->name('live.consultation.show');
+            Route::get(
+                'user-zoom-credential/{userZoomCredential}/fetch',
+                'LiveConsultationController@zoomCredential'
+            )->name('zoom.credential');
+            Route::post(
+                'user-zoom-credential',
+                'LiveConsultationController@zoomCredentialCreate'
+            )->name('zoom.credential.create');
+        }
+    );
 });

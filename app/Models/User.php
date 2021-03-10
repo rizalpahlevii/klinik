@@ -20,23 +20,17 @@ use Spatie\Permission\Traits\HasRoles;
  * App\Models\User
  *
  * @property int $id
- * @property int|null $address_id
- * @property int|null $department_id
- * @property string $first_name
- * @property string $last_name
- * @property string $email
+ * @property string $fullname
+ * @property string $username
  * @property string $password
- * @property string|null $designation
  * @property string $phone
- * @property int $gender
- * @property string|null $education
- * @property string $dob
- * @property int $status
- * @property string|null $remember_token
+ * @property string $gender
+ * @property string $role
+ * @property date $start_working_date
+ * @property string|null $address
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
- * @property-read string $full_name
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static Builder|User newModelQuery()
@@ -108,22 +102,14 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'address_id',
-        'department_id',
-        'first_name',
-        'last_name',
-        'email',
+        'username',
         'password',
-        'designation',
         'phone',
         'gender',
-        'qualification',
-        'dob',
-        'blood_group',
-        'status',
-        'language',
-        'owner_id',
-        'owner_type',
+        'fullname',
+        'start_working_date',
+        'address',
+        'role',
     ];
 
     /**
@@ -132,7 +118,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /**
@@ -140,20 +126,17 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
 
     /**
      * @var array
      */
-    protected $appends = ['image_url', 'full_name', 'age'];
 
     /**
      * @var array
      */
     public static $messages = [
-        'phone.digits' => 'The phone number must be 10 digits long.',
+        'phone.digits' => 'The phone number must be 13 digits long.',
         'email.regex'  => 'Please enter valid email.',
         'photo.mimes'  => 'The profile image must be a file of type: jpeg, jpg, png.',
     ];
@@ -161,10 +144,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     /**
      * @return string
      */
-    public function getFullNameAttribute()
-    {
-        return ucfirst($this->first_name).' '.ucfirst($this->last_name);
-    }
+
 
     /**
      * @return mixed
@@ -173,7 +153,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         /** @var Media $media */
         $media = $this->getMedia(User::COLLECTION_PROFILE_PICTURES)->first();
-        if (! empty($media)) {
+        if (!empty($media)) {
             return $media->getFullUrl();
         }
 
@@ -183,10 +163,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     /**
      * Accessor for Age.
      */
-    public function getAgeAttribute()
-    {
-        return Carbon::parse($this->attributes['dob'])->age;
-    }
+
 
     /**
      * @return MorphTo
