@@ -374,6 +374,16 @@ class DefaultModuleSeeder extends Seeder
                 'is_active' => 1,
                 'route'     => 'live.meeting.index',
             ],
+            [
+                'name'      => 'Pengguna',
+                'is_active' => 1,
+                'route'     => 'users.index',
+            ],
+            [
+                'name'      => 'Role',
+                'is_active' => 1,
+                'route'     => 'roles.index',
+            ],
         ];
         foreach ($input as $data) {
             $module = Module::whereName($data['name'])->first();

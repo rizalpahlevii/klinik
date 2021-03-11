@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(AdminUserSeeder::class);
         // $this->call(BloodBankSeeder::class);
         // $this->call(DocumentTypesTableSeeder::class);
+        $this->call(RoleTableSeeder::class);
         $this->call(PermissionTableSeeder::class);
         // $this->call(AssignDefaultRoleToUserSeeder::class);
         $this->call(SettingsTableSeeder::class);

@@ -25,10 +25,10 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->middleware('verified');
 
 Route::group(['middleware' => ['auth', 'xss']], function () {
-    Route::get('profile', 'UserController@editProfile');
-    Route::post('change-password', 'UserController@changePassword');
-    Route::post('profile-update', 'UserController@profileUpdate');
-    Route::post('update-language', 'UserController@updateLanguage');
+    Route::get('profile', 'ProfileController@editProfile');
+    Route::post('change-password', 'ProfileController@changePassword');
+    Route::post('profile-update', 'ProfileController@profileUpdate');
+    Route::post('update-language', 'ProfileController@updateLanguage');
 
     // stripe payment
     Route::post('/stripe-charge', 'StripeController@createSession');
@@ -46,6 +46,25 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
             });
         }
     );
+
+    Route::group(['middleware' => ['role:Admin']], function () {
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/', 'UserController@index')->middleware('modules')->name('index');
+            Route::get('/create', 'UserController@create')->name('create');
+            Route::post('/', 'UserController@store')->name('store');
+            Route::get('/{id}/edit', 'UserController@edit')->name('edit');
+            Route::put('/{id}', 'UserController@update')->name('update');
+            Route::delete('/{id}', 'UserController@destroy')->name('destroy');
+        });
+        Route::prefix('roles')->name('roles.')->group(function () {
+            Route::get('/', 'RoleController@index')->middleware('modules')->name('index');
+            Route::get('/create', 'RoleController@create')->name('create');
+            Route::post('/', 'RoleController@store')->name('store');
+            Route::get('/{id}/edit', 'RoleController@edit')->name('edit');
+            Route::put('/{id}', 'RoleController@update')->name('update');
+            Route::delete('/{id}', 'RoleController@destroy')->name('destroy');
+        });
+    });
 
     Route::group(
         ['middleware' => ['role:Admin|Doctor|Receptionist|Nurse|Accountant|Lab Technician|Pharmacist|Case Manager']],
