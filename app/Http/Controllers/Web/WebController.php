@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Doctor;
-use App\Models\DoctorDepartment;
-use App\Models\NoticeBoard;
+use App\Models\Medic;
 use App\Models\Setting;
 use App\Models\Testimonial;
-use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
@@ -20,14 +17,14 @@ class WebController extends Controller
      */
     public function index()
     {
-        $doctorsDepartments = DoctorDepartment::take(6)->get();
-        $doctors = Doctor::with('department')->distinct()->take(6)->get();
-        $todayNotice = NoticeBoard::whereDate('created_at', Carbon::today()->toDateTimeString())->latest()->first();
+        $doctors = Medic::distinct()->take(6)->get();
         $contactDetails = Setting::all()->pluck('value', 'key')->toArray();
         $testimonials = Testimonial::all();
 
-        return view('web.home.index',
-            compact('doctorsDepartments', 'doctors', 'todayNotice', 'contactDetails', 'testimonials'));
+        return view(
+            'web.home.index',
+            compact('doctors', 'contactDetails', 'testimonials')
+        );
     }
 
     /**

@@ -35,43 +35,30 @@ use Illuminate\Support\Carbon;
  */
 class Service extends Model
 {
-    const STATUS_ALL = 2;
-    const ACTIVE = 1;
-    const INACTIVE = 0;
 
-    const STATUS_ARR = [
-        self::STATUS_ALL => 'All',
-        self::ACTIVE     => 'Active',
-        self::INACTIVE   => 'Deactive',
-    ];
-
-    /**
-     * Validation rules
-     * @var array
-     */
-    public static $rules = [
-        'name'     => 'required|unique:services,name',
-        'quantity' => 'required|numeric',
-        'rate'     => 'required',
-    ];
     public $table = 'services';
-    public $fillable = [
-        'name',
-        'description',
-        'quantity',
-        'rate',
-        'status',
+
+    public static $rules = [
+        'service_number' => 'required|unique:services,service_number',
+        'registration_time' => 'required',
+        'patient_id' => 'required',
+        'medic_id' => 'required',
+        'phone' => 'required',
+        'service_fee' => 'required|numeric',
+        'discount' => 'required|numeric',
+        'total_fee' => 'required|numeric',
+        'notes' => 'required',
     ];
-    /**
-     * The attributes that should be casted to native types.
-     * @var array
-     */
-    protected $casts = [
-        'id'          => 'integer',
-        'name'        => 'string',
-        'description' => 'string',
-        'quantity'    => 'integer',
-        'rate'        => 'integer',
-        'status'      => 'integer',
+
+    public $fillable = [
+        'service_number',
+        'registration_time',
+        'patient_id',
+        'medic_id',
+        'phone',
+        'service_fee',
+        'discount',
+        'phone',
+        'notes',
     ];
 }

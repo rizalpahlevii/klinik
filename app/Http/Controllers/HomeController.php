@@ -49,16 +49,6 @@ class HomeController extends AppBaseController
      */
     public function dashboard()
     {
-        $data['invoiceAmount'] = Invoice::sum('amount');
-        $data['billAmount'] = Bill::sum('amount');
-        $data['paymentAmount'] = Payment::sum('amount');
-        $data['advancePaymentAmount'] = AdvancedPayment::sum('amount');
-        $data['doctors'] = Doctor::count();
-        $data['patients'] = Patient::count();
-        $data['nurses'] = Nurse::count();
-        $data['availableBeds'] = Bed::whereIsAvailable(1)->count();
-        $data['noticeBoards'] = NoticeBoard::take(10)->orderBy('id', 'DESC')->get();
-        $data['enquiries'] = Enquiry::where('status', 0)->latest()->take(10)->get();
         $data['currency'] = Setting::CURRENCIES;
 
         return view('dashboard.index', compact('data'));

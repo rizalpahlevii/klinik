@@ -6,7 +6,6 @@ use App\Exports\PatientExport;
 use App\Http\Requests\CreatePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\AdvancedPayment;
-use App\Models\Appointment;
 use App\Models\BedAssign;
 use App\Models\Bill;
 use App\Models\BirthReport;
@@ -155,7 +154,7 @@ class PatientController extends AppBaseController
             Invoice::class, AdvancedPayment::class, Prescription::class, IpdPatientDepartment::class,
         ];
         $result = canDelete($patientModels, 'patient_id', $patient->id);
-        if($result) {
+        if ($result) {
             return $this->sendError('Patient can\'t be deleted.');
         }
         $patient->user()->delete();
@@ -173,7 +172,7 @@ class PatientController extends AppBaseController
     public function activeDeactiveStatus($id)
     {
         $patient = Patient::findOrFail($id);
-        $status = ! $patient->user->status;
+        $status = !$patient->user->status;
         $patient->user()->update(['status' => $status]);
 
         return $this->sendSuccess('Status updated successfully.');
@@ -184,6 +183,6 @@ class PatientController extends AppBaseController
      */
     public function patientExport()
     {
-        return Excel::download(new PatientExport, 'patients-'.time().'.xlsx');
+        return Excel::download(new PatientExport, 'patients-' . time() . '.xlsx');
     }
 }

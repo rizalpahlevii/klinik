@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModulesTable extends Migration
+class AddIndexToServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateModulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('modules', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->boolean('is_active')->default(1);
-            $table->string('route')->nullable();
-            $table->timestamps();
+        Schema::table('services', function (Blueprint $table) {
+            $table->index('service_number');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateModulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modules');
+        Schema::table('services', function (Blueprint $table) {
+            $table->dropIndex('services_service_number_index');
+        });
     }
 }

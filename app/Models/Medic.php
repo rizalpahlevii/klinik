@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Validation\Rule;
 
-class Patient extends Model
+class Medic extends Model
 {
     use SoftDeletes;
     protected $fillable = [
         'name',
+        'specialization',
         'birth_date',
         'phone',
         'gender',
@@ -20,6 +20,7 @@ class Patient extends Model
     ];
     public static $rules = [
         'name' => 'required|min:2',
+        'specialization' => 'required',
         'birth_date' => 'required',
         'phone' => 'required',
         'gender' => 'required',
