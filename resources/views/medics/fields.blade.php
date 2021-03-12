@@ -7,8 +7,8 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="specialization">Spesialisasi <span class="required">*</span></label>
-            <input type="text" class="form-control" name="specialization" id="specialization">
+            <label for="specialization">Spesialisasi <span class="required"></span></label>
+            <input type="text" class="form-control" name="specialization" id="specialization" required>
         </div>
     </div>
     <div class="col-md-6">

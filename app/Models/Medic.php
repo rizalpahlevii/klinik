@@ -19,13 +19,17 @@ class Medic extends Model
         'city'
     ];
     public static $rules = [
-        'name' => 'required|min:2',
         'specialization' => 'required',
+        'name_form' => 'required|min:2',
         'birth_date' => 'required',
-        'phone' => 'required',
-        'gender' => 'required',
+        'phone_form' => 'required',
+        'gender_form' => 'required',
         'blood_group' => 'required',
-        'address' => 'required|min:4',
+        'address_form' => 'required|min:4',
         'city' => 'required:min:2'
     ];
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'medic_id', 'id');
+    }
 }

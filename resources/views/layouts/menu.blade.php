@@ -36,6 +36,34 @@
         @endmodule
     </ul>
 </li>
+{{-- Users  --}}
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
+        title="Registrasi" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        <i class="nav-icon fas fa-file"></i>
+        Registrasi
+    </a>
+    <ul class="nav-dropdown-items">
+        @module('Pasien')
+        <li class="nav-item side-menus {{ Request::is('patients*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('patients.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Pengguna" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-file"></i>
+                <span>Pasien</span>
+            </a>
+        </li>
+        @endmodule
+        @module('Dokter')
+        <li class="nav-item side-menus {{ Request::is('medics*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('medics.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Jabatan" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-folder"></i>
+                <span>Dokter</span>
+            </a>
+        </li>
+        @endmodule
+    </ul>
+</li>
 
 
 {{-- Settings --}}

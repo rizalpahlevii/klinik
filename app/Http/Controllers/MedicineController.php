@@ -145,6 +145,6 @@ class MedicineController extends AppBaseController
      */
     public function medicineExport()
     {
-        return Excel::download(new MedicineExport, 'medicines-'.time().'.xlsx');
+        return Excel::download(new MedicineExport, 'medicines-' . time() . '.xlsx');
     }
 }

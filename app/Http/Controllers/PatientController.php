@@ -139,10 +139,10 @@ class PatientController extends AppBaseController
         $result = canDelete($patientModels, 'patient_id', $patient->id);
         if ($result) {
             return $this->sendError('Patient can\'t be deleted.');
+        } else {
+            $patient->delete();
+            return $this->sendSuccess('Patient deleted successfully.');
         }
-        $patient->delete();
-
-        return $this->sendSuccess('Patient deleted successfully.');
     }
 
     /**

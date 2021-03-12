@@ -1,13 +1,13 @@
 <div class="row view-spacer">
     <div class="col-md-3">
         <div class="form-group">
-            {{ Form::label('full_name', __('Nama Pasien').':', ['class' => 'font-weight-bold']) }}
+            {{ Form::label('full_name', __('Nama Dokter').':', ['class' => 'font-weight-bold']) }}
             <p>{{ $data->name }}</p>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            {{ Form::label('phone', __('No.Telp Pasien').':', ['class' => 'font-weight-bold']) }}
+            {{ Form::label('phone', __('No.Telp Dokter').':', ['class' => 'font-weight-bold']) }}
             <p>{{ !empty($data->phone)?$data->phone:__('messages.common.n/a') }}</p>
         </div>
     </div>
@@ -29,6 +29,12 @@
             <p>{{ !empty($data->birth_date) ? $data->birth_date : __('messages.common.n/a') }}</p>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('specialization', __('Spesialisasi').':', ['class' => 'font-weight-bold']) }}
+            <p>{{ !empty($data->specialization) ? $data->specialization : __('messages.common.n/a') }}</p>
+        </div>
+    </div>
 
     <div class="col-md-3">
         <div class="form-group">
@@ -48,7 +54,7 @@
 <hr>
 <div class="row">
     <div class="col-lg-12">
-        <h4>Detail Pasien</h4>
+        <h4>{{ __('messages.patient.patient_details') }}</h4>
     </div>
     <div class="col-lg-12">
         <!-- Nav tabs -->
@@ -68,8 +74,8 @@
                                 <thead>
                                     <tr>
                                         <th>Kode Faktur Layanan</th>
-                                        <th>Dokter</th>
-                                        <th>No.Telp Dokter</th>
+                                        <th>Pasien</th>
+                                        <th>No.Telp Pasien</th>
                                         <th>Deskripsi</th>
                                         <th>Tanggal Layanan</th>
                                         <th>Biaya</th>
@@ -78,11 +84,10 @@
                                 <tbody>
                                     @foreach ($data->services as $service)
                                     <td>{{ $service->service_number }}</td>
-                                    <td>
-                                        <a
-                                            href="{{ route('medics.show',$service->medic->id) }}">{{ $service->medic->name }}</a>
+                                    <td><a
+                                            href="{{ route('patients.show',$service->patient->id) }}">{{ $service->patient->name }}</a>
                                     </td>
-                                    <td>{{ $service->medic->phone }}</td>
+                                    <td>{{ $service->patient->phone }}</td>
                                     <td>{{ $service->notes }}</td>
                                     <td>{{ $service->registration_time }}</td>
                                     <td>{{  $service->total_fee  }}</td>

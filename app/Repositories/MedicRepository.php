@@ -55,12 +55,16 @@ class MedicRepository extends BaseRepository
             $input['blood_group'] = $input['blood_group'];
             $input['address'] = $input['address_form'];
             $input['city'] = $input['city'];
-            Medic::create($input);
+            $this->medic->create($input);
         } catch (Exception $e) {
             throw new UnprocessableEntityHttpException($e->getMessage());
         }
 
         return true;
+    }
+    public function getMedicAssociatedData($id)
+    {
+        return $this->medic->with('services.patient')->findOrFail($id);
     }
     public function update($input, $medic_id)
     {
@@ -68,16 +72,20 @@ class MedicRepository extends BaseRepository
             $input['name'] = $input['name_form'];
             $input['birth_date'] = $input['birth_date'];
             $input['specialization'] = $input['specialization'];
-            $input['phone'] = preparePhoneNumber($input, 'phone_form');
+            $input['phone'] = $input['phone_form'];
             $input['gender'] = $input['gender_form'];
             $input['blood_group'] = $input['blood_group'];
             $input['address'] = $input['address_form'];
             $input['city'] = $input['city'];
-            Medic::find($medic_id)->update($input);
+            $this->medic->find($medic_id)->update($input);
         } catch (Exception $e) {
             throw new UnprocessableEntityHttpException($e->getMessage());
         }
 
         return true;
+    }
+    public function getMedic($id)
+    {
+        return $this->medic->findOrFail($id);
     }
 }

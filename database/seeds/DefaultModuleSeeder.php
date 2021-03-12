@@ -14,14 +14,14 @@ class DefaultModuleSeeder extends Seeder
     {
         $input = [
             [
-                'name'      => 'Patients',
+                'name'      => 'Pasien',
                 'is_active' => 1,
                 'route'     => 'patients.index',
             ],
             [
-                'name'      => 'Doctors',
+                'name'      => 'Dokter',
                 'is_active' => 1,
-                'route'     => 'doctors.index',
+                'route'     => 'medics.index',
             ],
             [
                 'name'      => 'Accountants',

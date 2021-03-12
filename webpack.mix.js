@@ -289,6 +289,10 @@ mix.js(
         "public/assets/js/patients/patients.js"
     )
     .js(
+        "resources/assets/js/medics/medics.js",
+        "public/assets/js/medics/medics.js"
+    )
+    .js(
         "resources/assets/js/patients/patients_data_listing.js",
         "public/assets/js/patients/patients_data_listing.js"
     )

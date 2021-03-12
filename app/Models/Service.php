@@ -65,4 +65,8 @@ class Service extends Model
     {
         return $this->belongsTo(Medic::class, 'medic_id', 'id');
     }
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class, 'patient_id', 'id');
+    }
 }
