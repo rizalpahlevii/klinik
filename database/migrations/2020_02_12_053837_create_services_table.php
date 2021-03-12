@@ -21,6 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('phone');
             $table->double('service_fee', 15, 2);
             $table->double('discount', 15, 2);
+            $table->double('total_fee', 15, 2);
             $table->text('notes');
             $table->timestamps();
         });

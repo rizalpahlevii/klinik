@@ -25,8 +25,6 @@ class UpdatePatientRequest extends FormRequest
     public function rules()
     {
         $rules = Patient::$rules;
-        $rules['email'] = 'required|email|unique:users,email,'.$this->route('patient')->user->id;
-
         return $rules;
     }
 }

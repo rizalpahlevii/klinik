@@ -2,29 +2,23 @@
 
 namespace App\Repositories;
 
+use App\Models\Medic;
 use Exception;
-use App\Models\Patient;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
-/**
- * Class PatientRepository
- * @package App\Repositories
- * @version February 14, 2020, 5:53 am UTC
- */
-class PatientRepository extends BaseRepository
+class MedicRepository extends BaseRepository
 {
-
-    protected $patient;
-    public function __construct(Patient $patient)
+    protected $medic;
+    public function __construct(Medic $medic)
     {
-        $this->patient = $patient;
+        $this->medic = $medic;
     }
-
     /**
      * @var array
      */
     protected $fieldSearchable = [
         'name',
+        'specialization',
         'birth_date',
         'phone',
         'gender',
@@ -48,62 +42,42 @@ class PatientRepository extends BaseRepository
      **/
     public function model()
     {
-        return Patient::class;
+        return Medic::class;
     }
-
-    /**
-     * @param  array  $input
-     *
-     * @param  bool  $mail
-     * @return bool
-     */
     public function store($input)
     {
         try {
             $input['name'] = $input['name_form'];
+            $input['specialization'] = $input['specialization'];
             $input['birth_date'] = $input['birth_date'];
             $input['phone'] = preparePhoneNumber($input, 'phone_form');
             $input['gender'] = $input['gender_form'];
             $input['blood_group'] = $input['blood_group'];
             $input['address'] = $input['address_form'];
             $input['city'] = $input['city'];
-            $this->patient->create($input);
+            Medic::create($input);
         } catch (Exception $e) {
             throw new UnprocessableEntityHttpException($e->getMessage());
         }
 
         return true;
     }
-
-    /**
-     * @param  array  $input
-     * @param  Patient  $patient
-     *
-     * @return bool
-     */
-    public function update($input, $patien_id)
+    public function update($input, $medic_id)
     {
         try {
             $input['name'] = $input['name_form'];
             $input['birth_date'] = $input['birth_date'];
-            $input['phone'] = $input['phone_form'];
+            $input['specialization'] = $input['specialization'];
+            $input['phone'] = preparePhoneNumber($input, 'phone_form');
             $input['gender'] = $input['gender_form'];
             $input['blood_group'] = $input['blood_group'];
             $input['address'] = $input['address_form'];
             $input['city'] = $input['city'];
-            $patien = $this->patient->find($patien_id)->update($input);
+            Medic::find($medic_id)->update($input);
         } catch (Exception $e) {
             throw new UnprocessableEntityHttpException($e->getMessage());
         }
 
         return true;
-    }
-    public function getPatient($id)
-    {
-        return $this->patient->find($id);
-    }
-    public function getPatientAssociatedData($id)
-    {
-        return $this->patient->with('services.medic')->findOrFail($id);
     }
 }

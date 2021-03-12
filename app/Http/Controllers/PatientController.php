@@ -5,19 +5,8 @@ namespace App\Http\Controllers;
 use App\Exports\PatientExport;
 use App\Http\Requests\CreatePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
-use App\Models\AdvancedPayment;
-use App\Models\BedAssign;
-use App\Models\Bill;
-use App\Models\BirthReport;
-use App\Models\DeathReport;
-use App\Models\InvestigationReport;
-use App\Models\Invoice;
-use App\Models\IpdPatientDepartment;
-use App\Models\OperationReport;
 use App\Models\Patient;
-use App\Models\PatientAdmission;
-use App\Models\PatientCase;
-use App\Models\Prescription;
+use App\Models\Service;
 use App\Queries\PatientDataTable;
 use App\Repositories\PatientRepository;
 use DataTables;
@@ -54,11 +43,10 @@ class PatientController extends AppBaseController
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return Datatables::of((new PatientDataTable())->get($request->only(['status'])))->make(true);
+            return Datatables::of((new PatientDataTable())->get())->addIndexColumn()->make(true);
         }
-        $data['statusArr'] = Patient::STATUS_ARR;
 
-        return view('patients.index', $data);
+        return view('patients.index');
     }
 
     /**
@@ -83,10 +71,8 @@ class PatientController extends AppBaseController
     public function store(CreatePatientRequest $request)
     {
         $input = $request->all();
-        $input['status'] = isset($input['status']) ? 1 : 0;
 
         $this->patientRepository->store($input);
-        $this->patientRepository->createNotification($input);
         Flash::success('Patient saved successfully.');
 
         return redirect(route('patients.index'));
@@ -101,7 +87,6 @@ class PatientController extends AppBaseController
     public function show($patientId)
     {
         $data = $this->patientRepository->getPatientAssociatedData($patientId);
-
         return view('patients.show', compact('data'));
     }
 
@@ -112,12 +97,12 @@ class PatientController extends AppBaseController
      *
      * @return Factory|View
      */
-    public function edit(Patient $patient)
+    public function edit($id)
     {
-        $user = $patient->user;
+        $patient = $this->patientRepository->getPatient($id);
         $bloodGroup = getBloodGroups();
 
-        return view('patients.edit', compact('patient', 'user', 'bloodGroup'));
+        return view('patients.edit', compact('patient', 'bloodGroup'));
     }
 
     /**
@@ -126,11 +111,11 @@ class PatientController extends AppBaseController
      *
      * @return RedirectResponse|Redirector
      */
-    public function update(Patient $patient, UpdatePatientRequest $request)
+    public function update(UpdatePatientRequest $request, $id)
     {
         $input = $request->all();
-        $input['status'] = isset($input['status']) ? 1 : 0;
-        $this->patientRepository->update($input, $patient);
+
+        $this->patientRepository->update($input, $id);
 
         Flash::success('Patient updated successfully.');
 
@@ -149,16 +134,12 @@ class PatientController extends AppBaseController
     public function destroy(Patient $patient)
     {
         $patientModels = [
-            BirthReport::class, DeathReport::class, InvestigationReport::class, OperationReport::class,
-            Appointment::class, BedAssign::class, PatientAdmission::class, PatientCase::class, Bill::class,
-            Invoice::class, AdvancedPayment::class, Prescription::class, IpdPatientDepartment::class,
+            Service::class
         ];
         $result = canDelete($patientModels, 'patient_id', $patient->id);
         if ($result) {
             return $this->sendError('Patient can\'t be deleted.');
         }
-        $patient->user()->delete();
-        $patient->address()->delete();
         $patient->delete();
 
         return $this->sendSuccess('Patient deleted successfully.');
