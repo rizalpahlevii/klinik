@@ -6,11 +6,13 @@ use Eloquent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
@@ -79,7 +81,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use Notifiable, HasMediaTrait, HasRoles;
+    use Notifiable, HasMediaTrait, HasRoles, SoftDeletes;
 
     const COLLECTION_PROFILE_PICTURES = 'profile_photo';
     const COLLECTION_MAIL_ATTACHMENTS = 'mail_attachments';
@@ -141,6 +143,17 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'photo.mimes'  => 'The profile image must be a file of type: jpeg, jpg, png.',
     ];
 
+    public static $rules = [
+        'name_form' => 'required|min:3',
+        'address_form' => 'required|min:3',
+        'role_form' => 'required',
+        'phone_form' => 'required|numeric',
+        'gender_form' => 'required',
+        'start_working_date' => 'required',
+        'username_form' => 'required|unique:users,username',
+        'password' => 'required|same:password_confirmation|min:6'
+    ];
+
     /**
      * @return string
      */
@@ -160,6 +173,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         return getUserImageInitial($this->id, $this->full_name);
     }
 
+    public function getGenderAttribute()
+    {
+        return $this->attributes['gender'] == "female" ? "Wanita" : "Pria";
+    }
+
     /**
      * Accessor for Age.
      */
@@ -168,6 +186,9 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     /**
      * @return MorphTo
      */
+
+
+
     public function owner()
     {
         return $this->morphTo();
@@ -178,6 +199,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
      *
      * @return string
      */
+
     public static function getOwnerType($ownerType)
     {
         switch ($ownerType) {

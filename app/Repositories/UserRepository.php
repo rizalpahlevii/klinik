@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Models\Role;
 use App\Models\User;
+use Arr;
 use Auth;
 use Exception;
 use Hash;
@@ -15,13 +17,23 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
  */
 class UserRepository extends BaseRepository
 {
+    protected $user;
+    protected $role;
+    public function __construct(User $user, Role $role)
+    {
+        $this->role = $role;
+        $this->user = $user;
+    }
     /**
      * @var array
      */
     protected $fieldSearchable = [
         'name',
-        'email',
+        'username',
         'phone',
+        'gender',
+        'address',
+        'start_working_date'
     ];
 
     /**
@@ -42,47 +54,27 @@ class UserRepository extends BaseRepository
         return User::class;
     }
 
-    /**
-     * @param  array  $input
-     *
-     * @return bool
-     */
-    public function profileUpdate($input)
+    public function getRoles()
     {
-        /** @var User $user */
-        $user = $this->find(Auth::id());
-        try {
-            if (isset($input['image']) && ! empty($input['image'])) {
-                $mediaId = updateProfileImage($user, $input['image']);
-            }
-
-            $user->update($input);
-
-            return true;
-        } catch (Exception $e) {
-            throw new UnprocessableEntityHttpException($e->getMessage());
-        }
+        return $this->role->get();
     }
 
-    /**
-     * @param  array  $input
-     *
-     * @return bool
-     */
-    public function changePassword($input)
+    public function getUser($id)
     {
-        try {
-            /** @var User $user */
-            $user = Auth::user();
-            if (! Hash::check($input['password_current'], $user->password)) {
-                throw new UnprocessableEntityHttpException("Current password is invalid.");
-            }
-            $input['password'] = Hash::make($input['password']);
-            $user->update($input);
+        return $this->user->with('roles')->findOrFail($id);
+    }
 
-            return true;
-        } catch (Exception $e) {
-            throw new UnprocessableEntityHttpException($e->getMessage());
-        }
+    public function createUser($data)
+    {
+        $role = $this->role->findById($data['role_id']);
+        $user = $this->user->create(Arr::except($data, ['role_id']));
+        $user->assignRole($role);
+    }
+    public function updateUser($data, $id)
+    {
+        $role = $this->role->findById($data['role_id']);
+        $user = User::find($id);
+        $user->update(Arr::except($data, ['role_id']));
+        $user->syncRoles($role);
     }
 }

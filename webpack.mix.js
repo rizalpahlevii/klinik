@@ -696,6 +696,7 @@ mix.js(
         "public/assets/js/item_categories/item_categories.js"
     )
     .js("resources/assets/js/roles/roles.js", "public/assets/js/roles/roles.js")
+    .js("resources/assets/js/users/users.js", "public/assets/js/users/users.js")
     .js("resources/assets/js/items/items.js", "public/assets/js/items/items.js")
     .js(
         "resources/assets/js/items/create-edit.js",
