@@ -48,6 +48,21 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
             Route::put('/{id}', 'RoleController@update')->name('update');
             Route::delete('/{id}', 'RoleController@destroy')->name('destroy');
         });
+
+
+        Route::prefix('/suppliers')->name('suppliers.')->group(function () {
+            Route::get('/', 'SupplierController@index')->name('index')->middleware('modules');
+            Route::get('/create', 'SupplierController@create')->name('create');
+            Route::get('/{supplier}', 'SupplierController@show')->name('show');
+            Route::post('/patients', 'SupplierController@store')->name('store');
+            Route::delete('/{supplier}', 'SupplierController@destroy')->name('destroy');
+            Route::post('/{supplier}/salesmans', 'SupplierController@createSalesman')->name('createSalesman');
+            Route::delete('/{supplier}/salesmans/{salesman}', 'SupplierController@destroySalesman')->name('destroy_salesman');
+            Route::patch('/{supplier}', 'SupplierController@update')->name('update');
+            Route::get('/{supplier}/edit', 'SupplierController@edit')->name('edit');
+        });
+
+
         Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
         Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');
         Route::get('testimonials/{testimonial}/edit', 'TestimonialController@edit')->name('testimonials.edit');
@@ -62,18 +77,17 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
 
     Route::group(['middleware' => ['role:Admin|Receptionist']], function () {
 
-        Route::get('patients', 'PatientController@index')->name('patients.index')->middleware('modules');
-        Route::get('patients/{patient}', 'PatientController@show')->name('patients.show');
-        Route::post('patients', 'PatientController@store')->name('patients.store');
-        Route::get('patients/create', 'PatientController@create')->name('patients.create');
-        Route::delete('patients/{patient}', 'PatientController@destroy')
-            ->name('patients.destroy');
-        Route::patch('patients/{patient}', 'PatientController@update')
-            ->name('patients.update');
-        Route::get('patients/{patient}/edit', 'PatientController@edit')
-            ->name('patients.edit');
-        Route::post('patients/{patient}/active-deactive', 'PatientController@activeDeactiveStatus');
-        Route::get('export-patients', 'PatientController@patientExport')->name('patient.excel');
+        Route::prefix('patients')->name('patients.')->group(function () {
+            Route::get('/', 'PatientController@index')->name('index')->middleware('modules');
+            Route::get('/create', 'PatientController@create')->name('create');
+            Route::get('/{patient}', 'PatientController@show')->name('show');
+            Route::post('/patients', 'PatientController@store')->name('store');
+            Route::delete('/{patient}', 'PatientController@destroy')->name('destroy');
+            Route::patch('/{patient}', 'PatientController@update')->name('update');
+            Route::get('/{patient}/edit', 'PatientController@edit')->name('edit');
+            Route::post('/{patient}/active-deactive', 'PatientController@activeDeactiveStatus');
+            Route::get('export-patients', 'PatientController@patientExport')->name('excel');
+        });
 
         Route::prefix('medics')->name('medics.')->group(function () {
             Route::get('/', 'MedicController@index')->name('index')->middleware('modules');

@@ -5,10 +5,6 @@ namespace App\Repositories;
 use App\Models\Role;
 use App\Models\User;
 use Arr;
-use Auth;
-use Exception;
-use Hash;
-use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 /**
  * Class UserRepository

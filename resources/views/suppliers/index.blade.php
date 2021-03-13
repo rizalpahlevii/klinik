@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Dokter
+Supplier
 @endsection
 
 @section('page_css')
@@ -12,7 +12,7 @@ Dokter
     <div class="animated fadeIn">
         @include('flash::message')
         <div class="page-header">
-            <h3 class="page__heading">Dokter</h3>
+            <h3 class="page__heading">Supplier</h3>
             <div class="filter-container">
 
                 <div class="mr-0 actions-btn">
@@ -21,9 +21,10 @@ Dokter
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions
                         </button>
                         <div class="dropdown-menu" aria-labelledby="patientActions" x-placement="bottom-start">
-                            <a href="{{ route('medics.create') }}" class="dropdown-item">
-                                Input Dokter
+                            <a href="{{ route('suppliers.create') }}" class="dropdown-item">
+                                Input Supplier
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -33,13 +34,13 @@ Dokter
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        @include('medics.table')
+                        @include('suppliers.table')
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @include('medics.templates.templates')
+    @include('suppliers.templates.templates')
 </div>
 @endsection
 
@@ -50,8 +51,8 @@ Dokter
 
 @section('scripts')
 <script>
-    let medicUrl = "{{url('medics')}}"
+    let supplierUrl = "{{url('suppliers')}}"
 </script>
-<script src="{{ mix('assets/js/medics/medics.js') }}"></script>
+<script src="{{ mix('assets/js/suppliers/suppliers.js') }}"></script>
 <script src="{{ mix('assets/js/custom/delete.js') }}"></script>
 @endsection

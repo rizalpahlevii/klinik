@@ -24,7 +24,7 @@
                             <a href="{{ route('patients.create') }}" class="dropdown-item">
                                 {{ __('messages.patient.new_patient') }}
                             </a>
-                            <a href="{{ route('patient.excel') }}" class="dropdown-item">
+                            <a href="{{ route('patients.excel') }}" class="dropdown-item">
                                 {{ __('messages.common.export_to_excel') }}
                             </a>
                         </div>

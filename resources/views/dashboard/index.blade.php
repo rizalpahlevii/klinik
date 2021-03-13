@@ -17,12 +17,12 @@
 <script src="{{ asset('assets/js/daterangepicker.js') }}"></script>
 @endsection
 @section('scripts')
-<script>
+{{-- <script>
     let incomeExpenseReportUrl = "{{route('income-expense-report')}}";
-        let currentCurrencyName = "{{ getCurrencySymbol()}}";
-        let curencies = JSON.parse('@json($data['currency'])');
+let currentCurrencyName = "{{ getCurrencySymbol()}}";
+let curencies = JSON.parse('@json($data['currency'])');
 </script>
 <script src="{{mix('assets/js/dashboard/dashboard.js')}}"></script>
-<script src="{{mix('assets/js/custom/input_price_format.js')}}"></script>
+<script src="{{mix('assets/js/custom/input_price_format.js')}}"></script> --}}
 
 @endsection
