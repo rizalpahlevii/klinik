@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-{{ __('messages.patient.new_patient') }}
+Input Pasien
 @endsection
 @section('page_css')
 <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.css') }}">
@@ -15,7 +15,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong>{{ __('messages.patient.new_patient') }}</strong>
+                        <strong>Input Pasien</strong>
                     </div>
                     <div class="card-body">
                         @if ($errors->any())

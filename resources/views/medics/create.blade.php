@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Dokter
+Input Dokter
 @endsection
 @section('page_css')
 <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.css') }}">

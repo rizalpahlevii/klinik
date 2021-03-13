@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-{{ __('messages.patient.edit_patient') }}
+Edit Pasien
 @endsection
 @section('page_css')
 <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.css') }}">
@@ -15,7 +15,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong>{{ __('messages.patient.edit_patient') }}</strong>
+                        <strong>Edit Pasien</strong>
                     </div>
                     <div class="card-body">
                         {{ Form::model($patient, ['route' => ['patients.update', $patient->id], 'method' => 'patch', 'files' => 'true', 'id' => 'editPatientForm']) }}
