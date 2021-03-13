@@ -67,23 +67,7 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        if (Auth::user()->hasRole('Admin')) {
-            $this->redirectTo = 'dashboard';
-        } else {
-            if (Auth::user()->hasRole(['Receptionist'])) {
-                $this->redirectTo = 'appointments';
-            } elseif (Auth::user()->hasRole(['Doctor', 'Case Manager', 'Lab Technician', 'Pharmacist'])) {
-                $this->redirectTo = 'employee/doctor';
-            } elseif (Auth::user()->hasRole(['Patient'])) {
-                $this->redirectTo = 'patient/my-cases';
-            } elseif (Auth::user()->hasRole(['Nurse'])) {
-                $this->redirectTo = 'bed-types';
-            } elseif (Auth::user()->hasRole(['Accountant'])) {
-                $this->redirectTo = 'accounts';
-            } else {
-                $this->redirectTo = 'employee/notice-board';
-            }
-        }
+        $this->redirectTo = '/dashboard';
 
         if (!isset($request->remember)) {
 

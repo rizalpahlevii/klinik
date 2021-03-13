@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
     Route::post('update-language', 'ProfileController@updateLanguage');
 
 
-    Route::group(['middleware' => ['role:Admin']], function () {
+    Route::group(['middleware' => ['role:admin']], function () {
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', 'UserController@index')->middleware('modules')->name('index');
             Route::get('/create', 'UserController@create')->name('create');
@@ -62,21 +62,6 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
             Route::get('/{supplier}/edit', 'SupplierController@edit')->name('edit');
         });
 
-
-        Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
-        Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');
-        Route::get('testimonials/{testimonial}/edit', 'TestimonialController@edit')->name('testimonials.edit');
-        Route::post('testimonials/{testimonial}', 'TestimonialController@update')->name('testimonials.update');
-        Route::delete('testimonials/{testimonial}', 'TestimonialController@destroy')->name('testimonials.destroy');
-    });
-
-
-    Route::group(['middleware' => ['role:Admin|Doctor|Receptionist|Accountant']], function () {
-        Route::get('doctors/{doctor}', 'DoctorController@show')->where('doctor', '[0-9]+');
-    });
-
-    Route::group(['middleware' => ['role:Admin|Receptionist']], function () {
-
         Route::prefix('patients')->name('patients.')->group(function () {
             Route::get('/', 'PatientController@index')->name('index')->middleware('modules');
             Route::get('/create', 'PatientController@create')->name('create');
@@ -103,21 +88,17 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
             Route::post('/{medic}/active-deactive', 'MedicController@activeDeactiveStatus');
             Route::get('export-patients', 'MedicController@patientExport')->name('patient.excel');
         });
+
+        Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
+        Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');
+        Route::get('testimonials/{testimonial}/edit', 'TestimonialController@edit')->name('testimonials.edit');
+        Route::post('testimonials/{testimonial}', 'TestimonialController@update')->name('testimonials.update');
+        Route::delete('testimonials/{testimonial}', 'TestimonialController@destroy')->name('testimonials.destroy');
     });
 
 
-    Route::group(['middleware' => ['role:Admin|Accountant|Receptionist']], function () {
 
-        //services routes
-        Route::resource('services', 'ServiceController')->parameters(['services' => 'service']);
-        Route::get('services', 'ServiceController@index')->name('services.index')->middleware('modules');
-        Route::post('services/{service_id}/active-deactive', 'ServiceController@activeDeActiveService');
-    });
-
-
-
-
-    Route::group(['middleware' => ['role:Admin']], function () {
+    Route::group(['middleware' => ['role:admin']], function () {
         //        Route::resource('departments', 'DepartmentController');
         //        Route::post('departments/{department}/active-deactive', 'DepartmentController@activeDeactiveDepartment');
 
@@ -134,7 +115,7 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
 
 
     Route::group(
-        ['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Nurse|Accountant|Lab Technician|Pharmacist|Case Manager']],
+        ['middleware' => ['role:admin']],
         function () {
 
             //Notification routes

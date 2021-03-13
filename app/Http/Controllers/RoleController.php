@@ -27,6 +27,7 @@ class RoleController extends AppBaseController
     }
     public function store(CreateRoleRequest $request)
     {
+        $request->merge(['name' => strtolower($request->name)]);
         $input = $request->all();
         $this->roleRepository->create($input);
 
@@ -57,6 +58,7 @@ class RoleController extends AppBaseController
     public function update(UpdateRoleRequest $request, $id)
     {
         $role = $this->roleRepository->findById($id);
+        $request->merge(['name' => strtolower($request->name)]);
         $input = $request->all();
         $this->roleRepository->update($input, $role->id);
 

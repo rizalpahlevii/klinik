@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UuidTrait;
 use Eloquent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,11 +13,11 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
-use Illuminate\Validation\Rule;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
+use Webpatser\Uuid\Uuid;
 
 /**
  * App\Models\User
@@ -123,16 +124,17 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'password',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+    protected $keyType = 'string';
 
+    public $incrementing = false;
 
-    /**
-     * @var array
-     */
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->id = (string) Uuid::generate(4);
+        });
+    }
 
     /**
      * @var array
@@ -153,10 +155,6 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'username_form' => 'required|unique:users,username',
         'password' => 'required|same:password_confirmation|min:6'
     ];
-
-    /**
-     * @return string
-     */
 
 
     /**
@@ -222,5 +220,10 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
             default:
                 return Notification::ADMIN;
         }
+    }
+
+    public function setUsernameAttribute($value)
+    {
+        $this->attributes['username'] = strtolower($value);
     }
 }

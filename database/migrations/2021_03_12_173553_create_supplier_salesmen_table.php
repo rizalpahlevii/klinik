@@ -14,8 +14,8 @@ class CreateSupplierSalesmenTable extends Migration
     public function up()
     {
         Schema::create('supplier_salesmans', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('supplier_id');
+            $table->uuid('id')->primary();
+            $table->uuid('supplier_id');
             $table->string('salesman_name');
             $table->string('phone');
             $table->timestamps();

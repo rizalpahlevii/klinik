@@ -14,12 +14,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $adminRole = Role::whereName('Admin')->first();
+        $adminRole = Role::whereName('admin')->first();
         $input = [
             'fullname'          => 'Super Admin',
             'username'          => 'Admin',
-            'password'          => Hash::make('123456789'),
-            'phone'             => '7878454512',
+            'password'          => Hash::make('123123123'),
+            'phone'             => '082158115949',
             'gender'            => 'male',
             'address'           => 'Pati Jawa Tengah',
             'start_working_date' => date('Y-m-d'),

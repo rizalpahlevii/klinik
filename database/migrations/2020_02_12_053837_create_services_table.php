@@ -13,11 +13,11 @@ class CreateServicesTable extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id')->primary();
             $table->string('service_number')->unique();
             $table->dateTime('registration_time');
-            $table->unsignedBigInteger('patient_id');
-            $table->unsignedBigInteger('medic_id');
+            $table->uuid('patient_id');
+            $table->uuid('medic_id');
             $table->string('phone');
             $table->double('service_fee', 15, 2);
             $table->double('discount', 15, 2);

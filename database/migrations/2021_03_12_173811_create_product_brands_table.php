@@ -14,7 +14,7 @@ class CreateProductBrandsTable extends Migration
     public function up()
     {
         Schema::create('product_brands', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('brand_name');
             $table->timestamps();
             $table->softDeletes();

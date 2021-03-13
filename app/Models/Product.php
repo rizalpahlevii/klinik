@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Webpatser\Uuid\Uuid;
 
 class Product extends Model
 {
@@ -24,6 +25,18 @@ class Product extends Model
         'side_effects',
         'notes'
     ];
+
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->id = (string) Uuid::generate(4);
+        });
+    }
 
     public function category()
     {

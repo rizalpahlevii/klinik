@@ -1,4 +1,3 @@
-@role('Admin')
 {{--Dashboard--}}
 <li class="nav-item side-menus {{ Request::is('dashboard*') ? 'active' : '' }}">
     <a class="nav-link menu-text-wrap" href="{{ route('dashboard') }}" data-toggle="tooltip" data-placement="bottom"
@@ -94,4 +93,3 @@
         </li>
     </ul>
 </li>
-@endrole

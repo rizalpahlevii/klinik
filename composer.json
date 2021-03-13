@@ -27,6 +27,7 @@
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-permission": "^3.7",
         "twilio/sdk": "^6.4",
+        "webpatser/laravel-uuid": "^3.0",
         "yajra/laravel-datatables-oracle": "^9.8"
     },
     "require-dev": {

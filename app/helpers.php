@@ -4,12 +4,8 @@ use App\Models\BloodBank;
 use App\Models\Department;
 use App\Models\DoctorDepartment;
 use App\Models\Notification;
-use App\Models\Patient;
-use App\Models\PatientAdmission;
-use App\Models\PatientCase;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\VaccinatedPatients;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist;
@@ -66,7 +62,7 @@ function getUserImageInitial($userId, $name)
 function getRandomColor($userId)
 {
     $colors = ['329af0', 'fc6369', 'ffaa2e', '42c9af', '7d68f0'];
-    $index = $userId % 5;
+    $index = rand(1, 4);
 
     return $colors[$index];
 }
@@ -235,7 +231,7 @@ function canDeletePayroll($model, $columnName, $id)
  */
 function getBloodGroups()
 {
-    return BloodBank::pluck('blood_group', 'blood_group')->toArray();
+    return ['A', 'B', 'AB', 'O'];
 }
 
 /**
@@ -427,45 +423,6 @@ function preparePhoneNumber($input, $key)
     return (!empty($input[$key])) ? '+' . $input['prefix_code'] . $input[$key] : null;
 }
 
-/**
- * @param $doctorDepartmentId
- *
- * @return mixed
- */
-function getDoctorDepartment($doctorDepartmentId)
-{
-    return DoctorDepartment::where('id', $doctorDepartmentId)->value('title');
-}
-
-/**
- * @param $userOwnerId
- *
- * @return Collection
- */
-function getPatientsList($userOwnerId)
-{
-    $patientCase = PatientCase::with('patient.user')->where(
-        'doctor_id',
-        '=',
-        $userOwnerId
-    )->where('status', '=', 1)->get()->pluck('patient.user_id', 'id');
-
-    $patientAdmission = PatientAdmission::with('patient.user')->where(
-        'doctor_id',
-        '=',
-        $userOwnerId
-    )->where('status', '=', 1)->get()->pluck('patient.user_id', 'id');
-
-    $arrayMerge = array_merge($patientAdmission->toArray(), $patientCase->toArray());
-    $patientIds = array_unique($arrayMerge);
-
-    $patients = Patient::with('user')->whereIn('user_id', $patientIds)
-        ->whereHas('user', function (Builder $query) {
-            $query->where('status', 1);
-        })->get()->pluck('user.full_name', 'id');
-
-    return $patients;
-}
 
 /**
  * @return array
@@ -555,10 +512,7 @@ function addNotification($data)
  */
 function getNotification($role)
 {
-    return Notification::whereUserId(Auth::id())->whereNotificationFor(Notification::NOTIFICATION_FOR[$role])->where(
-        'read_at',
-        null
-    )->orderByDesc('created_at')->get();
+    return Notification::whereUserId(Auth::id())->orderByDesc('created_at')->get();
 }
 
 /**
@@ -626,35 +580,4 @@ function getNotificationIcon($notificationFor)
         default:
             return 'fa fa-inbox';
     }
-}
-
-/**
- * @param $input
- *
- * @param  null  $vaccinatedPatient
- * @param  null  $isCreate
- * @return bool
- */
-function checkVaccinatePatientValidation($input, $vaccinatedPatient = null, $isCreate = null)
-{
-    $patients = VaccinatedPatients::where('patient_id', $input['patient_id'])->get();
-    $returnValue = false;
-    if ($isCreate) {
-        if ($input['patient_id'] != $vaccinatedPatient->patient_id) {
-            $patients = VaccinatedPatients::where('patient_id', '!=', $vaccinatedPatient->patient_id)->get();
-        }
-    }
-
-    foreach ($patients as $patient) {
-        if (
-            $input['patient_id'] == $patient->patient_id &&
-            $input['vaccination_id'] == $patient->vaccination_id &&
-            $input['dose_number'] == $patient->dose_number
-        ) {
-            $returnValue = true;
-            break;
-        }
-    }
-
-    return $returnValue;
 }

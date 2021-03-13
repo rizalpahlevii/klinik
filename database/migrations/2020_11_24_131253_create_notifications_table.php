@@ -17,7 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->increments('id');
             $table->integer('type');
             $table->integer('notification_for');
-            $table->unsignedBigInteger('user_id');
+            $table->uuid('user_id');
             $table->string('title');
             $table->text('text')->nullable();
             $table->text('meta')->nullable();
