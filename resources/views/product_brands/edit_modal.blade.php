@@ -3,17 +3,17 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Jabatan</h5>
+                <h5 class="modal-title">Edit Merek</h5>
                 <button type="button" aria-label="Close" class="close" data-dismiss="modal">×</button>
             </div>
             {{ Form::open(['id'=>'editForm']) }}
             <div class="modal-body">
                 <div class="alert alert-danger display-none" id="editValidationErrorsBox"></div>
-                {{ Form::hidden('roleId',null,['id'=>'roleId']) }}
+                {{ Form::hidden('brandId',null,['id'=>'brandId']) }}
                 <div class="row">
                     <div class="form-group col-sm-12">
-                        {{ Form::label('name', 'Nama Jabatan'.(':')) }}<span class="required">*</span>
-                        {{ Form::text('name', '', ['id'=>'editName','class' => 'form-control','required']) }}
+                        {{ Form::label('brand_name', 'Nama Merek'.(':')) }}<span class="required">*</span>
+                        {{ Form::text('brand_name', '', ['id'=>'editName','class' => 'form-control','required']) }}
                     </div>
                 </div>
                 <div class="text-right">

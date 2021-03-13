@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-{{ __('messages.patients') }}
+Pasien
 @endsection
 
 @section('page_css')
@@ -12,7 +12,7 @@
     <div class="animated fadeIn">
         @include('flash::message')
         <div class="page-header">
-            <h3 class="page__heading">{{ __('messages.patients') }}</h3>
+            <h3 class="page__heading">Pasien</h3>
             <div class="filter-container">
 
                 <div class="mr-0 actions-btn">
@@ -22,10 +22,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="patientActions" x-placement="bottom-start">
                             <a href="{{ route('patients.create') }}" class="dropdown-item">
-                                {{ __('messages.patient.new_patient') }}
-                            </a>
-                            <a href="{{ route('patients.excel') }}" class="dropdown-item">
-                                {{ __('messages.common.export_to_excel') }}
+                                Input Pasien
                             </a>
                         </div>
                     </div>

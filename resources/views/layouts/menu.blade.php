@@ -93,6 +93,15 @@
             </a>
         </li>
         @endmodule
+        @module('Merek')
+        <li class="nav-item side-menus {{ Request::is('brands*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('brands.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Merek" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-file"></i>
+                <span>Daftar Merek</span>
+            </a>
+        </li>
+        @endmodule
     </ul>
 </li>
 

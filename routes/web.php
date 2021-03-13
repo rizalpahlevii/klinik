@@ -98,6 +98,16 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
             Route::delete('/{id}', 'ProductCategoryController@destroy')->name('destroy');
         });
 
+        Route::prefix('brands')->name('brands.')->group(function () {
+            Route::get('/', 'ProductBrandController@index')->name('index')->middleware('modules');
+            Route::get('/create', 'ProductBrandController@create')->name('create');
+            Route::get('/{brand}', 'ProductBrandController@show')->name('show');
+            Route::post('/patients', 'ProductBrandController@store')->name('store');
+            Route::delete('/{brand}', 'ProductBrandController@destroy')->name('destroy');
+            Route::put('/{brand}', 'ProductBrandController@update')->name('update');
+            Route::get('/{brand}/edit', 'ProductBrandController@edit')->name('edit');
+        });
+
 
         Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
         Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');
