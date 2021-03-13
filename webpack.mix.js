@@ -293,6 +293,10 @@ mix.js(
         "public/assets/js/medics/medics.js"
     )
     .js(
+        "resources/assets/js/product_categories/product_categories.js",
+        "public/assets/js/product_categories/product_categories.js"
+    )
+    .js(
         "resources/assets/js/suppliers/suppliers.js",
         "public/assets/js/suppliers/suppliers.js"
     )

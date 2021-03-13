@@ -46,7 +46,7 @@ class DefaultModuleSeeder extends Seeder
             [
                 'name'      => 'Kategori',
                 'is_active' => 1,
-                'route'     => 'category.index',
+                'route'     => 'categories.index',
             ],
             [
                 'name'      => 'Merek',

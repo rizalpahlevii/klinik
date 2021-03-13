@@ -57,10 +57,9 @@ class RoleController extends AppBaseController
      */
     public function update(UpdateRoleRequest $request, $id)
     {
-        $role = $this->roleRepository->findById($id);
         $request->merge(['name' => strtolower($request->name)]);
         $input = $request->all();
-        $this->roleRepository->update($input, $role->id);
+        $this->roleRepository->update($input, $id);
 
         return $this->sendSuccess('Role updated successfully.');
     }
@@ -80,10 +79,10 @@ class RoleController extends AppBaseController
         $result = canDelete($roleModel, 'role_id', $role->id);
         if ($result) {
             return $this->sendError('Role can\'t be deleted.');
+        } else {
+            $this->roleRepository->delete($role->id);
+            return $this->sendSuccess('Role deleted successfully.');
         }
-        $this->roleRepository->delete($role->id);
-
-        return $this->sendSuccess('Role deleted successfully.');
     }
 
     /**

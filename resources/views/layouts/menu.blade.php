@@ -10,34 +10,6 @@
 {{-- Users  --}}
 <li class="nav-item side-menus nav-dropdown">
     <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
-        title="Pengguna" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
-        <i class="nav-icon fas fa-file"></i>
-        Pengguna
-    </a>
-    <ul class="nav-dropdown-items">
-        @module('Pengguna')
-        <li class="nav-item side-menus {{ Request::is('users*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('users.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Pengguna" data-delay='{"show":"500", "hide":"50"}'>
-                <i class="nav-icon fas fa-file"></i>
-                <span>Pengguna</span>
-            </a>
-        </li>
-        @endmodule
-        @module('Role')
-        <li class="nav-item side-menus {{ Request::is('roles*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('roles.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Jabatan" data-delay='{"show":"500", "hide":"50"}'>
-                <i class="nav-icon fas fa-folder"></i>
-                <span>Jabatan</span>
-            </a>
-        </li>
-        @endmodule
-    </ul>
-</li>
-{{-- Users  --}}
-<li class="nav-item side-menus nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
         title="Registrasi" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
         <i class="nav-icon fas fa-file"></i>
         Registrasi
@@ -64,6 +36,65 @@
     </ul>
 </li>
 
+
+
+{{-- Users  --}}
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
+        title="Pengguna" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        <i class="nav-icon fas fa-file"></i>
+        Pengguna
+    </a>
+    <ul class="nav-dropdown-items">
+        @module('Pengguna')
+        <li class="nav-item side-menus {{ Request::is('users*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('users.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Pengguna" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-file"></i>
+                <span>Pengguna</span>
+            </a>
+        </li>
+        @endmodule
+        @module('Role')
+        <li class="nav-item side-menus {{ Request::is('roles*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('roles.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Jabatan" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-folder"></i>
+                <span>Jabatan</span>
+            </a>
+        </li>
+        @endmodule
+    </ul>
+</li>
+
+{{-- Users  --}}
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
+        title="Obat" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        <i class="nav-icon fas fa-file"></i>
+        Obat
+    </a>
+    <ul class="nav-dropdown-items">
+        @module('Kategori')
+        <li class="nav-item side-menus {{ Request::is('categories*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('categories.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Kategori" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-file"></i>
+                <span>Daftar Kategori</span>
+            </a>
+        </li>
+        @endmodule
+        @module('Supplier')
+        <li class="nav-item side-menus {{ Request::is('suppliers*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('suppliers.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Supplier" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-file"></i>
+                <span>Daftar Supplier</span>
+            </a>
+        </li>
+        @endmodule
+    </ul>
+</li>
 
 {{-- Settings --}}
 <li class="nav-item side-menus nav-dropdown">

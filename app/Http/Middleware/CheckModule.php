@@ -25,7 +25,7 @@ class CheckModule
     {
         $route = request()->route()->getName();
         $activeRoutes = Module::whereRoute($route)->whereIsActive(1)->first();
-        if (! $activeRoutes) {
+        if (!$activeRoutes) {
             App::abort(404);
         }
 

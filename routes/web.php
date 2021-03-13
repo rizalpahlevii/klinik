@@ -89,6 +89,16 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
             Route::get('export-patients', 'MedicController@patientExport')->name('patient.excel');
         });
 
+        Route::prefix('categories')->name('categories.')->group(function () {
+            Route::get('/', 'ProductCategoryController@index')->middleware('modules')->name('index');
+            Route::get('/create', 'ProductCategoryController@create')->name('create');
+            Route::post('/', 'ProductCategoryController@store')->name('store');
+            Route::get('/{id}/edit', 'ProductCategoryController@edit')->name('edit');
+            Route::put('/{id}', 'ProductCategoryController@update')->name('update');
+            Route::delete('/{id}', 'ProductCategoryController@destroy')->name('destroy');
+        });
+
+
         Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
         Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');
         Route::get('testimonials/{testimonial}/edit', 'TestimonialController@edit')->name('testimonials.edit');
