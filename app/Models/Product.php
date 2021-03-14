@@ -35,7 +35,23 @@ class Product extends Model
         parent::boot();
         self::creating(function ($model) {
             $model->id = (string) Uuid::generate(4);
+            $model->product_code = self::productCode();
+            $model->current_stock = 0;
         });
+    }
+    public static function productCode()
+    {
+        $cek = Product::where('product_code', 'like', 'PRF%')->get();
+        if ($cek->count() > 0) {
+            $product = Product::where('product_code', 'like', 'PRF%')->orderBy('id', 'DESC')->first();
+            $nourut = (int) substr($product->product_code, -8, 8);
+            $nourut++;
+            $char = "PRF";
+            $number = $char  .  sprintf("%08s", $nourut);
+        } else {
+            $number = "PRF"  . "00000001";
+        }
+        return $number;
     }
 
     public function category()

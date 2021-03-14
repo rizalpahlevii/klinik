@@ -171,10 +171,6 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         return getUserImageInitial($this->id, $this->full_name);
     }
 
-    public function getGenderAttribute()
-    {
-        return $this->attributes['gender'] == "female" ? "Wanita" : "Pria";
-    }
 
     /**
      * Accessor for Age.

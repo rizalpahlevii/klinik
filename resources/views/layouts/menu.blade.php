@@ -38,36 +38,9 @@
 
 
 
-{{-- Users  --}}
-<li class="nav-item side-menus nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
-        title="Pengguna" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
-        <i class="nav-icon fas fa-file"></i>
-        Pengguna
-    </a>
-    <ul class="nav-dropdown-items">
-        @module('Pengguna')
-        <li class="nav-item side-menus {{ Request::is('users*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('users.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Pengguna" data-delay='{"show":"500", "hide":"50"}'>
-                <i class="nav-icon fas fa-file"></i>
-                <span>Pengguna</span>
-            </a>
-        </li>
-        @endmodule
-        @module('Role')
-        <li class="nav-item side-menus {{ Request::is('roles*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('roles.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Jabatan" data-delay='{"show":"500", "hide":"50"}'>
-                <i class="nav-icon fas fa-folder"></i>
-                <span>Jabatan</span>
-            </a>
-        </li>
-        @endmodule
-    </ul>
-</li>
 
-{{-- Users  --}}
+
+{{-- Produk  --}}
 <li class="nav-item side-menus nav-dropdown">
     <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
         title="Obat" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
@@ -99,6 +72,44 @@
                 data-placement="bottom" title="Merek" data-delay='{"show":"500", "hide":"50"}'>
                 <i class="nav-icon fas fa-file"></i>
                 <span>Daftar Merek</span>
+            </a>
+        </li>
+        @endmodule
+        @module('Obat')
+        <li class="nav-item side-menus {{ Request::is('products*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('products.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Obat" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-file"></i>
+                <span>Daftar Obat</span>
+            </a>
+        </li>
+        @endmodule
+    </ul>
+</li>
+
+{{-- Users  --}}
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
+        title="Pengguna" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        <i class="nav-icon fas fa-file"></i>
+        Pengguna
+    </a>
+    <ul class="nav-dropdown-items">
+        @module('Pengguna')
+        <li class="nav-item side-menus {{ Request::is('users*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('users.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Pengguna" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-file"></i>
+                <span>Pengguna</span>
+            </a>
+        </li>
+        @endmodule
+        @module('Role')
+        <li class="nav-item side-menus {{ Request::is('roles*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('roles.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Jabatan" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-folder"></i>
+                <span>Jabatan</span>
             </a>
         </li>
         @endmodule

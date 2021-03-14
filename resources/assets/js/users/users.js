@@ -36,7 +36,9 @@ let tbl = $(tableName).DataTable({
             name: "start_working_date"
         },
         {
-            data: "gender",
+            data: function(row) {
+                return row.gender == "male" ? "Pria" : "Wanita";
+            },
             name: "gender"
         },
         {

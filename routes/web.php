@@ -102,10 +102,18 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
             Route::get('/', 'ProductBrandController@index')->name('index')->middleware('modules');
             Route::get('/create', 'ProductBrandController@create')->name('create');
             Route::get('/{brand}', 'ProductBrandController@show')->name('show');
-            Route::post('/patients', 'ProductBrandController@store')->name('store');
+            Route::post('/', 'ProductBrandController@store')->name('store');
             Route::delete('/{brand}', 'ProductBrandController@destroy')->name('destroy');
             Route::put('/{brand}', 'ProductBrandController@update')->name('update');
             Route::get('/{brand}/edit', 'ProductBrandController@edit')->name('edit');
+        });
+        Route::prefix('products')->name('products.')->group(function () {
+            Route::get('/', 'ProductController@index')->name('index')->middleware('modules');
+            Route::get('/create', 'ProductController@create')->name('create');
+            Route::post('/', 'ProductController@store')->name('store');
+            Route::delete('/{brand}', 'ProductController@destroy')->name('destroy');
+            Route::put('/{brand}', 'ProductController@update')->name('update');
+            Route::get('/{brand}/edit', 'ProductController@edit')->name('edit');
         });
 
 

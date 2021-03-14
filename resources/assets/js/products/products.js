@@ -1,11 +1,11 @@
 "use strict";
-let tableName = "#medicsTable";
-let tbl = $("#medicsTable").DataTable({
+let tableName = "#productsTable";
+let tbl = $("#productsTable").DataTable({
     processing: true,
     serverSide: true,
     order: [[1, "asc"]],
     ajax: {
-        url: medicUrl,
+        url: productUrl,
         data: function(data) {
             data.status = $("#filter_status")
                 .find("option:selected")
@@ -14,60 +14,41 @@ let tbl = $("#medicsTable").DataTable({
     },
     columnDefs: [
         {
-            targets: [0, 5, 6],
-            orderable: false,
-            className: "text-center",
-            width: "5%"
-        },
-        {
             targets: "_all",
             defaultContent: "N/A"
         }
     ],
     columns: [
         {
-            data: "DT_RowIndex",
-            name: "DT_RowIndex"
-        },
-        {
             data: function(row) {
-                let showLink = medicUrl + "/" + row.id;
+                let showLink = productUrl + "/" + row.id;
                 return '<a href="' + showLink + '">' + row.name + "</a>";
             },
             name: "name"
         },
         {
-            data: "specialization",
-            name: "specialization"
+            data: "brand.brand_name",
+            name: "brand.brand_name"
         },
         {
-            data: "address",
-            name: "address"
+            data: "selling_price",
+            name: "selling_price"
         },
         {
-            data: "phone",
-            name: "phone"
+            data: "category.category_name",
+            name: "category.category_name"
         },
-        {
-            data: function(row) {
-                return row.gender == "male" ? "Pria" : "Wanita";
-            },
-            name: "gender"
-        },
-        {
-            data: "city",
-            name: "city"
-        },
+
         {
             data: function(row) {
-                let url = medicUrl + "/" + row.id;
+                let url = productUrl + "/" + row.id;
                 let data = [
                     {
                         id: row.id,
                         url: url + "/edit"
                     }
                 ];
-                return prepareTemplateRender("#medicActionTemplate", data);
+                return prepareTemplateRender("#productActionTemplate", data);
             },
             name: "id"
         }
@@ -82,18 +63,18 @@ let tbl = $("#medicsTable").DataTable({
 });
 
 $(document).on("click", ".delete-btn", function(event) {
-    let medicId = $(event.currentTarget).data("id");
-    deleteItem(medicUrl + "/" + medicId, "#medicsTable", "Dokter");
+    let productId = $(event.currentTarget).data("id");
+    deleteItem(productUrl + "/" + productId, "#productsTable", "Produk");
 });
 
 $(document).on("change", ".status", function(event) {
-    let medicId = $(event.currentTarget).data("id");
-    updateStatus(medicId);
+    let productId = $(event.currentTarget).data("id");
+    updateStatus(productId);
 });
 
 window.updateStatus = function(id) {
     $.ajax({
-        url: medicUrl + "/" + +id + "/active-deactive",
+        url: productUrl + "/" + +id + "/active-deactive",
         method: "post",
         cache: false,
         success: function(result) {

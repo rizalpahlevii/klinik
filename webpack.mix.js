@@ -301,6 +301,10 @@ mix.js(
         "public/assets/js/product_brands/product_brands.js"
     )
     .js(
+        "resources/assets/js/products/products.js",
+        "public/assets/js/products/products.js"
+    )
+    .js(
         "resources/assets/js/suppliers/suppliers.js",
         "public/assets/js/suppliers/suppliers.js"
     )

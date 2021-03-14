@@ -92,7 +92,6 @@ class Kernel extends HttpKernel
         'permission'         => PermissionMiddleware::class,
         'role_or_permission' => RoleOrPermissionMiddleware::class,
         'xss'                => XSS::class,
-        'checkUserStatus'    => CheckUserStatus::class,
         'modules'            => CheckModule::class,
     ];
 
