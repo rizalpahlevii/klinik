@@ -89,7 +89,7 @@ $(".btn-save-salesman").click(function() {
                 timer: 2000
             });
             $("#salesman_name").val("");
-            $("#salesman_phon").val("");
+            $("#salesman_phone").val("");
         },
         error: function(data) {
             swal({

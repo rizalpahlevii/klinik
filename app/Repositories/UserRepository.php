@@ -50,6 +50,11 @@ class UserRepository extends BaseRepository
         return User::class;
     }
 
+    public function getUsersByRole($role)
+    {
+        return $this->user->role('owner')->get();
+    }
+
     public function getRoles()
     {
         return $this->role->get();

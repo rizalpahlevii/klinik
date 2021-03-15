@@ -5,12 +5,7 @@
             {{ Form::text('name_form', null, ['class' => 'form-control','required']) }}
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="specialization">Spesialisasi <span class="required">*</span></label>
-            <input type="text" class="form-control" name="specialization" id="specialization">
-        </div>
-    </div>
+
     <div class="col-md-6">
         <div class="form-group">
             <label for="birth_date">Tanggal Kelahiran <span class="required">*</span></label>
@@ -37,10 +32,15 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            {{ Form::label('blood_group', __('Golongan Darah').':') }}
-            {{ Form::select('blood_group', $bloodGroup, null, ['class' => 'form-control', 'id' => 'bloodGroup','placeholder'=>'Pilih Golongan Darah']) }}
+            <label for="blood_group">Golongan Darah <span class="required">*</span></label>
+            <select name="blood_group" id="bloodGroup" required class="form-control">
+                @foreach ($bloodGroup as $item)
+                <option value="{{ $item }}">{{ $item }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
+
     <div class="col-md-6">
         <div class="form-group">
             {{ Form::label('address_form', __('Alamat').':') }}<span class="required">*</span>

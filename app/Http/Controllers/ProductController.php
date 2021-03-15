@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Product;
 use App\Queries\ProductDataTable;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
@@ -104,14 +105,15 @@ class ProductController extends AppBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
         $brandModels = [];
-        $result = canDelete($brandModels, 'product_id', $id);
+        $result = canDelete($brandModels, 'product_id', $product->id);
         if ($result) {
             return $this->sendError("Data produk tidak dapat dihapus");
         } else {
-            $this->productRepository->delete($id);
+            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data produk : " . $product->name);
+            $product->delete();
             return $this->sendSuccess("Berhasil menghpus data produk");
         }
     }

@@ -16,5 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingsTableSeeder::class);
         $this->call(DefaultModuleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(BrandSeeder::class);
+        $this->call(ProductCategorySeeder::class);
+        $this->call(SupplierSeeder::class);
+        $this->call(MedicSeeder::class);
+        $this->call(PatientSeeder::class);
     }
 }

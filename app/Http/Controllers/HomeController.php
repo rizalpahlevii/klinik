@@ -2,16 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdvancedPayment;
-use App\Models\Bed;
-use App\Models\Bill;
-use App\Models\Doctor;
-use App\Models\Enquiry;
-use App\Models\Invoice;
-use App\Models\NoticeBoard;
-use App\Models\Nurse;
-use App\Models\Patient;
-use App\Models\Payment;
 use App\Models\Setting;
 use App\Repositories\DashboardRepository;
 use Illuminate\Contracts\View\Factory;
@@ -49,6 +39,7 @@ class HomeController extends AppBaseController
      */
     public function dashboard()
     {
+
         $data['currency'] = Setting::CURRENCIES;
 
         return view('dashboard.index', compact('data'));

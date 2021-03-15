@@ -117,6 +117,7 @@ class SupplierController extends AppBaseController
         if ($result) {
             return $this->sendError('Supplier can\'t be deleted.');
         } else {
+            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data supplier : " . $supplier->name);
             $supplier->delete();
             return $this->sendSuccess('Supplier deleted successfully.');
         }
@@ -125,6 +126,8 @@ class SupplierController extends AppBaseController
     {
         $salesman  = $this->supplierRepository->getSalesman($salesmanId);
         if ($salesman) {
+            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data salesman supplier : " . $salesman->salesman_name);
+            $salesman->delete();
             return $this->sendSuccess("Supplier berhasil dihapus");
         } else {
             return $this->sendError("Supplier tidak dapat dihapus");

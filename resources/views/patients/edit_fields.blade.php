@@ -30,12 +30,17 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="form-group">
-            {{ Form::label('blood_group', __('Golongan Darah').':') }}
-            {{ Form::select('blood_group', $bloodGroup, null, ['class' => 'form-control', 'id' => 'bloodGroup','placeholder'=>'Pilih Golongan Darah']) }}
+            <label for="blood_group">Golongan Darah <span class="required">*</span></label>
+            <select name="blood_group" id="bloodGroup" required class="form-control">
+                @foreach ($bloodGroup as $item)
+                <option value="{{ $item }}" {{ $item == $patient->blood_group ? 'selected' : '' }}>{{ $item }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
+
     <div class="col-md-4">
         <div class="form-group">
             {{ Form::label('address_form', __('Alamat').':') }}<span class="required">*</span>

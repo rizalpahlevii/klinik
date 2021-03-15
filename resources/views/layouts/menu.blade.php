@@ -78,9 +78,9 @@
         @module('Obat')
         <li class="nav-item side-menus {{ Request::is('products*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('products.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Obat" data-delay='{"show":"500", "hide":"50"}'>
+                data-placement="bottom" title="Produk" data-delay='{"show":"500", "hide":"50"}'>
                 <i class="nav-icon fas fa-file"></i>
-                <span>Daftar Obat</span>
+                <span>Daftar Produk</span>
             </a>
         </li>
         @endmodule

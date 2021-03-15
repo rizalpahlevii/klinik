@@ -14,17 +14,47 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $adminRole = Role::whereName('admin')->first();
+        $adminRole = Role::whereName('owner')->first();
+        $kasirRole = Role::whereName('kasir')->first();
+        $gudangRole = Role::whereName('gudang')->first();
         $input = [
-            'fullname'          => 'Super Admin',
-            'username'          => 'Admin',
-            'password'          => Hash::make('123123123'),
-            'phone'             => '082158115949',
-            'gender'            => 'male',
-            'address'           => 'Pati Jawa Tengah',
-            'start_working_date' => date('Y-m-d'),
+            [
+                'fullname'          => 'Super Admin',
+                'username'          => 'admin',
+                'password'          => Hash::make('123123123'),
+                'phone'             => '082158115949',
+                'gender'            => 'male',
+                'address'           => 'Pati Jawa Tengah',
+                'start_working_date' => date('Y-m-d'),
+            ],
+            [
+                'fullname'          => 'Kasir',
+                'username'          => 'kasir',
+                'password'          => Hash::make('123123123'),
+                'phone'             => '012837187',
+                'gender'            => 'male',
+                'address'           => 'Pati Jawa Tengah',
+                'start_working_date' => date('Y-m-d'),
+            ],
+            [
+                'fullname'          => 'Gudang',
+                'username'          => 'Gudang',
+                'password'          => Hash::make('123123123'),
+                'phone'             => '19237891237',
+                'gender'            => 'male',
+                'address'           => 'Pati Jawa Tengah',
+                'start_working_date' => date('Y-m-d'),
+            ],
         ];
-        $user = User::create($input);
-        $user->assignRole($adminRole);
+        foreach ($input as $data) {
+            $user = User::create($data);
+            if ($data['username'] == "admin") {
+                $user->assignRole($adminRole);
+            } elseif ($data['username'] == "kasir") {
+                $user->assignRole($kasirRole);
+            } else {
+                $user->assignRole($gudangRole);
+            }
+        }
     }
 }

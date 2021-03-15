@@ -24,14 +24,14 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->middleware('verified');
 
-Route::group(['middleware' => ['auth', 'xss']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('profile', 'ProfileController@editProfile');
     Route::post('change-password', 'ProfileController@changePassword');
     Route::post('profile-update', 'ProfileController@profileUpdate');
     Route::post('update-language', 'ProfileController@updateLanguage');
 
 
-    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group(['middleware' => ['xss']], function () {
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', 'UserController@index')->middleware('modules')->name('index');
             Route::get('/create', 'UserController@create')->name('create');
@@ -111,9 +111,9 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
             Route::get('/', 'ProductController@index')->name('index')->middleware('modules');
             Route::get('/create', 'ProductController@create')->name('create');
             Route::post('/', 'ProductController@store')->name('store');
-            Route::delete('/{brand}', 'ProductController@destroy')->name('destroy');
-            Route::put('/{brand}', 'ProductController@update')->name('update');
-            Route::get('/{brand}/edit', 'ProductController@edit')->name('edit');
+            Route::delete('/{product}', 'ProductController@destroy')->name('destroy');
+            Route::put('/{product}', 'ProductController@update')->name('update');
+            Route::get('/{product}/edit', 'ProductController@edit')->name('edit');
         });
 
 
@@ -126,7 +126,7 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
 
 
 
-    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group(['middleware' => ['xss']], function () {
         //        Route::resource('departments', 'DepartmentController');
         //        Route::post('departments/{department}/active-deactive', 'DepartmentController@activeDeactiveDepartment');
 
@@ -143,7 +143,7 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
 
 
     Route::group(
-        ['middleware' => ['role:admin']],
+        ['middleware' => ['xss']],
         function () {
 
             //Notification routes

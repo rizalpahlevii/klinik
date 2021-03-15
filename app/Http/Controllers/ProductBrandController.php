@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProductBrandRequest;
 use App\Http\Requests\UpdateProductBrandRequest;
 use App\Models\Product;
+use App\Models\ProductBrand;
 use App\Queries\ProductBrandDataTable;
 use Illuminate\Http\Request;
 use DataTables;
@@ -104,7 +105,9 @@ class ProductBrandController extends AppBaseController
         if ($result) {
             return $this->sendError("Data merek tidak dapat dihapus");
         } else {
-            $this->productBrandRepository->delete($id);
+            $productBrand = $this->productBrandRepository->findById($id);
+            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data merek : " . $productBrand->brand_name);
+            $productBrand->delete();
             return $this->sendSuccess("Berhasil menghpus data merek");
         }
     }

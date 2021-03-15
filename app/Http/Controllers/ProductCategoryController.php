@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Queries\ProductCategoryDataTable;
 use App\Repositories\ProductCategoryRepository;
 use Illuminate\Http\Request;
@@ -107,7 +108,9 @@ class ProductCategoryController extends AppBaseController
         if ($result) {
             return $this->sendError("Data kategori tidak dapat dihapus");
         } else {
-            $this->productCategoryRepository->delete($id);
+            $productCategory = $this->productCategoryRepository->findById($id);
+            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data kategori produk : " . $productCategory->category_name);
+            $productCategory->delete();
             return $this->sendSuccess("Berhasil menghpus data kategori");
         }
     }

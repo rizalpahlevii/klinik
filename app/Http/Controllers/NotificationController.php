@@ -28,7 +28,7 @@ class NotificationController extends AppBaseController
      */
     public function readAllNotification()
     {
-        Notification::whereReadAt(null)->where('user_id', getLoggedInUserId())->update(['read_at' => Carbon::now()]);
+        Notification::whereReadAt(null)->where('recipient_id', auth()->id())->update(['read_at' => Carbon::now()]);
 
         return $this->sendSuccess('All Notification Read successfully');
     }

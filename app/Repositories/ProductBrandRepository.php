@@ -13,7 +13,7 @@ class ProductBrandRepository extends BaseRepository
         $this->productBrand = $productBrand;
     }
     protected $fieldSearchable = [
-        'brand_name', 'brand_phone', 'brand_address'
+        'brand_name'
     ];
 
     /**

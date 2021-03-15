@@ -80,6 +80,7 @@ class RoleController extends AppBaseController
         if ($result) {
             return $this->sendError('Role can\'t be deleted.');
         } else {
+            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data jabatan : " . $role->name);
             $this->roleRepository->delete($role->id);
             return $this->sendSuccess('Role deleted successfully.');
         }

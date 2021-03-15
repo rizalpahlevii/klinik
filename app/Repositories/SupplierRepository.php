@@ -34,10 +34,6 @@ class SupplierRepository extends BaseRepository
         return $this->supplier->findOrFail($supplier_id);
     }
 
-    public function getSalesman($salesManId)
-    {
-        return $this->salesMan->find($salesManId)->delete();
-    }
 
     public function createSupplier($input)
     {
@@ -53,6 +49,11 @@ class SupplierRepository extends BaseRepository
         $input['phone'] = $input['phone_form'];
         $input['address'] = $input['address_form'];
         $this->supplier->find($supplier_id)->update($input);
+    }
+
+    public function getSalesman($salesManId)
+    {
+        return $this->salesMan->find($salesManId);
     }
 
 

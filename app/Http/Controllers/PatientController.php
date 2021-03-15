@@ -42,6 +42,7 @@ class PatientController extends AppBaseController
      */
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             return Datatables::of((new PatientDataTable())->get())->addIndexColumn()->make(true);
         }
@@ -131,15 +132,19 @@ class PatientController extends AppBaseController
      *
      * @return JsonResponse
      */
-    public function destroy(Patient $patient)
+    public function destroy($id)
     {
         $patientModels = [
             Service::class
         ];
-        $result = canDelete($patientModels, 'patient_id', $patient->id);
+        $result = canDelete($patientModels, 'patient_id', $id);
         if ($result) {
             return $this->sendError('Patient can\'t be deleted.');
         } else {
+
+            $patient = $this->patientRepository->getPatient($id);
+            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data pasien : " . $patient->name);
+
             $patient->delete();
             return $this->sendSuccess('Patient deleted successfully.');
         }

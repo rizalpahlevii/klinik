@@ -91,7 +91,9 @@ class UserController extends AppBaseController
     }
     public function destroy($id)
     {
-        $this->userRepository->delete($id);
+        $user = $this->userRepository->getUser($id);
+        if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data pengguna : " . $user->name);
+        $user->delete();
         return $this->sendSuccess('User deleted successfully.');
     }
 }

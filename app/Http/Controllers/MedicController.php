@@ -110,14 +110,15 @@ class MedicController extends AppBaseController
      */
     public function destroy($id)
     {
-        $medic = Medic::find($id);
         $medicModels = [
             Service::class
         ];
-        $result = canDelete($medicModels, 'medic_id', $medic->id);
+        $result = canDelete($medicModels, 'medic_id', $id);
         if ($result) {
             return $this->sendError('Doctor can\'t be deleted.');
         } else {
+            $medic = $this->medicRepository->getMedic($id);
+            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data dokter : " . $medic->name);
             $medic->delete();
             return $this->sendSuccess('Doctor deleted successfully.');
         }

@@ -87,7 +87,7 @@ Pengguna
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="gender_form"
                                                 id="exampleRadios1" value="male"
-                                                {{ $user->gender == "Pria" ? 'checked' : '' }}>
+                                                {{ $user->gender == "male" ? 'checked' : '' }}>
                                             <label class="form-check-label" for="exampleRadios1">
                                                 Pria
                                             </label>
@@ -95,7 +95,7 @@ Pengguna
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="gender_form"
                                                 id="exampleRadios2" value="female"
-                                                {{ $user->gender == "Wanita" ? 'checked' : '' }}>
+                                                {{ $user->gender == "female" ? 'checked' : '' }}>
                                             <label class="form-check-label" for="exampleRadios2">
                                                 Wanita
                                             </label>

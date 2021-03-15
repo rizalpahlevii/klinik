@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\BloodBank;
 use App\Models\Department;
 use App\Models\DoctorDepartment;
 use App\Models\Notification;
@@ -491,18 +490,20 @@ function getFileName($fileName, $attachment)
     return $newName . '.' . $fileNameExtension;
 }
 
+
+function getUsersByRole($role)
+{
+    return User::role($role)->get()->pluck('id')->toArray();
+}
+
 /**
  * @param  array  $data
  */
-function addNotification($data)
+function addNotification($title)
 {
-    $notificationRecord = [
-        'type'             => $data[0],
-        'user_id'          => $data[1],
-        'notification_for' => $data[2],
-        'title'            => $data[3],
-    ];
-    Notification::create($notificationRecord);
+    foreach (getUsersByRole('owner') as $key => $value) {
+        Notification::create(['recipient_id' => $value, 'title' => auth()->user()->fullname . ' ' . $title]);
+    }
 }
 
 /**
@@ -510,9 +511,9 @@ function addNotification($data)
  *
  * @return Notification[]|Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|Collection
  */
-function getNotification($role)
+function getNotification()
 {
-    return Notification::whereUserId(Auth::id())->orderByDesc('created_at')->get();
+    return Notification::where('recipient_id', auth()->id())->whereNull('read_at')->orderByDesc('created_at')->get();
 }
 
 /**
