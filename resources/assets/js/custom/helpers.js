@@ -1,9 +1,11 @@
-'use strict';
+"use strict";
 
-window.isEmpty = (value) => {
-    return value === undefined || value === null || value === '';
+window.isEmpty = value => {
+    return value === undefined || value === null || value === "";
 };
 
 window.randomCode = (length = 6) => {
-    return Math.random().toString(36).slice(-length);
+    return Math.random()
+        .toString(36)
+        .slice(-length);
 };

@@ -233,6 +233,19 @@ function getBloodGroups()
     return ['A', 'B', 'AB', 'O'];
 }
 
+function convertToRupiah($value, $prefix)
+{
+    return $prefix . number_format($value, 0, ',', '.');
+}
+
+function convertCurrency($value)
+{
+    $rupiah = str_replace('.', '', $value);
+    $rupiah = str_replace(',', '.', $rupiah);
+    $rupiah = str_replace('Rp ', '', $rupiah);
+    return $rupiah;
+}
+
 /**
  * @param  string|null  $currency
  *

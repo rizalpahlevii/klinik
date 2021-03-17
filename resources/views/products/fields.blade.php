@@ -41,8 +41,9 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
+
             <label for="selling_price">Harga Jual <span class="required">*</span></label>
-            <input type="number" class="form-control" name="selling_price" id="selling_price">
+            <input type="text" class="form-control" name="selling_price" id="selling_price">
         </div>
     </div>
     <div class="col-md-4">
@@ -53,7 +54,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="side_effects">Efek Samping <span class="required">*</span></label>
+            <label for="side_effects">Efek Samping </label>
             <textarea name="side_effects" id="side_effects" cols="30" rows="5" class="form-control"></textarea>
         </div>
     </div>

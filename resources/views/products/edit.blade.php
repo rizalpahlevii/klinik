@@ -43,7 +43,33 @@ Edit Produk
 @endsection
 @section('scripts')
 <script>
+    $(document).ready(function(){
+        sellingPriceValue = $('#selling_price').val()
+        $('#selling_price').val(formatRupiah(sellingPriceValue,'Rp. '));
+    });
+</script>
+<script>
     let utilsScript = "{{asset('assets/js/int-tel/js/utils.min.js')}}";
         let isEdit = true;
+        var sellingPrice = document.getElementById('selling_price');
+    $('#selling_price').keyup(function(){
+        value = $(this).val();
+        $(this).val(formatRupiah(value,'Rp. '))
+    });
+
+    function formatRupiah(angka,prefix){
+        var numberString = angka.replace(/[^,\d]/g, '').toString(),
+        split   		= numberString.split(','),
+		sisa     		= split[0].length % 3,
+		rupiah     		= split[0].substr(0, sisa),
+		ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+        if(ribuan){
+            separator = sisa ? '.' : '';
+			rupiah += separator + ribuan.join('.');
+        }
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+		return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
 </script>
 @endsection

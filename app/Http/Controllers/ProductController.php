@@ -28,6 +28,9 @@ class ProductController extends AppBaseController
         if ($request->ajax()) {
             return DataTables::of((new ProductDataTable())->get())
                 ->addIndexColumn()
+                ->editColumn('selling_price', function ($row) {
+                    return convertToRupiah($row->selling_price, 'Rp. ');
+                })
                 ->make(true);
         }
         return view('products.index');
@@ -53,7 +56,7 @@ class ProductController extends AppBaseController
      */
     public function store(CreateProductRequest $request)
     {
-        $request->merge(['name' => $request->product_name]);
+        $request->merge(['name' => $request->product_name, 'selling_price' => convertCurrency($request->selling_price)]);
         $this->productRepository->create($request->all());
         Flash::success("Berhasil membuat data produk baru");
         return redirect()->route('products.index');
@@ -93,7 +96,7 @@ class ProductController extends AppBaseController
      */
     public function update(UpdateProductRequest $request, $id)
     {
-        $request->merge(['name' => $request->product_name]);
+        $request->merge(['name' => $request->product_name, 'selling_price' => convertCurrency($request->selling_price)]);
         $this->productRepository->update($request->all(), $id);
         Flash::success("Berhasil mengubah data produk ");
         return redirect()->route('products.index');

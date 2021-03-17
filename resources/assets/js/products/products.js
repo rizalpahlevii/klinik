@@ -34,6 +34,7 @@ let tbl = $("#productsTable").DataTable({
             data: "selling_price",
             name: "selling_price"
         },
+
         {
             data: "category.category_name",
             name: "category.category_name"

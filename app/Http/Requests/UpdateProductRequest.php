@@ -31,7 +31,7 @@ class UpdateProductRequest extends FormRequest
             'unit' => 'required',
             'selling_price' => 'required',
             'total_minimum_stock' => 'required',
-            'side_effects' => 'required',
+            'side_effects' => 'nullable|min:3',
             'notes' => 'nullable|min:3'
         ];
     }

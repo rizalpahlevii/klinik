@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->double('selling_price', 15, 2);
             $table->integer('current_stock');
             $table->integer('total_minimum_stock');
-            $table->string('side_effects');
+            $table->string('side_effects')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
