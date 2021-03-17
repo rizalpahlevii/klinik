@@ -137,7 +137,7 @@ class SupplierController extends AppBaseController
     {
         try {
             $salesman = $this->supplierRepository->createSalesman($request->except(['_token']), $supplier_id);
-            return $this->sendSuccess("Salesman created");
+            return $this->sendSuccess("Berhasil membuat data salesman");
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage());
         }

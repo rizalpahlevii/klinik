@@ -16,6 +16,7 @@ let tbl = $("#suppliersTable").DataTable({
         {
             targets: [0],
             orderable: false,
+            searchable: false,
             className: "text-center",
             width: "5%"
         },
@@ -36,13 +37,14 @@ let tbl = $("#suppliersTable").DataTable({
             },
             name: "name"
         },
-        {
-            data: "address",
-            name: "address"
-        },
+
         {
             data: "phone",
             name: "phone"
+        },
+        {
+            data: "address",
+            name: "address"
         },
         {
             data: function(row) {

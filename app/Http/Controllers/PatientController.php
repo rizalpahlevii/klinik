@@ -74,7 +74,7 @@ class PatientController extends AppBaseController
         $input = $request->all();
 
         $this->patientRepository->store($input);
-        Flash::success('Patient saved successfully.');
+        Flash::success('Berhasil menyimpan data pasien baru.');
 
         return redirect(route('patients.index'));
     }
@@ -118,7 +118,7 @@ class PatientController extends AppBaseController
 
         $this->patientRepository->update($input, $id);
 
-        Flash::success('Patient updated successfully.');
+        Flash::success('Berhasil mengubah data pasien.');
 
         return redirect(route('patients.index'));
     }
@@ -146,7 +146,7 @@ class PatientController extends AppBaseController
             if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data pasien : " . $patient->name);
 
             $patient->delete();
-            return $this->sendSuccess('Patient deleted successfully.');
+            return $this->sendSuccess('Berhasil menghapus data pasien.');
         }
     }
 

@@ -54,7 +54,7 @@ class MedicController extends AppBaseController
         $input = $request->all();
 
         $this->medicRepository->store($input);
-        Flash::success('Doctor saved successfully.');
+        Flash::success('Berhasil menyimpan data dokter baru.');
 
         return redirect(route('medics.index'));
     }
@@ -97,7 +97,7 @@ class MedicController extends AppBaseController
 
         $this->medicRepository->update($input, $id);
 
-        Flash::success('Doctor updated successfully.');
+        Flash::success('Berhasil mengubah data dokter.');
 
         return redirect(route('medics.index'));
     }
@@ -120,7 +120,7 @@ class MedicController extends AppBaseController
             $medic = $this->medicRepository->getMedic($id);
             if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data dokter : " . $medic->name);
             $medic->delete();
-            return $this->sendSuccess('Doctor deleted successfully.');
+            return $this->sendSuccess('Berhasil menghapus data dokter.');
         }
     }
 }

@@ -18,7 +18,7 @@ class CreatePatientsTable extends Migration
             $table->date('birth_date');
             $table->string('phone');
             $table->enum('gender', ['male', 'female']);
-            $table->string('blood_group');
+            $table->string('blood_group')->nullable();
             $table->string('address');
             $table->string('city');
             $table->timestamps();

@@ -32,8 +32,9 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            <label for="blood_group">Golongan Darah <span class="required">*</span></label>
-            <select name="blood_group" id="bloodGroup" required class="form-control">
+            <label for="blood_group">Golongan Darah</label>
+            <select name="blood_group" id="blood_group" class="form-control">
+                <option selected value="null">Pilih Golongan Darah</option>
                 @foreach ($bloodGroup as $item)
                 <option value="{{ $item }}">{{ $item }}</option>
                 @endforeach

@@ -14,6 +14,10 @@ let tbl = $("#patientsTable").DataTable({
     },
     columnDefs: [
         {
+            targets: [0],
+            searchable: false
+        },
+        {
             targets: [0, 5, 6],
             orderable: false,
             className: "text-center",

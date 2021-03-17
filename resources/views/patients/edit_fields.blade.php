@@ -13,13 +13,14 @@
         </div>
 
     </div>
+
     <div class="col-md-6">
         <div class="form-group mobile-overlapping">
-            <div class="form-group">
-                <label for="phone_form">No Telp. <span class="required">*</span></label>
-                <input type="text" class="form-control" name="phone_form" id="phone_form" required
-                    value="{{ $patient->phone }}">
-            </div>
+            {{ Form::label('phone_form', __('No.Telp').':') }}<span class="required">*</span><br>
+            {{ Form::tel('phone_form', $patient->phone, ['class' => 'form-control','id' => 'phoneNumber','required', 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")']) }}
+            {{ Form::hidden('prefix_code',null,['id'=>'prefix_code']) }}
+            <span id="valid-msg" class="hide">✓ &nbsp; Valid</span>
+            <span id="error-msg" class="hide"></span>
         </div>
     </div>
     <div class="col-md-6">
@@ -32,8 +33,9 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            <label for="blood_group">Golongan Darah <span class="required">*</span></label>
-            <select name="blood_group" id="bloodGroup" required class="form-control">
+            <label for="blood_group">Golongan Darah</label>
+            <select name="blood_group" id="blood_group" required class="form-control">
+                <option selected value="null">Pilih Golongan Darah</option>
                 @foreach ($bloodGroup as $item)
                 <option value="{{ $item }}" {{ $item == $patient->blood_group ? 'selected' : '' }}>{{ $item }}</option>
                 @endforeach

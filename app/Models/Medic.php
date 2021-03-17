@@ -26,7 +26,7 @@ class Medic extends Model
         'name_form' => 'required|min:2',
         'birth_date' => 'required',
         'phone_form' => 'required',
-        'gender_form' => 'required',
+        'gender_form' => 'nullable',
         'blood_group' => 'required',
         'address_form' => 'required|min:4',
         'city' => 'required:min:2'

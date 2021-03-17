@@ -8,11 +8,15 @@ Pengguna
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        @include('flash::message')
         <div class="page-header">
             <h3 class="page__heading">Pengguna</h3>
             <div class="flex-end-sm">
                 <a href="{{ route('users.create') }}" class="btn btn-primary">Tambah Pengguna</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @include('flash::message')
             </div>
         </div>
         <div class="row">

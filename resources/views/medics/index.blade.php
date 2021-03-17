@@ -10,7 +10,6 @@ Dokter
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        @include('flash::message')
         <div class="page-header">
             <h3 class="page__heading">Dokter</h3>
             <div class="filter-container">
@@ -27,6 +26,11 @@ Dokter
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @include('flash::message')
             </div>
         </div>
         <div class="row">

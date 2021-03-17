@@ -52,7 +52,7 @@ class MedicRepository extends BaseRepository
             $input['birth_date'] = $input['birth_date'];
             $input['phone'] = preparePhoneNumber($input, 'phone_form');
             $input['gender'] = $input['gender_form'];
-            $input['blood_group'] = $input['blood_group'];
+            $input['blood_group'] = $input['blood_group'] == "null" ? null : $input['blood_group'];
             $input['address'] = $input['address_form'];
             $input['city'] = $input['city'];
             $this->medic->create($input);
@@ -72,9 +72,9 @@ class MedicRepository extends BaseRepository
             $input['name'] = $input['name_form'];
             $input['birth_date'] = $input['birth_date'];
             $input['specialization'] = $input['specialization'];
-            $input['phone'] = $input['phone_form'];
+            $input['phone'] = preparePhoneNumber($input, 'phone_form');
             $input['gender'] = $input['gender_form'];
-            $input['blood_group'] = $input['blood_group'];
+            $input['blood_group'] = $input['blood_group'] == "null" ? null : $input['blood_group'];
             $input['address'] = $input['address_form'];
             $input['city'] = $input['city'];
             $this->medic->find($medic_id)->update($input);

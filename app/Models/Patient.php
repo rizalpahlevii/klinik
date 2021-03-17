@@ -24,7 +24,7 @@ class Patient extends Model
         'birth_date' => 'required',
         'phone_form' => 'required',
         'gender_form' => 'required',
-        'blood_group' => 'required',
+        'blood_group' => 'nullable',
         'address_form' => 'required|min:4',
         'city' => 'required:min:2'
     ];

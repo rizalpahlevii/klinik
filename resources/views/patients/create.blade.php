@@ -33,7 +33,7 @@ Input Pasien
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
-                                <button type="reset" class="btn btn-secondary">Batal</button>
+                                <a href="{{ route('patients.index') }}" class="btn btn-secondary">Batal</a>
                             </div>
                         </div>
                         {{ Form::close() }}

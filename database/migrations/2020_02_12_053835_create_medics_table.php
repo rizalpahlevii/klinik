@@ -20,7 +20,7 @@ class CreateMedicsTable extends Migration
             $table->string('phone');
             $table->enum('gender', ['male', 'female']);
             $table->date('birth_date');
-            $table->string('blood_group');
+            $table->string('blood_group')->nullable();
             $table->string('address');
             $table->string('city');
             $table->timestamps();
