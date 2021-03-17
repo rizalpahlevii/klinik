@@ -38,7 +38,7 @@ class SupplierRepository extends BaseRepository
     public function createSupplier($input)
     {
         $input['name'] = $input['name_form'];
-        $input['phone'] = preparePhoneNumber($input, 'phone_form');
+        $input['phone'] = $input['phone_form'];
         $input['address'] = $input['address_form'];
         $this->supplier->create($input);
     }
@@ -46,7 +46,7 @@ class SupplierRepository extends BaseRepository
     public function updateSupplier($input, $supplier_id)
     {
         $input['name'] = $input['name_form'];
-        $input['phone'] = preparePhoneNumber($input, 'phone_form');
+        $input['phone'] = $input['phone_form'];
         $input['address'] = $input['address_form'];
         $this->supplier->find($supplier_id)->update($input);
     }

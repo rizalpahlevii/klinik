@@ -62,7 +62,7 @@ class PatientRepository extends BaseRepository
         try {
             $input['name'] = $input['name_form'];
             $input['birth_date'] = $input['birth_date'];
-            $input['phone'] = preparePhoneNumber($input, 'phone_form');
+            $input['phone'] = $input['phone_form'];
             $input['gender'] = $input['gender_form'];
             $input['blood_group'] = $input['blood_group'] == "null" ? null : $input['blood_group'];
             $input['address'] = $input['address_form'];
@@ -86,7 +86,7 @@ class PatientRepository extends BaseRepository
         try {
             $input['name'] = $input['name_form'];
             $input['birth_date'] = $input['birth_date'];
-            $input['phone'] = preparePhoneNumber($input, 'phone_form');
+            $input['phone'] = $input['phone_form'];
             $input['gender'] = $input['gender_form'];
             $input['blood_group'] = $input['blood_group'] == "null" ? null : $input['blood_group'];
             $input['address'] = $input['address_form'];

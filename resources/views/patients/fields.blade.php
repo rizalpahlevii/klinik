@@ -16,10 +16,7 @@
     <div class="col-md-6">
         <div class="form-group mobile-overlapping">
             {{ Form::label('phone_form', __('No.Telp').':') }}<span class="required">*</span><br>
-            {{ Form::tel('phone_form', null, ['class' => 'form-control','id' => 'phoneNumber','required', 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")']) }}
-            {{ Form::hidden('prefix_code',null,['id'=>'prefix_code']) }}
-            <span id="valid-msg" class="hide">✓ &nbsp; Valid</span>
-            <span id="error-msg" class="hide"></span>
+            {{ Form::tel('phone_form', null, ['class' => 'form-control','id' => 'phone_form','required', 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")']) }}
         </div>
     </div>
     <div class="col-md-6">
