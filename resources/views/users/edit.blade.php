@@ -59,7 +59,7 @@ Pengguna
                                         <select name="role_form" id="role_form"
                                             class="form-control @error('role_form') is-invalid @enderror">
                                             @foreach ($roles as $role)
-                                            @if ($user->roles)
+                                            @if (count($user->roles) > 0)
                                             <option value="{{ $role->id }}"
                                                 {{ $user->roles[0]->id == $role->id ? 'selected' : '' }}>
                                                 {{ $role->name }}

@@ -73,17 +73,13 @@ class RoleController extends AppBaseController
      *
      * @return JsonResponse
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        $roleModel = [Role::class];
-        $result = canDelete($roleModel, 'role_id', $role->id);
-        if ($result) {
-            return $this->sendError('Role can\'t be deleted.');
-        } else {
-            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data jabatan : " . $role->name);
-            $this->roleRepository->delete($role->id);
-            return $this->sendSuccess('Role deleted successfully.');
-        }
+
+        $role = $this->roleRepository->findById($id);
+        if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data jabatan : " . $role->name);
+        $role->delete();
+        return $this->sendSuccess('Role deleted successfully.');
     }
 
     /**

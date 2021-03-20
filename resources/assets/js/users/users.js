@@ -20,7 +20,9 @@ let tbl = $(tableName).DataTable({
             name: "fullname"
         },
         {
-            data: "role",
+            data: function(row) {
+                return row.role == "" ? "N/A" : row.role;
+            },
             name: "role"
         },
         {

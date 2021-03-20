@@ -20,10 +20,7 @@ let tbl = $("#productsTable").DataTable({
     ],
     columns: [
         {
-            data: function(row) {
-                let showLink = productUrl + "/" + row.id;
-                return '<a href="' + showLink + '">' + row.name + "</a>";
-            },
+            data: "name",
             name: "name"
         },
         {
