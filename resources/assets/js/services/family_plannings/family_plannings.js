@@ -1,11 +1,11 @@
 "use strict";
-let tableName = "#generalsTable";
-let tbl = $("#generalsTable").DataTable({
+let tableName = "#familyPlanningsTable";
+let tbl = $("#familyPlanningsTable").DataTable({
     processing: true,
     serverSide: true,
     order: [[1, "asc"]],
     ajax: {
-        url: generalUrl,
+        url: familyPlanningUrl,
         data: function(data) {
             data.status = $("#filter_status")
                 .find("option:selected")
@@ -21,7 +21,7 @@ let tbl = $("#generalsTable").DataTable({
     columns: [
         {
             data: function(row) {
-                let showLink = generalUrl + "/" + row.id;
+                let showLink = familyPlanningUrl + "/" + row.id;
                 return (
                     '<a href="' + showLink + '">' + row.service_number + "</a>"
                 );
@@ -60,14 +60,17 @@ let tbl = $("#generalsTable").DataTable({
 
         {
             data: function(row) {
-                let url = generalUrl + "/" + row.id;
+                let url = familyPlanningUrl + "/" + row.id;
                 let data = [
                     {
                         id: row.id,
                         url: url + "/edit"
                     }
                 ];
-                return prepareTemplateRender("#generalActionTemplate", data);
+                return prepareTemplateRender(
+                    "#familyPlanningActionTemplate",
+                    data
+                );
             },
             name: "id"
         }
@@ -83,7 +86,11 @@ let tbl = $("#generalsTable").DataTable({
 
 $(document).on("click", ".delete-btn", function(event) {
     let generalId = $(event.currentTarget).data("id");
-    deleteItem(generalUrl + "/" + generalId, "#generalsTable", "Layanan Umum");
+    deleteItem(
+        familyPlanningUrl + "/" + generalId,
+        "#familyPlanningsTable",
+        "Layanan KB"
+    );
 });
 
 $(document).on("change", ".status", function(event) {

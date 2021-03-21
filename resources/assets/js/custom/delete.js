@@ -3,16 +3,16 @@
 window.deleteItem = function(url, tableId, header, callFunction = null) {
     swal(
         {
-            title: "Delete !",
-            text: 'Are you sure want to delete this "' + header + '" ?',
+            title: "Hapus !",
+            text: 'Anda Yakin Ingin Menghapus Data "' + header + '" ?',
             type: "warning",
             showCancelButton: true,
             closeOnConfirm: false,
             showLoaderOnConfirm: true,
             confirmButtonColor: "#5cb85c",
             cancelButtonColor: "#d33",
-            cancelButtonText: "No",
-            confirmButtonText: "Yes"
+            cancelButtonText: "Tidak",
+            confirmButtonText: "Iya"
         },
         function() {
             deleteItemAjax(url, tableId, header, (callFunction = null));
@@ -44,8 +44,8 @@ function deleteItemAjax(url, tableId, header, callFunction = null) {
                 }
             }
             swal({
-                title: "Deleted!",
-                text: header + " has been deleted.",
+                title: "Terhapus!",
+                text: header + " telah terhapus.",
                 type: "success",
                 timer: 2000
             });

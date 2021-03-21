@@ -121,18 +121,30 @@ Route::group(['middleware' => ['auth']], function () {
             });
             Route::prefix('pregnancies')->name('pregnancies.')->group(function () {
                 Route::get('/', 'PregnancyServiceController@index')->name('index');
-                Route::post('/', 'PregnancyServiceController@store')->name('store');
                 Route::get('/create', 'PregnancyServiceController@create')->name('create');
+                Route::get('/{id}', 'PregnancyServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'PregnancyServiceController@edit')->name('edit');
+                Route::put('/{id}', 'PregnancyServiceController@update')->name('update');
+                Route::delete('/{id}', 'PregnancyServiceController@destroy')->name('destroy');
+                Route::post('/', 'PregnancyServiceController@store')->name('store');
             });
             Route::prefix('family-plannings')->name('family_plannings.')->group(function () {
                 Route::get('/', 'FamilyPlanningServiceController@index')->name('index');
-                Route::post('/', 'FamilyPlanningServiceController@store')->name('store');
                 Route::get('/create', 'FamilyPlanningServiceController@create')->name('create');
+                Route::get('/{id}', 'FamilyPlanningServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'FamilyPlanningServiceController@edit')->name('edit');
+                Route::put('/{id}', 'FamilyPlanningServiceController@update')->name('update');
+                Route::delete('/{id}', 'FamilyPlanningServiceController@destroy')->name('destroy');
+                Route::post('/', 'FamilyPlanningServiceController@store')->name('store');
             });
             Route::prefix('laboratories')->name('laboratories.')->group(function () {
                 Route::get('/', 'LaboratoryServiceController@index')->name('index');
-                Route::post('/', 'LaboratoryServiceController@store')->name('store');
                 Route::get('/create', 'LaboratoryServiceController@create')->name('create');
+                Route::get('/{id}', 'LaboratoryServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'LaboratoryServiceController@edit')->name('edit');
+                Route::put('/{id}', 'LaboratoryServiceController@update')->name('update');
+                Route::delete('/{id}', 'LaboratoryServiceController@destroy')->name('destroy');
+                Route::post('/', 'LaboratoryServiceController@store')->name('store');
             });
         });
 

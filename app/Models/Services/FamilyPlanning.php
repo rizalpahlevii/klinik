@@ -19,21 +19,20 @@ class FamilyPlanning extends Model
         parent::boot();
         self::creating(function ($model) {
             $model->id = (string) Uuid::generate(4);
+            $model->service_number = getUniqueString();
         });
     }
 
     protected $table = 'family_planning_services';
 
     public static $rules = [
-        'service_number' => 'required|unique:family_planning_services,service_number',
         'registration_time' => 'required',
         'patient_id' => 'required',
         'medic_id' => 'required',
-        'phone' => 'required',
-        'service_fee' => 'required|numeric',
-        'discount' => 'required|numeric',
-        'total_fee' => 'required|numeric',
-        'notes' => 'required',
+        'phone' => 'nullable',
+        'fee' => 'required',
+        'discount' => 'required',
+        'notes' => 'nullable',
     ];
 
     public $fillable = [

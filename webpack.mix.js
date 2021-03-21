@@ -902,4 +902,8 @@ mix.js(
         "resources/assets/js/services/generals/generals.js",
         "public/assets/js/services/generals/generals.js"
     )
+    .js(
+        "resources/assets/js/services/family_plannings/family_plannings.js",
+        "public/assets/js/services/family_plannings/family_plannings.js"
+    )
     .version();
