@@ -910,4 +910,8 @@ mix.js(
         "resources/assets/js/services/pregnancies/pregnancies.js",
         "public/assets/js/services/pregnancies/pregnancies.js"
     )
+    .js(
+        "resources/assets/js/services/laboratories/laboratories.js",
+        "public/assets/js/services/laboratories/laboratories.js"
+    )
     .version();

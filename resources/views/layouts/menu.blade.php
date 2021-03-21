@@ -61,6 +61,13 @@
                 <span>Kehamilan</span>
             </a>
         </li>
+        <li class="nav-item side-menus {{ Request::is('services.laboratories*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.laboratories.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Laboratorium</span>
+            </a>
+        </li>
     </ul>
 </li>
 
