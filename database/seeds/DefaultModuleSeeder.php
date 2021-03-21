@@ -28,11 +28,7 @@ class DefaultModuleSeeder extends Seeder
                 'is_active' => 1,
                 'route'     => 'users.index',
             ],
-            [
-                'name'      => 'Role',
-                'is_active' => 1,
-                'route'     => 'roles.index',
-            ],
+
             [
                 'name'      => 'Supplier',
                 'is_active' => 1,

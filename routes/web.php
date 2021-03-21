@@ -40,14 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/{id}', 'UserController@update')->name('update');
             Route::delete('/{id}', 'UserController@destroy')->name('destroy');
         });
-        Route::prefix('roles')->name('roles.')->group(function () {
-            Route::get('/', 'RoleController@index')->middleware('modules')->name('index');
-            Route::get('/create', 'RoleController@create')->name('create');
-            Route::post('/', 'RoleController@store')->name('store');
-            Route::get('/{id}/edit', 'RoleController@edit')->name('edit');
-            Route::put('/{id}', 'RoleController@update')->name('update');
-            Route::delete('/{id}', 'RoleController@destroy')->name('destroy');
-        });
+
 
 
         Route::prefix('/suppliers')->name('suppliers.')->group(function () {

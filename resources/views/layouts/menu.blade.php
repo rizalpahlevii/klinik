@@ -104,15 +104,6 @@
             </a>
         </li>
         @endmodule
-        @module('Role')
-        <li class="nav-item side-menus {{ Request::is('roles*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('roles.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Jabatan" data-delay='{"show":"500", "hide":"50"}'>
-                <i class="nav-icon fas fa-user-tag"></i>
-                <span>Jabatan</span>
-            </a>
-        </li>
-        @endmodule
     </ul>
 </li>
 
