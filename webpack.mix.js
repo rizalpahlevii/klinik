@@ -906,4 +906,8 @@ mix.js(
         "resources/assets/js/services/family_plannings/family_plannings.js",
         "public/assets/js/services/family_plannings/family_plannings.js"
     )
+    .js(
+        "resources/assets/js/services/pregnancies/pregnancies.js",
+        "public/assets/js/services/pregnancies/pregnancies.js"
+    )
     .version();

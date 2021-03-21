@@ -19,7 +19,7 @@ Input Layanan KB
                     </div>
                     <div class="card-body">
 
-                        {{ Form::open(['route' => 'services.family_plannings.store', 'files' => 'true', 'id' => 'createGeneralForm']) }}
+                        {{ Form::open(['route' => 'services.family_plannings.store', 'files' => 'true']) }}
 
                         @include('services.family_plannings.fields')
                         <div class="row">

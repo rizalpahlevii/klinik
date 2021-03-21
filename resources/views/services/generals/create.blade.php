@@ -19,7 +19,7 @@ Input Layanan Umum
                     </div>
                     <div class="card-body">
 
-                        {{ Form::open(['route' => 'services.generals.store', 'files' => 'true', 'id' => 'createGeneralForm']) }}
+                        {{ Form::open(['route' => 'services.generals.store', 'files' => 'true']) }}
 
                         @include('services.generals.fields')
                         <div class="row">

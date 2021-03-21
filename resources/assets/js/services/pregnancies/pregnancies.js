@@ -1,11 +1,11 @@
 "use strict";
-let tableName = "#familyPlanningsTable";
-let tbl = $("#familyPlanningsTable").DataTable({
+let tableName = "#pregnanciesTable";
+let tbl = $("#pregnanciesTable").DataTable({
     processing: true,
     serverSide: true,
     order: [[1, "asc"]],
     ajax: {
-        url: familyPlanningUrl,
+        url: pregnancyUrl,
         data: function(data) {
             data.status = $("#filter_status")
                 .find("option:selected")
@@ -21,7 +21,7 @@ let tbl = $("#familyPlanningsTable").DataTable({
     columns: [
         {
             data: function(row) {
-                let showLink = familyPlanningUrl + "/" + row.id;
+                let showLink = pregnancyUrl + "/" + row.id;
                 return (
                     '<a href="' + showLink + '">' + row.service_number + "</a>"
                 );
@@ -60,17 +60,14 @@ let tbl = $("#familyPlanningsTable").DataTable({
 
         {
             data: function(row) {
-                let url = familyPlanningUrl + "/" + row.id;
+                let url = pregnancyUrl + "/" + row.id;
                 let data = [
                     {
                         id: row.id,
                         url: url + "/edit"
                     }
                 ];
-                return prepareTemplateRender(
-                    "#familyPlanningActionTemplate",
-                    data
-                );
+                return prepareTemplateRender("#pregnancyActionTemplate", data);
             },
             name: "id"
         }
@@ -85,15 +82,15 @@ let tbl = $("#familyPlanningsTable").DataTable({
 });
 
 $(document).on("click", ".delete-btn", function(event) {
-    let familiPlanningId = $(event.currentTarget).data("id");
+    let pregnancyId = $(event.currentTarget).data("id");
     deleteItem(
-        familyPlanningUrl + "/" + familiPlanningId,
-        "#familyPlanningsTable",
-        "Layanan KB"
+        pregnancyUrl + "/" + pregnancyId,
+        "#pregnanciesTable",
+        "Layanan Kehamilan"
     );
 });
 
 $(document).on("change", ".status", function(event) {
-    let familiPlanningId = $(event.currentTarget).data("id");
-    updateStatus(familiPlanningId);
+    let pregnancyId = $(event.currentTarget).data("id");
+    updateStatus(pregnancyId);
 });

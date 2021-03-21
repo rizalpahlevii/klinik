@@ -19,7 +19,7 @@ Edit Layanan KB
                     </div>
                     <div class="card-body">
 
-                        {{ Form::open(['route' => ['services.family_plannings.update', $data->id], 'method' => 'put','files' => 'true', 'id' => 'updateGeneralForm']) }}
+                        {{ Form::open(['route' => ['services.family_plannings.update', $data->id], 'method' => 'put','files' => 'true']) }}
 
                         @include('services.family_plannings.edit_fields')
                         <div class="row">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Edit Layanan Umum
+Edit Layanan Kehamilan
 @endsection
 @section('page_css')
 <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.css') }}">
@@ -15,17 +15,17 @@ Edit Layanan Umum
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Edit Layanan Umum</strong>
+                        <strong>Edit Layanan Kehamilan</strong>
                     </div>
                     <div class="card-body">
 
-                        {{ Form::open(['route' => ['services.generals.update', $data->id], 'method' => 'put','files' => 'true']) }}
+                        {{ Form::open(['route' => ['services.pregnancies.update', $data->id], 'method' => 'put','files' => 'true']) }}
 
-                        @include('services.generals.edit_fields')
+                        @include('services.pregnancies.edit_fields')
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
-                                <a href="{{ route('services.generals.index') }}" class="btn btn-secondary">Batal</a>
+                                <a href="{{ route('services.pregnancies.index') }}" class="btn btn-secondary">Batal</a>
                             </div>
                         </div>
                         {{ Form::close() }}

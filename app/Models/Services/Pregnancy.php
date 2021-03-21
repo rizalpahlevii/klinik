@@ -18,6 +18,7 @@ class Pregnancy extends Model
         parent::boot();
         self::creating(function ($model) {
             $model->id = (string) Uuid::generate(4);
+            $model->service_number = getUniqueString();
         });
     }
 

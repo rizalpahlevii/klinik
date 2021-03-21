@@ -15,7 +15,6 @@
         Registrasi
     </a>
     <ul class="nav-dropdown-items">
-        @module('Pasien')
         <li class="nav-item side-menus {{ Request::is('patients*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('patients.index') }}" data-toggle="tooltip"
                 data-placement="bottom" title="Pengguna" data-delay='{"show":"500", "hide":"50"}'>
@@ -23,8 +22,6 @@
                 <span>Pasien</span>
             </a>
         </li>
-        @endmodule
-        @module('Dokter')
         <li class="nav-item side-menus {{ Request::is('medics*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('medics.index') }}" data-toggle="tooltip"
                 data-placement="bottom" title="Jabatan" data-delay='{"show":"500", "hide":"50"}'>
@@ -32,7 +29,6 @@
                 <span>Dokter</span>
             </a>
         </li>
-        @endmodule
     </ul>
 </li>
 
@@ -46,16 +42,23 @@
     <ul class="nav-dropdown-items">
         <li class="nav-item side-menus {{ Request::is('services.generals*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('services.generals.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Kategori" data-delay='{"show":"500", "hide":"50"}'>
+                data-placement="bottom" title="Umum" data-delay='{"show":"500", "hide":"50"}'>
                 <i class="nav-icon fas fa-bookmark"></i>
                 <span>Umum</span>
             </a>
         </li>
         <li class="nav-item side-menus {{ Request::is('services.family_plannings*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('services.family_plannings.index') }}"
-                data-toggle="tooltip" data-placement="bottom" title="Kategori" data-delay='{"show":"500", "hide":"50"}'>
+                data-toggle="tooltip" data-placement="bottom" title="KB" data-delay='{"show":"500", "hide":"50"}'>
                 <i class="nav-icon fas fa-bookmark"></i>
                 <span>KB</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.pregnancies*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.pregnancies.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Kehamilan" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Kehamilan</span>
             </a>
         </li>
     </ul>
