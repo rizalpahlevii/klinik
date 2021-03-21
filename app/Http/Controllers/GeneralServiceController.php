@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateGeneralService;
+use App\Http\Requests\CreateGeneralServiceRequest;
 use App\Http\Requests\UpdateGeneralServiceRequest;
 use App\Queries\Services\GeneralDataTable;
 use App\Repositories\Services\GeneralRepository;
@@ -43,7 +43,7 @@ class GeneralServiceController extends AppBaseController
         return view('services.generals.create', compact('patients', 'medics'));
     }
 
-    public function store(CreateGeneralService $request)
+    public function store(CreateGeneralServiceRequest $request)
     {
         $request->merge([
             'phone' => $request->phone_form,
