@@ -83,7 +83,6 @@
         Produk
     </a>
     <ul class="nav-dropdown-items">
-        @module('Kategori')
         <li class="nav-item side-menus {{ Request::is('categories*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('categories.index') }}" data-toggle="tooltip"
                 data-placement="bottom" title="Kategori" data-delay='{"show":"500", "hide":"50"}'>
@@ -91,8 +90,7 @@
                 <span>Daftar Kategori</span>
             </a>
         </li>
-        @endmodule
-        @module('Supplier')
+
         <li class="nav-item side-menus {{ Request::is('suppliers*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('suppliers.index') }}" data-toggle="tooltip"
                 data-placement="bottom" title="Supplier" data-delay='{"show":"500", "hide":"50"}'>
@@ -100,8 +98,7 @@
                 <span>Daftar Supplier</span>
             </a>
         </li>
-        @endmodule
-        @module('Merek')
+
         <li class="nav-item side-menus {{ Request::is('brands*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('brands.index') }}" data-toggle="tooltip"
                 data-placement="bottom" title="Merek" data-delay='{"show":"500", "hide":"50"}'>
@@ -109,8 +106,7 @@
                 <span>Daftar Merek</span>
             </a>
         </li>
-        @endmodule
-        @module('Obat')
+
         <li class="nav-item side-menus {{ Request::is('products*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('products.index') }}" data-toggle="tooltip"
                 data-placement="bottom" title="Produk" data-delay='{"show":"500", "hide":"50"}'>
@@ -118,7 +114,7 @@
                 <span>Daftar Produk</span>
             </a>
         </li>
-        @endmodule
+
     </ul>
 </li>
 
@@ -130,42 +126,11 @@
         Pengguna
     </a>
     <ul class="nav-dropdown-items">
-        @module('Pengguna')
         <li class="nav-item side-menus {{ Request::is('users*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('users.index') }}" data-toggle="tooltip"
                 data-placement="bottom" title="Pengguna" data-delay='{"show":"500", "hide":"50"}'>
                 <i class="nav-icon fas fa-users"></i>
                 <span>Pengguna</span>
-            </a>
-        </li>
-        @endmodule
-    </ul>
-</li>
-
-{{-- Settings --}}
-<li class="nav-item side-menus nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
-        title="{{ __('messages.settings') }}" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
-        <i class="nav-icon  fa fa-cogs"></i>
-        {{ __('messages.settings') }}
-    </a>
-    <ul class="nav-dropdown-items">
-
-        @module('Testimonial')
-        <li class="nav-item side-menus {{ Request::is('testimonials*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('testimonials.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="{{ __('messages.testimonials') }}"
-                data-delay='{"show":"500", "hide":"50"}'>
-                <i class="nav-icon fab fa-alipay"></i>
-                <span>{{ __('messages.testimonials') }}</span>
-            </a>
-        </li>
-        @endmodule
-        <li class="nav-item side-menus {{ Request::is('settings*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('settings.edit') }}" data-toggle="tooltip"
-                data-placement="bottom" title="{{ __('messages.settings') }}" data-delay='{"show":"500", "hide":"50"}'>
-                <i class="nav-icon fa fa-cogs"></i>
-                <span>{{ __('messages.settings') }}</span>
             </a>
         </li>
     </ul>

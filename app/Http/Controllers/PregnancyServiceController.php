@@ -52,7 +52,7 @@ class PregnancyServiceController extends AppBaseController
             'total_fee' => convertCurrency($request->fee) - convertCurrency($request->discount),
         ]);
         $this->pregnancyRepository->create($request->except(['_token', 'fee', 'phone_form']));
-        Flash::success("Berhasil menginput layanan umum");
+        Flash::success("Berhasil menginput layanan kehamilan");
         return redirect()->route('services.pregnancies.index');
     }
 
@@ -79,7 +79,7 @@ class PregnancyServiceController extends AppBaseController
             'total_fee' => convertCurrency($request->fee) - convertCurrency($request->discount),
         ]);
         $this->pregnancyRepository->update($request->except(['_token', 'fee', 'phone_form']), $id);
-        Flash::success("Berhasil mengubah data layanan umum");
+        Flash::success("Berhasil mengubah data layanan kehamilan");
         return redirect()->route('services.pregnancies.index');
     }
 
@@ -87,8 +87,8 @@ class PregnancyServiceController extends AppBaseController
     {
         $general = $this->pregnancyRepository->findById($id);
         $general->delete();
-        if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data layanan umum : " . $general->service_number);
-        return $this->sendSuccess("Berhasil menghapus data layanan umum");
+        if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data layanan kehamilan : " . $general->service_number);
+        return $this->sendSuccess("Berhasil menghapus data layanan kehamilan");
     }
 
     public function print($id)
