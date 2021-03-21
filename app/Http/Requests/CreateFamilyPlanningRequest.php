@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\LabTechnician;
+use App\Models\Services\FamilyPlanning;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateLabTechnicianRequest extends FormRequest
+class CreateFamilyPlanningRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class CreateLabTechnicianRequest extends FormRequest
      */
     public function rules()
     {
-        return LabTechnician::$rules;
+        return FamilyPlanning::$rules;
     }
 }

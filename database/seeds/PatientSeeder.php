@@ -14,7 +14,7 @@ class PatientSeeder extends Seeder
     {
         $input = [
             [
-                'name' => 'Rizal Pasien',
+                'name' => 'Kiki',
                 'birth_date' => date('Y-m-d'),
                 'phone' => '012378123',
                 'gender' => 'male',
@@ -23,7 +23,7 @@ class PatientSeeder extends Seeder
                 'city' => 'Semarang'
             ],
             [
-                'name' => 'Pahlevi Pasien',
+                'name' => 'Galuh',
                 'birth_date' => date('Y-m-d'),
                 'phone' => '012378123',
                 'gender' => 'male',

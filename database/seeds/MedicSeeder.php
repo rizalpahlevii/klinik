@@ -14,7 +14,7 @@ class MedicSeeder extends Seeder
     {
         $input = [
             [
-                'name' => 'Rizal',
+                'name' => 'Rizal Pahlevi',
                 'specialization' => 'Dokter 1',
                 'birth_date' => date('Y-m-d'),
                 'phone' => '012378123',
@@ -24,7 +24,7 @@ class MedicSeeder extends Seeder
                 'city' => 'Semarang'
             ],
             [
-                'name' => 'Pahlevi',
+                'name' => 'Briska Irvan',
                 'specialization' => 'Dokter 2',
                 'birth_date' => date('Y-m-d'),
                 'phone' => '012378123',

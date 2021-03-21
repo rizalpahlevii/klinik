@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/', 'SupplierController@index')->name('index')->middleware('modules');
             Route::get('/create', 'SupplierController@create')->name('create');
             Route::get('/{supplier}', 'SupplierController@show')->name('show');
-            Route::post('/patients', 'SupplierController@store')->name('store');
+            Route::post('/supplier', 'SupplierController@store')->name('store');
             Route::delete('/{supplier}', 'SupplierController@destroy')->name('destroy');
             Route::post('/{supplier}/salesmans', 'SupplierController@createSalesman')->name('createSalesman');
             Route::delete('/{supplier}/salesmans/{salesman}', 'SupplierController@destroySalesman')->name('destroy_salesman');

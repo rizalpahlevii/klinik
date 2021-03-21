@@ -49,6 +49,11 @@ class GeneralRepository extends BaseRepository
         return General::class;
     }
 
+    public function create($input)
+    {
+        return $this->general->create($input);
+    }
+
     public function findById($id)
     {
         return $this->general->with('medic', 'patient')->findOrFail($id);
