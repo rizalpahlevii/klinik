@@ -62,7 +62,9 @@ class ProductBrandController extends AppBaseController
      */
     public function show($id)
     {
-        //
+        $brand = $this->productBrandRepository->findById($id);
+        $products = $this->productBrandRepository->getProducts($id);
+        return view('product_brands.show', compact('brand', 'products'));
     }
 
     /**
@@ -74,6 +76,7 @@ class ProductBrandController extends AppBaseController
     public function edit($id)
     {
         $brand = $this->productBrandRepository->findById($id);
+        $product = $this->productBrandRepository->getProducts($id);
         return $this->sendResponse($brand, 'Berhasil mendapatkan data merek');
     }
 

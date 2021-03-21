@@ -2,14 +2,17 @@
 
 namespace App\Repositories;
 
+use App\Models\Product;
 use App\Models\ProductBrand;
 use App\Repositories\BaseRepository;
 
 class ProductBrandRepository extends BaseRepository
 {
     protected $productBrand;
-    public function __construct(ProductBrand $productBrand)
+    protected $product;
+    public function __construct(ProductBrand $productBrand, Product $product)
     {
+        $this->product = $product;
         $this->productBrand = $productBrand;
     }
     protected $fieldSearchable = [
@@ -47,6 +50,11 @@ class ProductBrandRepository extends BaseRepository
     public function update($input, $id)
     {
         return $this->findById($id)->update($input);
+    }
+
+    public function getProducts($brand_id)
+    {
+        return $this->product->with('category')->where('brand_id', $brand_id)->get();
     }
 
     public function delete($id)

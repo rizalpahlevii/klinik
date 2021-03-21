@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Detail Pasien
+Detail Merek
 @endsection
 @section('page_css')
 <link href="{{ asset('assets/css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
@@ -18,10 +18,10 @@ Detail Pasien
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Detail Pasien</strong>
+                        <strong>Detail Merek</strong>
                     </div>
                     <div class="card-body">
-                        @include('patients.show_fields')
+                        @include('product_brands.show_fields')
                     </div>
                 </div>
             </div>
@@ -32,5 +32,9 @@ Detail Pasien
 @section('page_scripts')
 <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ mix('assets/js/custom/custom-datatable.js') }}"></script>
-<script src="{{ mix('assets/js/patients/patients_data_listing.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('.product-table').DataTable();
+    });
+</script>
 @endsection
