@@ -72,7 +72,8 @@ class MedicController extends AppBaseController
     public function show($id)
     {
         $data = $this->medicRepository->getMedicAssociatedData($id);
-        return view('medics.show', compact('data'));
+        $patients = $this->medicRepository->getPatients($id);
+        return view('medics.show', compact('data', 'patients'));
     }
 
     /**
@@ -85,6 +86,7 @@ class MedicController extends AppBaseController
     {
         $medic = $this->medicRepository->getMedic($id);
         $bloodGroup  = getBloodGroups();
+
         return view('medics.edit', compact('medic', 'bloodGroup'));
     }
 

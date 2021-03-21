@@ -6,7 +6,6 @@ use App\Exports\PatientExport;
 use App\Http\Requests\CreatePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Patient;
-use App\Models\Service;
 use App\Models\Services\FamilyPlanning;
 use App\Models\Services\General;
 use App\Models\Services\Laboratory;

@@ -3,6 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Medic;
+use App\Models\Patient;
+use App\Models\Services\FamilyPlanning;
+use App\Models\Services\General;
+use App\Models\Services\Laboratory;
+use App\Models\Services\Pregnancy;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
@@ -10,8 +15,10 @@ class MedicRepository extends BaseRepository
 {
     protected $medic;
 
-    public function __construct(Medic $medic)
+    protected $patient;
+    public function __construct(Medic $medic, Patient $patient)
     {
+        $this->patient = $patient;
         $this->medic = $medic;
     }
     /**
@@ -67,7 +74,12 @@ class MedicRepository extends BaseRepository
 
     public function getMedicAssociatedData($id)
     {
-        return $this->medic->with('services.patient')->findOrFail($id);
+        return $this->medic->with(
+            'generalServices.patient',
+            'laboratoryServices.patient',
+            'pregnancyServices.patient',
+            'familyPlanningServices.patient'
+        )->findOrFail($id);
     }
 
     public function update($input, $medic_id)
@@ -97,5 +109,15 @@ class MedicRepository extends BaseRepository
     public function getMedics()
     {
         return $this->medic->get();
+    }
+
+    public function getPatients($medic_id)
+    {
+        $generals = General::where('medic_id', $medic_id)->get()->pluck('patient_id')->toArray();
+        $pregnancies = Pregnancy::where('medic_id', $medic_id)->get()->pluck('patient_id')->toArray();
+        $familyPlannings = FamilyPlanning::where('medic_id', $medic_id)->get()->pluck('patient_id')->toArray();
+        $laboratories = Laboratory::where('medic_id', $medic_id)->get()->pluck('patient_id')->toArray();
+        $patientdId = array_unique(array_merge($generals, $pregnancies, $familyPlannings, $laboratories));
+        return $this->patient->whereIn('id', $patientdId)->get();
     }
 }
