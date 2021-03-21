@@ -90,4 +90,10 @@ class LaboratoryServiceController extends AppBaseController
         if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data layanan laboratorium : " . $general->service_number);
         return $this->sendSuccess("Berhasil menghapus data layanan laboratorium");
     }
+
+    public function print($id)
+    {
+        $data = $this->laboratoryRepository->findById($id);
+        return view('services.laboratories.print', compact('data'));
+    }
 }

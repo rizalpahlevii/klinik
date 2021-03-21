@@ -90,4 +90,10 @@ class PregnancyServiceController extends AppBaseController
         if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data layanan umum : " . $general->service_number);
         return $this->sendSuccess("Berhasil menghapus data layanan umum");
     }
+
+    public function print($id)
+    {
+        $data = $this->pregnancyRepository->findById($id);
+        return view('services.pregnancies.print', compact('data'));
+    }
 }

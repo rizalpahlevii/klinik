@@ -90,4 +90,10 @@ class FamilyPlanningServiceController extends AppBaseController
         if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data layanan KB : " . $familyPlanning->service_number);
         return $this->sendSuccess("Berhasil menghapus data layanan umum");
     }
+
+    public function print($id)
+    {
+        $data = $this->familyPlanningRepository->findById($id);
+        return view('services.family_plannings.print', compact('data'));
+    }
 }

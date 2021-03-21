@@ -64,7 +64,8 @@ let tbl = $("#laboratoriesTable").DataTable({
                 let data = [
                     {
                         id: row.id,
-                        url: url + "/edit"
+                        url: url + "/edit",
+                        urlPrint: url + "/print"
                     }
                 ];
                 return prepareTemplateRender("#laboratoryActionTemplate", data);

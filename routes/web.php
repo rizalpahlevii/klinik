@@ -115,6 +115,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/create', 'GeneralServiceController@create')->name('create');
                 Route::get('/{id}', 'GeneralServiceController@show')->name('show');
                 Route::get('/{id}/edit', 'GeneralServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'GeneralServiceController@print')->name('print');
                 Route::put('/{id}', 'GeneralServiceController@update')->name('update');
                 Route::delete('/{id}', 'GeneralServiceController@destroy')->name('destroy');
                 Route::post('/', 'GeneralServiceController@store')->name('store');
@@ -124,6 +125,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/create', 'PregnancyServiceController@create')->name('create');
                 Route::get('/{id}', 'PregnancyServiceController@show')->name('show');
                 Route::get('/{id}/edit', 'PregnancyServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'PregnancyServiceController@print')->name('print');
                 Route::put('/{id}', 'PregnancyServiceController@update')->name('update');
                 Route::delete('/{id}', 'PregnancyServiceController@destroy')->name('destroy');
                 Route::post('/', 'PregnancyServiceController@store')->name('store');
@@ -133,6 +135,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/create', 'FamilyPlanningServiceController@create')->name('create');
                 Route::get('/{id}', 'FamilyPlanningServiceController@show')->name('show');
                 Route::get('/{id}/edit', 'FamilyPlanningServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'FamilyPlanningServiceController@print')->name('print');
                 Route::put('/{id}', 'FamilyPlanningServiceController@update')->name('update');
                 Route::delete('/{id}', 'FamilyPlanningServiceController@destroy')->name('destroy');
                 Route::post('/', 'FamilyPlanningServiceController@store')->name('store');
@@ -142,6 +145,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/create', 'LaboratoryServiceController@create')->name('create');
                 Route::get('/{id}', 'LaboratoryServiceController@show')->name('show');
                 Route::get('/{id}/edit', 'LaboratoryServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'LaboratoryServiceController@print')->name('print');
                 Route::put('/{id}', 'LaboratoryServiceController@update')->name('update');
                 Route::delete('/{id}', 'LaboratoryServiceController@destroy')->name('destroy');
                 Route::post('/', 'LaboratoryServiceController@store')->name('store');
