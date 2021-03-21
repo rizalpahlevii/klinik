@@ -109,6 +109,33 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{product}/edit', 'ProductController@edit')->name('edit');
         });
 
+        Route::prefix('services')->name('services.')->group(function () {
+            Route::prefix('generals')->name('generals.')->group(function () {
+                Route::get('/', 'GeneralServiceController@index')->name('index');
+                Route::get('/create', 'GeneralServiceController@create')->name('create');
+                Route::get('/{id}', 'GeneralServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'GeneralServiceController@edit')->name('edit');
+                Route::put('/{id}', 'GeneralServiceController@update')->name('update');
+                Route::delete('/{id}', 'GeneralServiceController@destroy')->name('destroy');
+                Route::post('/', 'GeneralServiceController@store')->name('store');
+            });
+            Route::prefix('pregnancies')->name('pregnancies.')->group(function () {
+                Route::get('/', 'PregnancyServiceController@index')->name('index');
+                Route::post('/', 'PregnancyServiceController@store')->name('store');
+                Route::get('/create', 'PregnancyServiceController@create')->name('create');
+            });
+            Route::prefix('family-plannings')->name('family_plannings.')->group(function () {
+                Route::get('/', 'FamilyPlanningServiceController@index')->name('index');
+                Route::post('/', 'FamilyPlanningServiceController@store')->name('store');
+                Route::get('/create', 'FamilyPlanningServiceController@create')->name('create');
+            });
+            Route::prefix('laboratories')->name('laboratories.')->group(function () {
+                Route::get('/', 'LaboratoryServiceController@index')->name('index');
+                Route::post('/', 'LaboratoryServiceController@store')->name('store');
+                Route::get('/create', 'LaboratoryServiceController@create')->name('create');
+            });
+        });
+
 
         Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
         Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');

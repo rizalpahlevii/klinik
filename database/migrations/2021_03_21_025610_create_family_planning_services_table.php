@@ -2,37 +2,40 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateServicesTable extends Migration
+class CreateFamilyPlanningServicesTable extends Migration
 {
-
     /**
      * Run the migrations.
+     *
      * @return void
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('family_planning_services', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('service_number')->unique();
             $table->dateTime('registration_time');
             $table->uuid('patient_id');
             $table->uuid('medic_id');
+            $table->string('phone')->nullable();
             $table->double('service_fee', 15, 2);
             $table->double('discount', 15, 2);
             $table->double('total_fee', 15, 2);
             $table->text('notes');
-            $table->string('service_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
      * @return void
      */
     public function down()
     {
-        Schema::drop('services');
+        Schema::dropIfExists('family_planning_services');
     }
 }

@@ -117,7 +117,7 @@ class ProductController extends AppBaseController
         } else {
             if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data produk : " . $product->name);
             $product->delete();
-            return $this->sendSuccess("Berhasil menghpus data produk");
+            return $this->sendSuccess("Berhasil menghapus data produk");
         }
     }
 }

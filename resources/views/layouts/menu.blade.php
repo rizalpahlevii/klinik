@@ -36,6 +36,45 @@
     </ul>
 </li>
 
+{{-- layanan --}}
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
+        title="Layanan" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        <i class="nav-icon fas fa-hospital-user"></i>
+        Layanan
+    </a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item side-menus {{ Request::is('services.generals*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.generals.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Kategori" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Umum</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.family_plannings*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.family_plannings.index') }}"
+                data-toggle="tooltip" data-placement="bottom" title="Kategori" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>KB</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.pregnancies*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.pregnancies.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Kategori" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Kehamilan</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.laboratories*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.laboratories.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Kategori" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Laboratorium</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
 
 
 

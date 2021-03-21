@@ -98,6 +98,10 @@ class PatientRepository extends BaseRepository
 
         return true;
     }
+    public function getPatients()
+    {
+        return $this->patient->get();
+    }
     public function getPatient($id)
     {
         return $this->patient->find($id);

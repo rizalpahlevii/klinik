@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 class MedicRepository extends BaseRepository
 {
     protected $medic;
+
     public function __construct(Medic $medic)
     {
         $this->medic = $medic;
@@ -44,6 +45,7 @@ class MedicRepository extends BaseRepository
     {
         return Medic::class;
     }
+
     public function store($input)
     {
         try {
@@ -62,10 +64,12 @@ class MedicRepository extends BaseRepository
 
         return true;
     }
+
     public function getMedicAssociatedData($id)
     {
         return $this->medic->with('services.patient')->findOrFail($id);
     }
+
     public function update($input, $medic_id)
     {
         try {
@@ -84,8 +88,14 @@ class MedicRepository extends BaseRepository
 
         return true;
     }
+
     public function getMedic($id)
     {
         return $this->medic->findOrFail($id);
+    }
+
+    public function getMedics()
+    {
+        return $this->medic->get();
     }
 }

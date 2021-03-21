@@ -6,6 +6,10 @@ use App\Http\Requests\CreateMedicRequest;
 use App\Http\Requests\UpdateMedicRequest;
 use App\Models\Medic;
 use App\Models\Service;
+use App\Models\Services\FamilyPlanning;
+use App\Models\Services\General;
+use App\Models\Services\Laboratory;
+use App\Models\Services\Pregnancy;
 use App\Queries\MedicDataTable;
 use App\Repositories\MedicRepository;
 use Illuminate\Http\Request;
@@ -111,7 +115,10 @@ class MedicController extends AppBaseController
     public function destroy($id)
     {
         $medicModels = [
-            Service::class
+            General::class,
+            FamilyPlanning::class,
+            Laboratory::class,
+            Pregnancy::class
         ];
         $result = canDelete($medicModels, 'medic_id', $id);
         if ($result) {

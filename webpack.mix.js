@@ -525,14 +525,6 @@ mix.js(
         "public/assets/js/schedules/create-edit.js"
     )
     .js(
-        "resources/assets/js/services/services.js",
-        "public/assets/js/services/services.js"
-    )
-    .js(
-        "resources/assets/js/services/create-edit.js",
-        "public/assets/js/services/create-edit.js"
-    )
-    .js(
         "resources/assets/js/packages/packages.js",
         "public/assets/js/packages/packages.js"
     )
@@ -905,5 +897,9 @@ mix.js(
     .js(
         "resources/assets/js/vaccinated_patients/patient_vaccinated.js",
         "public/assets/js/vaccinated_patients/patient_vaccinated.js"
+    )
+    .js(
+        "resources/assets/js/services/generals/generals.js",
+        "public/assets/js/services/generals/generals.js"
     )
     .version();

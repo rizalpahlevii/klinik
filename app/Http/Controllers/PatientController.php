@@ -7,6 +7,10 @@ use App\Http\Requests\CreatePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Patient;
 use App\Models\Service;
+use App\Models\Services\FamilyPlanning;
+use App\Models\Services\General;
+use App\Models\Services\Laboratory;
+use App\Models\Services\Pregnancy;
 use App\Queries\PatientDataTable;
 use App\Repositories\PatientRepository;
 use DataTables;
@@ -135,7 +139,10 @@ class PatientController extends AppBaseController
     public function destroy($id)
     {
         $patientModels = [
-            Service::class
+            General::class,
+            Pregnancy::class,
+            FamilyPlanning::class,
+            Laboratory::class
         ];
         $result = canDelete($patientModels, 'patient_id', $id);
         if ($result) {
