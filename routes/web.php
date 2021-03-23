@@ -160,6 +160,11 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::post('/cart', 'CashierController@addCart')->name('cart_add');
                 Route::delete('/cart/{key}', 'CashierController@deleteCart')->name('cart_delete');
             });
+
+            Route::prefix('data')->name('datas.')->group(function () {
+                Route::get('/', 'SalesDataController@index')->name('index');
+                Route::get('/{sale_id}/print', 'SalesDataController@print')->name('print');
+            });
         });
 
 

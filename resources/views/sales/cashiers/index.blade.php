@@ -18,6 +18,11 @@ Penjualan Obat
                         <strong>Faktur Baru</strong>
                     </div>
                     <div class="card-body">
+                        @if (session()->has('newurl'))
+                        <input type="hidden" value="{{ session()->get('newurl') }}" name="newurl" id="newurl">
+                        @else
+                        <input type="hidden" value="no" name="newurl" id="newurl">
+                        @endif
 
                         {{ Form::open(['route' => 'sales.cashiers.store', 'files' => 'true', 'id' => 'createProductForm']) }}
 
@@ -50,6 +55,12 @@ Penjualan Obat
 <script src="{{ asset('assets/js/int-tel/js/intlTelInput.min.js') }}"></script>
 <script src="{{ asset('assets/js/int-tel/js/utils.min.js') }}"></script>
 <script>
+    $(document).ready(function(){
+        newurl = $('#newurl').val()
+        if(newurl!="no"){
+            window.open(newurl);
+        }
+    });
     $('#member_buyer_name').select2({
         placeholder : 'Input Pasien',
         width :'resolve'

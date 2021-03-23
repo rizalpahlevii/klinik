@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Queries\SalesDataTable;
+use App\Repositories\SaleRepository;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+
+class SalesDataController extends Controller
+{
+    protected $saleRepository;
+    public function __construct(SaleRepository $saleRepository)
+    {
+        $this->saleRepository = $saleRepository;
+    }
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            return DataTables::of((new SalesDataTable())->get())
+                ->filter(function ($query) use ($request) {
+                    if ($request->has('start_date') && $request->has('end_date')) {
+                        $query->where('receipt_date', '>=', $request->start_date)->where('receipt_date', '<=', $request->end_date);
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('grand_total2', function ($row) {
+                    return convertToRupiah($row->grand_total, "Rp.");
+                })->make(true);
+        }
+        return view('sales.datas.index');
+    }
+
+    public function print($id)
+    {
+        $sale = $this->saleRepository->findById($id);
+
+        return view('sales.datas.print', compact('sale'));
+    }
+}

@@ -33,6 +33,7 @@ class SaleRepository
         $sale->sub_total = $saleItem;
         $sale->grand_total = $saleItem - $sale->tax - $sale->discount;
         $sale->save();
+        return $sale;
     }
 
     public function createSaleItems($sale)
@@ -50,5 +51,10 @@ class SaleRepository
             $total += $item->total;
         }
         return $total;
+    }
+
+    public function findById($id)
+    {
+        return Sale::with('saleItems.product', 'medic')->find($id);
     }
 }

@@ -87,6 +87,13 @@
                 <span>Kasir</span>
             </a>
         </li>
+        <li class="nav-item side-menus {{ Request::is('sales.datas*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('sales.datas.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Data Penjualan" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Data Penjualan</span>
+            </a>
+        </li>
     </ul>
 </li>
 

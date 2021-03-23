@@ -277,6 +277,10 @@ mix.js(
         "public/assets/js/sales/cashiers/cashiers.js"
     )
     .js(
+        "resources/assets/js/sales/datas/datas.js",
+        "public/assets/js/sales/datas/datas.js"
+    )
+    .js(
         "resources/assets/js/custom/phone-number-country-code.js",
         "public/assets/js/custom/phone-number-country-code.js"
     )

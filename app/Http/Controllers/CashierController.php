@@ -31,7 +31,7 @@ class CashierController extends AppBaseController
     {
         DB::beginTransaction();
         try {
-            $this->saleRepository->create($request->all());
+            $sale = $this->saleRepository->create($request->all());
             Flash::success("Berhasil melakukan transaksi pembelian produk");
             DB::commit();
         } catch (\Throwable $th) {
@@ -39,6 +39,7 @@ class CashierController extends AppBaseController
             Flash::error("Ada Kesalahan Dalan melakukan transaksi");
         }
         $carts = Cookie::forget('klinik-sales-carts');
+        session()->flash('newurl', route('sales.datas.print', $sale->id));
         return redirect()->route('sales.cashiers.index')->withCookie($carts);
     }
     public function index(Request $request)
