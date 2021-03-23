@@ -14,7 +14,7 @@ class CreateSaleItemsTable extends Migration
     public function up()
     {
         Schema::create('sale_items', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('sale_id');
             $table->uuid('product_id');
             $table->double('current_price', 15, 2);

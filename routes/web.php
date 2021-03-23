@@ -152,6 +152,16 @@ Route::group(['middleware' => ['auth']], function () {
             });
         });
 
+        Route::prefix('sales')->name('sales.')->group(function () {
+            Route::prefix('cashiers')->name('cashiers.')->group(function () {
+                Route::get('/', 'CashierController@index')->name('index');
+                Route::post('/', 'CashierController@store')->name('store');
+                Route::get('/cart-table', 'CashierController@loadTable')->name('cart_table');
+                Route::post('/cart', 'CashierController@addCart')->name('cart_add');
+                Route::delete('/cart/{key}', 'CashierController@deleteCart')->name('cart_delete');
+            });
+        });
+
 
         Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
         Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');

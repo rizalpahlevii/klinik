@@ -269,7 +269,15 @@ mix.js(
         "resources/assets/js/services/laboratories/laboratories.js",
         "public/assets/js/services/laboratories/laboratories.js"
     )
+    .js("resources/assets/js/web/plugin.js", "public/assets/js/web/plugin.js")
     .js("resources/assets/js/roles/roles.js", "public/assets/js/roles/roles.js")
     .js("resources/assets/js/users/users.js", "public/assets/js/users/users.js")
-
+    .js(
+        "resources/assets/js/sales/cashiers/cashiers.js",
+        "public/assets/js/sales/cashiers/cashiers.js"
+    )
+    .js(
+        "resources/assets/js/custom/phone-number-country-code.js",
+        "public/assets/js/custom/phone-number-country-code.js"
+    )
     .version();

@@ -72,6 +72,25 @@
 </li>
 
 
+{{-- Penjualan Obat --}}
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
+        title="Penjualan Obat" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        <i class="nav-icon fas fa-list"></i>
+        Penjualan Obat
+    </a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item side-menus {{ Request::is('sales.cashiers*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('sales.cashiers.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Kasir" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Kasir</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+
 
 
 

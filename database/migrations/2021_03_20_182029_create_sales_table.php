@@ -23,7 +23,8 @@ class CreateSalesTable extends Migration
             $table->double('tax', 15, 2);
             $table->double('discount', 15, 2);
             $table->double('grand_total', 15, 2);
-            $table->uuid('doctor_id');
+            $table->uuid('doctor_id')->nullable();
+            $table->enum('payment_method', ['cash', 'credit']);
             $table->timestamps();
             $table->softDeletes();
         });
