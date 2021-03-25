@@ -34,13 +34,13 @@ class CashierController extends AppBaseController
             $sale = $this->saleRepository->create($request->all());
             Flash::success("Berhasil melakukan transaksi pembelian produk");
             DB::commit();
+            Cookie::queue(Cookie::forget('klinik-sales-carts'));
+            session()->flash('newurl', route('sales.datas.print', $sale->id));
         } catch (\Throwable $th) {
             DB::rollback();
-            Flash::error("Ada Kesalahan Dalan melakukan transaksi");
+            Flash::error("Ada Kesalahan Dalam melakukan transaksi");
         }
-        $carts = Cookie::forget('klinik-sales-carts');
-        session()->flash('newurl', route('sales.datas.print', $sale->id));
-        return redirect()->route('sales.cashiers.index')->withCookie($carts);
+        return redirect()->route('sales.cashiers.index');
     }
     public function index(Request $request)
     {
@@ -55,18 +55,27 @@ class CashierController extends AppBaseController
     {
         $carts = json_decode($request->cookie('klinik-sales-carts'), true);
 
+
+        $product = $this->productRepository->findById($request->product_id);
         if ($carts && array_key_exists($request->product_id, $carts)) {
-            $carts[$request->product_id]['quantity'] += $request->quantity;
+            if ($product->current_stock >= $carts[$request->product_id]['quantity'] += $request->quantity) {
+                $carts[$request->product_id]['quantity'] += $request->quantity;
+            } else {
+                return $this->sendError("Stok Tidak Cukup", 200);
+            }
         } else {
-            $product = $this->productRepository->findById($request->product_id);
-            $carts[$request->product_id] = [
-                'quantity' => $request->quantity,
-                'product_id' => $product->id,
-                'product_name' => $product->name,
-                'product_code' => $product->product_code,
-                'unit' => $product->unit,
-                'price' => $product->selling_price,
-            ];
+            if ($product->current_stock >= $request->quantity) {
+                $carts[$request->product_id] = [
+                    'quantity' => $request->quantity,
+                    'product_id' => $product->id,
+                    'product_name' => $product->name,
+                    'product_code' => $product->product_code,
+                    'unit' => $product->unit,
+                    'price' => $product->selling_price,
+                ];
+            } else {
+                return $this->sendError("Stok Tidak Cukup", 200);
+            }
         }
 
 
@@ -78,6 +87,9 @@ class CashierController extends AppBaseController
     public function loadTable(Request $request)
     {
         $carts = json_decode($request->cookie('klinik-sales-carts'), true);
+        if (!$carts) {
+            $carts = [];
+        }
         $products = (new ProductDataTable())->get()->get();
 
         return view('sales.cashiers.table', compact('carts', 'products'));

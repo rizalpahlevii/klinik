@@ -94,7 +94,7 @@
     $('#subtotal_hid').val(endTotal);
     $('#end-total').html(formatRupiah(String(endTotal)));
     $(document).on('click','.delete-btn',function(){
-        let cartDelete = `{{ route('sales.cashiers.cart_delete',':id') }}`;
+        let cartDelete = `{{ route('purchases.cart_delete',':id') }}`;
         cartDelete=cartDelete.replace(':id',$(this).data('id'));
         console.log(cartDelete);
         $.ajax({
@@ -172,8 +172,6 @@
                 if (result.success) {
                     displaySuccessMessage(result.message);
                     loadTable();
-                }else{
-                    displayErrorMessage(result.message);
                 }
             },
             error: function(result) {

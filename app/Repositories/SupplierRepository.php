@@ -29,6 +29,16 @@ class SupplierRepository extends BaseRepository
         return Supplier::class;
     }
 
+    public function getSuppliers()
+    {
+        return $this->supplier->get();
+    }
+
+    public function getSalesmanBySupplier($supplier_id)
+    {
+        return $this->salesMan->where('supplier_id', $supplier_id)->get();
+    }
+
     public function getSupplier($supplier_id)
     {
         return $this->supplier->findOrFail($supplier_id);

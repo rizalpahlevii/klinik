@@ -143,7 +143,14 @@
 
     </ul>
 </li>
-
+{{--Dashboard--}}
+<li class="nav-item side-menus {{ Request::is('purchases*') ? 'active' : '' }}">
+    <a class="nav-link menu-text-wrap" href="{{ route('purchases.index') }}" data-toggle="tooltip"
+        data-placement="bottom" title="Pembelian" data-delay='{"show":"500", "hide":"50"}'>
+        <i class="nav-icon fas fa-chart-pie"></i>
+        <span>Pembelian</span>
+    </a>
+</li>
 {{-- Users  --}}
 <li class="nav-item side-menus nav-dropdown">
     <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"

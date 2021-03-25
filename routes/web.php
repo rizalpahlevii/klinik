@@ -167,6 +167,19 @@ Route::group(['middleware' => ['auth']], function () {
             });
         });
 
+        Route::prefix('purchases')->name('purchases.')->group(function () {
+            Route::get('/', 'PurchaseController@index')->name('index');
+            Route::get('/create', 'PurchaseController@create')->name('create');
+            Route::post('/', 'PurchaseController@store')->name('store');
+            Route::get('/{purchase_id}/print', 'PurchaseController@print')->name('print');
+
+            Route::get('/{suppleir_id}/salesman', 'PurchaseController@getSalesmans')->name('get_salesman');
+
+            Route::get('/cart-table', 'PurchaseController@loadTable')->name('cart_table');
+            Route::post('/cart', 'PurchaseController@addCart')->name('cart_add');
+            Route::delete('/cart/{key}', 'PurchaseController@deleteCart')->name('cart_delete');
+        });
+
 
         Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
         Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');

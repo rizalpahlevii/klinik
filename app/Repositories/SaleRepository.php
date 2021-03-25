@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleItem;
 use Request;
@@ -10,8 +11,10 @@ class SaleRepository
 {
     protected $sale;
     protected $saleItem;
-    public function __construct(Sale $sale, SaleItem $saleItem)
+    protected $product;
+    public function __construct(Sale $sale, SaleItem $saleItem, Product $product)
     {
+        $this->product = $product;
         $this->sale = $sale;
         $this->saleItem = $saleItem;
     }
@@ -49,12 +52,18 @@ class SaleRepository
             $item->total = $item->current_price * $item->quantity;
             $item->save();
             $total += $item->total;
+            $this->reduceStock($item->product_id, $item->quantity);
         }
         return $total;
     }
 
+    public function reduceStock($productId, $qty)
+    {
+        return $this->product->find($productId)->decrement('current_stock', $qty);
+    }
+
     public function findById($id)
     {
-        return Sale::with('saleItems.product', 'medic')->find($id);
+        return $this->sale->with('saleItems.product', 'medic')->find($id);
     }
 }
