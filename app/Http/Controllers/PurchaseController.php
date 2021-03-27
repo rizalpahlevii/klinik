@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePurchaseRequest;
+use App\Http\Requests\UpdatePurchaseRequest;
 use App\Queries\ProductDataTable;
 use App\Queries\PurchaseDataTable;
 use App\Repositories\ProductRepository;
@@ -85,7 +86,7 @@ class PurchaseController extends AppBaseController
                 'product_name' => $product->name,
                 'product_code' => $product->product_code,
                 'unit' => $product->unit,
-                'price' => $product->selling_price,
+                'price' => $request->price,
             ];
         }
 
@@ -118,10 +119,44 @@ class PurchaseController extends AppBaseController
         return $this->sendResponse($this->supplierRepository->getSalesmanBySupplier($supplier_id), "Success get salesman");
     }
 
+    public function edit($purchase_id)
+    {
+        $products = (new ProductDataTable())->get()->get();
+        $purchase = $this->purchaseRepository->findById($purchase_id);
+        $suppliers = $this->supplierRepository->getSuppliers();
+        $supplierSalesmans = $this->supplierRepository->getSalesmanBySupplier($purchase->supplier_id);
+        return view('purchases.edit.edit', compact('purchase', 'suppliers', 'supplierSalesmans', 'products'));
+    }
+
     public function print($purchase_id)
     {
         $sale = $this->purchaseRepository->findById($purchase_id);
 
         return view('purchases.data.print', compact('sale'));
+    }
+
+    public function getProducts()
+    {
+        return $this->sendResponse((new ProductDataTable())->get()->get(), "Success to get products data");
+    }
+
+    public function update(UpdatePurchaseRequest $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->file) {
+                $imageName = time() . '.' . $request->file->getClientOriginalExtension();
+                $request->file->move(public_path('/uploads/purchases'), $imageName);
+                $request->merge(['photo' => 'uploads/purchases/' . $imageName]);
+            }
+            $purchase =  $this->purchaseRepository->update($request->all(), $id);
+            Flash::success("Berhasil melakukan pengubahan transaksi pembelian produk");
+            session()->flash('newurl', route('purchases.print', $purchase->id));
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            Flash::error($e->getMessage());
+        }
+        return redirect()->route('purchases.index');
     }
 }

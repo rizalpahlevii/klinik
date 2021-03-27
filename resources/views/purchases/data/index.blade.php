@@ -65,6 +65,7 @@ Data Pembelian
             </div>
         </div>
     </div>
+    @include('purchases.data.templates.templates')
 </div>
 @endsection
 

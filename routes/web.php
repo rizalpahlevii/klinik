@@ -171,13 +171,20 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/', 'PurchaseController@index')->name('index');
             Route::get('/create', 'PurchaseController@create')->name('create');
             Route::post('/', 'PurchaseController@store')->name('store');
+            Route::put('/{purchase_id}', 'PurchaseController@update')->name('update');
             Route::get('/{purchase_id}/print', 'PurchaseController@print')->name('print');
-
+            Route::get('/{purchase_id}/edit', 'PurchaseController@edit')->name('edit');
             Route::get('/{suppleir_id}/salesman', 'PurchaseController@getSalesmans')->name('get_salesman');
-
+            Route::get('/get-products', 'PurchaseController@getProducts')->name('get_products');
+            // cart create
             Route::get('/cart-table', 'PurchaseController@loadTable')->name('cart_table');
             Route::post('/cart', 'PurchaseController@addCart')->name('cart_add');
             Route::delete('/cart/{key}', 'PurchaseController@deleteCart')->name('cart_delete');
+
+            // edit
+            Route::get('/cart-table-edit/{purchase_id}', 'PurchaseController@loadTableEdit')->name('cart_table_edit');
+            // Route::post('/cart/{purchase_id}', 'PurchaseController@addCartOnEdit')->name('cart_add_on_edit');
+            // Route::delete('/cart/{key}', 'PurchaseController@deleteCart')->name('cart_delete_on_edit');
         });
 
 

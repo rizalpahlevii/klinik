@@ -48,7 +48,7 @@
             <td><input type="text" class="form-control" id="product_name" readonly></td>
             <td><input type="number" class="form-control" id="quantity" value="1"></td>
             <td><input type="text" class="form-control" id="unit" readonly></td>
-            <td><input type="number" class="form-control" id="price" readonly></td>
+            <td><input type="number" class="form-control" id="price"></td>
             <td><input type="number" class="form-control" id="subtotal" readonly></td>
             <td><button type="button" class="btn btn-success btn-sm add-cart"
                     data-loading-text="<span class='spinner-border spinner-border-sm'></span> Processing...">Tambahkan
@@ -135,16 +135,17 @@
                 .data("unit")
         );
         $("#price").val(
-            $(this)
-                .find("option:selected")
-                .data("price")
+           0
         );
         $("#subtotal").val(
-            $(this)
-                .find("option:selected")
-                .data("price") * parseInt($("#quantity").val())
+           0
         );
     });
+    $('#price').keyup(function(){
+        qty = $('#quantity').val();
+        $("#subtotal").val(parseInt(qty) * parseInt($(this).val()));
+    });
+
     $("#quantity").keyup(function() {
         qty = $(this).val();
         $("#subtotal").val(parseInt(qty) * $("#price").val());
@@ -166,7 +167,8 @@
             method: "post",
             data: {
                 product_id: $("#product_id").val(),
-                quantity: $("#quantity").val()
+                quantity: $("#quantity").val(),
+                price: $("#price").val(),
             },
             success: function(result) {
                 if (result.success) {

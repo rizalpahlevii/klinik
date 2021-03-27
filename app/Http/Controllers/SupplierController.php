@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\SupplierSalesman;
 use App\Queries\SupplierDataTable;
 use App\Repositories\SupplierRepository;
@@ -111,6 +112,7 @@ class SupplierController extends AppBaseController
     {
         $supplier = $this->supplierRepository->getSupplier($id);
         $supplierModels = [
+            Purchase::class,
             SupplierSalesman::class
         ];
         $result = canDelete($supplierModels, 'supplier_id', $supplier->id);
@@ -124,13 +126,21 @@ class SupplierController extends AppBaseController
     }
     public function destroySalesman($supplier_id, $salesmanId)
     {
-        $salesman  = $this->supplierRepository->getSalesman($salesmanId);
-        if ($salesman) {
-            if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data salesman supplier : " . $salesman->salesman_name);
-            $salesman->delete();
-            return $this->sendSuccess("Supplier berhasil dihapus");
+        $models = [
+            Purchase::class
+        ];
+        $result = canDelete($models, 'salesman_id', 'id');
+        if ($result) {
+            return $this->sendError('Supplier Tidak Dapat Dihapus');
         } else {
-            return $this->sendError("Supplier tidak dapat dihapus");
+            $salesman  = $this->supplierRepository->getSalesman($salesmanId);
+            if ($salesman) {
+                if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data salesman supplier : " . $salesman->salesman_name);
+                $salesman->delete();
+                return $this->sendSuccess("Supplier berhasil dihapus");
+            } else {
+                return $this->sendError("Supplier tidak dapat dihapus");
+            }
         }
     }
     public function createSalesman(Request $request, $supplier_id)

@@ -6,6 +6,7 @@
             <th>Nama Sales</th>
             <th>Tanggal Faktur</th>
             <th>Total Harga</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
