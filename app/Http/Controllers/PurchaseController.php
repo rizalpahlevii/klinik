@@ -159,4 +159,14 @@ class PurchaseController extends AppBaseController
         }
         return redirect()->route('purchases.index');
     }
+
+    public function destroy($id)
+    {
+
+        $brandModels = [];
+        $purchase = $this->purchaseRepository->findById($id);
+        if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data pembelian : " . $purchase->receipt_code);
+        $purchase->delete();
+        return $this->sendSuccess("Berhasil menghapus data pembelian");
+    }
 }

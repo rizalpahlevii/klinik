@@ -53,19 +53,6 @@ let tbl = $("#purchasesTable").DataTable({
         {
             data: "grand_total2",
             name: "grand_total2"
-        },
-        {
-            data: function(row) {
-                let url = purchaseUrl + "/" + row.id;
-                let data = [
-                    {
-                        id: row.id,
-                        url: url + "/edit"
-                    }
-                ];
-                return prepareTemplateRender("#purchaseActionTemplate", data);
-            },
-            name: "id"
         }
     ]
 });

@@ -92,7 +92,9 @@ Penjualan Obat
         $('#subtotal-view').html(formatRupiah(subtotal));
         $('#end-total').html(formatRupiah(String(endTotal)));
     });
-
+    $('#medic_id').select2({
+        placeholder: "Select an option"
+    });
     $('#tax').keyup(function(){
         tax = $('#tax').val();
         discount = $('#discount').val();

@@ -107,4 +107,9 @@ class PurchaseRepository
         }
         return $total;
     }
+
+    public function delete($id)
+    {
+        return $this->purchase->find($id)->delete();
+    }
 }

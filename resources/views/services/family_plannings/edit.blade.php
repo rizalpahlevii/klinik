@@ -62,6 +62,13 @@ Edit Layanan KB
             $(this).val(formatRupiah(value,'Rp. '))
         });
 
+
+        $('#patient_id').select2({
+            placeholder: "Select an option"
+        });
+        $('#medic_id').select2({
+            placeholder: "Select an option"
+        });
         function formatRupiah(angka,prefix){
             var numberString = angka.replace(/[^,\d]/g, '').toString(),
             split   		= numberString.split(','),

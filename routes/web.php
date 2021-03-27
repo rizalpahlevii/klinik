@@ -172,6 +172,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/create', 'PurchaseController@create')->name('create');
             Route::post('/', 'PurchaseController@store')->name('store');
             Route::put('/{purchase_id}', 'PurchaseController@update')->name('update');
+            Route::delete('/{purchase_id}', 'PurchaseController@destroy')->name('destroy');
             Route::get('/{purchase_id}/print', 'PurchaseController@print')->name('print');
             Route::get('/{purchase_id}/edit', 'PurchaseController@edit')->name('edit');
             Route::get('/{suppleir_id}/salesman', 'PurchaseController@getSalesmans')->name('get_salesman');

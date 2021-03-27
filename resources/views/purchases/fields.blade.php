@@ -33,9 +33,7 @@
             <label for="salesman_id">Nama Sales <span class="required">*</span></label>
             <select name="salesman_id" id="salesman_id" class="form-control">
                 <option disabled selected>Pilih Sales</option>
-                @foreach ($suppliers as $supplier)
-                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-                @endforeach
+
             </select>
         </div>
     </div>

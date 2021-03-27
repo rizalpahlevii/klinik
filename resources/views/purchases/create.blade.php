@@ -79,6 +79,12 @@ Pembelian Obat
         });
     });
 
+    $('#supplier_id').select2({
+        placeholder: "Select an option"
+    });
+    $('#salesman_id').select2({
+        placeholder: "Select an option"
+    });
 
 
     let cartTableUrl = `{{ route('purchases.cart_table') }}`;

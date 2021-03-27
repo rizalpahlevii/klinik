@@ -53,6 +53,13 @@ Input Layanan KB
             $('#phone_form').val($('#patient_id :selected').data('phone'));
         });
 
+        $('#patient_id').select2({
+            placeholder: "Select an option"
+        });
+        $('#medic_id').select2({
+            placeholder: "Select an option"
+        });
+
         $('#discount').keyup(function(){
             value = $(this).val();
             $(this).val(formatRupiah(value,'Rp. '))

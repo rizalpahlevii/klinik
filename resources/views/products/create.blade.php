@@ -52,6 +52,12 @@ Input Produk
         value = $(this).val();
         $(this).val(formatRupiah(value,'Rp. '))
     });
+    $('#category_id').select2({
+        placeholder: "Select an option"
+    });
+    $('#brand_id').select2({
+        placeholder: "Select an option"
+    });
 
     function formatRupiah(angka,prefix){
         var numberString = angka.replace(/[^,\d]/g, '').toString(),

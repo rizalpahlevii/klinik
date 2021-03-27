@@ -6,7 +6,9 @@
             <th>Nama Sales</th>
             <th>Tanggal Faktur</th>
             <th>Total Harga</th>
+            @if (auth()->user()->hasRole('admin'))
             <th>Aksi</th>
+            @endif
         </tr>
     </thead>
     <tbody>
