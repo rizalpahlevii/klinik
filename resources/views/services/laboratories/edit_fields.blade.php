@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="discount">Dikson </label>
+            <label for="discount">Diskon </label>
             <input type="text" class="form-control" name="discount" id="discount" value="{{ $data->discount }}">
         </div>
     </div>

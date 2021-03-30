@@ -32,7 +32,7 @@
     <div class="col-md-3">
         <div class="form-group">
             <label for="registration_time" class="font-weight-bold">Diskon</label>
-            <p>@rupiah($data->dicount)</p>
+            <p>@rupiah($data->discount)</p>
         </div>
     </div>
     <div class="col-md-3">

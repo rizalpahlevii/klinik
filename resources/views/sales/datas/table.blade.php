@@ -6,6 +6,7 @@
             <th>Tipe Pembeli</th>
             <th>Tipe Pembayaran</th>
             <th>Total Harga</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>

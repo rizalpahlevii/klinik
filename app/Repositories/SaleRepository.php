@@ -24,8 +24,8 @@ class SaleRepository
         $sale->receipt_date = $input['date'];
         $sale->buyer_type = $input['buyer_type'];
         $sale->buyer_name = $input['buyer_type'] == "general" ? $input['buyer_name'] : $input['member_buyer_name'];
-        $sale->discount = $input['discount'];
-        $sale->tax = $input['tax'];
+        $sale->discount = $input['discount_hidden'];
+        $sale->tax = $input['tax_hidden'];
         $sale->sub_total = 0;
         $sale->grand_total = 0;
         $sale->doctor_id = $input['medic_id'] != "" ? $input['medic_id'] : NULL;
@@ -37,6 +37,44 @@ class SaleRepository
         $sale->grand_total = $saleItem - $sale->tax - $sale->discount;
         $sale->save();
         return $sale;
+    }
+
+    public function update($input, $id)
+    {
+        $sale = $this->sale->find($id);
+        $sale->receipt_date = $input['date'];
+        $sale->buyer_type = $input['buyer_type'];
+        $sale->buyer_name = $input['buyer_type'] == "general" ? $input['buyer_name'] : $input['member_buyer_name'];
+        $sale->discount = convertCurrency($input['discount']);
+        $sale->tax = convertCurrency($input['tax']);
+        $sale->sub_total = 0;
+        $sale->grand_total = 0;
+        $sale->doctor_id = $input['medic_id'] != "" ? $input['medic_id'] : NULL;
+        $sale->payment_method = $input['payment_method'];
+        $sale->save();
+
+        $saleItem = $this->updateSaleItems($input, $sale->id);
+        $sale->sub_total = $saleItem;
+        $sale->grand_total = $saleItem - $sale->tax - $sale->discount;
+        $sale->save();
+        return $sale;
+    }
+
+    public function updateSaleItems($input, $sale_id)
+    {
+        SaleItem::where('sale_id', $sale_id)->delete();
+        $total = 0;
+        for ($i = 0; $i < count($input['product_id']); $i++) {
+            $item = new SaleItem();
+            $item->sale_id = $sale_id;
+            $item->product_id = $input['product_id'][$i];
+            $item->current_price = convertCurrency($input['price'][$i]);
+            $item->quantity = $input['quantity'][$i];
+            $item->total = $item->quantity * $item->current_price;
+            $item->save();
+            $total += $item->total;
+        }
+        return $total;
     }
 
     public function createSaleItems($sale)

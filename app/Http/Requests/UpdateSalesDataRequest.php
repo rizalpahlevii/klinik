@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateSaleCashierRequest extends FormRequest
+class UpdateSalesDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,15 @@ class CreateSaleCashierRequest extends FormRequest
     public function rules()
     {
         return [
-            'buyer_name' => 'nullable',
-            'buyer_name' => 'nullable',
-            'tax_hidden' => 'nullable|numeric',
-            'discount_hidden' => 'nullable|numeric',
-            'medic_id' => 'nullable',
-            'payment_method' => 'required'
+            'date' => 'required',
+            'discount' => 'nullable',
+            'tax' => 'nullable',
+            'product_id' => 'required|array',
+            'product_id.*' => 'required',
+            'price' => 'required|array',
+            'price.*' => 'required',
+            'quantity' => 'required|array',
+            'quantity.*' => 'required'
         ];
     }
 }

@@ -53,6 +53,7 @@ Data Penjualan
             </div>
         </div>
     </div>
+    @include('sales.datas.templates.templates')
 </div>
 @endsection
 

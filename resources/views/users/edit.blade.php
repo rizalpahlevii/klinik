@@ -162,6 +162,5 @@ Pengguna
     let utilsScript = "{{asset('assets/js/int-tel/js/utils.min.js')}}";
         let isEdit = false;
 </script>
-<script src="{{ mix('assets/js/brands/create-edit.js') }}"></script>
 <script src="{{ mix('assets/js/custom/phone-number-country-code.js') }}"></script>
 @endsection

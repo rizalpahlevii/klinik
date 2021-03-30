@@ -26,7 +26,8 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('birth_date', __('Tanggal Lahir').':', ['class' => 'font-weight-bold']) }}
-            <p>{{ !empty($data->birth_date) ? $data->birth_date : __('messages.common.n/a') }}</p>
+            <p>{{ !empty($data->birth_date) ? Carbon\Carbon::parse($data->birth_date)->locale('id')->isoFormat('LL') : __('messages.common.n/a') }}
+            </p>
         </div>
     </div>
     <div class="col-md-3">
@@ -40,14 +41,14 @@
         <div class="form-group">
             {{ Form::label('created_at', __('Waktu Input').':', ['class' => 'font-weight-bold']) }}<br>
             <span data-toggle="tooltip" data-placement="right"
-                title="{{ date('jS M, Y', strtotime($data->created_at)) }}">{{ $data->created_at->diffForHumans() }}</span>
+                title="{{ date('jS M, Y', strtotime($data->created_at)) }}">{{ $data->created_at->isoFormat('LL') }}</span>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('updated_at', __('Terakhir Diperbarui').':', ['class' => 'font-weight-bold']) }}<br>
             <span data-toggle="tooltip" data-placement="right"
-                title="{{ date('jS M, Y', strtotime($data->updated_at)) }}">{{ $data->updated_at->diffForHumans() }}</span>
+                title="{{ date('jS M, Y', strtotime($data->updated_at)) }}">{{ $data->updated_at->isoFormat('LL') }}</span>
         </div>
     </div>
 </div>

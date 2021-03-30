@@ -85,10 +85,11 @@ Data Pembelian
     let purchaseUrl = "{{url('purchases/')}}"
     let supplierUrl = "{{url('suppliers/')}}"
 </script>
-@if (auth()->user()->hasRole('admin'))
+@if (auth()->user()->hasRole('owner'))
 <script src="{{ mix('assets/js/purchases/purchases.js') }}"></script>
 @else
 <script src="{{ mix('assets/js/purchases/purchases-could-edit.js') }}"></script>
 @endif
+
 <script src="{{ mix('assets/js/custom/delete.js') }}"></script>
 @endsection

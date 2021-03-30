@@ -29,7 +29,7 @@ class UpdatePurchaseRequest extends FormRequest
             'supplier_id' => 'required',
             'salesman_id' => 'required',
             'date' => 'required',
-            'dicount' => 'nullable',
+            'discount' => 'nullable',
             'tax' => 'nullable',
             'file' => 'nullable|mimes:jpg,png,jpeg|max:10000',
             'product_id' => 'required|array',

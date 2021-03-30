@@ -163,6 +163,8 @@ Route::group(['middleware' => ['auth']], function () {
 
             Route::prefix('data')->name('datas.')->group(function () {
                 Route::get('/', 'SalesDataController@index')->name('index');
+                Route::put('/{id}', 'SalesDataController@update')->name('update');
+                Route::get('/{id}/edit', 'SalesDataController@edit')->name('edit');
                 Route::get('/{sale_id}/print', 'SalesDataController@print')->name('print');
             });
         });

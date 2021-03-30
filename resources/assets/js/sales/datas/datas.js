@@ -33,12 +33,32 @@ let tbl = $("#salesTable").DataTable({
         },
 
         {
-            data: "payment_method",
+            data: function(row) {
+                if (row == "cash") {
+                    return "Tunai";
+                } else {
+                    return "Debit";
+                }
+            },
             name: "payment_method"
         },
         {
             data: "grand_total2",
             name: "grand_total2"
+        },
+        {
+            data: function(row) {
+                let url = saleUrl + "/" + row.id;
+                let data = [
+                    {
+                        id: row.id,
+                        url: url + "/edit",
+                        printUrl: url + "/print"
+                    }
+                ];
+                return prepareTemplateRender("#saleActionTemplate", data);
+            },
+            name: "id"
         }
     ]
 });

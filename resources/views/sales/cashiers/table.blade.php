@@ -36,7 +36,7 @@
         <tr>
             <td>
                 <select name="product_id" id="product_id" class="form-control">
-                    <option disabled selected>Pilih Produk</option>
+                    <option disabled selected>Pilih Dari Kode Produk</option>
                     @foreach ($products as $product)
                     <option value="{{ $product->id }}" data-name="{{ $product->name }}"
                         data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
@@ -45,7 +45,17 @@
                     @endforeach
                 </select>
             </td>
-            <td><input type="text" class="form-control" id="product_name" readonly></td>
+            <td>
+                <select name="product_name" id="product_name" class="form-control">
+                    <option disabled selected>Pilih Dari Nama Produk</option>
+                    @foreach ($products as $product)
+                    <option value="{{ $product->name }}" data-id="{{ $product->id }}" data-name="{{ $product->name }}"
+                        data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
+                        {{ $product->name }}
+                    </option>
+                    @endforeach
+                </select>
+            </td>
             <td><input type="number" class="form-control" id="quantity" value="1"></td>
             <td><input type="text" class="form-control" id="unit" readonly></td>
             <td><input type="number" class="form-control" id="price" readonly></td>
@@ -84,13 +94,13 @@
     <input type="hidden" id="subtotal_hid">
 </div>
 <script>
-    tax = $('#tax').val();
-    discount = $('#discount').val();
+    tax = $('#tax_hidden').val();
+    discount = $('#discount_hidden').val();
     subtotal = $('#subtotal-view').html();
     endTotal = subtotal - discount - tax;
-    $('#tax-view').html(formatRupiah(tax));
-    $('#discount-view').html(formatRupiah(discount));
-    $('#subtotal-view').html(formatRupiah(subtotal));
+    $('#tax-view').html(formatRupiah(String(tax)));
+    $('#discount-view').html(formatRupiah(String(discount)));
+    $('#subtotal-view').html(formatRupiah(String(subtotal)));
     $('#subtotal_hid').val(endTotal);
     $('#end-total').html(formatRupiah(String(endTotal)));
     $(document).on('click','.delete-btn',function(){
@@ -122,6 +132,31 @@
     });
     $("#product_id").select2({
         placeholder: "Select an option"
+    });
+    $("#product_name").select2({
+        placeholder: "Select an option"
+    });
+    $("#product_name").change(function() {
+        $("#product_id").val(
+            $(this)
+                .find("option:selected")
+                .data("id")
+        );
+        $("#unit").val(
+            $(this)
+                .find("option:selected")
+                .data("unit")
+        );
+        $("#price").val(
+            $(this)
+                .find("option:selected")
+                .data("price")
+        );
+        $("#subtotal").val(
+            $(this)
+                .find("option:selected")
+                .data("price") * parseInt($("#quantity").val())
+        );
     });
     $("#product_id").change(function() {
         $("#product_name").val(
