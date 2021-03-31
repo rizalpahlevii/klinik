@@ -70,4 +70,10 @@ class SalesDataController extends Controller
 
         return view('sales.datas.print', compact('sale'));
     }
+
+    public function show($id)
+    {
+        $sale = $this->saleRepository->findById($id);
+        return view('sales.datas.show', compact('sale'));
+    }
 }

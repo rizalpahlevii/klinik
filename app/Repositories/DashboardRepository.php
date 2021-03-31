@@ -2,8 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Expense;
-use App\Models\Income;
+use App\Models\Cash;
+use App\Models\Shift;
+use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 
@@ -12,51 +13,57 @@ use Exception;
  */
 class DashboardRepository
 {
-    /**
-     * @param  array  $input
-     * @throws Exception
-     * @return array
-     */
-    public function getIncomeExpenseReport($input)
+    public function endShift()
     {
-        $dates = $this->getDate($input['start_date'], $input['end_date']);
-
-        $incomes = Income::all();
-        $expenses = Expense::all();
-
-        //Income report
-        $data = [];
-        foreach ($dates['dateArr'] as $cDate) {
-            $incomeTotal = 0;
-            foreach ($incomes as $row) {
-                $chartDates = $cDate;
-                $incomeDates = trim(substr($row['date'], 0, 10));
-                if ($chartDates == $incomeDates) {
-                    $incomeTotal += $row['amount'];
-                }
-            }
-            $incomeTotalArray[] = $incomeTotal;
-            $dateArray[] = $cDate;
+        $shift = Shift::where('user_id', auth()->id())->where('status', 'active')->first();
+        $shift->status = 'ended';
+        $shift->end_shift = now();
+        $shift->save();
+        $this->createCash($shift->cash_now);
+    }
+    public function startShift()
+    {
+        $previousShift = $this->previousShift();
+        if ($previousShift) {
+            $previousShiftname = $this->getUserById($previousShift->user_id)->fullname;
+            $previousShiftEnd = $previousShift->end_shift;
+        } else {
+            $previousShiftname = '-';
+            $previousShiftEnd = NULL;
         }
+        $shift = new Shift();
+        $shift->user_id = auth()->id();
+        $shift->previous_cashier_name = $previousShiftname;
+        $shift->status  = 'active';
+        $shift->start_shift = now();
+        $shift->previous_end_shift = $previousShiftEnd;
+        $shift->initial_cash = 0;
+        $shift->total_sales = 0;
+        $shift->cash_now = 0;
+        $shift->save();
+    }
+    public function getShift()
+    {
+        $shift = Shift::with('user')->where('user_id', auth()->id())->orderBy('id', 'DESC')->where('status', 'active')->first();
+        return $shift;
+    }
 
-        //Expense report
-        foreach ($dates['dateArr'] as $cDate) {
-            $expenseTotal = 0;
-            foreach ($expenses as $row) {
-                $chartDates = $cDate;
-                $expenseDates = trim(substr($row['date'], 0, 10));
-                if ($chartDates == $expenseDates) {
-                    $expenseTotal += $row['amount'];
-                }
-            }
-            $expenseTotalArray[] = $expenseTotal;
-        }
+    public function createCash($amount)
+    {
+        $cash = new Cash();
+        $cash->amount = $amount;
+        $cash->user_id = auth()->id();
+        $cash->save();
+    }
 
-        $data['incomeTotal'] = $incomeTotalArray;
-        $data['expenseTotal'] = $expenseTotalArray;
-        $data['date'] = $dateArray;
+    public function getUserById($user_id)
+    {
+        return User::find($user_id);
+    }
 
-        return $data;
+    public function previousShift()
+    {
+        return Shift::orderBy('id', 'DESC')->where('status', 'ended')->first();
     }
 
     /**
@@ -71,7 +78,7 @@ class DashboardRepository
         $dateArr = [];
         $subStartDate = '';
         $subEndDate = '';
-        if (! ($startDate && $endDate)) {
+        if (!($startDate && $endDate)) {
             $data = [
                 'dateArr'   => $dateArr,
                 'startDate' => $subStartDate,

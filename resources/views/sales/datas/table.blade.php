@@ -1,6 +1,7 @@
 <table class="table table-responsive-sm table-striped table-bordered" id="salesTable">
     <thead>
         <tr>
+            <th>Kode Faktur</th>
             <th>Tanggal Penjualan</th>
             <th>Nama Pembeli</th>
             <th>Tipe Pembeli</th>

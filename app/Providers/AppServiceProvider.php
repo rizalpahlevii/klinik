@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Module;
 use Blade;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Carbon::setLocale(config('app.locale'));
         \Schema::defaultStringLength(191);
         Blade::if('module', function ($name) {
             $module = Module::where('name', $name)->first();

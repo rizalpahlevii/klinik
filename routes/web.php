@@ -164,6 +164,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::prefix('data')->name('datas.')->group(function () {
                 Route::get('/', 'SalesDataController@index')->name('index');
                 Route::put('/{id}', 'SalesDataController@update')->name('update');
+                Route::get('/{id}', 'SalesDataController@show')->name('show');
                 Route::get('/{id}/edit', 'SalesDataController@edit')->name('edit');
                 Route::get('/{sale_id}/print', 'SalesDataController@print')->name('print');
             });
@@ -205,7 +206,7 @@ Route::group(['middleware' => ['auth']], function () {
         //        Route::post('departments/{department}/active-deactive', 'DepartmentController@activeDeactiveDepartment');
 
         Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
-
+        Route::post('/shift', 'HomeController@startShift')->name('shift');
 
         Route::get('settings', 'SettingController@edit')->name('settings.edit');
         Route::post('settings', 'SettingController@update')->name('settings.update');

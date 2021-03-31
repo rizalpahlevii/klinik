@@ -40,20 +40,20 @@ class HomeController extends AppBaseController
     public function dashboard()
     {
 
+        $shift = $this->dashboardRepository->getShift();
         $data['currency'] = Setting::CURRENCIES;
-
-        return view('dashboard.index', compact('data'));
+        return view('dashboard.index', compact('data', 'shift'));
     }
 
-    /**
-     * @param  Request  $request
-     *
-     * @return JsonResponse
-     */
-    public function incomeExpenseReport(Request $request)
+    public function startShift(Request $request)
     {
-        $data = $this->dashboardRepository->getIncomeExpenseReport($request->all());
-
-        return $this->sendResponse($data, 'Income and Expense report retrieved successfully.');
+        $shift = $this->dashboardRepository->getShift();
+        if ($shift) {
+            $this->dashboardRepository->endShift();
+            return $this->sendSuccess("Berhasil mengakhiri shift");
+        } else {
+            $this->dashboardRepository->startShift();
+            return $this->sendSuccess("Berhasil memulai shift");
+        }
     }
 }

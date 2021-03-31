@@ -20,6 +20,13 @@ let tbl = $("#salesTable").DataTable({
     ],
     columns: [
         {
+            data: function(row) {
+                let showUrl = saleUrl + "/" + row.id;
+                return `<a target="_blank" href="${showUrl}">${row.receipt_code}</a>`;
+            },
+            name: "receipt_code"
+        },
+        {
             data: "receipt_date",
             name: "receipt_date"
         },

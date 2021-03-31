@@ -4,6 +4,7 @@ use App\Models\Department;
 use App\Models\DoctorDepartment;
 use App\Models\Notification;
 use App\Models\Setting;
+use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -248,6 +249,18 @@ function getBloodGroups()
 function convertToRupiah($value, $prefix)
 {
     return $prefix . number_format($value, 0, ',', '.');
+}
+
+function shiftUpdate($amount)
+{
+    if (auth()->user()->hasRole('kasir')) {
+        $shift = Shift::where('user_id', auth()->id())->where('status', 'active')->first();
+        if($shift){
+            $shift->total_sales += $amount;
+            $shift->cash_now += $amount;
+            $shift->save();
+        }
+    }
 }
 
 function convertCurrency($value)

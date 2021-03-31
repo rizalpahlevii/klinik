@@ -33,6 +33,7 @@ class CashierController extends AppBaseController
         try {
             $sale = $this->saleRepository->create($request->all());
             Flash::success("Berhasil melakukan transaksi pembelian produk");
+            shiftUpdate($sale->grand_total);
             DB::commit();
             Cookie::queue(Cookie::forget('klinik-sales-carts'));
             session()->flash('newurl', route('sales.datas.print', $sale->id));
