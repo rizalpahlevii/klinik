@@ -75,9 +75,9 @@
 {{-- Penjualan Obat --}}
 <li class="nav-item side-menus nav-dropdown">
     <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
-        title="Penjualan Obat" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        title="Penjualan Produk" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
         <i class="nav-icon fas fa-list"></i>
-        Penjualan Obat
+        Penjualan Produk
     </a>
     <ul class="nav-dropdown-items">
         <li class="nav-item side-menus {{ Request::is('sales.cashiers*') ? 'active' : '' }}">
