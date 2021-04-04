@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use App\Repositories\DashboardRepository;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -83,5 +84,14 @@ class LoginController extends Controller
             ->withCookie(\Cookie::make('username', $request->username, 3600))
             ->withCookie(\Cookie::make('password', $request->password, 3600))
             ->withCookie(\Cookie::make('remember', 1, 3600));
+    }
+    public function logout(Request $request)
+    {
+        $dashboardRepository = new DashboardRepository;
+        if ($dashboardRepository->getShift()) {
+            $dashboardRepository->endShift();
+        }
+        Auth::logout();
+        return redirect('/');
     }
 }
