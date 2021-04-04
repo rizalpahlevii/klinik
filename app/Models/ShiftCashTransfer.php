@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cash extends Model
+class ShiftCashTransfer extends Model
 {
     //
 }

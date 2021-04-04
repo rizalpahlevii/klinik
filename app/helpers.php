@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CashierShift;
 use App\Models\Department;
 use App\Models\DoctorDepartment;
 use App\Models\Notification;
@@ -250,17 +251,10 @@ function convertToRupiah($value, $prefix)
 {
     return $prefix . number_format($value, 0, ',', '.');
 }
-
-function shiftUpdate($amount)
+function getShift()
 {
-    if (auth()->user()->hasRole('kasir')) {
-        $shift = Shift::where('user_id', auth()->id())->where('status', 'active')->first();
-        if($shift){
-            $shift->total_sales += $amount;
-            $shift->cash_now += $amount;
-            $shift->save();
-        }
-    }
+    $shift = CashierShift::with('cashier')->where('cashier_id', auth()->id())->where('end_shift', NULL)->first();
+    return $shift;
 }
 
 function convertCurrency($value)

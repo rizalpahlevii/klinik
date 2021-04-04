@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use App\Repositories\DashboardRepository;
+use DB;
+use Flash;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,10 +41,47 @@ class HomeController extends AppBaseController
      */
     public function dashboard()
     {
-
-        $shift = $this->dashboardRepository->getShift();
         $data['currency'] = Setting::CURRENCIES;
-        return view('dashboard.index', compact('data', 'shift'));
+        $shift = $this->dashboardRepository->getShift();
+        $previousShift = $this->dashboardRepository->previousShift();
+        $totalSales = $this->dashboardRepository->getShiftSalesTotal();
+        $finalCash = $this->dashboardRepository->getFinalCash();
+        return view('dashboard.index', compact('data', 'shift', 'previousShift', 'totalSales', 'finalCash'));
+    }
+
+    public function transfer(Request $request)
+    {
+        $request->validate([
+            'transfer_proof' => 'nullable|mimes:pdf,jpg,jpeg,png|max:5000'
+        ]);
+        if ($request->transfer_proof) {
+            $file = $request->file('transfer_proof');
+            $fileName = time() . "_" . $file->getClientOriginalName();
+            $file->move('upload/transfer-proof', $fileName);
+        } else {
+            $fileName = null;
+        }
+        $this->dashboardRepository->transferCash(convertCurrency($request->amount), $fileName);
+        Flash::success("Berhasil menyetorkan uang sejumlah ." . convertCurrency($request->amount));
+        return redirect()->back();
+    }
+
+    public function cashAdd(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $repo = $this->dashboardRepository->addInitialCash(convertCurrency($request->amount));
+            if ($repo != false) {
+                Flash::success("Berhasil menambah kas awal");
+            } else {
+                Flash::success("Gagal menambah kas awal");
+            }
+            DB::commit();
+        } catch (\Exception $th) {
+            Flash::error("Gagal menambah kas awal");
+            DB::rollBack();
+        }
+        return redirect()->back();
     }
 
     public function startShift(Request $request)

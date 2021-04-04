@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update-language', 'ProfileController@updateLanguage');
 
 
-    Route::group(['middleware' => ['xss']], function () {
+    Route::group(['middleware' => ['xss', 'cashier']], function () {
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', 'UserController@index')->middleware('modules')->name('index');
             Route::get('/create', 'UserController@create')->name('create');
@@ -207,7 +207,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
         Route::post('/shift', 'HomeController@startShift')->name('shift');
-
+        Route::post('/trasnfer', 'HomeController@transfer')->name('transfer');
+        Route::post('/cash-add', 'HomeController@cashAdd')->name('cash_add');
         Route::get('settings', 'SettingController@edit')->name('settings.edit');
         Route::post('settings', 'SettingController@update')->name('settings.update');
         Route::get('modules', 'SettingController@getModule')->name('module.index');

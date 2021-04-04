@@ -2,68 +2,139 @@
 
 namespace App\Repositories;
 
-use App\Models\Cash;
-use App\Models\Shift;
+use App\Models\CashierShift;
+use App\Models\Sale;
+use App\Models\Services\FamilyPlanning;
+use App\Models\Services\General;
+use App\Models\Services\Laboratory;
+use App\Models\Services\Pregnancy;
+use App\Models\ShiftCashTransfer;
+use App\Models\ShiftCassAdd;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Laravel\Cashier\Cashier;
 
 /**
  * Class DashboardRepository
  */
 class DashboardRepository
 {
-    public function endShift()
+
+    public function getSalesTotal()
     {
-        $shift = Shift::where('user_id', auth()->id())->where('status', 'active')->first();
-        $shift->status = 'ended';
-        $shift->end_shift = now();
-        $shift->save();
-        $this->createCash($shift->cash_now);
-    }
-    public function startShift()
-    {
-        $previousShift = $this->previousShift();
-        if ($previousShift) {
-            $previousShiftname = $this->getUserById($previousShift->user_id)->fullname;
-            $previousShiftEnd = $previousShift->end_shift;
+        if ($this->getShift()) {
+            $sales = Sale::where('created_at', '>=', $this->getShift()->start_shift)->where('created_at', '<=', Carbon::now())->sum('grand_total');
+            return $sales ?? 0;
         } else {
-            $previousShiftname = '-';
-            $previousShiftEnd = NULL;
+            return 0;
         }
-        $shift = new Shift();
-        $shift->user_id = auth()->id();
-        $shift->previous_cashier_name = $previousShiftname;
-        $shift->status  = 'active';
-        $shift->start_shift = now();
-        $shift->previous_end_shift = $previousShiftEnd;
-        $shift->initial_cash = 0;
-        $shift->total_sales = 0;
-        $shift->cash_now = 0;
-        $shift->save();
     }
-    public function getShift()
+
+    public function getServicesTotal()
     {
-        $shift = Shift::with('user')->where('user_id', auth()->id())->orderBy('id', 'DESC')->where('status', 'active')->first();
+        $general = General::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
+        $pregnancy = Pregnancy::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
+        $familyPlanning = FamilyPlanning::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
+        $laboratory = Laboratory::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
+        return $general ?? 0 + $pregnancy ?? 0 + $familyPlanning ?? 0 + $laboratory ?? 0;
+    }
+
+    public function getShiftSalesTotal()
+    {
+        return $this->getSalesTotal() + $this->getServicesTotal();
+    }
+
+    public function getFinalCash()
+    {
+        if ($this->getShift()) {
+            return ($this->getShiftSalesTotal() + $this->getShift()->initial_cash) - $this->getTransferCash();
+        } else {
+            return 0;
+        }
+    }
+
+    public function previousShift()
+    {
+        $shift = CashierShift::with('cashier')->whereNotNull('end_shift')->orderBy('created_at', 'DESC')->first();
         return $shift;
     }
 
-    public function createCash($amount)
+    public function getShift()
     {
-        $cash = new Cash();
-        $cash->amount = $amount;
-        $cash->user_id = auth()->id();
-        $cash->save();
+        $shift = CashierShift::with('cashier')->where('cashier_id', auth()->id())->where('end_shift', NULL)->first();
+        return $shift;
+    }
+
+    public function startShift()
+    {
+        $checkShift = CashierShift::whereNull('end_shift')->get()->count();
+        if ($checkShift == 0) {
+            $shift = new CashierShift();
+            $shift->cashier_id = auth()->id();
+            $shift->start_shift = now();
+            if ($this->previousShift()) {
+                $shift->initial_cash = $this->previousShift()->final_cash;
+            } else {
+                $shift->initial_cash = 0;
+            }
+            $shift->save();
+            return $shift;
+        } else {
+            return false;
+        }
+    }
+
+    public function endShift()
+    {
+        $shift = CashierShift::where('cashier_id', auth()->id())->whereNull('end_shift')->first();
+        $shift->shift_sales_total = $this->getSalesTotal();
+        $shift->final_cash = $this->getFinalCash();
+        $shift->end_shift = now();
+        $shift->save();
+    }
+
+    public function addInitialCash($amount)
+    {
+
+        $initial = new ShiftCassAdd();
+        $initial->cashier_id = auth()->id();
+        if ($this->getShift()) {
+            $initial->cashier_shift_id = $this->getShift()->id;
+        } else {
+            if ($this->previousShift()) {
+                $initial->cashier_shift_id = $this->previousShift()->id;
+            } else {
+                return false;
+            }
+        }
+        $initial->total_add = $amount;
+        $update = CashierShift::find($initial->cashier_shift_id);
+        $update->initial_cash += $amount;
+        $update->save();
+        return $initial->save();
+    }
+
+    public function getTransferCash()
+    {
+        $shift = $this->getShift();
+        $transfer = ShiftCashTransfer::where('cashier_id', auth()->id())->where('cashier_shift_id', $shift->id)->sum('total_transfer');
+        return $transfer ?? 0;
+    }
+
+    public function transferCash($amount, $transferProof = null)
+    {
+        $transfer = new ShiftCashTransfer();
+        $transfer->cashier_id = auth()->id();
+        $transfer->cashier_shift_id = $this->getShift()->id;
+        $transfer->total_transfer = $amount;
+        $transfer->transfer_proof = $transferProof;
+        $transfer->save();
     }
 
     public function getUserById($user_id)
     {
         return User::find($user_id);
-    }
-
-    public function previousShift()
-    {
-        return Shift::orderBy('id', 'DESC')->where('status', 'ended')->first();
     }
 
     /**
