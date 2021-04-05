@@ -20,23 +20,25 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="row mb-3">
+                            <div class="col-md-10 offset-md-1">
                                 @if ($shift != null)
+                                <button class="btn btn-block btn-secondary btn-shift" data-status="aktif"
+                                    style="padding: 10px;">Stop
+                                    Shift</button>
 
-                                <input type="checkbox" data-on="Aktif" data-off="Tidak Aktif" checked
-                                    data-toggle="toggle" data-onstyle="primary" id="shift-toggle" data-status="active">
 
                                 @else
-                                <input type="checkbox" data-on="Aktif" data-off="Tidak Aktif" data-toggle="toggle"
-                                    data-onstyle="primary" id="shift-toggle" data-status="not_have_shift">
+                                <button class="btn btn-block btn-primary btn-shift" data-status="nonaktif"
+                                    style="padding: 10px;">Start</button>
+
                                 @endif
 
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="font-size: 20px;">
                             <div class="col-md-6">
-                                <table style="width: 100%">
+                                <table style="width: 100%;">
                                     <tr>
                                         <th style="width: 50%">Nama Kasir</th>
                                         <th>:</th>
@@ -87,6 +89,15 @@
                                             @endif
                                         </th>
                                     </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th>
+                                            <button class="btn btn-block btn-primary btn-setor"><b>Setor
+                                                    Uang</b></button>
+
+                                        </th>
+                                    </tr>
                                 </table>
                             </div>
                             <div class="col-md-6">
@@ -125,7 +136,6 @@
 
                         <div class="row mt-2">
                             <div class="col-md-12">
-                                <button class="btn btn-block btn-primary btn-setor"><b>Setor Uang</b></button>
                             </div>
                         </div>
                         @endif
@@ -185,7 +195,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4>Penanmbahan Kas Awal</h4>
+                                    <h4>Penambahan Kas Awal</h4>
                                     <div class="from-group">
                                         <label for="amount">Total Penambahan Kas</label>
                                         <input type="text" class="form-control" name="amount" id="amount">
@@ -244,10 +254,9 @@
                 return 'Rp. '+ rupiah;
             }
         }
-        $('#shift-toggle').change(function(){
-            checkedStatus = $(this).prop("checked");
+        $('.btn-shift').click(function(){
             shiftStatus = $(this).data('status');
-            if(checkedStatus){
+            if(shiftStatus != "aktif"){
                 confirm = confirm('Yakin Ingin Memulai Shift ? ');
                 if(confirm){
                     $.ajax({
