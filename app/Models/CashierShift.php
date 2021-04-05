@@ -16,7 +16,6 @@ class CashierShift extends Model
         parent::boot();
         self::creating(function ($model) {
             $model->id = (string) Uuid::generate(4);
-            $model->current_stock = 0;
         });
     }
     public function cashier()

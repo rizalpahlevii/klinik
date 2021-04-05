@@ -7,7 +7,7 @@
     </a>
 </li>
 
-@if (auth()->user()->hasRole('kasir'))
+@if (auth()->user()->hasRole(['kasir','owner']))
 @if (getShift())
 {{-- Users  --}}
 <li class="nav-item side-menus nav-dropdown">

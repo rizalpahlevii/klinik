@@ -70,7 +70,7 @@ class HomeController extends AppBaseController
     {
         DB::beginTransaction();
         try {
-            $repo = $this->dashboardRepository->addInitialCash(convertCurrency($request->amount));
+            $repo = $this->dashboardRepository->addInitialCash(convertCurrency($request->cash_add));
             if ($repo != false) {
                 Flash::success("Berhasil menambah kas awal");
             } else {
@@ -78,7 +78,7 @@ class HomeController extends AppBaseController
             }
             DB::commit();
         } catch (\Exception $th) {
-            Flash::error("Gagal menambah kas awal");
+            Flash::error($th->getMessage());
             DB::rollBack();
         }
         return redirect()->back();

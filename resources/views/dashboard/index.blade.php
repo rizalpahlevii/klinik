@@ -9,7 +9,7 @@
 @endsection
 @section('content')
 <div class="container-fluid">
-    @if (in_array('kasir',auth()->user()->roles()->pluck('name')->toArray()))
+    @if (auth()->user()->hasRole(['owner','kasir']))
     <div class="animated fadeIn">
         <div class="row mt-3">
             <div class="col-md-12">
@@ -144,6 +144,32 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('cash_add') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Penambahan Kas Awal</h4>
+                                <div class="from-group">
+                                    <label for="cash_add">Total Penambahan Kas</label>
+                                    <input type="text" class="form-control" name="cash_add" id="cash_add">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary">Simpan Penambahan</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="addModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -180,40 +206,6 @@
             </div>
         </div>
     </div>
-    @else
-    <div class="animated fadeIn">
-        <div class="row mt-3">
-            <div class="col-md-12">
-                @include('flash::message')
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="{{ route('cash_add') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h4>Penambahan Kas Awal</h4>
-                                    <div class="from-group">
-                                        <label for="amount">Total Penambahan Kas</label>
-                                        <input type="text" class="form-control" name="amount" id="amount">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary">Simpan Penambahan</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     @endif
 </div>
 
@@ -231,6 +223,11 @@
            $('#addModal').modal('show');
         });
         $('#amount').keyup(function(){
+            value = String($(this).val());
+            $('#show-amount').html(formatRupiah(value));
+            $(this).val(formatRupiah(value));
+        });
+        $('#cash_add').keyup(function(){
             value = String($(this).val());
             $('#show-amount').html(formatRupiah(value));
             $(this).val(formatRupiah(value));
