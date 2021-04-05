@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update-language', 'ProfileController@updateLanguage');
 
 
-    Route::group(['middleware' => ['xss', 'cashier']], function () {
+    Route::group(['middleware' => ['xss']], function () {
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', 'UserController@index')->middleware('modules')->name('index');
             Route::get('/create', 'UserController@create')->name('create');
@@ -153,7 +153,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::prefix('sales')->name('sales.')->group(function () {
-            Route::prefix('cashiers')->name('cashiers.')->group(function () {
+            Route::prefix('cashiers')->name('cashiers.')->middleware('cashier')->group(function () {
                 Route::get('/', 'CashierController@index')->name('index');
                 Route::post('/', 'CashierController@store')->name('store');
                 Route::get('/cart-table', 'CashierController@loadTable')->name('cart_table');
