@@ -257,6 +257,17 @@ function getShift()
     return $shift;
 }
 
+function checkAvailableToStartShift()
+{
+    $shift = CashierShift::whereNull('end_shift')->where('cashier_id', '!=', auth()->id())->count();
+    if ($shift == 0) {
+
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function convertCurrency($value)
 {
     $rupiah = str_replace('.', '', $value);

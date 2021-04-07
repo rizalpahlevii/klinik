@@ -31,8 +31,11 @@
 
 
                                 @else
+                                @if (checkAvailableToStartShift())
+
                                 <button class="btn btn-block btn-primary btn-shift" data-status="nonaktif"
                                     style="padding: 10px;">Start</button>
+                                @endif
 
                                 @endif
 
@@ -95,8 +98,14 @@
                                         <th></th>
                                         <th></th>
                                         <th>
-                                            <button class="btn btn-block btn-primary btn-setor"><b>Setor
-                                                    Uang</b></button>
+                                            @if ($shift != null)
+                                            @if (checkAvailableToStartShift())
+                                            <button class="btn btn-block btn-primary btn-setor">
+                                                <b>Setor
+                                                    Uang</b>
+                                            </button>
+                                            @endif
+                                            @endif
 
                                         </th>
                                     </tr>
