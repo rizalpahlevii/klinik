@@ -16,6 +16,8 @@
                 @include('flash::message')
             </div>
         </div>
+
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -144,6 +146,7 @@
             </div>
         </div>
     </div>
+    @if (auth()->user()->hasRole(['owner']))
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -170,6 +173,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div id="addModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -269,7 +273,7 @@
                     })
                 }
             }else{
-                confirm = confirm('Yakin ingin mengakhiri shift dan menyetor uang ? ')
+                confirm = confirm('Yakin ingin mengakhiri shift  ? ')
                 if(confirm){
                     $.ajax({
                         url :   `{{ route('shift') }}` ,

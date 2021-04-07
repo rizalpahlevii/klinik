@@ -118,7 +118,7 @@
 @endif
 @endif
 
-@if (auth()->user()->hasRole(['kasir','owner']))
+@if (auth()->user()->hasRole(['kasir']))
 @if (getShift())
 
 {{-- Penjualan Obat --}}
@@ -136,6 +136,32 @@
                 <span>Kasir</span>
             </a>
         </li>
+    </ul>
+</li>
+
+@endif
+@endif
+
+@if (auth()->user()->hasRole(['owner']))
+
+
+{{-- Penjualan Obat --}}
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
+        title="Penjualan Produk" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        <i class="nav-icon fas fa-list"></i>
+        Penjualan Produk
+    </a>
+    <ul class="nav-dropdown-items">
+        @if (getShift())
+        <li class="nav-item side-menus {{ Request::is('sales.cashiers*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('sales.cashiers.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Kasir" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Kasir</span>
+            </a>
+        </li>
+        @endif
         <li class="nav-item side-menus {{ Request::is('sales.datas*') ? 'active' : '' }}">
             <a class="nav-link menu-text-wrap" href="{{ route('sales.datas.index') }}" data-toggle="tooltip"
                 data-placement="bottom" title="Data Penjualan" data-delay='{"show":"500", "hide":"50"}'>
@@ -146,7 +172,6 @@
     </ul>
 </li>
 
-@endif
 @endif
 
 
