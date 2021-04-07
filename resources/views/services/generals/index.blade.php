@@ -15,10 +15,12 @@ Daftar Layanan Umum
             <div class="filter-container">
 
                 @if (auth()->user()->hasRole(['owner']))
+                @if (getShift())
 
                 <div class="mr-0 actions-btn">
                     <a href="{{ route('services.generals.create') }}" class="btn btn-primary">Layanan Baru</a>
                 </div>
+                @endif
                 @endif
             </div>
         </div>

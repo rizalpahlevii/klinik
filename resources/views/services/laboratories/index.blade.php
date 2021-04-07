@@ -14,10 +14,12 @@ Daftar Layanan Laboratorium
             <h3 class="page__heading">Daftar Layanan Laboratorium</h3>
             <div class="filter-container">
                 @if (auth()->user()->hasRole(['owner']))
+                @if (getShift())
 
                 <div class="mr-0 actions-btn">
                     <a href="{{ route('services.laboratories.create') }}" class="btn btn-primary">Layanan Baru</a>
                 </div>
+                @endif
                 @endif
             </div>
         </div>

@@ -15,10 +15,12 @@ Daftar Layanan KB
             <div class="filter-container">
 
                 @if (auth()->user()->hasRole(['owner']))
+                @if (getShift())
 
                 <div class="mr-0 actions-btn">
                     <a href="{{ route('services.family_plannings.create') }}" class="btn btn-primary">Layanan Baru</a>
                 </div>
+                @endif
                 @endif
             </div>
         </div>

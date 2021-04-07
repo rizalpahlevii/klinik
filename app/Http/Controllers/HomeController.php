@@ -89,10 +89,17 @@ class HomeController extends AppBaseController
         $shift = $this->dashboardRepository->getShift();
         if ($shift) {
             $this->dashboardRepository->endShift();
+            Flash::success("Berhasil Mengakhiri Shift");
             return $this->sendSuccess("Berhasil mengakhiri shift");
         } else {
-            $this->dashboardRepository->startShift();
-            return $this->sendSuccess("Berhasil memulai shift");
+            $response = $this->dashboardRepository->startShift();
+            if ($response['success']) {
+                Flash::success($response['message']);
+                return $this->sendSuccess($response['message']);
+            } else {
+                Flash::error($response['message']);
+                return $this->sendSuccess($response['message']);
+            }
         }
     }
 }

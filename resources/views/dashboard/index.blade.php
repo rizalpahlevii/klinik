@@ -265,9 +265,7 @@
                         method :'post',
                         dataType : 'json',
                         success:function(response){
-                            if(response.status){
-                                alert(response.message);
-                            }
+                            alert(response.message);
                             location.reload();
                         }
                     })

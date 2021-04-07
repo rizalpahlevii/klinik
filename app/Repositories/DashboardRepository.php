@@ -79,9 +79,17 @@ class DashboardRepository
                 $shift->initial_cash = 0;
             }
             $shift->save();
-            return $shift;
+            return [
+                'success' => true,
+                'message' => 'Berhasil Memulai Shift',
+                'data' => $shift
+            ];
         } else {
-            return false;
+            return [
+                'success' => false,
+                'message' => 'Masih Ada Shift Aktif',
+                'data' => []
+            ];
         }
     }
 
