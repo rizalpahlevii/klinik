@@ -31,11 +31,11 @@
 
 
                                 @else
-                                @if (checkAvailableToStartShift())
 
-                                <button class="btn btn-block btn-primary btn-shift" data-status="nonaktif"
-                                    style="padding: 10px;">Start</button>
-                                @endif
+                                <button class="btn btn-block btn-primary btn-shift pt-2 pb-2" data-status="nonaktif" {!!
+                                    checkAvailableToStartShift() ? '' : 'style="
+                                    cursor:no-drop;" ' !!}" {!! checkAvailableToStartShift() ? '' : ' disabled '
+                                    !!}>Start</button>
 
                                 @endif
 
@@ -51,9 +51,7 @@
                                             @if ($shift)
                                             {{ $shift->cashier->fullname }}
                                             @else
-                                            '-'
-                                            @endif
-                                        </th>
+                                            ' -' @endif </th>
                                     </tr>
                                     <tr>
                                         <th>Nama Kasir Sebelumnya</th>
