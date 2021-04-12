@@ -2,8 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
+use App\Models\Sale;
+use App\Models\Services\FamilyPlanning;
+use App\Models\Services\General;
+use App\Models\Services\Laboratory;
+use App\Models\Services\Pregnancy;
 use App\Models\Setting;
+use App\Queries\ProductDataTable;
+use App\Repositories\ChartRepository;
 use App\Repositories\DashboardRepository;
+use App\Repositories\ProductRepository;
+use App\Repositories\StockAdjusmentRepository;
 use DB;
 use Flash;
 use Illuminate\Contracts\View\Factory;
@@ -14,15 +24,25 @@ use Illuminate\View\View;
 class HomeController extends AppBaseController
 {
     private $dashboardRepository;
-
+    private $chartRepository;
+    private $productRepository;
+    private $stockAdjusmentRepository;
     /**
      * Create a new controller instance.
      *
      * @param  DashboardRepository  $dashboardRepository
      */
-    public function __construct(DashboardRepository $dashboardRepository)
-    {
+    public function __construct(
+        DashboardRepository $dashboardRepository,
+        ChartRepository $chartRepository,
+        ProductRepository $productRepository,
+        StockAdjusmentRepository $stockAdjusmentRepository
+
+    ) {
         $this->middleware('auth');
+        $this->stockAdjusmentRepository = $stockAdjusmentRepository;
+        $this->productRepository = $productRepository;
+        $this->chartRepository = $chartRepository;
         $this->dashboardRepository = $dashboardRepository;
     }
 
@@ -46,7 +66,10 @@ class HomeController extends AppBaseController
         $previousShift = $this->dashboardRepository->previousShift();
         $totalSales = $this->dashboardRepository->getShiftSalesTotal();
         $finalCash = $this->dashboardRepository->getFinalCash();
-        return view('dashboard.index', compact('data', 'shift', 'previousShift', 'totalSales', 'finalCash'));
+        $highProducts = $this->dashboardRepository->getHighProduct();
+        $stockAdjusments = $this->dashboardRepository->stockAdjusments();
+        $products = (new ProductDataTable())->get()->get();
+        return view('dashboard.index', compact('products', 'highProducts', 'stockAdjusments', 'data', 'shift', 'previousShift', 'totalSales', 'finalCash'));
     }
 
     public function transfer(Request $request)
@@ -63,6 +86,56 @@ class HomeController extends AppBaseController
         }
         $this->dashboardRepository->transferCash(convertCurrency($request->amount), $fileName);
         Flash::success("Berhasil menyetorkan uang sejumlah ." . convertCurrency($request->amount));
+        return redirect()->back();
+    }
+
+    public function stockAdjusment(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required',
+            'note' => 'nullable|min:3',
+            'quantity' => 'numeric'
+        ]);
+        DB::beginTransaction();
+        try {
+            $this->stockAdjusmentRepository->create($request->except('_token'));
+            DB::commit();
+            Flash::success("Berhasil menambahkan stok penyesuaian produk");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Flash::error($e->getMessage());
+        }
+        return redirect()->back();
+    }
+    public function stockAdjusmentUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'product_id_edit' => 'required',
+            'note_edit' => 'nullable|min:3',
+            'quantity_edit' => 'numeric'
+        ]);
+        DB::beginTransaction();
+        try {
+            $this->stockAdjusmentRepository->update($request->except('_token'), $id);
+            DB::commit();
+            Flash::success("Berhasil menambahkan stok penyesuaian produk");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Flash::error($e->getMessage());
+        }
+        return redirect()->back();
+    }
+    public function stockAdjusmentDelete($id)
+    {
+        DB::beginTransaction();
+        try {
+            $this->stockAdjusmentRepository->destroy($id);
+            DB::commit();
+            Flash::success("Berhasil menghapus stok penyesuaian produk");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Flash::error($e->getMessage());
+        }
         return redirect()->back();
     }
 
@@ -101,5 +174,72 @@ class HomeController extends AppBaseController
                 return $this->sendSuccess($response['message']);
             }
         }
+    }
+
+    public function getChart()
+    {
+        $response = $this->chartRepository->getChart();
+        return response()->json($response);
+    }
+
+    public function report()
+    {
+        $querySale = Sale::whereMonth('receipt_date', '>=', request()->get('month-start'))
+            ->whereYear('receipt_date', '>=', request()->get('year-start'))
+            ->whereMonth('receipt_date', '<=', request()->get('month-end'))
+            ->whereYear('receipt_date', '<=', request()->get('year-end'));
+        $saleSum = $querySale->sum('grand_total');
+        $sale = $querySale->get();
+
+        $queryGeneralService = General::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $generalServiceSum = $queryGeneralService->sum('total_fee');
+        $generalService = $queryGeneralService->get();
+
+        $queryLaboratoryService = Laboratory::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $laboratoryServiceSum = $queryLaboratoryService->sum('total_fee');
+        $laboratoryService = $queryLaboratoryService->get();
+
+
+        $queryPregnancyService = Pregnancy::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $pregnancyServiceSum = $queryPregnancyService->sum('total_fee');
+        $pregnancyService = $queryPregnancyService->get();
+
+
+        $queryFamilyPlanningService = FamilyPlanning::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $familyPlanningServiceSum = $queryFamilyPlanningService->sum('total_fee');
+        $familyPlanningService = $queryFamilyPlanningService->get();
+
+        $queryPurchase = Purchase::with('supplier')->whereMonth('receipt_date', '>=', request()->get('month-start'))
+            ->whereYear('receipt_date', '>=', request()->get('year-start'))
+            ->whereMonth('receipt_date', '<=', request()->get('month-end'))
+            ->whereYear('receipt_date', '<=', request()->get('year-end'));
+        $purchaseSum = $queryPurchase->sum('grand_total');
+        $purchase = $queryPurchase->get();
+        return view('report', compact(
+            'sale',
+            'saleSum',
+            'purchase',
+            'purchaseSum',
+            'familyPlanningService',
+            'familyPlanningServiceSum',
+            'pregnancyService',
+            'pregnancyServiceSum',
+            'laboratoryService',
+            'laboratoryServiceSum',
+            'generalService',
+            'generalServiceSum'
+        ));
     }
 }

@@ -206,7 +206,12 @@ Route::group(['middleware' => ['auth']], function () {
         //        Route::post('departments/{department}/active-deactive', 'DepartmentController@activeDeactiveDepartment');
 
         Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
+        Route::get('/chart', 'HomeController@getChart')->name('chart');
+        Route::get('/report', 'HomeController@report')->name('report');
         Route::post('/shift', 'HomeController@startShift')->name('shift');
+        Route::post('/stock-adjusment', 'HomeController@stockAdjusment')->name('stock_adjusment');
+        Route::put('/stock-adjusment/{id}', 'HomeController@stockAdjusmentUpdate')->name('stock_adjusment_update');
+        Route::get('/stock-adjusment/{id}', 'HomeController@stockAdjusmentDelete')->name('stock_adjusment_delete');
         Route::post('/trasnfer', 'HomeController@transfer')->name('transfer');
         Route::post('/cash-add', 'HomeController@cashAdd')->name('cash_add');
         Route::get('settings', 'SettingController@edit')->name('settings.edit');

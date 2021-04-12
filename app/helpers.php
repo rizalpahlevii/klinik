@@ -4,6 +4,11 @@ use App\Models\CashierShift;
 use App\Models\Department;
 use App\Models\DoctorDepartment;
 use App\Models\Notification;
+use App\Models\Sale;
+use App\Models\Services\FamilyPlanning;
+use App\Models\Services\General;
+use App\Models\Services\Laboratory;
+use App\Models\Services\Pregnancy;
 use App\Models\Setting;
 use App\Models\Shift;
 use App\Models\User;
@@ -17,6 +22,105 @@ use Stripe\Stripe;
 /**
  * @return int
  */
+function getYears()
+{
+    $sales = Sale::select(DB::raw('YEAR(created_at) as year'))->distinct()->get()->toArray();
+    $generals = General::select(DB::raw('YEAR(created_at) as year'))->distinct()->get()->toArray();
+    $pregnancies = Pregnancy::select(DB::raw('YEAR(created_at) as year'))->distinct()->get()->toArray();
+    $laboratories = Laboratory::select(DB::raw('YEAR(created_at) as year'))->distinct()->get()->toArray();
+    $familyPlannings = FamilyPlanning::select(DB::raw('YEAR(created_at) as year'))->distinct()->get()->toArray();
+    $year = [];
+    foreach ($sales as $sale) {
+        $year[] = $sale['year'];
+    }
+    foreach ($generals as $general) {
+        if (!in_array($general['year'], $year)) {
+            $year[] = $general['year'];
+        }
+    }
+    foreach ($pregnancies as $pregnancy) {
+        if (!in_array($pregnancy['year'], $year)) {
+            $year[] = $pregnancy['year'];
+        }
+    }
+    foreach ($laboratories as $laboratory) {
+        if (!in_array($laboratory['year'], $year)) {
+            $year[] = $laboratory['year'];
+        }
+    }
+    foreach ($familyPlannings as $familyPlanning) {
+        if (!in_array($familyPlanning['year'], $year)) {
+            $year[] = $familyPlanning['year'];
+        }
+    }
+    return $year;
+}
+function compareSale($a, $b)
+{
+    return $a['month'] - $b['month'];
+}
+function convertMonthNumber($month)
+{
+    if ($month == "1") {
+        $data = 'Januari';
+    } elseif ($month == "2") {
+        $data = 'Februari';
+    } elseif ($month == "3") {
+        $data = "Maret";
+    } elseif ($month == "4") {
+        $data = "April";
+    } elseif ($month == "5") {
+        $data = "Mei";
+    } elseif ($month == "6") {
+        $data = "Juni";
+    } elseif ($month == "7") {
+        $data = "Juli";
+    } elseif ($month == "8") {
+        $data = "Agustus";
+    } elseif ($month == "9") {
+        $data = "September";
+    } elseif ($month == "10") {
+        $data = "Oktober";
+    } elseif ($month == "11") {
+        $data = "November";
+    } elseif ($month == "12") {
+        $data = "Desember";
+    } else {
+        $data = "Not available";
+    }
+    return $data;
+}
+function convertMonthNumber2($month)
+{
+    if ($month == "01") {
+        $data = 'Januari';
+    } elseif ($month == "02") {
+        $data = 'Februari';
+    } elseif ($month == "03") {
+        $data = "Maret";
+    } elseif ($month == "04") {
+        $data = "April";
+    } elseif ($month == "05") {
+        $data = "Mei";
+    } elseif ($month == "06") {
+        $data = "Juni";
+    } elseif ($month == "07") {
+        $data = "Juli";
+    } elseif ($month == "08") {
+        $data = "Agustus";
+    } elseif ($month == "09") {
+        $data = "September";
+    } elseif ($month == "10") {
+        $data = "Oktober";
+    } elseif ($month == "11") {
+        $data = "November";
+    } elseif ($month == "12") {
+        $data = "Desember";
+    } else {
+        $data = "Not available";
+    }
+    return $data;
+}
 function getLoggedInUserId()
 {
     return Auth::id();

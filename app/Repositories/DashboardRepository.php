@@ -10,16 +10,33 @@ use App\Models\Services\Laboratory;
 use App\Models\Services\Pregnancy;
 use App\Models\ShiftCashTransfer;
 use App\Models\ShiftCassAdd;
+use App\Models\StockAdjusment;
 use App\Models\User;
 use Carbon\Carbon;
+use DB;
 use Exception;
-use Laravel\Cashier\Cashier;
 
 /**
  * Class DashboardRepository
  */
 class DashboardRepository
 {
+
+    public function stockAdjusments()
+    {
+        return StockAdjusment::with('product')->get();
+    }
+
+    public function getHighProduct()
+    {
+        $data = DB::table('products')->leftJoin('sale_items', 'products.id', '=', 'sale_items.product_id')
+            ->selectRaw('products.*, COALESCE(sum(sale_items.total),0) total')
+            ->groupBy('products.id')
+            ->orderBy('total', 'DESC')
+            ->take(5)
+            ->get();
+        return $data;
+    }
 
     public function getSalesTotal()
     {
