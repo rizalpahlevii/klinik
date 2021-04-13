@@ -254,8 +254,6 @@ select:focus {
 .landing-header {
     height: 95vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .welcome-text {
@@ -266,7 +264,7 @@ select:focus {
 }
 
 .welcome-text .heading-name {
-    font-size: 100px;
+    font-size: 60px;
     line-height: 150px;
     color: #f33d54;
 }

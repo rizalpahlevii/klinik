@@ -386,7 +386,7 @@
         </div>
     </div>
     @endif
-    @if (auth()->user()->hasRole('gudang'))
+    @if (auth()->user()->hasRole(['gudang','owner']))
     <div class="animated fadeIn">
         <div class="row mt-3">
             <div class="col-md-12">
