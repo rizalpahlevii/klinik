@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Supplier;
+use App\Models\SupplierSalesman;
 use Illuminate\Database\Seeder;
 
 class SupplierSeeder extends Seeder
@@ -29,8 +30,9 @@ class SupplierSeeder extends Seeder
                 'address' => 'Jepara'
             ],
         ];
-        foreach ($input as $data) {
-            Supplier::create($data);
+        foreach ($input as $key => $data) {
+            $supplier = Supplier::create($data);
+            SupplierSalesman::create(['supplier_id' => $supplier->id, 'salesman_name' => $data['name'] . $key, 'phone' => '01238912387']);
         }
     }
 }
