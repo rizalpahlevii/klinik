@@ -80,7 +80,7 @@
                                             @if ($shift)
                                             @rupiah($shift->initial_cash)
                                             @else
-                                            -
+                                            @rupiah( $previousShift != null ? $previousShift->final_cash : 0 )
                                             @endif
                                         </th>
                                     </tr>
@@ -102,7 +102,7 @@
                                             @if ($shift)
                                             @rupiah($finalCash )
                                             @else
-                                            -
+                                            @rupiah( $previousShift != null ? $previousShift->final_cash : 0 )
                                             @endif
                                         </th>
                                     </tr>
@@ -132,9 +132,7 @@
                                             @if ($shift)
                                             {{ \Carbon\Carbon::parse($shift->start_shift)->isoFormat('LLLL') }}
                                             @else
-                                            @php
-                                            '-'
-                                            @endphp
+                                            -
                                             @endif
                                         </th>
                                     </tr>
@@ -145,9 +143,7 @@
                                             @if ($shift)
                                             {{ $shift->previous_end_shift != NULL ? \Carbon\Carbon::parse($shift->previous_end_shift)->isoFormat('LLLL') : '-' }}
                                             @else
-                                            @php
-                                            '-'
-                                            @endphp
+                                            {{ $previousShift != null ? \Carbon\Carbon::parse($previousShift->end_shift)->isoFormat('LLLL') : '-' }}
                                             @endif
 
                                         </th>
