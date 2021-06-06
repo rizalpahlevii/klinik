@@ -13,7 +13,7 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         $input = [
-            'owner', 'gudang', 'kasir'
+            'owner', 'inventory', 'cashier'
         ];
         foreach ($input as $value) {
             Role::create([

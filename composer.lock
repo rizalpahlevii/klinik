@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fe2b7b549acd565e50f7fa6587362d3",
+    "content-hash": "9bc6ee99c658f20b5ab9ebf746ec409e",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -993,135 +993,6 @@
                 "laravel-testing"
             ],
             "time": "2020-11-09T16:35:23+00:00"
-        },
-        {
-            "name": "infyomlabs/coreui-templates",
-            "version": "7.0.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/InfyOmLabs/coreui-templates.git",
-                "reference": "142a774cd0ff4ca818cb1e6484968e62c1b2ebbb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/coreui-templates/zipball/142a774cd0ff4ca818cb1e6484968e62c1b2ebbb",
-                "reference": "142a774cd0ff4ca818cb1e6484968e62c1b2ebbb",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^7.0",
-                "php": "^7.2.5|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "\\InfyOm\\CoreUITemplates\\CoreUITemplatesServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "InfyOm\\CoreUITemplates\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mitul Golakiya",
-                    "email": "me@mitul.me"
-                }
-            ],
-            "description": "CoreUI templates for InfyOm Laravel Generator",
-            "keywords": [
-                "bootstrap",
-                "coreui",
-                "generator",
-                "infyom",
-                "laravel",
-                "templates"
-            ],
-            "funding": [
-                {
-                    "url": "https://opencollective.com/infyomlabs",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2020-12-18T16:56:58+00:00"
-        },
-        {
-            "name": "infyomlabs/laravel-generator",
-            "version": "7.0.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/InfyOmLabs/laravel-generator.git",
-                "reference": "3b82e49f6273d7b59564fa02c37fff6ebb8d7cff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator/zipball/3b82e49f6273d7b59564fa02c37fff6ebb8d7cff",
-                "reference": "3b82e49f6273d7b59564fa02c37fff6ebb8d7cff",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^7.0",
-                "laracasts/flash": "^3.1",
-                "php": "^7.2.5|^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.3.1",
-                "phpunit/phpunit": "^8.5|^9.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "\\InfyOm\\Generator\\InfyOmGeneratorServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "InfyOm\\Generator\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mitul Golakiya",
-                    "email": "me@mitul.me"
-                }
-            ],
-            "description": "InfyOm Laravel Generator",
-            "keywords": [
-                "api",
-                "crud",
-                "generator",
-                "laravel",
-                "migration",
-                "model",
-                "repository",
-                "request",
-                "swagger",
-                "test",
-                "view"
-            ],
-            "funding": [
-                {
-                    "url": "https://opencollective.com/infyomlabs",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2020-12-18T11:38:34+00:00"
         },
         {
             "name": "intervention/image",
@@ -10164,12 +10035,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
@@ -10211,10 +10082,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "infyomlabs/coreui-templates": 20,
-        "infyomlabs/laravel-generator": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

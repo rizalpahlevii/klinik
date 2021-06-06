@@ -9,7 +9,7 @@
 @endsection
 @section('content')
 <div class="container-fluid">
-    @if (auth()->user()->hasRole(['owner','kasir']))
+    @if (auth()->user()->hasRole(['owner','cashier']))
     <div class="animated fadeIn">
         <div class="row mt-3">
             <div class="col-md-12">
@@ -382,7 +382,7 @@
         </div>
     </div>
     @endif
-    @if (auth()->user()->hasRole(['gudang','owner']))
+    @if (auth()->user()->hasRole(['inventory','owner']))
     <div class="animated fadeIn">
         <div class="row mt-3">
             <div class="col-md-12">

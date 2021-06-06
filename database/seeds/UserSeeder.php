@@ -14,8 +14,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $adminRole = Role::whereName('owner')->first();
-        $kasirRole = Role::whereName('kasir')->first();
-        $gudangRole = Role::whereName('gudang')->first();
+        $cashierRole = Role::whereName('cashier')->first();
+        $inventoryRole = Role::whereName('inventory')->first();
         $input = [
             [
                 'fullname'          => 'Super Admin',
@@ -49,10 +49,10 @@ class UserSeeder extends Seeder
             $user = User::create($data);
             if ($data['username'] == "admin") {
                 $user->assignRole($adminRole);
-            } elseif ($data['username'] == "kasir") {
-                $user->assignRole($kasirRole);
+            } elseif ($data['username'] == "cashier") {
+                $user->assignRole($cashierRole);
             } else {
-                $user->assignRole($gudangRole);
+                $user->assignRole($inventoryRole);
             }
         }
     }
