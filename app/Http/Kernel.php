@@ -4,6 +4,8 @@ namespace App\Http;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CashierAccess;
+use App\Http\Middleware\CashierShiftAccess;
+use App\Http\Middleware\OwnerAccess;
 use App\Http\Middleware\CheckForMaintenanceMode;
 use App\Http\Middleware\CheckModule;
 use App\Http\Middleware\CheckUserStatus;
@@ -95,6 +97,8 @@ class Kernel extends HttpKernel
         'xss'                => XSS::class,
         'modules'            => CheckModule::class,
         'cashier'            => CashierAccess::class,
+        'cashier_shift'      => CashierShiftAccess::class,
+        'owner'              => OwnerAccess::class, 
     ];
 
     /**
