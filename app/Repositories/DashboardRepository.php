@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use \Illuminate\Database\QueryException;
+
 use App\Models\CashierShift;
 use App\Models\Sale;
 use App\Models\Services\FamilyPlanning;
@@ -73,41 +75,47 @@ class DashboardRepository
 
     public function previousShift()
     {
-        $shift = CashierShift::with('cashier')->whereNotNull('end_shift')->orderBy('created_at', 'DESC')->first();
-        return $shift;
+        return CashierShift::with('cashier')
+            ->whereNotNull('end_shift')
+            ->orderBy('created_at', 'DESC')
+            ->first();
     }
 
     public function getShift()
     {
-        $shift = CashierShift::with('cashier')->where('cashier_id', auth()->id())->where('end_shift', NULL)->first();
-        return $shift;
+        return CashierShift::with('cashier')
+            ->where('cashier_id', auth()->id())
+            ->where('end_shift', NULL)
+            ->first();
     }
 
     public function startShift()
     {
-        $checkShift = CashierShift::whereNull('end_shift')->get()->count();
-        if ($checkShift == 0) {
-            $shift = new CashierShift();
-            $shift->cashier_id = auth()->id();
-            $shift->start_shift = now();
-            if ($this->previousShift()) {
-                $shift->initial_cash = $this->previousShift()->final_cash;
-            } else {
-                $shift->initial_cash = 0;
-            }
-            $shift->save();
+        $currentShift = CashierShift::whereNull('end_shift')
+            ->get()
+            ->count();
+        if ($currentShift) {
             return [
-                'success' => true,
-                'message' => 'Berhasil Memulai Shift',
-                'data' => $shift
-            ];
-        } else {
-            return [
-                'success' => false,
+                'status' => 'error',
                 'message' => 'Masih Ada Shift Aktif',
                 'data' => []
             ];
         }
+
+        $shift = new CashierShift();
+        $shift->cashier_id = auth()->id();
+        $shift->start_shift = now();
+        if ($previousShift = $this->previousShift()) {
+            $shift->previous_shift_id = $previousShift->id
+            $shift->initial_cash = $previousShift->final_cash;
+        }
+        $shift->save();
+
+        return [
+            'status' => 'success',
+            'message' => 'Berhasil Memulai Shift',
+            'data' => $shift
+        ];
     }
 
     public function endShift()
@@ -121,40 +129,43 @@ class DashboardRepository
 
     public function addInitialCash($amount)
     {
+        $shift = $this->getShift() ?: $this->previousShift();
 
         $initial = new ShiftCassAdd();
         $initial->cashier_id = auth()->id();
-        if ($this->getShift()) {
-            $initial->cashier_shift_id = $this->getShift()->id;
-        } else {
-            if ($this->previousShift()) {
-                $initial->cashier_shift_id = $this->previousShift()->id;
-            } else {
-                return false;
-            }
-        }
+        $initial->cashier_shift_id = $shift->id;
         $initial->total_add = $amount;
+
         $update = CashierShift::find($initial->cashier_shift_id);
         $update->initial_cash += $amount;
         $update->save();
+
         return $initial->save();
     }
 
     public function getTransferCash()
     {
         $shift = $this->getShift();
-        $transfer = ShiftCashTransfer::where('cashier_id', auth()->id())->where('cashier_shift_id', $shift->id)->sum('total_transfer');
+        $transfer = ShiftCashTransfer::where('cashier_id', auth()->id())
+            ->where('cashier_shift_id', $shift->id)
+            ->sum('total_transfer');
         return $transfer ?? 0;
     }
 
-    public function transferCash($amount, $transferProof = null)
+    public function transferCash(array $transferData)
     {
-        $transfer = new ShiftCashTransfer();
-        $transfer->cashier_id = auth()->id();
-        $transfer->cashier_shift_id = $this->getShift()->id;
-        $transfer->total_transfer = $amount;
-        $transfer->transfer_proof = $transferProof;
-        $transfer->save();
+        try {
+            $transfer = new ShiftCashTransfer();
+            $transfer->cashier_id = auth()->id();
+            $transfer->cashier_shift_id = $this->getShift()->id;
+            $transfer->total_transfer = $amount;
+            $transfer->transfer_proof_image = $transferData['transfer_proof'];
+            $transfer->save();
+        } catch (QueryException $qe) {
+            abort(500, $qe->getMessage());
+        }
+
+        return $transfer;
     }
 
     public function getUserById($user_id)

@@ -18,4 +18,26 @@ class ShiftCashTransfer extends Model
             $model->id = (string) Uuid::generate(4);
         });
     }
+
+    public function getTransferAmountAttribute()
+    {
+        $amount = $this->attributes['total_transfer'];
+
+        return convertCurrency($amount);
+    }
+
+    public function setTransferProofImageAttribute($proof = null)
+    {
+        if (! $proof) $this->attributes['transfer_proof'] = null;
+
+        $proof->move('upload/transfer-proof', $fileName);
+        $fileName = time() . "_" . $proof->getClientOriginalName();
+
+        $this->attributes['transfer_proof'] = $filename;
+    }
+
+    public function getTransferProofImageAttribute()
+    {
+        return asset($this->attributes['transfer_proof']);
+    }
 }

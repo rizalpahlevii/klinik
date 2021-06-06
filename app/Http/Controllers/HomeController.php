@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+use App\Http\Requests\Shifts/
+
 use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\Services\FamilyPlanning;
@@ -9,17 +16,16 @@ use App\Models\Services\General;
 use App\Models\Services\Laboratory;
 use App\Models\Services\Pregnancy;
 use App\Models\Setting;
+
 use App\Queries\ProductDataTable;
+
 use App\Repositories\ChartRepository;
 use App\Repositories\DashboardRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\StockAdjusmentRepository;
+
 use DB;
 use Flash;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class HomeController extends AppBaseController
 {
@@ -61,7 +67,13 @@ class HomeController extends AppBaseController
      */
     public function dashboard()
     {
-        $data['currency'] = Setting::CURRENCIES;
+        $data['currency'] = Setting::CURRENCIES; // Multi currency tidak diperlukan, bisa dihapus
+
+        /*
+            Pengelompokan action seharusnya tidak berdasarkan page
+            tapi berdasarkan objek data yang dipakai.
+            Misal untuk shift, sebaiknya dibuat ShiftRepository
+        */
         $shift = $this->dashboardRepository->getShift();
         $previousShift = $this->dashboardRepository->previousShift();
         $totalSales = $this->dashboardRepository->getShiftSalesTotal();
@@ -69,23 +81,25 @@ class HomeController extends AppBaseController
         $highProducts = $this->dashboardRepository->getHighProduct();
         $stockAdjusments = $this->dashboardRepository->stockAdjusments();
         $products = (new ProductDataTable())->get()->get();
-        return view('dashboard.index', compact('products', 'highProducts', 'stockAdjusments', 'data', 'shift', 'previousShift', 'totalSales', 'finalCash'));
+
+        return view('dashboard.index', compact([
+            'products', 
+            'highProducts', 
+            'stockAdjusments', 
+            'data', 
+            'shift', 
+            'previousShift', 
+            'totalSales', 
+            'finalCash'
+        ]));
     }
 
-    public function transfer(Request $request)
+    public function transfer(TransferCashRequest $request)
     {
-        $request->validate([
-            'transfer_proof' => 'nullable|mimes:pdf,jpg,jpeg,png|max:5000'
-        ]);
-        if ($request->transfer_proof) {
-            $file = $request->file('transfer_proof');
-            $fileName = time() . "_" . $file->getClientOriginalName();
-            $file->move('upload/transfer-proof', $fileName);
-        } else {
-            $fileName = null;
-        }
-        $this->dashboardRepository->transferCash(convertCurrency($request->amount), $fileName);
-        Flash::success("Berhasil menyetorkan uang sejumlah ." . convertCurrency($request->amount));
+        $input = $request->collectTransferData();
+        $transfer = $this->dashboardRepository->transferCash($input);
+        session()->flash('success', 'Berhasil menyetorkan uang sejumlah ' . $transfer->amount);
+        
         return redirect()->back();
     }
 
@@ -157,9 +171,18 @@ class HomeController extends AppBaseController
         return redirect()->back();
     }
 
+    /*
+        Ganti nama function ini dengan toggleShift
+    */
     public function startShift(Request $request)
     {
         $shift = $this->dashboardRepository->getShift();
+
+        if (! $shift = $this->dashboardRepository->getShift()) {
+            $response = $this->dashboardRepository->startShift();
+            Flash::{$response['success'] ?: }
+        }
+
         if ($shift) {
             $this->dashboardRepository->endShift();
             Flash::success("Berhasil Mengakhiri Shift");
