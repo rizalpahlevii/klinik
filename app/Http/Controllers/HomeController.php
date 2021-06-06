@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-use App\Http\Requests\Shifts/
+use App\Http\Requests\Shifts\ShiftCashTransfer;
 
 use App\Models\Purchase;
 use App\Models\Sale;
@@ -178,11 +178,9 @@ class HomeController extends AppBaseController
     {
         $shift = $this->dashboardRepository->getShift();
 
-        if (! $shift = $this->dashboardRepository->getShift()) {
-            $response = $this->dashboardRepository->startShift();
-            Flash::{$response['success'] ?: }
-        }
-
+        /*
+            Rapikan if else berikut menjadi GATE principal
+        */        
         if ($shift) {
             $this->dashboardRepository->endShift();
             Flash::success("Berhasil Mengakhiri Shift");

@@ -106,7 +106,7 @@ class DashboardRepository
         $shift->cashier_id = auth()->id();
         $shift->start_shift = now();
         if ($previousShift = $this->previousShift()) {
-            $shift->previous_shift_id = $previousShift->id
+            $shift->previous_shift_id = $previousShift->id;
             $shift->initial_cash = $previousShift->final_cash;
         }
         $shift->save();
