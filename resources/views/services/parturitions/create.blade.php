@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Input Layanan KB
+Input Layanan Partus
 @endsection
 @section('page_css')
 <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.css') }}">
@@ -15,18 +15,17 @@ Input Layanan KB
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Input Layanan KB</strong>
+                        <strong>Input Layanan Partus</strong>
                     </div>
                     <div class="card-body">
 
-                        {{ Form::open(['route' => 'services.family_plannings.store', 'files' => 'true']) }}
+                        {{ Form::open(['route' => 'services.parturitions.store', 'files' => 'true']) }}
 
-                        @include('services.family_plannings.fields')
+                        @include('services.parturitions.fields')
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
-                                <a href="{{ route('services.family_plannings.index') }}"
-                                    class="btn btn-secondary">Batal</a>
+                                <a href="{{ route('services.parturitions.index') }}" class="btn btn-secondary">Batal</a>
                             </div>
                         </div>
                         {{ Form::close() }}
