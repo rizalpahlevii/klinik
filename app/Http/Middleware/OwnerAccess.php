@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CashierAccess
+class OwnerAccess
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,7 @@ class CashierAccess
      */
     public function handle($request, Closure $next)
     {
-        return auth()->user()->hasAnyRole(['kasir', 'owner']) ?
-            $next($request) : 
-            abort(403);
+        return auth()->user()->hasRole('owner') ?
+            $next($request) : abort(403);
     }
 }

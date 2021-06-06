@@ -357,19 +357,16 @@ function convertToRupiah($value, $prefix)
 }
 function getShift()
 {
-    $shift = CashierShift::with('cashier')->where('cashier_id', auth()->id())->where('end_shift', NULL)->first();
-    return $shift;
+    return CashierShift::with('cashier')
+        ->where('cashier_id', auth()->id())->where('end_shift', NULL)
+        ->first();
 }
 
 function checkAvailableToStartShift()
 {
-    $shift = CashierShift::whereNull('end_shift')->where('cashier_id', '!=', auth()->id())->count();
-    if ($shift == 0) {
-
-        return true;
-    } else {
-        return false;
-    }
+    return CashierShift::whereNull('end_shift')
+        ->where('cashier_id', '!=', auth()->id())
+        ->count() == 0;
 }
 
 function convertCurrency($value)
@@ -453,7 +450,7 @@ function getCurrenciesForSetting($currency = null)
  */
 function getCurrencyForPDF($currency = null)
 {
-    if (!$currency) {
+    if (! $currency) {
         $currency = Setting::where('key', 'current_currency')->first()->value;
     }
 

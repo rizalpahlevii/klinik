@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::group(['middleware' => ['xss']], function () {
-        Route::prefix('users')->name('users.')->group(function () {
+        Route::prefix('users')->name('users.')->middleware('owner')->group(function () {
             Route::get('/', 'UserController@index')->middleware('modules')->name('index');
             Route::get('/create', 'UserController@create')->name('create');
             Route::post('/', 'UserController@store')->name('store');
@@ -41,9 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/{id}', 'UserController@destroy')->name('destroy');
         });
 
-
-
-        Route::prefix('/suppliers')->name('suppliers.')->group(function () {
+        Route::prefix('/suppliers')->name('suppliers.')->middleware('owner')->group(function () {
             Route::get('/', 'SupplierController@index')->name('index')->middleware('modules');
             Route::get('/create', 'SupplierController@create')->name('create');
             Route::get('/{supplier}', 'SupplierController@show')->name('show');
@@ -55,7 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{supplier}/edit', 'SupplierController@edit')->name('edit');
         });
 
-        Route::prefix('patients')->name('patients.')->group(function () {
+        Route::prefix('patients')->name('patients.')->middleware('cashier')->group(function () {
             Route::get('/', 'PatientController@index')->name('index')->middleware('modules');
             Route::get('/create', 'PatientController@create')->name('create');
             Route::get('/{patient}', 'PatientController@show')->name('show');
@@ -67,7 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('export-patients', 'PatientController@patientExport')->name('excel');
         });
 
-        Route::prefix('medics')->name('medics.')->group(function () {
+        Route::prefix('medics')->name('medics.')->middleware('cashier')->group(function () {
             Route::get('/', 'MedicController@index')->name('index')->middleware('modules');
             Route::post('/', 'MedicController@store')->name('store');
             Route::get('/create', 'MedicController@create')->name('create');
@@ -82,7 +80,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('export-patients', 'MedicController@patientExport')->name('patient.excel');
         });
 
-        Route::prefix('categories')->name('categories.')->group(function () {
+        Route::prefix('categories')->name('categories.')->middleware('owner')->group(function () {
             Route::get('/', 'ProductCategoryController@index')->middleware('modules')->name('index');
             Route::get('/create', 'ProductCategoryController@create')->name('create');
             Route::post('/', 'ProductCategoryController@store')->name('store');
@@ -91,7 +89,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/{id}', 'ProductCategoryController@destroy')->name('destroy');
         });
 
-        Route::prefix('brands')->name('brands.')->group(function () {
+        Route::prefix('brands')->name('brands.')->middleware('owner')->group(function () {
             Route::get('/', 'ProductBrandController@index')->name('index')->middleware('modules');
             Route::get('/create', 'ProductBrandController@create')->name('create');
             Route::get('/{brand}', 'ProductBrandController@show')->name('show');
@@ -100,7 +98,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/{brand}', 'ProductBrandController@update')->name('update');
             Route::get('/{brand}/edit', 'ProductBrandController@edit')->name('edit');
         });
-        Route::prefix('products')->name('products.')->group(function () {
+        Route::prefix('products')->name('products.')->middleware('cashier')->group(function () {
             Route::get('/', 'ProductController@index')->name('index')->middleware('modules');
             Route::get('/create', 'ProductController@create')->name('create');
             Route::post('/', 'ProductController@store')->name('store');
@@ -109,7 +107,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{product}/edit', 'ProductController@edit')->name('edit');
         });
 
-        Route::prefix('services')->name('services.')->group(function () {
+        Route::prefix('services')->name('services.')->middleware('cashier')->group(function () {
             Route::prefix('generals')->name('generals.')->group(function () {
                 Route::get('/', 'GeneralServiceController@index')->name('index');
                 Route::get('/create', 'GeneralServiceController@create')->name('create');
@@ -152,8 +150,8 @@ Route::group(['middleware' => ['auth']], function () {
             });
         });
 
-        Route::prefix('sales')->name('sales.')->group(function () {
-            Route::prefix('cashiers')->name('cashiers.')->middleware('cashier')->group(function () {
+        Route::prefix('sales')->name('sales.')->middleware('owner')->group(function () {
+            Route::prefix('cashiers')->name('cashiers.')->middleware('cashier_shift')->group(function () {
                 Route::get('/', 'CashierController@index')->name('index');
                 Route::post('/', 'CashierController@store')->name('store');
                 Route::get('/cart-table', 'CashierController@loadTable')->name('cart_table');
@@ -170,7 +168,7 @@ Route::group(['middleware' => ['auth']], function () {
             });
         });
 
-        Route::prefix('purchases')->name('purchases.')->group(function () {
+        Route::prefix('purchases')->name('purchases.')->middleware('owner')->group(function () {
             Route::get('/', 'PurchaseController@index')->name('index');
             Route::get('/create', 'PurchaseController@create')->name('create');
             Route::post('/', 'PurchaseController@store')->name('store');
