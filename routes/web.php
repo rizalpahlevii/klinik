@@ -148,9 +148,59 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::delete('/{id}', 'LaboratoryServiceController@destroy')->name('destroy');
                 Route::post('/', 'LaboratoryServiceController@store')->name('store');
             });
+            Route::prefix('parturitions')->name('parturitions.')->group(function () {
+                Route::get('/', 'ParturitionServiceController@index')->name('index');
+                Route::get('/create', 'ParturitionServiceController@create')->name('create');
+                Route::get('/{id}', 'ParturitionServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'ParturitionServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'ParturitionServiceController@print')->name('print');
+                Route::put('/{id}', 'ParturitionServiceController@update')->name('update');
+                Route::delete('/{id}', 'ParturitionServiceController@destroy')->name('destroy');
+                Route::post('/', 'ParturitionServiceController@store')->name('store');
+            });
+            Route::prefix('inpatients')->name('inpatients.')->group(function () {
+                Route::get('/', 'InpatientServiceController@index')->name('index');
+                Route::get('/create', 'InpatientServiceController@create')->name('create');
+                Route::get('/{id}', 'InpatientServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'InpatientServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'InpatientServiceController@print')->name('print');
+                Route::put('/{id}', 'InpatientServiceController@update')->name('update');
+                Route::delete('/{id}', 'InpatientServiceController@destroy')->name('destroy');
+                Route::post('/', 'InpatientServiceController@store')->name('store');
+            });
+            Route::prefix('immunizations')->name('immunizations.')->group(function () {
+                Route::get('/', 'ImmunizationServiceController@index')->name('index');
+                Route::get('/create', 'ImmunizationServiceController@create')->name('create');
+                Route::get('/{id}', 'ImmunizationServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'ImmunizationServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'ImmunizationServiceController@print')->name('print');
+                Route::put('/{id}', 'ImmunizationServiceController@update')->name('update');
+                Route::delete('/{id}', 'ImmunizationServiceController@destroy')->name('destroy');
+                Route::post('/', 'ImmunizationServiceController@store')->name('store');
+            });
+            Route::prefix('electrocardiograms')->name('electrocardiograms.')->group(function () {
+                Route::get('/', 'ElectrocardiogramServiceController@index')->name('index');
+                Route::get('/create', 'ElectrocardiogramServiceController@create')->name('create');
+                Route::get('/{id}', 'ElectrocardiogramServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'ElectrocardiogramServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'ElectrocardiogramServiceController@print')->name('print');
+                Route::put('/{id}', 'ElectrocardiogramServiceController@update')->name('update');
+                Route::delete('/{id}', 'ElectrocardiogramServiceController@destroy')->name('destroy');
+                Route::post('/', 'ElectrocardiogramServiceController@store')->name('store');
+            });
+            Route::prefix('administrations')->name('administrations.')->group(function () {
+                Route::get('/', 'AdministrationServiceController@index')->name('index');
+                Route::get('/create', 'AdministrationServiceController@create')->name('create');
+                Route::get('/{id}', 'AdministrationServiceController@show')->name('show');
+                Route::get('/{id}/edit', 'AdministrationServiceController@edit')->name('edit');
+                Route::get('/{id}/print', 'AdministrationServiceController@print')->name('print');
+                Route::put('/{id}', 'AdministrationServiceController@update')->name('update');
+                Route::delete('/{id}', 'AdministrationServiceController@destroy')->name('destroy');
+                Route::post('/', 'AdministrationServiceController@store')->name('store');
+            });
         });
 
-        Route::prefix('sales')->name('sales.')->middleware('owner')->group(function () {
+        Route::prefix('sales')->name('sales.')->middleware('cashier')->group(function () {
             Route::prefix('cashiers')->name('cashiers.')->middleware('cashier_shift')->group(function () {
                 Route::get('/', 'CashierController@index')->name('index');
                 Route::post('/', 'CashierController@store')->name('store');

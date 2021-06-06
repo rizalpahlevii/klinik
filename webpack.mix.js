@@ -258,6 +258,26 @@ mix.js(
         "public/assets/js/services/generals/generals.js"
     )
     .js(
+        "resources/assets/js/services/immunizations/immunizations.js",
+        "public/assets/js/services/immunizations/immunizations.js"
+    )
+    .js(
+        "resources/assets/js/services/parturitions/parturitions.js",
+        "public/assets/js/services/parturitions/parturitions.js"
+    )
+    .js(
+        "resources/assets/js/services/inpatients/inpatients.js",
+        "public/assets/js/services/inpatients/inpatients.js"
+    )
+    .js(
+        "resources/assets/js/services/electrocardiograms/electrocardiograms.js",
+        "public/assets/js/services/electrocardiograms/electrocardiograms.js"
+    )
+    .js(
+        "resources/assets/js/services/administrations/administrations.js",
+        "public/assets/js/services/administrations/administrations.js"
+    )
+    .js(
         "resources/assets/js/services/family_plannings/family_plannings.js",
         "public/assets/js/services/family_plannings/family_plannings.js"
     )

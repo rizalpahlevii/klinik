@@ -15,7 +15,7 @@ Input Layanan KB
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Input Layanan Umum</strong>
+                        <strong>Input Layanan KB</strong>
                     </div>
                     <div class="card-body">
 
