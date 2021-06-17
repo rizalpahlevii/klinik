@@ -4,8 +4,14 @@ namespace App\Models;
 
 use App\Models\Services\FamilyPlanning;
 use App\Models\Services\General;
+use App\Models\Services\Immunization;
 use App\Models\Services\Laboratory;
+use App\Models\Services\Parturition;
 use App\Models\Services\Pregnancy;
+use App\Models\Services\Administration;
+use App\Models\Services\Electrocardiogram;
+use App\Models\Services\Inpatient;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
@@ -64,5 +70,26 @@ class Patient extends Model
     public function pregnancyServices()
     {
         return $this->hasMany(Pregnancy::class, 'patient_id', 'id');
+    }
+    public function immunizationServices()
+    {
+        return $this->hasMany(Immunization::class, 'patient_id', 'id');
+    }
+
+    public function parturitionServices()
+    {
+        return $this->hasMany(Parturition::class, 'patient_id', 'id');
+    }
+    public function inpatientServices()
+    {
+        return $this->hasMany(Inpatient::class, 'patient_id', 'id');
+    }
+    public function electrocardiogramServices()
+    {
+        return $this->hasMany(Electrocardiogram::class, 'patient_id', 'id');
+    }
+    public function administrationServices()
+    {
+        return $this->hasMany(Administration::class, 'patient_id', 'id');
     }
 }

@@ -28,6 +28,8 @@ Detail Dokter
         </div>
     </div>
 </div>
+<input type="hidden" id="service-url"
+    value="{{ route('medics.service',['medic'=>$data->id,'service'=>':service-name']) }}">
 @endsection
 @section('page_scripts')
 <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
@@ -35,6 +37,44 @@ Detail Dokter
 <script>
     $(document).ready(function(){
         $('.data-table').DataTable();
+        $('#service').change(function(){
+            service = $(this).val();
+            url = $('#service-url').val();
+            url =url.replace(':service-name',service);
+            $.ajax({
+                url :url,
+                dataType : 'json',
+                success : function(response){
+                    console.log(response.data);
+                    rowTable = '';
+                    $('#serviceData').html('');
+                    response.data.forEach((item,i)=>{
+                        serviceUrl = `{{ url('/services/${service}/:service-id') }}`;
+                        serviceUrl = serviceUrl.replace(':service-id',item.id);
+                        patientUrl = `{{ url('/patients/:patient-id') }}`;
+                        patientUrl = patientUrl.replace(':patient-id',item.patient_id);
+                        rowTable += `
+                            <tr>
+                                <td>
+                                    <a href="${serviceUrl}">${item.service_number}
+                                            </a>
+                                </td>
+                                <td>
+                                    <a href="${patientUrl}">${item.patient.name}
+                                            </a>
+                                </td>
+                                <td>${item.notes}</td>
+                                <td>${item.phone}</td>
+                                <td>${item.registration_time}</td>
+                                <td>${item.total_fee}</td>
+                            </tr>
+                        `;
+                        $('#serviceData').html('');
+                        $('#serviceData').html(rowTable);
+                    });
+                }
+            });
+        });
     });
 </script>
 @endsection

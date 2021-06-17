@@ -106,13 +106,24 @@ class PatientRepository extends BaseRepository
     {
         return $this->patient->find($id);
     }
-    public function getPatientAssociatedData($id)
+    public function getPatientAssociatedData($id, $onlyOneRelation = null)
     {
-        return $this->patient->with(
-            'generalServices.medic',
-            'laboratoryServices.medic',
-            'pregnancyServices.medic',
-            'familyPlanningServices.medic'
-        )->findOrFail($id);
+        $query = $this->patient;
+        if ($onlyOneRelation) {
+            $query = $query->with($onlyOneRelation);
+        } else {
+            $query = $query->with(
+                'generalServices.medic',
+                'laboratoryServices.medic',
+                'pregnancyServices.medic',
+                'familyPlanningServices.medic',
+                'immunizationServices.medic',
+                'parturitionServices.medic',
+                'electrocardiogramServices.medic',
+                'inpatientServices.medic',
+                'administrationServices.medic',
+            );
+        }
+        return $query->findOrFail($id);
     }
 }

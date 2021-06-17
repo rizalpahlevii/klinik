@@ -53,177 +53,47 @@
         <h4>Detail Pasien</h4>
     </div>
     <div class="col-lg-12">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="service">Tipe Layanan</label>
+                    <select name="service" id="service" class="form-control">
+                        <option disabled selected>Pilih Tipe Layanan</option>
+                        <option value="generals">Umum</option>
+                        <option value="family-plannings">Keluarga Berencana</option>
+                        <option value="pregnancies">Kehamilan</option>
+                        <option value="laboratories">Laboratorium</option>
+                        <option value="immunizations">Imunisasi</option>
+                        <option value="parturitions">Partus</option>
+                        <option value="electrocardiograms">EKG</option>
+                        <option value="administrations">Administrasi</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs mt-2">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#general-service">{{ __('Layanan Umum') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#family-planning-service">{{ __('Layanan KB') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#pregnancy-service">{{ __('Layanan Kehamilan') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#laboratory-service">{{ __('Layanan Laboratorium') }}</a>
-            </li>
-        </ul>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive viewList">
+                    <table class=" table table-responsive-sm table-striped table-bordered data-table">
+                        <thead>
+                            <tr>
+                                <th>Kode Faktur Layanan</th>
+                                <th>Dokter</th>
+                                <th>Deskripsi</th>
+                                <th>No.Telp Pasien</th>
+                                <th>Tanggal Layanan</th>
+                                <th>Biaya</th>
+                            </tr>
+                        </thead>
+                        <tbody id="serviceData">
 
-        <div class="tab-content">
-            {{--             Patient Cases --}}
-            <div class="tab-pane active" id="general-service">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="table-responsive viewList">
-                            <table class=" table table-responsive-sm table-striped table-bordered data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Faktur Layanan</th>
-                                        <th>Dokter</th>
-                                        <th>Deskripsi</th>
-                                        <th>No.Telp Pasien</th>
-                                        <th>Tanggal Layanan</th>
-                                        <th>Biaya</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data->generalServices as $service)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ route('services.generals.show',$service->id) }}">{{ $service->service_number }}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="{{ route('medics.show',$service->medic->id) }}">{{ $service->medic->name }}</a>
-                                        </td>
-                                        <td>{{ $service->notes }}</td>
-                                        <td>{{ $service->phone }}</td>
-                                        <td>{{ $service->registration_time }}</td>
-                                        <td>@rupiah($service->total_fee)</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="tab-pane" id="family-planning-service">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="table-responsive viewList">
-                            <table class=" table table-responsive-sm table-striped table-bordered data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Faktur Layanan</th>
-                                        <th>Dokter</th>
-                                        <th>Deskripsi</th>
-                                        <th>No.Telp Pasien</th>
-                                        <th>Tanggal Layanan</th>
-                                        <th>Biaya</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data->familyPlanningServices as $service)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ route('services.family_plannings.show',$service->id) }}">{{ $service->service_number }}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="{{ route('medics.show',$service->medic->id) }}">{{ $service->medic->name }}</a>
-                                        </td>
-                                        <td>{{ $service->notes }}</td>
-                                        <td>{{ $service->phone }}</td>
-                                        <td>{{ $service->registration_time }}</td>
-                                        <td>@rupiah($service->total_fee)</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="pregnancy-service">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="table-responsive viewList">
-                            <table class=" table table-responsive-sm table-striped table-bordered data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Faktur Layanan</th>
-                                        <th>Dokter</th>
-                                        <th>Deskripsi</th>
-                                        <th>No.Telp Pasien</th>
-                                        <th>Tanggal Layanan</th>
-                                        <th>Biaya</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data->pregnancyServices as $service)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ route('services.pregnancies.show',$service->id) }}">{{ $service->service_number }}
-                                            </a></td>
-                                        <td>
-                                            <a
-                                                href="{{ route('medics.show',$service->medic->id) }}">{{ $service->medic->name }}</a>
-                                        </td>
-                                        <td>{{ $service->notes }}</td>
-                                        <td>{{ $service->phone }}</td>
-                                        <td>{{ $service->registration_time }}</td>
-                                        <td>@rupiah($service->total_fee)</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="laboratory-service">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="table-responsive viewList">
-                            <table class=" table table-responsive-sm table-striped table-bordered data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Faktur Layanan</th>
-                                        <th>Dokter</th>
-                                        <th>Deskripsi</th>
-                                        <th>No.Telp Pasien</th>
-                                        <th>Tanggal Layanan</th>
-                                        <th>Biaya</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data->laboratoryServices as $service)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ route('services.laboratories.show',$service->id) }}">{{ $service->service_number }}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="{{ route('medics.show',$service->medic->id) }}">{{ $service->medic->name }}</a>
-                                        </td>
-                                        <td>{{ $service->notes }}</td>
-                                        <td>{{ $service->phone }}</td>
-                                        <td>{{ $service->registration_time }}</td>
-                                        <td>@rupiah($service->total_fee)</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 </div>

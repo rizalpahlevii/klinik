@@ -4,8 +4,14 @@ namespace App\Models;
 
 use App\Models\Services\FamilyPlanning;
 use App\Models\Services\General;
+use App\Models\Services\Immunization;
 use App\Models\Services\Laboratory;
+use App\Models\Services\Parturition;
 use App\Models\Services\Pregnancy;
+use App\Models\Services\Administration;
+use App\Models\Services\Electrocardiogram;
+use App\Models\Services\Inpatient;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Webpatser\Uuid\Uuid;
@@ -48,6 +54,8 @@ class Medic extends Model
         });
     }
 
+
+
     public function generalServices()
     {
         return $this->hasMany(General::class, 'medic_id', 'id');
@@ -66,5 +74,26 @@ class Medic extends Model
     public function pregnancyServices()
     {
         return $this->hasMany(Pregnancy::class, 'medic_id', 'id');
+    }
+    public function immunizationServices()
+    {
+        return $this->hasMany(Immunization::class, 'medic_id', 'id');
+    }
+
+    public function parturitionServices()
+    {
+        return $this->hasMany(Parturition::class, 'medic_id', 'id');
+    }
+    public function inpatientServices()
+    {
+        return $this->hasMany(Inpatient::class, 'medic_id', 'id');
+    }
+    public function electrocardiogramServices()
+    {
+        return $this->hasMany(Electrocardiogram::class, 'medic_id', 'id');
+    }
+    public function administrationServices()
+    {
+        return $this->hasMany(Administration::class, 'medic_id', 'id');
     }
 }

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMedicRequest;
 use App\Http\Requests\UpdateMedicRequest;
-use App\Models\Medic;
-use App\Models\Service;
 use App\Models\Services\FamilyPlanning;
 use App\Models\Services\General;
 use App\Models\Services\Laboratory;
@@ -88,6 +86,47 @@ class MedicController extends AppBaseController
         $bloodGroup  = getBloodGroups();
 
         return view('medics.edit', compact('medic', 'bloodGroup'));
+    }
+
+    public function service($medicId, $serviceName)
+    {
+        if ($serviceName == "generals") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'generalServices.patient');
+            $service = $service->generalServices;
+        }
+        if ($serviceName == "pregnancies") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'pregnancyServices.patient');
+            $service = $service->pregnancyServices;
+        }
+        if ($serviceName == "family-plannings") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'familyPlanningServices.patient');
+            $service = $service->familyPlanningServices;
+        }
+        if ($serviceName == "laboratories") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'laboratoryServices.patient');
+            $service = $service->laboratoryServices;
+        }
+        if ($serviceName == "immunizations") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'immunizationServices.patient');
+            $service = $service->immunizationServices;
+        }
+        if ($serviceName == "parturitions") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'parturitionServices.patient');
+            $service = $service->parturitionServices;
+        }
+        if ($serviceName == "inpatients") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'inpatientServices.patient');
+            $service = $service->inpatientServices;
+        }
+        if ($serviceName == "electrocardiograms") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'electrocardiogramServices.patient');
+            $service = $service->electrocardiogramServices;
+        }
+        if ($serviceName == "administrations") {
+            $service = $this->medicRepository->getMedicAssociatedData($medicId, 'administrationServices.patient');
+            $service = $service->administrationServices;
+        }
+        return $this->sendResponse($service, "Successfully to get service.");
     }
 
     /**

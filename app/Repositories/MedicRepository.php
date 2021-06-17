@@ -72,14 +72,25 @@ class MedicRepository extends BaseRepository
         return true;
     }
 
-    public function getMedicAssociatedData($id)
+    public function getMedicAssociatedData($id, $onlyOneRelation = null)
     {
-        return $this->medic->with(
-            'generalServices.patient',
-            'laboratoryServices.patient',
-            'pregnancyServices.patient',
-            'familyPlanningServices.patient'
-        )->findOrFail($id);
+        $query = $this->medic;
+        if ($onlyOneRelation) {
+            $query = $query->with($onlyOneRelation);
+        } else {
+            $query = $query->with(
+                'generalServices.patient',
+                'laboratoryServices.patient',
+                'pregnancyServices.patient',
+                'familyPlanningServices.patient',
+                'immunizationServices.patient',
+                'parturitionServices.patient',
+                'electrocardiogramServices.patient',
+                'inpatientServices.patient',
+                'administrationServices.patient',
+            );
+        }
+        return $query->findOrFail($id);
     }
 
     public function update($input, $medic_id)

@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/{patient}', 'PatientController@destroy')->name('destroy');
             Route::patch('/{patient}', 'PatientController@update')->name('update');
             Route::get('/{patient}/edit', 'PatientController@edit')->name('edit');
+            Route::get('/{patient}/service/{service}', 'PatientController@service')->name('service');
             Route::post('/{patient}/active-deactive', 'PatientController@activeDeactiveStatus');
             Route::get('export-patients', 'PatientController@patientExport')->name('excel');
         });
@@ -76,6 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
                 ->name('update');
             Route::get('/{medic}/edit', 'MedicController@edit')
                 ->name('edit');
+            Route::get('/{medic}/service/{service}', 'MedicController@service')->name('service');
             Route::post('/{medic}/active-deactive', 'MedicController@activeDeactiveStatus');
             Route::get('export-patients', 'MedicController@patientExport')->name('patient.excel');
         });
