@@ -71,6 +71,43 @@
                 <span>Laboratorium</span>
             </a>
         </li>
+        <li class="nav-item side-menus {{ Request::is('services.immunizations*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.immunizations.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Imunisasi</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.parturitions*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.parturitions.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Partus</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.inpatients*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.inpatients.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Rawat Inap</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.electrocardiograms*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.electrocardiograms.index') }}"
+                data-toggle="tooltip" data-placement="bottom" title="Laboratorium"
+                data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>EKG</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.administrations*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.administrations.index') }}"
+                data-toggle="tooltip" data-placement="bottom" title="Laboratorium"
+                data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Administrasi</span>
+            </a>
+        </li>
     </ul>
 </li>
 @endif
@@ -108,6 +145,43 @@
                 data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
                 <i class="nav-icon fas fa-bookmark"></i>
                 <span>Laboratorium</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.immunizations*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.immunizations.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Imunisasi</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.parturitions*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.parturitions.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Partus</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.inpatients*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.inpatients.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Rawat Inap</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.electrocardiograms*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.electrocardiograms.index') }}"
+                data-toggle="tooltip" data-placement="bottom" title="Laboratorium"
+                data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>EKG</span>
+            </a>
+        </li>
+        <li class="nav-item side-menus {{ Request::is('services.administrations*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('services.administrations.index') }}"
+                data-toggle="tooltip" data-placement="bottom" title="Laboratorium"
+                data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Administrasi</span>
             </a>
         </li>
     </ul>
