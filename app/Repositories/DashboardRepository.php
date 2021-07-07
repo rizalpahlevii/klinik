@@ -43,7 +43,7 @@ class DashboardRepository
     public function getSalesTotal()
     {
         if ($this->getShift()) {
-            $sales = Sale::where('created_at', '>=', $this->getShift()->start_shift)->where('created_at', '<=', Carbon::now())->sum('grand_total');
+            $sales = Sale::where('payment_method', 'cash')->where('created_at', '>=', $this->getShift()->start_shift)->where('created_at', '<=', Carbon::now())->sum('grand_total');
             return $sales ?? 0;
         } else {
             return 0;

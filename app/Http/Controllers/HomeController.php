@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use App\Http\Requests\Shifts\ShiftCashTransfer;
-
+use App\Http\Requests\Shifts\TransferCashRequest;
 use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\Services\FamilyPlanning;
@@ -83,13 +83,13 @@ class HomeController extends AppBaseController
         $products = (new ProductDataTable())->get()->get();
 
         return view('dashboard.index', compact([
-            'products', 
-            'highProducts', 
-            'stockAdjusments', 
-            'data', 
-            'shift', 
-            'previousShift', 
-            'totalSales', 
+            'products',
+            'highProducts',
+            'stockAdjusments',
+            'data',
+            'shift',
+            'previousShift',
+            'totalSales',
             'finalCash'
         ]));
     }
@@ -99,7 +99,7 @@ class HomeController extends AppBaseController
         $input = $request->collectTransferData();
         $transfer = $this->dashboardRepository->transferCash($input);
         session()->flash('success', 'Berhasil menyetorkan uang sejumlah ' . $transfer->amount);
-        
+
         return redirect()->back();
     }
 
@@ -180,7 +180,7 @@ class HomeController extends AppBaseController
 
         /*
             Rapikan if else berikut menjadi GATE principal
-        */        
+        */
         if ($shift) {
             $this->dashboardRepository->endShift();
             Flash::success("Berhasil Mengakhiri Shift");

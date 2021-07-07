@@ -10,7 +10,7 @@ Edit Supplier
 <div class="container-fluid">
     <div class="animated fadeIn">
         @include('flash::message')
-        @include('coreui-templates::common.errors')
+
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="card">
