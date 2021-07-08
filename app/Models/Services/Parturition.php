@@ -16,9 +16,14 @@ class Parturition extends Model
     public static function boot()
     {
         parent::boot();
-        self::creating(function ($model) {
-            $model->id = (string) Uuid::generate(4);
-            $model->service_number = getUniqueString();
+
+        self::creating(function ($partus) {
+            $partus->id = (string) Uuid::generate(4);
+            $partus->service_number = getUniqueString();
+        });
+
+        self::saving(function ($partus) {
+            $partus->total_fee = $partus->service_fee - $partus->discount;
         });
     }
 
@@ -46,10 +51,31 @@ class Parturition extends Model
         'notes',
     ];
 
+    public function setRawServiceFeeAttribute(string $fee)
+    {
+        $this->attributes['service_fee'] = convertCurrency($fee);
+    }
+
+    public function getFormattedServiceFeeAttribute()
+    {
+        return formatCurrency($this->attributes['service_fee']);
+    }
+
+    public function setRawDiscountAttribute(string $discount)
+    {
+        $this->attributes['discount'] = convertCurrency($discount);
+    }
+
+    public function getFormattedDiscountAttribute()
+    {
+        return formatCurrency($this->attributes['discount']);
+    }
+
     public function medic()
     {
         return $this->belongsTo(Medic::class, 'medic_id', 'id');
     }
+
     public function patient()
     {
         return $this->belongsTo(Patient::class, 'patient_id', 'id');

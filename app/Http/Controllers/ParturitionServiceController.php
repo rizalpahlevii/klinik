@@ -16,23 +16,26 @@ use Yajra\DataTables\DataTables;
 
 class ParturitionServiceController extends AppBaseController
 {
-    protected $parturitionRepository;
+    protected $partus;
     protected $patientRepository;
     protected $medicRepository;
+
     public function __construct(
-        ParturitionRepository $parturitionRepository,
+        ParturitionRepository $partus,
         PatientRepository $patientRepository,
         MedicRepository $medicRepository
     ) {
         $this->medicRepository = $medicRepository;
         $this->patientRepository = $patientRepository;
-        $this->parturitionRepository = $parturitionRepository;
+        $this->partus = $partus;
     }
 
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return DataTables::of((new ParturitionDataTable())->get())
+            $options = $request->options();
+            $parturitions = $this->partus->all($options);
+            return DataTables::of($parturitions)
                 ->addIndexColumn()
                 ->editColumn('total_fee', function ($row) {
                     return convertToRupiah($row->total_fee, 'Rp. ');
@@ -50,20 +53,27 @@ class ParturitionServiceController extends AppBaseController
 
     public function store(CreateParturitionServiceRequest $request)
     {
-        $request->merge([
+        /*$request->merge([
             'phone' => $request->phone_form,
             'service_fee' => convertCurrency($request->fee),
             'discount' => convertCurrency($request->discount),
             'total_fee' => convertCurrency($request->fee) - convertCurrency($request->discount),
         ]);
-        $this->parturitionRepository->create($request->except(['_token', 'fee', 'phone_form']));
+        $this->partus->create($request->except(['_token', 'fee', 'phone_form']));
         Flash::success("Berhasil menginput layanan Partus");
+        return redirect()->route('services.parturitions.index');*/
+
+        $input = $request->partusData();
+        $partus = $this->partus->create($input);
+
+        session()->flash($this->partus->status, $this->partus->message);
+
         return redirect()->route('services.parturitions.index');
     }
 
     public function show($id)
     {
-        $data = $this->parturitionRepository->findById($id);
+        $data = $this->partus->findById($id);
         return view('services.parturitions.show', compact('data'));
     }
 
@@ -71,26 +81,34 @@ class ParturitionServiceController extends AppBaseController
     {
         $patients = $this->patientRepository->getPatients();
         $medics = $this->medicRepository->getMedics();
-        $data = $this->parturitionRepository->findById($id);
+        $data = $this->partus->findById($id);
         return view('services.parturitions.edit', compact('patients', 'medics', 'data'));
     }
 
     public function update(UpdateParturitionServiceRequest $request, $id)
     {
-        $request->merge([
+        /*$request->merge([
             'phone' => $request->phone_form,
             'service_fee' => convertCurrency($request->fee),
             'discount' => convertCurrency($request->discount),
             'total_fee' => convertCurrency($request->fee) - convertCurrency($request->discount),
         ]);
-        $this->parturitionRepository->update($request->except(['_token', 'fee', 'phone_form']), $id);
+        $this->partus->update($request->except(['_token', 'fee', 'phone_form']), $id);
         Flash::success("Berhasil mengubah data layanan Partus");
+        return redirect()->route('services.parturitions.index');*/
+
+        $input = $request->partusData();
+        $partus = $this->partus->find($id);
+        $partus = $this->partus->save($input);
+
+        session()->flash($this->partus->status, $this->partus->message);
+
         return redirect()->route('services.parturitions.index');
     }
 
     public function destroy($id)
     {
-        $familyPlanning = $this->parturitionRepository->findById($id);
+        $familyPlanning = $this->partus->findById($id);
         $familyPlanning->delete();
         if (!auth()->user()->hasRole('owner')) addNotification("melakukan penghapusan data layanan Partus : " . $familyPlanning->service_number);
         return $this->sendSuccess("Berhasil menghapus data layanan umum");
@@ -98,7 +116,7 @@ class ParturitionServiceController extends AppBaseController
 
     public function print($id)
     {
-        $data = $this->parturitionRepository->findById($id);
+        $data = $this->partus->findById($id);
         return view('services.parturitions.print', compact('data'));
     }
 }
