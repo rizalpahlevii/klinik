@@ -208,6 +208,13 @@
         </li>
     </ul>
 </li>
+<li class="nav-item side-menus {{ Request::is('spendings*') ? 'active' : '' }}">
+    <a class="nav-link menu-text-wrap" href="{{ route('spendings.index') }}" data-toggle="tooltip"
+        data-placement="bottom" title="Pengeluaran" data-delay='{"show":"500", "hide":"50"}'>
+        <i class="nav-icon fas fa-chart-pie"></i>
+        <span>Pengeluaran</span>
+    </a>
+</li>
 @endif
 @endif
 
@@ -238,6 +245,7 @@
         </li>
     </ul>
 </li>
+
 @endif
 
 
@@ -290,6 +298,13 @@
         data-placement="bottom" title="Pembelian" data-delay='{"show":"500", "hide":"50"}'>
         <i class="nav-icon fas fa-chart-pie"></i>
         <span>Pembelian</span>
+    </a>
+</li>
+<li class="nav-item side-menus {{ Request::is('spendings*') ? 'active' : '' }}">
+    <a class="nav-link menu-text-wrap" href="{{ route('spendings.index') }}" data-toggle="tooltip"
+        data-placement="bottom" title="Pengeluaran" data-delay='{"show":"500", "hide":"50"}'>
+        <i class="nav-icon fas fa-chart-pie"></i>
+        <span>Pengeluaran</span>
     </a>
 </li>
 

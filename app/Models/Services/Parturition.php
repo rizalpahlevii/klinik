@@ -7,6 +7,46 @@ use App\Models\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Models\Services\Parturition
+ *
+ * @property string $id
+ * @property string $service_number
+ * @property string $registration_time
+ * @property string $patient_id
+ * @property string $medic_id
+ * @property string|null $phone
+ * @property float $service_fee
+ * @property float $discount
+ * @property float $total_fee
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read mixed $formatted_discount
+ * @property-read mixed $formatted_service_fee
+ * @property-read Medic $medic
+ * @property-read Patient $patient
+ * @property-write mixed $raw_discount
+ * @property-write mixed $raw_service_fee
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereMedicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereRegistrationTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereServiceFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereServiceNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereTotalFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Parturition extends Model
 {
     protected $keyType = 'string';

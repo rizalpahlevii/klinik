@@ -7,6 +7,42 @@ use App\Models\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Models\Services\Immunization
+ *
+ * @property string $id
+ * @property string $service_number
+ * @property string $registration_time
+ * @property string $patient_id
+ * @property string $medic_id
+ * @property string|null $phone
+ * @property float $service_fee
+ * @property float $discount
+ * @property float $total_fee
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read Medic $medic
+ * @property-read Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereMedicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereRegistrationTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereServiceFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereServiceNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereTotalFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Immunization whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Immunization extends Model
 {
     protected $keyType = 'string';

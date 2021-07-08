@@ -7,6 +7,42 @@ use App\Models\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Models\Services\Pregnancy
+ *
+ * @property string $id
+ * @property string $service_number
+ * @property string $registration_time
+ * @property string $patient_id
+ * @property string $medic_id
+ * @property string|null $phone
+ * @property float $service_fee
+ * @property float $discount
+ * @property float $total_fee
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read Medic $medic
+ * @property-read Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereMedicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereRegistrationTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereServiceFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereServiceNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereTotalFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Pregnancy extends Model
 {
     protected $keyType = 'string';

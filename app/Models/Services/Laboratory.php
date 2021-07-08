@@ -7,6 +7,42 @@ use App\Models\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Models\Services\Laboratory
+ *
+ * @property string $id
+ * @property string $service_number
+ * @property string $registration_time
+ * @property string $patient_id
+ * @property string $medic_id
+ * @property string|null $phone
+ * @property float $service_fee
+ * @property float $discount
+ * @property float $total_fee
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read Medic $medic
+ * @property-read Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereMedicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereRegistrationTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereServiceFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereServiceNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereTotalFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Laboratory extends Model
 {
     protected $keyType = 'string';

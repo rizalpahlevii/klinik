@@ -187,7 +187,7 @@ class HomeController extends AppBaseController
             return $this->sendSuccess("Berhasil mengakhiri shift");
         } else {
             $response = $this->dashboardRepository->startShift();
-            if ($response['success']) {
+            if ($response['status'] == 'success') {
                 Flash::success($response['message']);
                 return $this->sendSuccess($response['message']);
             } else {

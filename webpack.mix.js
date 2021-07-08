@@ -305,6 +305,10 @@ mix.js(
         "public/assets/js/purchases/purchases.js"
     )
     .js(
+        "resources/assets/js/spendings/spendings.js",
+        "public/assets/js/spendings/spendings.js"
+    )
+    .js(
         "resources/assets/js/purchases/purchases-could-edit.js",
         "public/assets/js/purchases/purchases-could-edit.js"
     )

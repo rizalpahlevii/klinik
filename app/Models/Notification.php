@@ -34,6 +34,8 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereUserId($value)
  * @mixin \Eloquent
+ * @property string $recipient_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereRecipientId($value)
  */
 class Notification extends Model
 {

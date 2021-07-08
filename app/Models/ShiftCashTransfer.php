@@ -5,6 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Models\ShiftCashTransfer
+ *
+ * @property int $id
+ * @property string $cashier_id
+ * @property string $cashier_shift_id
+ * @property float $total_transfer
+ * @property string|null $transfer_proof
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $transfer_amount
+ * @property mixed $transfer_proof_image
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer whereCashierId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer whereCashierShiftId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer whereTotalTransfer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer whereTransferProof($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftCashTransfer whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class ShiftCashTransfer extends Model
 {
     protected $keyType = 'string';

@@ -79,6 +79,21 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLanguage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereQualification($value)
+ * @property string|null $stripe_id
+ * @property string|null $card_brand
+ * @property string|null $card_last_four
+ * @property string|null $trial_ends_at
+ * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
+ * @method static Builder|User whereAddress($value)
+ * @method static Builder|User whereCardBrand($value)
+ * @method static Builder|User whereCardLastFour($value)
+ * @method static Builder|User whereFullname($value)
+ * @method static Builder|User whereStartWorkingDate($value)
+ * @method static Builder|User whereStripeId($value)
+ * @method static Builder|User whereTrialEndsAt($value)
+ * @method static Builder|User whereUsername($value)
+ * @method static \Illuminate\Database\Query\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  */
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {

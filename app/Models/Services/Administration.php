@@ -7,6 +7,42 @@ use App\Models\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Models\Services\Administration
+ *
+ * @property string $id
+ * @property string $service_number
+ * @property string $registration_time
+ * @property string $patient_id
+ * @property string $medic_id
+ * @property string|null $phone
+ * @property float $service_fee
+ * @property float $discount
+ * @property float $total_fee
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read Medic $medic
+ * @property-read Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereMedicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereRegistrationTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereServiceFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereServiceNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereTotalFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Administration whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Administration extends Model
 {
     protected $keyType = 'string';

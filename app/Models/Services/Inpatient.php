@@ -7,6 +7,42 @@ use App\Models\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Models\Services\Inpatient
+ *
+ * @property string $id
+ * @property string $service_number
+ * @property string $registration_time
+ * @property string $patient_id
+ * @property string $medic_id
+ * @property string|null $phone
+ * @property float $service_fee
+ * @property float $discount
+ * @property float $total_fee
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read Medic $medic
+ * @property-read Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereMedicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereRegistrationTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereServiceFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereServiceNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereTotalFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Inpatient extends Model
 {
     protected $keyType = 'string';

@@ -17,6 +17,57 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Models\Patient
+ *
+ * @property string $id
+ * @property string $name
+ * @property string $birth_date
+ * @property string $phone
+ * @property string $gender
+ * @property string|null $blood_group
+ * @property string $address
+ * @property string $city
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|Administration[] $administrationServices
+ * @property-read int|null $administration_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Electrocardiogram[] $electrocardiogramServices
+ * @property-read int|null $electrocardiogram_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|FamilyPlanning[] $familyPlanningServices
+ * @property-read int|null $family_planning_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|General[] $generalServices
+ * @property-read int|null $general_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Immunization[] $immunizationServices
+ * @property-read int|null $immunization_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Inpatient[] $inpatientServices
+ * @property-read int|null $inpatient_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Laboratory[] $laboratoryServices
+ * @property-read int|null $laboratory_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Parturition[] $parturitionServices
+ * @property-read int|null $parturition_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Pregnancy[] $pregnancyServices
+ * @property-read int|null $pregnancy_services_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Patient onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereBirthDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereBloodGroup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Patient withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Patient withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Patient extends Model
 {
     use SoftDeletes;

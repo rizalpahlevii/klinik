@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShiftCashAddsTable extends Migration
+class CreateSpendingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateShiftCashAddsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shift_cash_adds', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('cashier_id');
+        Schema::create('spendings', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->uuid('cashier_shift_id');
-            $table->double('total_add', 15, 2);
+            $table->string('name');
+            $table->decimal('amount', 15, 2);
+            $table->enum('type', ['salary', 'office_supplies', 'operational', 'non_operational']);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateShiftCashAddsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shift_cash_adds');
+        Schema::dropIfExists('spendings');
     }
 }

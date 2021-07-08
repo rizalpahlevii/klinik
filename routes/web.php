@@ -241,6 +241,15 @@ Route::group(['middleware' => ['auth']], function () {
             // Route::delete('/cart/{key}', 'PurchaseController@deleteCart')->name('cart_delete_on_edit');
         });
 
+        Route::prefix('spendings')->name('spendings.')->group(function () {
+            Route::get('/', 'SpendingController@index')->name('index');
+            Route::get('/create', 'SpendingController@create')->name('create');
+            Route::post('/', 'SpendingController@store')->name('store');
+            Route::get('/{spending_id}/edit', 'SpendingController@edit')->name('edit');
+            Route::get('/{spending_id}/print', 'SpendingController@print')->name('print');
+            Route::put('/{spending_id}', 'SpendingController@update')->name('update');
+        });
+
 
         Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
         Route::post('testimonials', 'TestimonialController@store')->name('testimonials.store');
