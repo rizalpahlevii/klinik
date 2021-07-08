@@ -46,6 +46,8 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereTotalFee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Parturition whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $payment_method
+ * @method static \Illuminate\Database\Eloquent\Builder|Parturition wherePaymentMethod($value)
  */
 class Parturition extends Model
 {
@@ -77,6 +79,7 @@ class Parturition extends Model
         'fee' => 'required',
         'discount' => 'required',
         'notes' => 'nullable',
+        'payment_method' => 'required'
     ];
 
     public $fillable = [
@@ -89,6 +92,7 @@ class Parturition extends Model
         'discount',
         'total_fee',
         'notes',
+        'payment_method'
     ];
 
     public function setRawServiceFeeAttribute(string $fee)

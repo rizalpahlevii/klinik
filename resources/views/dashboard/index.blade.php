@@ -96,11 +96,22 @@
                                         </th>
                                     </tr>
                                     <tr>
+                                        <th>Pengeluaran</th>
+                                        <th>:</th>
+                                        <th>
+                                            @if ($shift)
+                                            @rupiah($spending )
+                                            @else
+                                            -
+                                            @endif
+                                        </th>
+                                    </tr>
+                                    <tr>
                                         <th>Kas Sekarang</th>
                                         <th>:</th>
                                         <th>
                                             @if ($shift)
-                                            @rupiah($finalCash )
+                                            @rupiah($finalCash - $spending)
                                             @else
                                             @rupiah( $previousShift != null ? $previousShift->final_cash : 0 )
                                             @endif

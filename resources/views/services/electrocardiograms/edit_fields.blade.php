@@ -42,6 +42,9 @@
             <input type="text" class="form-control" name="fee" id="fee" value="{{ $data->service_fee }}">
         </div>
     </div>
+
+
+
     <div class="col-md-6">
         <div class="form-group">
             <label for="phone_form">No.Telp</label>
@@ -50,8 +53,16 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
+            <label for="payment_method">Metode Pembayaran</label>
+
+            <option value="cash" {{ $data->payment_method == "cash" ? "selected" : "" }}>Tunai</option>
+            <option value="debit" {{ $data->payment_method == "debit" ? "selected" : "" }}>Debit</option>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
             <label for="notes">Catatan</label>
-            <textarea name="notes" id="notes" cols="30" rows="5" class="form-control">{{ $data->notes }}</textarea>
+            <textarea name="notes" id="notes" cols="30" rows="5" class="form-control"></textarea>
         </div>
     </div>
 </div>

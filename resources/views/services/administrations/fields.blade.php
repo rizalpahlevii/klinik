@@ -47,8 +47,19 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
+            <label for="payment_method">Metode Pembayaran</label>
+            <select name="payment_method" id="payment_method" class="form-control">
+                <option value="cash">Tunai</option>
+                <option value="debit">Debit</option>
+            </select>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
             <label for="notes">Catatan</label>
             <textarea name="notes" id="notes" cols="30" rows="5" class="form-control"></textarea>
         </div>
     </div>
+
 </div>

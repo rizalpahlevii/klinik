@@ -42,6 +42,8 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereTotalFee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Inpatient whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $payment_method
+ * @method static \Illuminate\Database\Eloquent\Builder|Inpatient wherePaymentMethod($value)
  */
 class Inpatient extends Model
 {
@@ -68,6 +70,7 @@ class Inpatient extends Model
         'fee' => 'required',
         'discount' => 'required',
         'notes' => 'nullable',
+        'payment_method' => 'required'
     ];
 
     public $fillable = [
@@ -80,6 +83,7 @@ class Inpatient extends Model
         'discount',
         'total_fee',
         'notes',
+        'payment_method'
     ];
 
     public function medic()

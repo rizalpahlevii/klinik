@@ -42,6 +42,8 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereTotalFee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Laboratory whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $payment_method
+ * @method static \Illuminate\Database\Eloquent\Builder|Laboratory wherePaymentMethod($value)
  */
 class Laboratory extends Model
 {
@@ -68,6 +70,7 @@ class Laboratory extends Model
         'fee' => 'required',
         'discount' => 'required',
         'notes' => 'nullable',
+        'payment_method' => 'required'
     ];
 
     public $fillable = [
@@ -80,6 +83,7 @@ class Laboratory extends Model
         'discount',
         'total_fee',
         'notes',
+        'payment_method'
     ];
     public function medic()
     {

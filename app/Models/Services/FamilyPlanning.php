@@ -42,6 +42,8 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|FamilyPlanning whereTotalFee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|FamilyPlanning whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $payment_method
+ * @method static \Illuminate\Database\Eloquent\Builder|FamilyPlanning wherePaymentMethod($value)
  */
 class FamilyPlanning extends Model
 {
@@ -69,6 +71,7 @@ class FamilyPlanning extends Model
         'fee' => 'required',
         'discount' => 'required',
         'notes' => 'nullable',
+        'payment_method' => 'required'
     ];
 
     public $fillable = [
@@ -81,6 +84,7 @@ class FamilyPlanning extends Model
         'discount',
         'total_fee',
         'notes',
+        'payment_method'
     ];
 
     public function medic()

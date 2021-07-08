@@ -79,10 +79,12 @@ class HomeController extends AppBaseController
         $totalSales = $this->dashboardRepository->getShiftSalesTotal();
         $finalCash = $this->dashboardRepository->getFinalCash();
         $highProducts = $this->dashboardRepository->getHighProduct();
+        $spending = $this->dashboardRepository->getSpending();
         $stockAdjusments = $this->dashboardRepository->stockAdjusments();
         $products = (new ProductDataTable())->get()->get();
 
         return view('dashboard.index', compact([
+            'spending',
             'products',
             'highProducts',
             'stockAdjusments',

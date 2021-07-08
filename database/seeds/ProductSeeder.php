@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product_code' => 'B11',
-                'name' => 'Makanan 1',
+                'name' => 'Makanan 2',
                 'category_id' => $category[1],
                 'brand_id' => $brand[1],
                 'unit' => 'PCS',

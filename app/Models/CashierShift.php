@@ -31,6 +31,8 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|CashierShift whereStartShift($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CashierShift whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $previous_shift_id
+ * @method static \Illuminate\Database\Eloquent\Builder|CashierShift wherePreviousShiftId($value)
  */
 class CashierShift extends Model
 {

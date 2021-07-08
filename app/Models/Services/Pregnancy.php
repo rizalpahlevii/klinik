@@ -42,6 +42,8 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereTotalFee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $payment_method
+ * @method static \Illuminate\Database\Eloquent\Builder|Pregnancy wherePaymentMethod($value)
  */
 class Pregnancy extends Model
 {
@@ -68,6 +70,7 @@ class Pregnancy extends Model
         'fee' => 'required',
         'discount' => 'required',
         'notes' => 'nullable',
+        'payment_method' => 'required'
     ];
 
     public $fillable = [
@@ -80,6 +83,7 @@ class Pregnancy extends Model
         'discount',
         'total_fee',
         'notes',
+        'payment_method'
     ];
 
     public function medic()

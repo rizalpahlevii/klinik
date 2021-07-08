@@ -36,7 +36,7 @@
         <tr>
             <td>
                 <select name="product_id" id="product_id" class="form-control">
-                    <option disabled selected>Pilih Dari Kode Produk</option>
+                    <option disabled>Pilih Dari Kode Produk</option>
                     @foreach ($products as $product)
                     <option value="{{ $product->id }}" data-name="{{ $product->name }}"
                         data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
@@ -47,7 +47,7 @@
             </td>
             <td>
                 <select name="product_name" id="product_name" class="form-control">
-                    <option disabled selected>Pilih Dari Nama Produk</option>
+                    <option disabled>Pilih Dari Nama Produk</option>
                     @foreach ($products as $product)
                     <option value="{{ $product->name }}" data-id="{{ $product->id }}" data-name="{{ $product->name }}"
                         data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
@@ -141,7 +141,7 @@
             $(this)
                 .find("option:selected")
                 .data("id")
-        );
+        ).change();
         $("#unit").val(
             $(this)
                 .find("option:selected")
@@ -159,11 +159,12 @@
         );
     });
     $("#product_id").change(function() {
+
         $("#product_name").val(
             $(this)
                 .find("option:selected")
                 .data("name")
-        );
+        ).change();
         $("#unit").val(
             $(this)
                 .find("option:selected")
