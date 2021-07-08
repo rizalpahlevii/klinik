@@ -13,7 +13,7 @@ class CreateShiftCassAddsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shift_cass_adds', function (Blueprint $table) {
+        Schema::create('shift_cash_adds', function (Blueprint $table) {
             $table->id();
             $table->uuid('cashier_id');
             $table->uuid('cashier_shift_id');
@@ -29,6 +29,6 @@ class CreateShiftCassAddsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shift_cass_adds');
+        Schema::dropIfExists('shift_cash_adds');
     }
 }

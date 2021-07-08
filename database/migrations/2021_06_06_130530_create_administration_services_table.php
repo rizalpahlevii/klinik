@@ -20,6 +20,7 @@ class CreateAdministrationServicesTable extends Migration
             $table->uuid('patient_id');
             $table->uuid('medic_id');
             $table->string('phone')->nullable();
+            $table->string('payment_method')->default('cash');
             $table->double('service_fee', 15, 2);
             $table->double('discount', 15, 2);
             $table->double('total_fee', 15, 2);
