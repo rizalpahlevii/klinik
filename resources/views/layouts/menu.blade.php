@@ -323,7 +323,13 @@
         </li>
     </ul>
 </li>
-
+<li class="nav-item side-menus {{ Request::is('shift_logs*') ? 'active' : '' }}">
+    <a class="nav-link menu-text-wrap" href="{{ route('shift_logs.index') }}" data-toggle="tooltip"
+        data-placement="bottom" title="Log Shift" data-delay='{"show":"500", "hide":"50"}'>
+        <i class="nav-icon fas fa-list"></i>
+        <span>Log Shift</span>
+    </a>
+</li>
 {{-- Users  --}}
 <li class="nav-item side-menus nav-dropdown">
     <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"

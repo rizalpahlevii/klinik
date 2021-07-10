@@ -249,6 +249,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{spending_id}/print', 'SpendingController@print')->name('print');
             Route::put('/{spending_id}', 'SpendingController@update')->name('update');
         });
+        Route::prefix('shift-logs')->name('shift_logs.')->group(function () {
+            Route::get('/', 'ShiftLogController@index')->name('index');
+        });
         Route::prefix('stock-adjusments')->name('stock_adjusments.')->group(function () {
             Route::get('/', 'StockAdjustmentController@index')->name('index');
             Route::post('/', 'StockAdjustmentController@store')->name('store');
