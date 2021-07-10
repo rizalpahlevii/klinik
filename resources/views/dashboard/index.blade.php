@@ -36,25 +36,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-10 offset-md-1">
-                                @if ($shift != null)
-                                <button class="btn btn-block btn-secondary btn-shift" data-status="aktif"
-                                    style="padding: 10px;">Stop
-                                    Shift</button>
 
-
-                                @else
-
-                                <button class="btn btn-block btn-primary btn-shift pt-2 pb-2" data-status="nonaktif" {!!
-                                    checkAvailableToStartShift() ? '' : 'style="
-                                    cursor:no-drop;" ' !!}" {!! checkAvailableToStartShift() ? '' : ' disabled '
-                                    !!}>Start</button>
-
-                                @endif
-
-                            </div>
-                        </div>
                         <div class="row" style="font-size: 20px;">
                             <div class="col-md-6">
                                 <table style="width: 100%;">
@@ -117,21 +99,7 @@
                                             @endif
                                         </th>
                                     </tr>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th>
-                                            @if ($shift != null)
-                                            @if (checkAvailableToStartShift())
-                                            <button class="btn btn-block btn-primary btn-setor">
-                                                <b>Setor
-                                                    Uang</b>
-                                            </button>
-                                            @endif
-                                            @endif
 
-                                        </th>
-                                    </tr>
                                 </table>
                             </div>
                             <div class="col-md-6">
@@ -162,45 +130,46 @@
                                 </table>
                             </div>
                         </div>
-                        @if ($shift)
+                        <div class="row mt-4">
+                            <div class="col-md-4 ">
+                                @if ($shift != null)
+                                <button class="btn btn-block btn-secondary btn-shift" data-status="aktif"
+                                    style="padding: 10px;">Stop Shift</button>
 
-                        <div class="row mt-2">
-                            <div class="col-md-12">
+
+                                @else
+
+                                <button class="btn btn-block btn-primary btn-shift pt-2 pb-2" data-status="nonaktif" {!!
+                                    checkAvailableToStartShift() ? '' : 'style="
+                                    cursor:no-drop;" ' !!}" {!! checkAvailableToStartShift() ? '' : ' disabled '
+                                    !!}>Start</button>
+
+                                @endif
                             </div>
+                            @if ($shift != null)
+                            @if (checkAvailableToStartShift())
+                            <div class="col-md-4">
+                                <button class="btn btn-block btn-primary btn-setor">
+                                    <b>Setor Uang</b>
+                                </button>
+                            </div>
+                            @endif
+                            @endif
+                            @if (auth()->user()->hasRole(['owner']))
+                            <div class="col-md-4">
+                                <button class="btn btn-block btn-primary btn-cash-add">
+                                    <b>Input Kas Awal</b>
+                                </button>
+                            </div>
+                            @endif
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @if (auth()->user()->hasRole(['owner']))
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ route('cash_add') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4>Penambahan Kas Awal</h4>
-                                <div class="from-group">
-                                    <label for="cash_add">Total Penambahan Kas</label>
-                                    <input type="text" class="form-control" name="cash_add" id="cash_add">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary">Simpan Penambahan</button>
-                            </div>
-                        </div>
-                    </form>
 
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-8">
             <div class="card">
@@ -299,61 +268,8 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 mb-2">
-            <button class="btn btn-primary btn-stock-adjusment">Tambah Penyesuaian Stok</button>
-        </div>
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="stock-adjusment-datatable" class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Tanggal Penyesuaian</th>
-                                    <th>Nama Barang</th>
-                                    <th>Jumlah Penyesuaian</th>
-                                    <th>Catatan</th>
-                                    <th>Aksi</th>
-                                    <th>Info</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($stockAdjusments as $stockAdjusment)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $stockAdjusment->created_at->format('[H:i:s] d F Y') }}</td>
-                                    <td>{{ $stockAdjusment->product ? $stockAdjusment->product->name : '' }}</td>
-                                    <td>{{ $stockAdjusment->quantity }}</td>
-                                    <td>{{ $stockAdjusment->note }}</td>
-                                    <td>
-                                        <button data-id="{{ $stockAdjusment->id }}"
-                                            data-product-id="{{ $stockAdjusment->product_id }}"
-                                            data-quantity="{{ $stockAdjusment->quantity }}"
-                                            data-note="{{ $stockAdjusment->note }}"
-                                            class="btn btn-dark btn-sm btn-edit">Edit</button>
-                                        <a class="btn btn-danger btn-sm"
-                                            href="{{ route('stock_adjusment_delete',$stockAdjusment->id) }}"
-                                            onclick="return confirm('Anda Yakin Ingin Menghapus Data Penyesuaian Stok Ini ? ')">Hapus</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" data-toggle="tooltip" data-html="true" title="
-                                            Dibuat Oleh : {{ $stockAdjusment->user->fullname }} <br>
-                                            Dibuat Pada : {{ $stockAdjusment->created_at->diffForHumans() }}<br><br>
-                                            Pengubah Terakhir : {{ $stockAdjusment->updated_by == NULL ? '' : $stockAdjusment->updatedBy->fullname }} <br>
-                                            Perubahan Terakhir : {{ $stockAdjusment->updated_at->diffForHumans() }}
-                                            "><i class="fa fa-info"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
     @endif
 
     <div id="addModal" class="modal fade" role="dialog">
@@ -450,39 +366,38 @@
     @endif
 </div>
 
-<div id="stockAdjusmentModal" class="modal fade" role="dialog">
+<div id="initialCashModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-header">
-            <h5 class="modal-title">Tambahkan Penyesuaian</h5>
+            <h5 class="modal-title">Input Kas Awal</h5>
             <button type="button" aria-label="Close" class="close" data-dismiss="modal">×</button>
         </div>
         <!-- Modal content-->
         <div class="modal-content">
 
-            <form action="{{ route('stock_adjusment') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('cash_add') }}" method="POST">
                 @csrf
                 <div class="modal-body">
+
                     <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="product_id">Produk</label>
-                            <select name="product_id" id="product_id" class="form-control" style="width:80%">
-                                @foreach ($products as $product)
-                                <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <label for="quantity">Jumlah Penyesuaian</label>
-                            <input type="number" name="quantity" id="quantity" class="form-control">
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <label for="note">Alasan Penyesuaian</label>
-                            <input type="text" name="note" id="note" class="form-control">
+                        <div class="col-md-12">
+
+                            <div class="from-group">
+                                <label for="cash_add">Total Penambahan Kas</label>
+                                <input type="text" class="form-control" name="cash_add" id="cash_add">
+                            </div>
                         </div>
                     </div>
-                    <div class="text-right">
-                        {{ Form::button(__('Simpan'), ['type'=>'submit','class' => 'btn btn-primary','id'=>'btnSave','data-loading-text'=>"<span class='spinner-border spinner-border-sm'></span> Processing..."]) }}
-                        <button type="button" class="btn btn-light ml-1" data-dismiss="modal">{{ __('Batal') }}</button>
+
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="text-right">
+                                {{ Form::button(__('Simpan'), ['type'=>'submit','class' => 'btn btn-primary','id'=>'btnSave','data-loading-text'=>"<span class='spinner-border spinner-border-sm'></span> Processing..."]) }}
+                                <button type="button" class="btn btn-light ml-1"
+                                    data-dismiss="modal">{{ __('Batal') }}</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -490,47 +405,6 @@
     </div>
 </div>
 
-<div id="stockAdjusmentModalEdit" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-header">
-            <h5 class="modal-title">Edit Penyesuaian Stok</h5>
-            <button type="button" aria-label="Close" class="close" data-dismiss="modal">×</button>
-        </div>
-        <!-- Modal content-->
-        <div class="modal-content">
-
-            <form action="" id="stock-adjument-edit" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="alert alert-danger display-none" id="validationErrorsBox"></div>
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="product_id_edit">Produk</label>
-                            <select name="product_id_edit" id="product_id_edit" class="form-control" style="width:80%">
-                                @foreach ($products as $product)
-                                <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <label for="quantity_edit">Jumlah Penyesuaian</label>
-                            <input type="number" name="quantity_edit" id="quantity_edit" class="form-control">
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <label for="note_edit">Alasan Penyesuaian</label>
-                            <input type="text" name="note_edit" id="note_edit" class="form-control">
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        {{ Form::button(__('Simpan'), ['type'=>'submit','class' => 'btn btn-primary','id'=>'btnSave','data-loading-text'=>"<span class='spinner-border spinner-border-sm'></span> Processing..."]) }}
-                        <button type="button" class="btn btn-light ml-1" data-dismiss="modal">{{ __('Batal') }}</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('page_css')
@@ -548,6 +422,9 @@
     $('#product-table').dataTable();
     $('#product_id').select2({
         placeholder: "Select an option"
+    });
+    $('.btn-cash-add').click(function(){
+        $('#initialCashModal').modal('show');
     });
     $(function(){
         $.ajax({
@@ -582,16 +459,7 @@
                 })
             }
         });
-        $(document).on('click','.btn-edit',function(){
-            $('#quantity_edit').val($(this).data('quantity'));
-            $('#note_edit').val($(this).data('note'))
-            $('#product_id_edit').val($(this).data('product-id'));
-            let url = `{{ route('stock_adjusment_update',':id') }}`;
-            url = url.replace(':id',$(this).data('id'));
-            $('#stock-adjument-edit').attr('action',url);
-            $('#stockAdjusmentModalEdit').modal('show');
 
-        });
         $('.btn-generate').click(function(){
             monthStart = $('#month_start').val();
             monthEnd = $('#month_end').val();
@@ -601,9 +469,7 @@
             window.open(url);
 
         });
-        $('.btn-stock-adjusment').click(function(){
-            $('#stockAdjusmentModal').modal('show');
-        });
+
         $('.btn-setor').click(function(){
            $('#addModal').modal('show');
         });

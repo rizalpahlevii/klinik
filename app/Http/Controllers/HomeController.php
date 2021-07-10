@@ -105,55 +105,6 @@ class HomeController extends AppBaseController
         return redirect()->back();
     }
 
-    public function stockAdjusment(Request $request)
-    {
-        $request->validate([
-            'product_id' => 'required',
-            'note' => 'nullable|min:3',
-            'quantity' => 'numeric'
-        ]);
-        DB::beginTransaction();
-        try {
-            $this->stockAdjusmentRepository->create($request->except('_token'));
-            DB::commit();
-            Flash::success("Berhasil menambahkan stok penyesuaian produk");
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Flash::error($e->getMessage());
-        }
-        return redirect()->back();
-    }
-    public function stockAdjusmentUpdate(Request $request, $id)
-    {
-        $request->validate([
-            'product_id_edit' => 'required',
-            'note_edit' => 'nullable|min:3',
-            'quantity_edit' => 'numeric'
-        ]);
-        DB::beginTransaction();
-        try {
-            $this->stockAdjusmentRepository->update($request->except('_token'), $id);
-            DB::commit();
-            Flash::success("Berhasil menambahkan stok penyesuaian produk");
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Flash::error($e->getMessage());
-        }
-        return redirect()->back();
-    }
-    public function stockAdjusmentDelete($id)
-    {
-        DB::beginTransaction();
-        try {
-            $this->stockAdjusmentRepository->destroy($id);
-            DB::commit();
-            Flash::success("Berhasil menghapus stok penyesuaian produk");
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Flash::error($e->getMessage());
-        }
-        return redirect()->back();
-    }
 
     public function cashAdd(Request $request)
     {

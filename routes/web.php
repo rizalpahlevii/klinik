@@ -249,6 +249,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{spending_id}/print', 'SpendingController@print')->name('print');
             Route::put('/{spending_id}', 'SpendingController@update')->name('update');
         });
+        Route::prefix('stock-adjusments')->name('stock_adjusments.')->group(function () {
+            Route::get('/', 'StockAdjustmentController@index')->name('index');
+            Route::post('/', 'StockAdjustmentController@store')->name('store');
+            Route::put('/{id}', 'StockAdjustmentController@update')->name('update');
+            Route::delete('/{id}', 'StockAdjustmentController@destroy')->name('destroy');
+        });
 
 
         Route::get('testimonials', 'TestimonialController@index')->name('testimonials.index')->middleware('modules');
@@ -268,9 +274,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/chart', 'HomeController@getChart')->name('chart');
         Route::get('/report', 'HomeController@report')->name('report');
         Route::post('/shift', 'HomeController@startShift')->name('shift');
-        Route::post('/stock-adjusment', 'HomeController@stockAdjusment')->name('stock_adjusment');
-        Route::put('/stock-adjusment/{id}', 'HomeController@stockAdjusmentUpdate')->name('stock_adjusment_update');
-        Route::get('/stock-adjusment/{id}', 'HomeController@stockAdjusmentDelete')->name('stock_adjusment_delete');
+
         Route::post('/trasnfer', 'HomeController@transfer')->name('transfer');
         Route::post('/cash-add', 'HomeController@cashAdd')->name('cash_add');
         Route::get('settings', 'SettingController@edit')->name('settings.edit');

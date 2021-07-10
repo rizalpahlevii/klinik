@@ -307,6 +307,22 @@
         <span>Pengeluaran</span>
     </a>
 </li>
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap" href="#" data-toggle="tooltip" data-placement="bottom"
+        title="Pengguna" data-delay='{"show":"500", "hide":"50"}' data-trigger="hover">
+        <i class="nav-icon fas fa-list"></i>
+        Perubahan
+    </a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item side-menus {{ Request::is('stock_adjusments*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('stock_adjusments.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Pengguna" data-delay='{"show":"500", "hide":"50"}'>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <span>Penyesuaian Stok</span>
+            </a>
+        </li>
+    </ul>
+</li>
 
 {{-- Users  --}}
 <li class="nav-item side-menus nav-dropdown">
