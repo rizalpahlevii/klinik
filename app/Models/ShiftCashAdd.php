@@ -25,7 +25,7 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|ShiftCassAdd whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class ShiftCassAdd extends Model
+class ShiftCashAdd extends Model
 {
     protected $keyType = 'string';
 

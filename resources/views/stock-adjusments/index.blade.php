@@ -27,6 +27,7 @@ Penyesuaian Stok
                                         <th>#</th>
                                         <th>Tanggal Penyesuaian</th>
                                         <th>Nama Barang</th>
+                                        <th>Jenis Penyesuaian</th>
                                         <th>Jumlah Penyesuaian</th>
                                         <th>Catatan</th>
                                         <th>Aksi</th>
@@ -40,6 +41,8 @@ Penyesuaian Stok
                                         <td>{{ $stockAdjusment->created_at->format('[H:i:s] d F Y') }}</td>
                                         <td>{{ $stockAdjusment->product ? $stockAdjusment->product->name : '' }}
                                         </td>
+                                        <td>{{ $stockAdjusment->type == "addition" ? "Penambahan"  :"Pengurangan" }}
+                                        </td>
                                         <td>{{ $stockAdjusment->quantity }}</td>
                                         <td>{{ $stockAdjusment->note }}</td>
                                         <td>
@@ -47,6 +50,7 @@ Penyesuaian Stok
                                                 data-product-id="{{ $stockAdjusment->product_id }}"
                                                 data-quantity="{{ $stockAdjusment->quantity }}"
                                                 data-note="{{ $stockAdjusment->note }}"
+                                                data-type="{{ $stockAdjusment->type }}"
                                                 class="btn btn-dark btn-sm btn-edit">Edit</button>
                                             <a class="btn btn-danger btn-sm btn-delete" href="#"
                                                 onclick="return confirm('Anda Yakin Ingin Menghapus Data Penyesuaian Stok Ini ? ')">Hapus</a>
@@ -101,6 +105,13 @@ Penyesuaian Stok
                             </select>
                         </div>
                         <div class="form-group col-sm-12">
+                            <label for="type">Jenis Penyesuaian</label>
+                            <select name="type" id="type" class="form-control">
+                                <option value="addition">Penambahan</option>
+                                <option value="subtraction">Pengurangan</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-12">
                             <label for="quantity">Jumlah Penyesuaian</label>
                             <input type="number" name="quantity" id="quantity" class="form-control">
                         </div>
@@ -145,6 +156,14 @@ Penyesuaian Stok
                         <div class="form-group col-sm-12">
                             <label for="quantity_edit">Jumlah Penyesuaian</label>
                             <input type="number" name="quantity_edit" id="quantity_edit" class="form-control">
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <label for="type_edit">Jenis Penyesuaian</label>
+                            <select name="type_edit" id="type_edit" class="form-control">
+                                <option value="addition">Penambahan</option>
+                                <option value="subtraction">Pengurangan</option>
+                            </select>
                         </div>
                         <div class="form-group col-sm-12">
                             <label for="note_edit">Alasan Penyesuaian</label>

@@ -44,15 +44,15 @@
                     @foreach ($products as $product)
                     <option value="{{ $product->id }}" data-code="{{ $product->product_code }}"
                         data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                        data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
+                        data-stock="{{ $product->current_stock }}" data-price="{{ $product->selling_price }}"
+                        data-unit="{{ $product->unit }}">
                         {{ $product->product_code }} - {{ $product->name }}
                     </option>
                     @endforeach
                 </select>
             </td>
 
-            <td><input type="number" class="form-control" id="quantity" value="1" min="1"
-                    max="{{ $product->current_stock }}"></td>
+            <td><input type="number" class="form-control" id="quantity" value="1" min="1"></td>
             <td><input type="text" class="form-control" id="unit" readonly></td>
             <td><input type="number" class="form-control" id="price" readonly></td>
             <td><input type="number" class="form-control" id="subtotal" readonly></td>
@@ -166,7 +166,12 @@
 
     $("#product_id").change(function() {
         dataElement = $(this).find('option:selected');
-
+        $('#quantity').attr('max',dataElement.data('stock'));
+        if(parseInt(dataElement.stock) < 1){
+            $('#quantity').attr('disabled');
+        }else{
+            $('#quantity').removeAttr('disabled');
+        }
         $("#unit").val(
            dataElement.data("unit")
         );

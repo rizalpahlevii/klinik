@@ -281,7 +281,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/report', 'HomeController@report')->name('report');
         Route::post('/shift', 'HomeController@startShift')->name('shift');
 
-        Route::post('/trasnfer', 'HomeController@transfer')->name('transfer');
+        Route::post('/transfer', 'HomeController@transfer')->name('transfer');
         Route::post('/cash-add', 'HomeController@cashAdd')->name('cash_add');
         Route::get('settings', 'SettingController@edit')->name('settings.edit');
         Route::post('settings', 'SettingController@update')->name('settings.update');

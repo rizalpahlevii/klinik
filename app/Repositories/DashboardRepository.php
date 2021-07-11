@@ -16,7 +16,7 @@ use App\Models\Services\Laboratory;
 use App\Models\Services\Parturition;
 use App\Models\Services\Pregnancy;
 use App\Models\ShiftCashTransfer;
-use App\Models\ShiftCassAdd;
+use App\Models\ShiftCashAdd;
 use App\Models\Spending;
 use App\Models\StockAdjusment;
 use App\Models\User;
@@ -68,17 +68,17 @@ class DashboardRepository
 
     public function getServicesTotal()
     {
-        $general = General::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        $pregnancy = Pregnancy::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        $familyPlanning = FamilyPlanning::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        $laboratory = Laboratory::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        $parturition = Parturition::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        $immunization = Immunization::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        $inpatient = Inpatient::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        $ekg = Electrocardiogram::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        $admininistration = Administration::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->sum('total_fee');
-        return $general ?? 0 + $pregnancy ?? 0 + $familyPlanning ?? 0 + $laboratory ?? 0
-            + $parturition ?? 0 + $immunization ?? 0 + $ekg ?? 0 + $admininistration ?? 0 + $inpatient ?? 0;
+        $general = General::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        $pregnancy = Pregnancy::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        $familyPlanning = FamilyPlanning::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        $laboratory = Laboratory::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        $parturition = Parturition::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        $immunization = Immunization::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        $inpatient = Inpatient::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        $ekg = Electrocardiogram::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        $admininistration = Administration::where('created_at', '>=', $this->getShift() != null ? $this->getShift()->start_shift : now())->where('created_at', '<=', Carbon::now())->where('payment_method', 'cash')->sum('total_fee');
+        return $general  + $pregnancy  + $familyPlanning  + $laboratory
+            + $parturition  + $immunization  + $ekg  + $admininistration  + $inpatient;
     }
 
     public function getShiftSalesTotal()
@@ -155,7 +155,7 @@ class DashboardRepository
     {
         $shift = $this->getShift() ?: $this->previousShift();
 
-        $initial = new ShiftCassAdd();
+        $initial = new ShiftCashAdd();
         $initial->cashier_id = auth()->id();
         $initial->cashier_shift_id = $shift->id;
         $initial->total_add = $amount;
@@ -182,7 +182,7 @@ class DashboardRepository
             $transfer = new ShiftCashTransfer();
             $transfer->cashier_id = auth()->id();
             $transfer->cashier_shift_id = $this->getShift()->id;
-            $transfer->total_transfer = $amount;
+            $transfer->total_transfer = $transferData['amount'];
             $transfer->transfer_proof_image = $transferData['transfer_proof'];
             $transfer->save();
         } catch (QueryException $qe) {

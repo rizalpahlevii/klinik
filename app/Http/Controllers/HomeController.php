@@ -29,7 +29,7 @@ use App\Repositories\ChartRepository;
 use App\Repositories\DashboardRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\StockAdjusmentRepository;
-
+use Auth;
 use DB;
 use Flash;
 
@@ -104,9 +104,9 @@ class HomeController extends AppBaseController
 
     public function transfer(TransferCashRequest $request)
     {
-        $input = $request->collectTransferData();
+        $input = $request->collectInput();
         $transfer = $this->dashboardRepository->transferCash($input);
-        session()->flash('success', 'Berhasil menyetorkan uang sejumlah ' . $transfer->amount);
+        Flash::success('Berhasil menyetorkan uang sejumlah ' . $transfer->total_transfer);
 
         return redirect()->back();
     }

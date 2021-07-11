@@ -63,7 +63,11 @@ class ChartRepository
             $monthDataTotal = 0;
             foreach ($adjustments as $adjustment) {
                 if ($adjustment->product != null) {
-                    $monthDataTotal += $adjustment->quantity * $adjustment->product->selling_price;
+                    if ($adjustment->type == "addition") {
+                        $monthDataTotal -= ($adjustment->quantity * $adjustment->product->selling_price);
+                    } else {
+                        $monthDataTotal += ($adjustment->quantity * $adjustment->product->selling_price);
+                    }
                 }
             }
             $data['month'][] = convertMonthNumber($month);

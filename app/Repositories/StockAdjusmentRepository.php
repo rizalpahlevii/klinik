@@ -22,9 +22,14 @@ class StockAdjusmentRepository
                 'quantity' => $input['quantity'],
                 'note' => $input['note'],
                 'product_id' => $input['product_id'],
+                'type' => $input['type'],
             ]
         );
-        $this->product->find($input['product_id'])->increment('current_stock', $input['quantity']);
+        if ($input['type'] == "addition") {
+            $this->product->find($input['product_id'])->increment('current_stock', $input['quantity']);
+        } else {
+            $this->product->find($input['product_id'])->decrement('current_stock', $input['quantity']);
+        }
         return $stockAdjusment;
     }
 
@@ -32,12 +37,12 @@ class StockAdjusmentRepository
     {
         $oldStock = $this->stockAdjusment->find($id);
         $product = $this->product->find($input['product_id_edit']);
-        if ($input['quantity_edit'] > $oldStock['quantity']) {
-            $new = $input['quantity_edit'] - $oldStock['quantity'];
-            $product->increment('current_stock', $new);
+        if ($input['type_edit'] == "addition") {
+            $product->decrement('current_stock', $oldStock->quantity);
+            $product->increment('current_stock', $input['quantity_edit']);
         } else {
-            $new = $oldStock['quantity'] - $input['quantity_edit'];
-            $product->decrement('current_stock', $new);
+            $product->increment('current_stock', $oldStock->quantity);
+            $product->decrement('current_stock', $input['quantity_edit']);
         }
         $stockAdjusment = $this->stockAdjusment->find($id)->update(
             [
@@ -51,7 +56,7 @@ class StockAdjusmentRepository
     public function destroy($id)
     {
         $stockAdjusment = $this->stockAdjusment->find($id);
-        $product = $this->product->find($stockAdjusment->product_id)->decrement('current_stock', $stockAdjusment->quantity);
+        $this->product->find($stockAdjusment->product_id)->decrement('current_stock', $stockAdjusment->quantity);
         $stockAdjusment->delete();
         return $stockAdjusment;
     }

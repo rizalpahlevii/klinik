@@ -26,8 +26,8 @@ class PurchaseRepository
             $purchase->receipt_photo_directory = $input['photo'];
         }
         $purchase->receipt_date = $input['date'];
-        $purchase->discount = $input['discount'];
-        $purchase->tax = $input['tax'];
+        $purchase->discount = $input['discount_hidden'];
+        $purchase->tax = $input['tax_hidden'];
         $purchase->sub_total = 0;
         $purchase->grand_total = 0;
         $purchase->supplier_id = $input['supplier_id'];

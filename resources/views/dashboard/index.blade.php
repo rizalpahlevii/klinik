@@ -67,7 +67,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th>Total Penjualan</th>
+                                        <th>Total Pendapatan</th>
                                         <th>:</th>
                                         <th>
                                             @if ($shift)
@@ -158,7 +158,7 @@
                             @if (auth()->user()->hasRole(['owner']))
                             <div class="col-md-4">
                                 <button class="btn btn-block btn-primary btn-cash-add">
-                                    <b>Input Kas Awal</b>
+                                    <b>Tambahkan Kas Awal</b>
                                 </button>
                             </div>
                             @endif
@@ -439,7 +439,7 @@
 <div id="initialCashModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-header">
-            <h5 class="modal-title">Input Kas Awal</h5>
+            <h5 class="modal-title">Tambahkan Kas Awal</h5>
             <button type="button" aria-label="Close" class="close" data-dismiss="modal">×</button>
         </div>
         <!-- Modal content-->

@@ -19,6 +19,7 @@ class CreateStockAdjusmentsTable extends Migration
             $table->integer('quantity')->default(0);
             $table->text('note')->nullable();
             $table->uuid('user_id');
+            $table->enum('type', ['addition', 'subtraction']);
             $table->uuid('updated_by')->nullable();
             $table->timestamps();
         });

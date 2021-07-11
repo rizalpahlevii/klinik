@@ -24,8 +24,7 @@ class ProductSeeder extends Seeder
                 'brand_id' => $brand[0],
                 'unit' => 'PCS',
                 'selling_price' => 10000,
-
-                'current_stock' => 11000,
+                'current_stock' => 100,
                 'total_minimum_stock' => 20,
                 'side_effects' => 'Menyebabkan tidak haus',
                 'notes' => 'Keterangan'
@@ -37,7 +36,6 @@ class ProductSeeder extends Seeder
                 'brand_id' => $brand[1],
                 'unit' => 'PCS',
                 'selling_price' => 9000,
-
                 'current_stock' => 10,
                 'total_minimum_stock' => 20,
                 'side_effects' => 'Menyebabkan tidak lapar',
@@ -45,11 +43,11 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product_code' => 'C11',
-                'name' => 'Makanan 2',
+                'name' => 'Makanan 3',
                 'category_id' => $category[0],
                 'brand_id' => $brand[0],
                 'unit' => 'PCS',
-                'current_stock' => 10,
+                'current_stock' => 100,
                 'selling_price' => 9500,
                 'total_minimum_stock' => 20,
                 'side_effects' => 'Menyebabkan tidak lapar',

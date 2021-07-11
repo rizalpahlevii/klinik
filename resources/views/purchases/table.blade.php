@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th style="width: 15%;">Kode Produk</th>
-            <th>Nama Produk</th>
+
             <th>Jumlah Beli</th>
             <th>Satuan</th>
             <th>Harga Beli Produk</th>
@@ -16,8 +16,7 @@
         @endphp
         @foreach ($carts as $cart)
         <tr>
-            <td>{{ $cart['product_code'] }}</td>
-            <td>{{ $cart['product_name'] }}</td>
+            <td>{{ $cart['product_code'] }} - {{  $cart['product_name']  }}</td>
             <td class="form-qty">
                 <input type="number" class="form-control qty-edit" value="{{ $cart['quantity'] }}">
             </td>
@@ -45,12 +44,12 @@
                     @foreach ($products as $product)
                     <option value="{{ $product->id }}" data-name="{{ $product->name }}"
                         data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
-                        {{ $product->product_code }}
+                        {{ $product->product_code }} - {{ $product->name }}
                     </option>
                     @endforeach
                 </select>
             </td>
-            <td><input type="text" class="form-control" id="product_name" readonly></td>
+
             <td><input type="number" class="form-control" id="quantity" value="1" min="1"></td>
             <td><input type="text" class="form-control" id="unit" readonly></td>
             <td><input type="number" class="form-control" id="price"></td>

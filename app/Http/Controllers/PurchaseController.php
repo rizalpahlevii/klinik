@@ -60,7 +60,6 @@ class PurchaseController extends AppBaseController
                 $request->file->move(public_path('/uploads/purchases'), $imageName);
                 $request->merge(['photo' => 'uploads/purchases/' . $imageName]);
             }
-
             $purchase = $this->purchaseRepository->create($request->all());
             Flash::success("Berhasil melakukan transaksi pembelian produk");
             session()->flash('newurl', route('purchases.print', $purchase->id));

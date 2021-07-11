@@ -32,10 +32,12 @@ use Webpatser\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|StockAdjusment whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StockAdjusment whereUserId($value)
  * @mixin \Eloquent
+ * @property string $type
+ * @method static \Illuminate\Database\Eloquent\Builder|StockAdjusment whereType($value)
  */
 class StockAdjusment extends Model
 {
-    protected $fillable = ['product_id', 'user_id', 'note', 'quantity', 'updated_by'];
+    protected $fillable = ['product_id', 'user_id', 'note', 'quantity', 'updated_by', 'type'];
 
     public function product()
     {

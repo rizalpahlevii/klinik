@@ -52,12 +52,12 @@ class ShiftCashTransfer extends Model
 
     public function setTransferProofImageAttribute($proof = null)
     {
-        if (! $proof) $this->attributes['transfer_proof'] = null;
-
-        $proof->move('upload/transfer-proof', $fileName);
-        $fileName = time() . "_" . $proof->getClientOriginalName();
-
-        $this->attributes['transfer_proof'] = $filename;
+        if (!$proof) $this->attributes['transfer_proof'] = null;
+        if ($proof) {
+            $fileName = time() . "_" . $proof->getClientOriginalName();
+            $proof->move('upload/transfer-proof', $fileName);
+            $this->attributes['transfer_proof'] = $fileName;
+        }
     }
 
     public function getTransferProofImageAttribute()

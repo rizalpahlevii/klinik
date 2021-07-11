@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
             $user = User::create($data);
             if ($data['username'] == "admin") {
                 $user->assignRole($adminRole);
-            } elseif ($data['username'] == "cashier") {
+            } elseif ($data['username'] == "kasir") {
                 $user->assignRole($cashierRole);
             } else {
                 $user->assignRole($inventoryRole);

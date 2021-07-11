@@ -20,11 +20,12 @@
         <div class="form-group">
             <label for="discount">Diskon <span class="required">*</span></label>
             <input type="text" class="form-control" name="discount" id="discount" value="0">
+            <input type="hidden" class="form-control" name="discount_hidden" id="discount_hidden" value="0">
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <label for="file">Foto Faktur <span class="required">*</span></label>
+            <label for="file">Foto Faktur </label>
             <input type="file" class="form-control" name="file" id="file" value="0">
         </div>
     </div>
@@ -41,6 +42,7 @@
         <div class="form-group">
             <label for="tax">Pajak <span class="required">*</span></label>
             <input type="text" class="form-control" name="tax" id="tax" value="0">
+            <input type="hidden" class="form-control" name="tax_hidden" id="tax_hidden" value="0">
         </div>
     </div>
     <div class="col-md-3">

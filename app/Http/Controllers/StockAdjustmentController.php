@@ -36,7 +36,8 @@ class StockAdjustmentController extends Controller
         $request->validate([
             'product_id' => 'required',
             'note' => 'nullable|min:3',
-            'quantity' => 'numeric'
+            'quantity' => 'numeric',
+            'type' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -55,7 +56,8 @@ class StockAdjustmentController extends Controller
         $request->validate([
             'product_id_edit' => 'required',
             'note_edit' => 'nullable|min:3',
-            'quantity_edit' => 'numeric'
+            'quantity_edit' => 'numeric',
+            'type_edit' => 'required'
         ]);
         DB::beginTransaction();
         try {

@@ -91,24 +91,43 @@ Pembelian Obat
     let cartDelete = `{{ route('purchases.cart_delete',':key') }}`;
     let addCartUrl = `{{ route('purchases.cart_add') }}`;
 
+
+    function convertToAngka(param)
+    {
+        rupiah = String(param);
+        return parseInt(rupiah.replace(/,.*|[^0-9]/g, ''), 10);
+    }
     $('#discount').keyup(function(){
-        tax = $('#tax').val();
-        discount = $('#discount').val();
+        value = $(this).val();
+        $('#discount_hidden').val(convertToAngka(value));
+        $(this).val(formatRupiah(value,'Rp. '))
+    });
+    $('#tax').keyup(function(){
+        value = $(this).val();
+        $('#tax_hidden').val(convertToAngka(value));
+        $(this).val(formatRupiah(value,'Rp. '))
+    });
+    $('#discount').keyup(function(){
+
+        tax = $('#tax_hidden').val();
+        discount = $('#discount_hidden').val();
         subtotal = $('#subtotal_hid').val();
         endTotal = subtotal - discount - tax;
-        console.log(endTotal);
+
         $('#tax-view').html(formatRupiah(tax));
         $('#discount-view').html(formatRupiah(discount));
         $('#subtotal-view').html(formatRupiah(subtotal));
+        console.log(endTotal);
         $('#end-total').html(formatRupiah(String(endTotal)));
     });
 
     $('#tax').keyup(function(){
-        tax = $('#tax').val();
-        discount = $('#discount').val();
+
+
+        tax = $('#tax_hidden').val();
+        discount = $('#discount_hidden').val();
         subtotal = $('#subtotal_hid').val();
         endTotal = subtotal - discount - tax;
-        console.log(endTotal);
         $('#tax-view').html(formatRupiah(tax));
         $('#discount-view').html(formatRupiah(discount));
         $('#subtotal-view').html(formatRupiah(subtotal));

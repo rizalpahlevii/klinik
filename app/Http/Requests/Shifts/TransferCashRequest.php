@@ -13,7 +13,7 @@ class TransferCashRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasAnyRole(['kasir', 'owner']);
+        return $this->user()->hasAnyRole(['cashier', 'owner']);
     }
 
     /**
@@ -24,7 +24,7 @@ class TransferCashRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount' => ['required', 'integer'],
+            'amount' => ['required'],
             'transfer_proof' => ['nullable', 'mimes:pdf,jpg,jpeg,png,svg', 'max:5000'],
         ];
     }
@@ -32,7 +32,7 @@ class TransferCashRequest extends FormRequest
     public function collectInput()
     {
         return [
-            'amount' => $this->input('amount'),
+            'amount' => convertCurrency($this->input('amount')),
             'transfer_proof' => $this->file('transfer_proof'),
         ];
     }

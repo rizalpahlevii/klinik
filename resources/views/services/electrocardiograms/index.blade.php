@@ -14,7 +14,7 @@ Daftar Layanan EGG
             <h3 class="page__heading">Daftar Layanan EGG</h3>
             <div class="filter-container">
 
-                @if (auth()->user()->hasRole(['owner']))
+                @if (auth()->user()->hasRole(['owner','cashier']))
                 @if (getShift())
 
                 <div class="mr-0 actions-btn">
