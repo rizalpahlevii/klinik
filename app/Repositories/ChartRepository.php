@@ -59,7 +59,7 @@ class ChartRepository
         $months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         $data = [];
         foreach ($months as $key => $month) {
-            $adjustments = StockAdjusment::with('product')->whereMonth('created_at', $month)->whereYear('created_at', date('Y'))->get()->toArray();
+            $adjustments = StockAdjusment::with('product')->whereMonth('created_at', $month)->whereYear('created_at', date('Y'))->get();
             $monthDataTotal = 0;
             foreach ($adjustments as $adjustment) {
                 if ($adjustment->product != null) {
