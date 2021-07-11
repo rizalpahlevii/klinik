@@ -11,12 +11,18 @@ use App\Http\Requests\Shifts\ShiftCashTransfer;
 use App\Http\Requests\Shifts\TransferCashRequest;
 use App\Models\Purchase;
 use App\Models\Sale;
+use App\Models\Services\Administration;
+use App\Models\Services\Electrocardiogram;
 use App\Models\Services\FamilyPlanning;
 use App\Models\Services\General;
+use App\Models\Services\Immunization;
+use App\Models\Services\Inpatient;
 use App\Models\Services\Laboratory;
+use App\Models\Services\Parturition;
 use App\Models\Services\Pregnancy;
 use App\Models\Setting;
-
+use App\Models\Spending;
+use App\Models\StockAdjusment;
 use App\Queries\ProductDataTable;
 
 use App\Repositories\ChartRepository;
@@ -200,12 +206,64 @@ class HomeController extends AppBaseController
         $familyPlanningServiceSum = $queryFamilyPlanningService->sum('total_fee');
         $familyPlanningService = $queryFamilyPlanningService->get();
 
+        $queryimmunizationService = Immunization::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $immunizationServiceSum = $queryimmunizationService->sum('total_fee');
+        $immunizationService = $queryimmunizationService->get();
+
+        $queryinpatientService = Inpatient::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $inpatientServiceSum = $queryinpatientService->sum('total_fee');
+        $inpatientService = $queryinpatientService->get();
+
+        $queryparturitionService = Parturition::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $parturitionServiceSum = $queryparturitionService->sum('total_fee');
+        $parturitionService = $queryparturitionService->get();
+
+        $queryekgService = Electrocardiogram::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $ekgServiceSum = $queryekgService->sum('total_fee');
+        $ekgService = $queryekgService->get();
+
+        $queryadministrationService = Administration::whereMonth('registration_time', '>=', request()->get('month-start'))
+            ->whereYear('registration_time', '>=', request()->get('year-start'))
+            ->whereMonth('registration_time', '<=', request()->get('month-end'))
+            ->whereYear('registration_time', '<=', request()->get('year-end'));
+        $administrationServiceSum = $queryadministrationService->sum('total_fee');
+        $administrationService = $queryadministrationService->get();
+
         $queryPurchase = Purchase::with('supplier')->whereMonth('receipt_date', '>=', request()->get('month-start'))
             ->whereYear('receipt_date', '>=', request()->get('year-start'))
             ->whereMonth('receipt_date', '<=', request()->get('month-end'))
             ->whereYear('receipt_date', '<=', request()->get('year-end'));
         $purchaseSum = $queryPurchase->sum('grand_total');
         $purchase = $queryPurchase->get();
+
+        $querySpending = Spending::with('shift.cashier')->whereMonth('created_at', '>=', request()->get('month-start'))
+            ->whereYear('created_at', '>=', request()->get('year-start'))
+            ->whereMonth('created_at', '<=', request()->get('month-end'))
+            ->whereYear('created_at', '<=', request()->get('year-end'));
+        $spendingSum = $querySpending->sum('amount');
+        $spending = $querySpending->get();
+
+        $stockAdjusment = StockAdjusment::with('product')->whereMonth('created_at', '>=', request()->get('month-start'))
+            ->whereYear('created_at', '>=', request()->get('year-start'))
+            ->whereMonth('created_at', '<=', request()->get('month-end'))
+            ->whereYear('created_at', '<=', request()->get('year-end'))->get();
+        $stockAdjusmentSum = 0;
+        foreach ($stockAdjusment as $row) {
+            $stockAdjusmentSum += $row->quantity * $row->product->selling_price;
+        }
+
         return view('report', compact(
             'sale',
             'saleSum',
@@ -218,7 +276,21 @@ class HomeController extends AppBaseController
             'laboratoryService',
             'laboratoryServiceSum',
             'generalService',
-            'generalServiceSum'
+            'generalServiceSum',
+            'inpatientService',
+            'inpatientServiceSum',
+            'immunizationService',
+            'immunizationServiceSum',
+            'parturitionService',
+            'parturitionServiceSum',
+            'ekgService',
+            'ekgServiceSum',
+            'administrationService',
+            'administrationServiceSum',
+            'spending',
+            'spendingSum',
+            'stockAdjusment',
+            'stockAdjusmentSum'
         ));
     }
 }
