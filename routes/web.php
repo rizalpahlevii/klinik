@@ -277,6 +277,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
         Route::get('/chart', 'HomeController@getChart')->name('chart');
+        Route::get('/service-chart', 'HomeController@getServiceChart')->name('service_chart');
         Route::get('/report', 'HomeController@report')->name('report');
         Route::post('/shift', 'HomeController@startShift')->name('shift');
 

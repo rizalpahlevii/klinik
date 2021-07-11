@@ -19,17 +19,19 @@ use DB;
 
 class ChartRepository
 {
-    public function getServiceChart($serviceName)
+    public function getServiceChart()
     {
-        if ($serviceName == 'ekg') return $this->prepareResponse($this->ekgDataForChart());
-        if ($serviceName == 'administration') return $this->prepareResponse($this->administrationDataForChart());
-        if ($serviceName == 'inpatient') return $this->prepareResponse($this->inPatientDataForChart());
-        if ($serviceName == 'laboratory') return $this->prepareResponse($this->getLaboratoryDataForChart());
-        if ($serviceName == 'general') return $this->prepareResponse($this->getGeneralServiceDataForChart());
-        if ($serviceName == 'family_planning') return $this->prepareResponse($this->getLFamilyPlanningDataForChart());
-        if ($serviceName == 'pregnancy') return $this->prepareResponse($this->getPregnancyServiceDataForChart());
-        if ($serviceName == 'immunization') return $this->prepareResponse($this->immunizationDataForChart());
-        if ($serviceName == 'immunization') return $this->prepareResponse($this->immunizationDataForChart());
+        return [
+            'ekg' => $this->prepareResponse($this->ekgDataForChart()),
+            'administration' => $this->prepareResponse($this->administrationDataForChart()),
+            'inpatient' => $this->prepareResponse($this->inPatientDataForChart()),
+            'laboratory' => $this->prepareResponse($this->getLaboratoryDataForChart()),
+            'general' => $this->prepareResponse($this->getGeneralServiceDataForChart()),
+            'family_planning' => $this->prepareResponse($this->getLFamilyPlanningDataForChart()),
+            'pregnancy' => $this->prepareResponse($this->getPregnancyServiceDataForChart()),
+            'immunization' => $this->prepareResponse($this->immunizationDataForChart()),
+            'parturition' => $this->prepareResponse($this->parturitionDataForChart()),
+        ];
     }
 
     public function prepareResponse($data)

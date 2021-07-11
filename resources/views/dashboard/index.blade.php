@@ -204,6 +204,76 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="general" height="280" width="600">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="family_planning" height="280" width="600">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="pregnancy" height="280" width="600">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="laboratory" height="280" width="600">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="immunization" height="280" width="600">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="parturition" height="280" width="600">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="inpatient" height="280" width="600">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="ekg" height="280" width="600">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="administration" height="280" width="600">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -462,6 +532,279 @@
                                 backgroundColor: 'rgba(255, 205, 86, 1)',
                                 data: response.stock_adjusment.value
                             },
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+            }
+        });
+
+        $('.btn-generate').click(function(){
+            monthStart = $('#month_start').val();
+            monthEnd = $('#month_end').val();
+            yearEnd = $('#year_end').val();
+            yearStart = $('#year_start').val();
+            let url = `{{ route('report') }}`+ `?month-start=${monthStart}&year-start=${yearStart}&month-end=${monthEnd}&year-end=${yearEnd}`;
+            window.open(url);
+
+        });
+
+        $('.btn-setor').click(function(){
+           $('#addModal').modal('show');
+        });
+        $('#amount').keyup(function(){
+            value = String($(this).val());
+            $('#show-amount').html(formatRupiah(value));
+            $(this).val(formatRupiah(value));
+        });
+        $('#cash_add').keyup(function(){
+            value = String($(this).val());
+            $('#show-amount').html(formatRupiah(value));
+            $(this).val(formatRupiah(value));
+        });
+        function formatRupiah(angka,prefix){
+            if(angka == 0 ){
+                return "Rp. 0";
+            }else{
+
+                var numberString = angka.replace(/[^,\d]/g, '').toString(),
+                split   		= numberString.split(','),
+                sisa     		= split[0].length % 3,
+                rupiah     		= split[0].substr(0, sisa),
+                ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+                if(ribuan){
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+                rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                return 'Rp. '+ rupiah;
+            }
+        }
+        $('.btn-shift').click(function(){
+            shiftStatus = $(this).data('status');
+            if(shiftStatus != "aktif"){
+                confirm = confirm('Yakin Ingin Memulai Shift ? ');
+                if(confirm){
+                    $.ajax({
+                        url :   `{{ route('shift') }}` ,
+                        method :'post',
+                        dataType : 'json',
+                        success:function(response){
+                            alert(response.message);
+                            location.reload();
+                        }
+                    })
+                }
+            }else{
+                confirm = confirm('Yakin ingin mengakhiri shift  ? ')
+                if(confirm){
+                    $.ajax({
+                        url :   `{{ route('shift') }}` ,
+                        method :'post',
+                        dataType : 'json',
+                        success:function(response){
+                            if(response.status){
+                                alert(response.message);
+                            }
+                            location.reload();
+                        }
+                    })
+                }
+            }
+        });
+    });
+    $(function(){
+        $.ajax({
+            url : `{{ route('service_chart') }}`,
+            method:'get',
+            dataType:'json',
+            success:function(response){
+                new Chart(document.getElementById('general').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.general.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan Umum',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.general.value
+                            }
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+                new Chart(document.getElementById('family_planning').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.family_planning.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan KB',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.family_planning.value
+                            }
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+                new Chart(document.getElementById('pregnancy').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.pregnancy.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan Kehamilan',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.pregnancy.value
+                            }
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+                new Chart(document.getElementById('laboratory').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.laboratory.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan Laboratorium',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.laboratory.value
+                            }
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+                new Chart(document.getElementById('immunization').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.immunization.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan Imunisasi',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.immunization.value
+                            }
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+                new Chart(document.getElementById('parturition').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.parturition.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan Partus',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.parturition.value
+                            }
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+                new Chart(document.getElementById('inpatient').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.inpatient.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan Rawat Inap',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.inpatient.value
+                            }
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+                new Chart(document.getElementById('ekg').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.ekg.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan EKG',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.ekg.value
+                            }
+                        ]
+                    },
+                    options : {
+                        tooltips : {
+                            mode: 'index'
+                        },
+                        responsive: true, // Instruct chart js to respond nicely.
+                        maintainAspectRatio: false,
+                    }
+                })
+                new Chart(document.getElementById('administration').getContext('2d'),{
+                    type : 'line',
+                    label : 'Chart',
+                    data : {
+                        labels : response.administration.month,
+                        datasets: [
+                            {
+                                label : 'Grafik Pendapatan Layanan Administrasi',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                data: response.administration.value
+                            }
                         ]
                     },
                     options : {

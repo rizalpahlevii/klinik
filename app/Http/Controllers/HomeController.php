@@ -156,6 +156,11 @@ class HomeController extends AppBaseController
         return response()->json($response);
     }
 
+    public function getServiceChart()
+    {
+        return response()->json($this->chartRepository->getServiceChart());
+    }
+
     public function report()
     {
         $querySale = Sale::whereMonth('receipt_date', '>=', request()->get('month-start'))
