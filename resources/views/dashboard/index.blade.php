@@ -434,19 +434,34 @@
             success:function(response){
                 console.log(response);
                 const ctx = document.getElementById('canvas').getContext('2d');
-                labels = response.month;
-                value = response.value
+                labels = response.income.month;
+
                 const myChart = new Chart(ctx,{
-                    type : 'line',
+                    type : 'bar',
                     label : 'Chart',
                     data : {
                         labels : labels,
                         datasets: [
                             {
-                                label : ' Grafik Pendapatan Tiap Bulan Per Tahun',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                data: value
-                            }
+                                label : ' Pendapatan',
+                                backgroundColor: 'rgba(54, 162, 235, 1)',
+                                data: response.income.value
+                            },
+                            {
+                                label : ' Pengeluaran',
+                                backgroundColor: 'rgba(255, 99, 132, 1)',
+                                data: response.spending.value
+                            },
+                            {
+                                label : ' Pembelian',
+                                backgroundColor: 'rgba(201, 203, 207, 1)',
+                                data: response.purchase.value
+                            },
+                            {
+                                label : ' Penyesuaian',
+                                backgroundColor: 'rgba(255, 205, 86, 1)',
+                                data: response.stock_adjusment.value
+                            },
                         ]
                     },
                     options : {
