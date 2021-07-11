@@ -28,8 +28,8 @@
                             + $administrationServiceSum + $immunizationServiceSum
                             + $ekgServiceSum
                             )</span></h6>
-                    <h6>Pembelian Supply Barang : <span class="text-success">+@rupiah($purchaseSum)</span></h6>
-                    <h6>Penyesuaian Stok : <span class="text-success">+@rupiah($stockAdjusmentSum)</span></h6>
+                    <h6>Pembelian Supply Barang : <span>@rupiah($purchaseSum)</span></h6>
+                    <h6>Penyesuaian Stok : <span class="text-danger">-@rupiah($stockAdjusmentSum)</span></h6>
                     <h6>Pengeluaran : <span class="text-danger">-@rupiah($spendingSum)</span></h6>
                     @php
                     $total=($saleSum + $generalServiceSum +
@@ -37,7 +37,7 @@
                     + $laboratoryServiceSum + $familyPlanningServiceSum
                     + $inpatientServiceSum + $parturitionServiceSum
                     + $administrationServiceSum + $immunizationServiceSum
-                    + $ekgServiceSum) + $purchaseSum + $stockAdjusmentSum - $spendingSum;
+                    + $ekgServiceSum) - $stockAdjusmentSum - $spendingSum;
                     @endphp
                     <h6>Total : <span class="text-{{ $total <= 0 ? 'danger':'success' }}">
                             @rupiah($total)</span></h6>
@@ -228,7 +228,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <h5>Grand Total : <span class="text-danger">-@rupiah($purchaseTotal)</span></h5>
+                            <h5>Grand Total : <span>@rupiah($purchaseTotal)</span></h5>
                         </div>
                     </div>
                 </div>
@@ -282,7 +282,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h6>Perubahan Stok</h6>
+                            <h6>Penyesuaian Stok</h6>
                             <table class="table table-hover">
                                 <thead>
                                     <th>#</th>
