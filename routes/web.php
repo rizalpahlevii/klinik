@@ -209,6 +209,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/cart-table', 'CashierController@loadTable')->name('cart_table');
                 Route::post('/cart', 'CashierController@addCart')->name('cart_add');
                 Route::delete('/cart/{key}', 'CashierController@deleteCart')->name('cart_delete');
+                Route::put('/cart/{key}', 'CashierController@updateCart')->name('cart_update');
             });
 
             Route::prefix('data')->name('datas.')->group(function () {
@@ -234,6 +235,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/cart-table', 'PurchaseController@loadTable')->name('cart_table');
             Route::post('/cart', 'PurchaseController@addCart')->name('cart_add');
             Route::delete('/cart/{key}', 'PurchaseController@deleteCart')->name('cart_delete');
+            Route::put('/cart/{key}', 'PurchaseController@updateCart')->name('cart_update');
 
             // edit
             Route::get('/cart-table-edit/{purchase_id}', 'PurchaseController@loadTableEdit')->name('cart_table_edit');

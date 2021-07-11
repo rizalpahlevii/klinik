@@ -22,12 +22,14 @@ class PurchaseRepository
     {
         $purchase = new Purchase();
         $purchase->receipt_code = $input['receipt_code'];
+        if (isset($input['photo'])) {
+            $purchase->receipt_photo_directory = $input['photo'];
+        }
         $purchase->receipt_date = $input['date'];
         $purchase->discount = $input['discount'];
         $purchase->tax = $input['tax'];
         $purchase->sub_total = 0;
         $purchase->grand_total = 0;
-        $purchase->receipt_photo_directory = $input['photo'];
         $purchase->supplier_id = $input['supplier_id'];
         $purchase->salesman_id = $input['salesman_id'];
         $purchase->save();

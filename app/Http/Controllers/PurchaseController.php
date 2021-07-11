@@ -55,9 +55,12 @@ class PurchaseController extends AppBaseController
     {
         DB::beginTransaction();
         try {
-            $imageName = time() . '.' . $request->file->getClientOriginalExtension();
-            $request->file->move(public_path('/uploads/purchases'), $imageName);
-            $request->merge(['photo' => 'uploads/purchases/' . $imageName]);
+            if ($request->file) {
+                $imageName = time() . '.' . $request->file->getClientOriginalExtension();
+                $request->file->move(public_path('/uploads/purchases'), $imageName);
+                $request->merge(['photo' => 'uploads/purchases/' . $imageName]);
+            }
+
             $purchase = $this->purchaseRepository->create($request->all());
             Flash::success("Berhasil melakukan transaksi pembelian produk");
             session()->flash('newurl', route('purchases.print', $purchase->id));
@@ -94,6 +97,19 @@ class PurchaseController extends AppBaseController
         $cookie = cookie('klinik-purchases-carts', json_encode($carts), 2800);
 
         return $this->sendSuccess("Berhasil menambahkan produk ke keranjang")->withCookie($cookie);
+    }
+
+
+    public function updateCart(Request $request, $id)
+    {
+        $carts = json_decode(request()->cookie('klinik-purchases-carts'), true);
+        foreach ($carts as $key => $cart) {
+            if ($cart['product_id'] == $id) {
+                $carts[$key]['quantity'] = $request->qty;
+            }
+        }
+        $cookie = cookie('klinik-purchases-carts', json_encode($carts), 2880);
+        return $this->sendSuccess("Berhasil mengubah keranjang")->withCookie($cookie);
     }
 
     public function loadTable(Request $request)

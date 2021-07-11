@@ -17,7 +17,7 @@ class CreatePurchasesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('receipt_code')->unique();
             $table->date('receipt_date');
-            $table->string('receipt_photo_directory');
+            $table->string('receipt_photo_directory')->nullable();
             $table->uuid('supplier_id');
             $table->uuid('salesman_id');
             $table->double('sub_total', 15, 2);

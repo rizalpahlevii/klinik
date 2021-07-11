@@ -24,7 +24,7 @@ class UpdatePurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'receipt_code' => 'required|min:3|unique:purchases,receipt_code,' . $this->route('purchase_id'),
+            'receipt_code' => 'nullable|min:3|unique:purchases,receipt_code,' . $this->route('purchase_id'),
 
             'supplier_id' => 'required',
             'salesman_id' => 'required',

@@ -18,11 +18,16 @@
         <tr>
             <td>{{ $cart['product_code'] }}</td>
             <td>{{ $cart['product_name'] }}</td>
-            <td>{{ $cart['quantity'] }}</td>
+            <td class="form-qty">
+                <input type="number" class="form-control qty-edit" value="{{ $cart['quantity'] }}">
+            </td>
             <td>{{ $cart['unit'] }}</td>
             <td>@rupiah($cart['price'])</td>
             <td>@rupiah($cart['quantity']*$cart['price'])</td>
             <td>
+                <a title="Edit" data-id="{{ $cart['product_id'] }}" class="btn action-btn btn-success btn-sm btn-save">
+                    <i class="fa fa-save action-icon"></i>
+                </a>
                 <a title="<?php echo __('messages.common.delete'); ?>" data-id="{{ $cart['product_id'] }}"
                     class="btn action-btn btn-danger btn-sm delete-btn">
                     <i class="fa fa-trash action-icon"></i>
@@ -38,7 +43,8 @@
                 <select name="product_id" id="product_id" class="form-control">
                     <option disabled>Pilih Dari Kode Produk</option>
                     @foreach ($products as $product)
-                    <option value="{{ $product->id }}" data-name="{{ $product->name }}"
+                    <option value="{{ $product->id }}" data-code="{{ $product->product_code }}"
+                        data-id="{{ $product->id }}" data-name="{{ $product->name }}"
                         data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
                         {{ $product->product_code }}
                     </option>
@@ -49,14 +55,16 @@
                 <select name="product_name" id="product_name" class="form-control">
                     <option disabled>Pilih Dari Nama Produk</option>
                     @foreach ($products as $product)
-                    <option value="{{ $product->name }}" data-id="{{ $product->id }}" data-name="{{ $product->name }}"
+                    <option value="{{ $product->product_code }}" data-id="{{ $product->id }}"
+                        data-code="{{ $product->product_code }}" data-name="{{ $product->name }}"
                         data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
                         {{ $product->name }}
                     </option>
                     @endforeach
                 </select>
             </td>
-            <td><input type="number" class="form-control" id="quantity" value="1"></td>
+            <td><input type="number" class="form-control" id="quantity" value="1" min="1"
+                    max="{{ $product->current_stock }}"></td>
             <td><input type="text" class="form-control" id="unit" readonly></td>
             <td><input type="number" class="form-control" id="price" readonly></td>
             <td><input type="number" class="form-control" id="subtotal" readonly></td>
@@ -103,6 +111,36 @@
     $('#subtotal-view').html(formatRupiah(String(subtotal)));
     $('#subtotal_hid').val(endTotal);
     $('#end-total').html(formatRupiah(String(endTotal)));
+    $(document).on('click','.btn-save',function(){
+        qty=$(this).parent().parent().find('.form-qty').find('.qty-edit').val();
+        let cartUpdate = `{{ route('sales.cashiers.cart_update',':id') }}`;
+        cartUpdate = cartUpdate.replace(':id',$(this).data('id'));
+        $.ajax({
+            url: cartUpdate,
+            type: "PUT",
+            dataType: "json",
+            data : {
+                qty : qty
+            },
+            success: function(obj) {
+                swal({
+                    title: "Sukses!",
+                    text:   "Produk berhasil diperbarui.",
+                    type: "success",
+                    timer: 2000
+                });
+                loadTable();
+            },
+            error: function(data) {
+                swal({
+                    title: "",
+                    text: data.responseJSON.message,
+                    type: "error",
+                    timer: 5000
+                });
+            }
+        });
+    });
     $(document).on('click','.delete-btn',function(){
         let cartDelete = `{{ route('sales.cashiers.cart_delete',':id') }}`;
         cartDelete=cartDelete.replace(':id',$(this).data('id'));
@@ -137,48 +175,30 @@
         placeholder: "Select an option"
     });
     $("#product_name").change(function() {
-        $("#product_id").val(
-            $(this)
-                .find("option:selected")
-                .data("id")
-        ).change();
+        dataElement = $(this).find('option:selected');
+        $("#product_id").val(dataElement.data('id')).trigger('change')
         $("#unit").val(
-            $(this)
-                .find("option:selected")
-                .data("unit")
+            dataElement.data("unit")
         );
         $("#price").val(
-            $(this)
-                .find("option:selected")
-                .data("price")
+            dataElement.data("price")
         );
         $("#subtotal").val(
-            $(this)
-                .find("option:selected")
-                .data("price") * parseInt($("#quantity").val())
+            dataElement.data("price") * parseInt($("#quantity").val())
         );
     });
     $("#product_id").change(function() {
+        dataElement = $(this).find('option:selected');
+        // $("#product_name").val(dataElement.data('code')).trigger('change');
 
-        $("#product_name").val(
-            $(this)
-                .find("option:selected")
-                .data("name")
-        ).change();
         $("#unit").val(
-            $(this)
-                .find("option:selected")
-                .data("unit")
+           dataElement.data("unit")
         );
         $("#price").val(
-            $(this)
-                .find("option:selected")
-                .data("price")
+           dataElement.data("price")
         );
         $("#subtotal").val(
-            $(this)
-                .find("option:selected")
-                .data("price") * parseInt($("#quantity").val())
+           dataElement.data("price") * parseInt($("#quantity").val())
         );
     });
     $("#quantity").keyup(function() {

@@ -51,6 +51,17 @@ class CashierController extends AppBaseController
         return view('sales.cashiers.index', compact('products', 'carts', 'medics', 'patients'));
     }
 
+    public function updateCart(Request $request, $id)
+    {
+        $carts = json_decode(request()->cookie('klinik-sales-carts'), true);
+        foreach ($carts as $key => $cart) {
+            if ($cart['product_id'] == $id) {
+                $carts[$key]['quantity'] = $request->qty;
+            }
+        }
+        $cookie = cookie('klinik-sales-carts', json_encode($carts), 2880);
+        return $this->sendSuccess("Berhasil mengubah keranjang")->withCookie($cookie);
+    }
     public function addCart(Request $request)
     {
         $carts = json_decode($request->cookie('klinik-sales-carts'), true);

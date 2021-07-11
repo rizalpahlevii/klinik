@@ -30,7 +30,7 @@ class CreatePurchaseRequest extends FormRequest
             'date' => 'required',
             'dicount' => 'nullable',
             'tax' => 'nullable',
-            'file' => 'required|mimes:jpg,png,jpeg|max:10000',
+            'file' => 'nullable|mimes:jpg,png,jpeg|max:10000',
         ];
     }
 }

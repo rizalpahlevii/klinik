@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                 'brand_id' => $brand[0],
                 'unit' => 'PCS',
                 'selling_price' => 10000,
-                'current_stock' => 10,
+
                 'current_stock' => 11000,
                 'total_minimum_stock' => 20,
                 'side_effects' => 'Menyebabkan tidak haus',
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
                 'brand_id' => $brand[1],
                 'unit' => 'PCS',
                 'selling_price' => 9000,
-                'current_stock' => 10000,
+
                 'current_stock' => 10,
                 'total_minimum_stock' => 20,
                 'side_effects' => 'Menyebabkan tidak lapar',
@@ -51,7 +51,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'PCS',
                 'current_stock' => 10,
                 'selling_price' => 9500,
-                'current_stock' => 15000,
+
                 'total_minimum_stock' => 20,
                 'side_effects' => 'Menyebabkan tidak lapar',
                 'notes' => 'Keterangan'

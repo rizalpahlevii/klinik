@@ -18,11 +18,16 @@
         <tr>
             <td>{{ $cart['product_code'] }}</td>
             <td>{{ $cart['product_name'] }}</td>
-            <td>{{ $cart['quantity'] }}</td>
+            <td class="form-qty">
+                <input type="number" class="form-control qty-edit" value="{{ $cart['quantity'] }}">
+            </td>
             <td>{{ $cart['unit'] }}</td>
             <td>@rupiah($cart['price'])</td>
             <td>@rupiah($cart['quantity']*$cart['price'])</td>
             <td>
+                <a title="Edit" data-id="{{ $cart['product_id'] }}" class="btn action-btn btn-success btn-sm btn-save">
+                    <i class="fa fa-save action-icon"></i>
+                </a>
                 <a title="<?php echo __('messages.common.delete'); ?>" data-id="{{ $cart['product_id'] }}"
                     class="btn action-btn btn-danger btn-sm delete-btn">
                     <i class="fa fa-trash action-icon"></i>
@@ -46,7 +51,7 @@
                 </select>
             </td>
             <td><input type="text" class="form-control" id="product_name" readonly></td>
-            <td><input type="number" class="form-control" id="quantity" value="1"></td>
+            <td><input type="number" class="form-control" id="quantity" value="1" min="1"></td>
             <td><input type="text" class="form-control" id="unit" readonly></td>
             <td><input type="number" class="form-control" id="price"></td>
             <td><input type="number" class="form-control" id="subtotal" readonly></td>
@@ -120,6 +125,36 @@
             }
         });
     });
+    $(document).on('click','.btn-save',function(){
+        qty=$(this).parent().parent().find('.form-qty').find('.qty-edit').val();
+        let cartUpdate = `{{ route('purchases.cart_update',':id') }}`;
+        cartUpdate = cartUpdate.replace(':id',$(this).data('id'));
+        $.ajax({
+            url: cartUpdate,
+            type: "PUT",
+            dataType: "json",
+            data : {
+                qty : qty
+            },
+            success: function(obj) {
+                swal({
+                    title: "Sukses!",
+                    text:   "Produk berhasil diperbarui.",
+                    type: "success",
+                    timer: 2000
+                });
+                loadTable();
+            },
+            error: function(data) {
+                swal({
+                    title: "",
+                    text: data.responseJSON.message,
+                    type: "error",
+                    timer: 5000
+                });
+            }
+        });
+    });
     $("#product_id").select2({
         placeholder: "Select an option"
     });
@@ -147,6 +182,12 @@
     });
 
     $("#quantity").keyup(function() {
+        if($(this).val() < 0){
+            alert('Quantity tidak boleh kurang dari 0');
+            $(this).val(0);
+            $("#subtotal").val(0);
+            return;
+        }
         qty = $(this).val();
         $("#subtotal").val(parseInt(qty) * $("#price").val());
     });
