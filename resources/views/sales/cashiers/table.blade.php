@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th style="width: 15%;">Kode Produk</th>
-            <th>Nama Produk</th>
+
             <th>Jumlah Beli</th>
             <th>Satuan</th>
             <th>Harga Beli Produk</th>
@@ -16,8 +16,7 @@
         @endphp
         @foreach ($carts as $cart)
         <tr>
-            <td>{{ $cart['product_code'] }}</td>
-            <td>{{ $cart['product_name'] }}</td>
+            <td>{{ $cart['product_code'] }} - {{ $cart['product_name'] }}</td>
             <td class="form-qty">
                 <input type="number" class="form-control qty-edit" value="{{ $cart['quantity'] }}">
             </td>
@@ -46,23 +45,12 @@
                     <option value="{{ $product->id }}" data-code="{{ $product->product_code }}"
                         data-id="{{ $product->id }}" data-name="{{ $product->name }}"
                         data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
-                        {{ $product->product_code }}
+                        {{ $product->product_code }} - {{ $product->name }}
                     </option>
                     @endforeach
                 </select>
             </td>
-            <td>
-                <select name="product_name" id="product_name" class="form-control">
-                    <option disabled>Pilih Dari Nama Produk</option>
-                    @foreach ($products as $product)
-                    <option value="{{ $product->product_code }}" data-id="{{ $product->id }}"
-                        data-code="{{ $product->product_code }}" data-name="{{ $product->name }}"
-                        data-price="{{ $product->selling_price }}" data-unit="{{ $product->unit }}">
-                        {{ $product->name }}
-                    </option>
-                    @endforeach
-                </select>
-            </td>
+
             <td><input type="number" class="form-control" id="quantity" value="1" min="1"
                     max="{{ $product->current_stock }}"></td>
             <td><input type="text" class="form-control" id="unit" readonly></td>
@@ -174,22 +162,10 @@
     $("#product_name").select2({
         placeholder: "Select an option"
     });
-    $("#product_name").change(function() {
-        dataElement = $(this).find('option:selected');
-        $("#product_id").val(dataElement.data('id')).trigger('change')
-        $("#unit").val(
-            dataElement.data("unit")
-        );
-        $("#price").val(
-            dataElement.data("price")
-        );
-        $("#subtotal").val(
-            dataElement.data("price") * parseInt($("#quantity").val())
-        );
-    });
+
+
     $("#product_id").change(function() {
         dataElement = $(this).find('option:selected');
-        // $("#product_name").val(dataElement.data('code')).trigger('change');
 
         $("#unit").val(
            dataElement.data("unit")

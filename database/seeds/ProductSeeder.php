@@ -51,7 +51,6 @@ class ProductSeeder extends Seeder
                 'unit' => 'PCS',
                 'current_stock' => 10,
                 'selling_price' => 9500,
-
                 'total_minimum_stock' => 20,
                 'side_effects' => 'Menyebabkan tidak lapar',
                 'notes' => 'Keterangan'
