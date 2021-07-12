@@ -56,6 +56,17 @@ class DashboardRepository
         }
     }
 
+
+    public function getCashAdd()
+    {
+        if ($this->getShift()) {
+            $data = ShiftCashAdd::where('cashier_shift_id', $this->getShift()->id)->sum('total_add');
+            return $data ?? 0;
+        } else {
+            return 0;
+        }
+    }
+
     public function getSpending()
     {
         if ($this->getShift()) {
@@ -144,9 +155,9 @@ class DashboardRepository
 
     public function endShift()
     {
-        $shift = CashierShift::where('cashier_id', auth()->id())->whereNull('end_shift')->first();
+        $shift = CashierShift::with('cashAdds')->where('cashier_id', auth()->id())->whereNull('end_shift')->first();
         $shift->shift_sales_total = $this->getSalesTotal();
-        $shift->final_cash = $this->getFinalCash();
+        $shift->final_cash = $this->getFinalCash() + $shift->cashAdds()->sum('total_add');
         $shift->end_shift = now();
         $shift->save();
     }
@@ -159,10 +170,6 @@ class DashboardRepository
         $initial->cashier_id = auth()->id();
         $initial->cashier_shift_id = $shift->id;
         $initial->total_add = $amount;
-
-        $update = CashierShift::find($initial->cashier_shift_id);
-        $update->initial_cash += $amount;
-        $update->save();
 
         return $initial->save();
     }

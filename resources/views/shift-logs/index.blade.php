@@ -27,7 +27,7 @@ Shift Log
                                         <th>Akhir Shift</th>
                                         <th>Kas Awal</th>
                                         <th>Total Penjualan</th>
-                                        <th>Total Penjualan</th>
+                                        <th>Penambahan Kas</th>
                                         <th>Kas Akhir</th>
                                     </tr>
                                 </thead>
@@ -40,6 +40,7 @@ Shift Log
                                         <td>{{ $shift->end_shift }}</td>
                                         <td>{{ convertToRupiah($shift->initial_cash,'Rp. ') }}</td>
                                         <td>{{ convertToRupiah($shift->shift_sales_total,'Rp. ') }}</td>
+                                        <td>{{ convertToRupiah($shift->cashAdds()->sum('total_add'),'Rp. ') }}</td>
                                         <td>{{ convertToRupiah($shift->final_cash,'Rp. ') }}</td>
                                     </tr>
                                     @endforeach

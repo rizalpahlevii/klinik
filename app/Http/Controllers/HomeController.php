@@ -88,7 +88,7 @@ class HomeController extends AppBaseController
         $spending = $this->dashboardRepository->getSpending();
         $stockAdjusments = $this->dashboardRepository->stockAdjusments();
         $products = (new ProductDataTable())->get()->get();
-
+        $cashAdd = $this->dashboardRepository->getCashAdd();
         return view('dashboard.index', compact([
             'spending',
             'products',
@@ -98,13 +98,18 @@ class HomeController extends AppBaseController
             'shift',
             'previousShift',
             'totalSales',
-            'finalCash'
+            'finalCash',
+            'cashAdd'
         ]));
     }
 
     public function transfer(TransferCashRequest $request)
     {
         $input = $request->collectInput();
+        if ($input['amount'] > $this->dashboardRepository->getFinalCash()) {
+            Flash::error("Nominal Setor Melebihi Kas Sekarang");
+            return redirect()->back();
+        }
         $transfer = $this->dashboardRepository->transferCash($input);
         Flash::success('Berhasil menyetorkan uang sejumlah ' . $transfer->total_transfer);
 

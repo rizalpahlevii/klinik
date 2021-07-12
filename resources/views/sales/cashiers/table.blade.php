@@ -4,6 +4,7 @@
             <th style="width: 15%;">Kode Produk</th>
 
             <th>Jumlah Beli</th>
+            <th>Maksimal Stok</th>
             <th>Satuan</th>
             <th>Harga Beli Produk</th>
             <th>Total Harga Beli</th>
@@ -20,6 +21,7 @@
             <td class="form-qty">
                 <input type="number" class="form-control qty-edit" value="{{ $cart['quantity'] }}">
             </td>
+            <td></td>
             <td>{{ $cart['unit'] }}</td>
             <td>@rupiah($cart['price'])</td>
             <td>@rupiah($cart['quantity']*$cart['price'])</td>
@@ -53,6 +55,7 @@
             </td>
 
             <td><input type="number" class="form-control" id="quantity" value="1" min="1"></td>
+            <td><input type="number" class="form-control" id="current_stock" value="1" min="1" readonly></td>
             <td><input type="text" class="form-control" id="unit" readonly></td>
             <td><input type="number" class="form-control" id="price" readonly></td>
             <td><input type="number" class="form-control" id="subtotal" readonly></td>
@@ -167,6 +170,7 @@
     $("#product_id").change(function() {
         dataElement = $(this).find('option:selected');
         $('#quantity').attr('max',dataElement.data('stock'));
+        $('#current_stock').val(dataElement.data('stock'));
         if(parseInt(dataElement.stock) < 1){
             $('#quantity').attr('disabled');
         }else{

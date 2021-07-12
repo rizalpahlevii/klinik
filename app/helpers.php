@@ -348,7 +348,16 @@ function canDeletePayroll($model, $columnName, $id)
  */
 function getBloodGroups()
 {
-    return ['A', 'B', 'AB', 'O'];
+    return [
+        'A+',
+        'A-',
+        'B+',
+        'B-',
+        'AB+',
+        'AB-',
+        'O+',
+        'O-'
+    ];
 }
 
 function convertToRupiah($value, $prefix)
@@ -450,7 +459,7 @@ function getCurrenciesForSetting($currency = null)
  */
 function getCurrencyForPDF($currency = null)
 {
-    if (! $currency) {
+    if (!$currency) {
         $currency = Setting::where('key', 'current_currency')->first()->value;
     }
 

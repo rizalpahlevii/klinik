@@ -9,7 +9,7 @@ class ShiftLogController extends Controller
 {
     public function index()
     {
-        $shifts = CashierShift::with('cashier')->orderBy('created_at', 'DESC')->get();
+        $shifts = CashierShift::with('cashier', 'cashAdds')->whereNotNull('end_shift')->orderBy('created_at', 'DESC')->get();
         return view('shift-logs.index', compact('shifts'));
     }
 }

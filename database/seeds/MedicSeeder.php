@@ -19,7 +19,7 @@ class MedicSeeder extends Seeder
                 'birth_date' => date('Y-m-d'),
                 'phone' => '012378123',
                 'gender' => 'male',
-                'blood_group' => 'AB',
+                'blood_group' => 'AB+',
                 'address' => 'Semarang',
                 'city' => 'Semarang'
             ],
@@ -29,7 +29,7 @@ class MedicSeeder extends Seeder
                 'birth_date' => date('Y-m-d'),
                 'phone' => '012378123',
                 'gender' => 'male',
-                'blood_group' => 'O',
+                'blood_group' => 'O+',
                 'address' => 'Semarang',
                 'city' => 'Semarang'
             ]

@@ -67,6 +67,17 @@
                                         </th>
                                     </tr>
                                     <tr>
+                                        <th>Kas Penambahan</th>
+                                        <th>:</th>
+                                        <th>
+                                            @if ($shift)
+                                            @rupiah($cashAdd)
+                                            @else
+                                            -
+                                            @endif
+                                        </th>
+                                    </tr>
+                                    <tr>
                                         <th>Total Pendapatan</th>
                                         <th>:</th>
                                         <th>
@@ -93,7 +104,7 @@
                                         <th>:</th>
                                         <th>
                                             @if ($shift)
-                                            @rupiah($finalCash - $spending)
+                                            @rupiah($finalCash - $spending + $cashAdd)
                                             @else
                                             @rupiah( $previousShift != null ? $previousShift->final_cash : 0 )
                                             @endif
@@ -158,7 +169,7 @@
                             @if (auth()->user()->hasRole(['owner']))
                             <div class="col-md-4">
                                 <button class="btn btn-block btn-primary btn-cash-add">
-                                    <b>Tambahkan Kas Awal</b>
+                                    <b>Tambahkan Kas</b>
                                 </button>
                             </div>
                             @endif
@@ -439,7 +450,7 @@
 <div id="initialCashModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-header">
-            <h5 class="modal-title">Tambahkan Kas Awal</h5>
+            <h5 class="modal-title">Tambahkan Kas</h5>
             <button type="button" aria-label="Close" class="close" data-dismiss="modal">×</button>
         </div>
         <!-- Modal content-->
