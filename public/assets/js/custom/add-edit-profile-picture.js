@@ -139,7 +139,7 @@ window.displayPhoto = function (input, selector) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/custom/add-edit-profile-picture.js */"./resources/assets/js/custom/add-edit-profile-picture.js");
+module.exports = __webpack_require__(/*! E:\projects\klinik\resources\assets\js\custom\add-edit-profile-picture.js */"./resources/assets/js/custom/add-edit-profile-picture.js");
 
 
 /***/ })

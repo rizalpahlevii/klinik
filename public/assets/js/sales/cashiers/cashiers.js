@@ -132,7 +132,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/sales/cashiers/cashiers.js */"./resources/assets/js/sales/cashiers/cashiers.js");
+module.exports = __webpack_require__(/*! E:\projects\klinik\resources\assets\js\sales\cashiers\cashiers.js */"./resources/assets/js/sales/cashiers/cashiers.js");
 
 
 /***/ })

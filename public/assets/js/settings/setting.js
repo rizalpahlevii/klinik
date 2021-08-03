@@ -226,7 +226,7 @@ window.displayLogo = function (input, selector) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/settings/setting.js */"./resources/assets/js/settings/setting.js");
+module.exports = __webpack_require__(/*! E:\projects\klinik\resources\assets\js\settings\setting.js */"./resources/assets/js/settings/setting.js");
 
 
 /***/ })

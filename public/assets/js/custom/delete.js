@@ -160,7 +160,7 @@ function deleteItemAjax(url, tableId, header) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/custom/delete.js */"./resources/assets/js/custom/delete.js");
+module.exports = __webpack_require__(/*! E:\projects\klinik\resources\assets\js\custom\delete.js */"./resources/assets/js/custom/delete.js");
 
 
 /***/ })

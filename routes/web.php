@@ -13,6 +13,11 @@
 
 // Routes for Landing Page starts
 Route::get('/', 'Web\WebController@index')->name('front');
+Route::get('/profil', 'Web\ProfilController@index')->name('profil');
+Route::get('/layanan', 'Web\LayananController@index')->name('layanan');
+Route::get('/fasilitas', 'Web\FasilitasController@index')->name('fasilitas');
+
+
 Route::get('/demo', 'Web\WebController@demo')->name('demo');
 Route::get('/modules-of-hms', 'Web\WebController@modulesOfHms')->name('modules-of-hms');
 // Routes for Landing Page ends
