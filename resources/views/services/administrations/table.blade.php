@@ -13,3 +13,8 @@
     <tbody>
     </tbody>
 </table>
+@push('script')
+<script>
+    $('.dataTables_length').html('<b>Tabel Daftar Layanan Administrasi</b>')
+</script>
+@endpush

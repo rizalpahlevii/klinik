@@ -11,7 +11,7 @@ Data Penjualan
 <div class="container-fluid">
     <div class="animated fadeIn">
         <div class="page-header">
-            <h3 class="page__heading">Data Penjualan</h3>
+            <b>Tabel Data Penjualan</b>
 
         </div>
         <div class="row">
@@ -41,7 +41,7 @@ Data Penjualan
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <button type="button" id="btn-filter" class="btn btn-success mt-4">
+                                        <button type="button" id="btn-filter" class="btn btn-lightgreen mt-4">
                                             Cek Mutasi</button>
                                     </div>
                                 </div>

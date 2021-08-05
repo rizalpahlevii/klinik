@@ -101,7 +101,6 @@ var tbl = $("#spendingsTable").DataTable({
   processing: true,
   serverSide: true,
   order: [[1, "asc"]],
-  searching: false,
   ajax: {
     url: spendingUrl,
     data: function data(_data) {

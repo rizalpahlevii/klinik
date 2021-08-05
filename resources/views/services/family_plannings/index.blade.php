@@ -10,7 +10,7 @@ Daftar Layanan KB
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        <div class="page-header">
+        {{-- <div class="page-header">
             <h3 class="page__heading">Daftar Layanan KB</h3>
             <div class="filter-container">
 
@@ -19,27 +19,27 @@ Daftar Layanan KB
 
                 <div class="mr-0 actions-btn">
                     <a href="{{ route('services.family_plannings.create') }}" class="btn btn-primary">Layanan Baru</a>
-                </div>
-                @endif
-                @endif
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                @include('flash::message')
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        @include('services.family_plannings.table')
-                    </div>
-                </div>
+    </div>
+    @endif
+    @endif
+</div>
+</div> --}}
+<div class="row">
+    <div class="col-md-12">
+        @include('flash::message')
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                @include('services.family_plannings.table')
             </div>
         </div>
     </div>
-    @include('services.family_plannings.templates.templates')
+</div>
+</div>
+@include('services.family_plannings.templates.templates')
 </div>
 @endsection
 

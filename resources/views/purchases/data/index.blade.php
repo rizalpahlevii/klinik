@@ -11,7 +11,7 @@ Data Pembelian
 <div class="container-fluid">
     <div class="animated fadeIn">
         <div class="page-header">
-            <h3 class="page__heading">Data Pembelian</h3>
+            <b class="page__heading">Tabel Pembelian</b>
             <div class="filter-container">
                 @if (session()->has('newurl'))
                 <input type="hidden" value="{{ session()->get('newurl') }}" name="newurl" id="newurl">
@@ -53,7 +53,7 @@ Data Pembelian
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <button type="button" id="btn-filter" class="btn btn-success mt-4">
+                                        <button type="button" id="btn-filter" class="btn btn-primary mt-4">
                                             Cek Mutasi</button>
                                     </div>
                                 </div>

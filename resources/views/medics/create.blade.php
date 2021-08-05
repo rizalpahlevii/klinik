@@ -11,7 +11,7 @@ Input Dokter
     <div class="animated fadeIn">
         @include('flash::message')
 
-        <div class="row mt-4">
+        <div class="row ">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">

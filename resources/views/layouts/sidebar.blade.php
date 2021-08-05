@@ -1,5 +1,5 @@
 <link href="{{ mix('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
-<div class="sidebar">
+<div class="sidebar bg-white shadow-sm">
 
     <nav class="sidebar-nav">
         <ul class="nav">

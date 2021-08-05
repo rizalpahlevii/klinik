@@ -56,7 +56,7 @@
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
 
-            <a href="index.html" class="logo mr-auto"><img src="{{asset('medicio/assets/img/logo.png')}}" alt=""></a>
+            <a href="index.html" class="logo mr-auto"><img src="{{ asset('web/img/klinik-logo.jpg') }}" alt=""></a>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <h1 class="logo mr-auto"><a href="index.html">Medicio</a></h1> -->
 
@@ -67,6 +67,7 @@
                     <li class="{{Request::is('layanan') ? 'active' : ''}}"><a href={{route('layanan')}}>Layanan</a></li>
                     <li class="{{Request::is('fasilitas') ? 'active' : ''}}"><a
                             href="{{route('fasilitas')}}">Fasilitas</a></li>
+                    <li><a href="/login">Login</a></li>
                     <!-- <li class="drop-down"><a href="">Drop Down</a>
           <ul>
             <li><a href="#">Drop Down 1</a></li>
@@ -139,13 +140,10 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
+                        <h4>Menu</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/login">Login</a></li>
+
                         </ul>
                     </div>
 

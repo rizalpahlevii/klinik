@@ -13,6 +13,10 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="{{ asset('assets/css/coreui.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('assets/css/@fortawesome/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/simple-line-icons/css/simple-line-icons.css') }}">
@@ -21,6 +25,7 @@
     @yield('page_css')
     <link href="{{ mix('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ mix('assets/css/infy-loader.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
     @yield('css')
 </head>
 
@@ -34,7 +39,7 @@
 
     <div class="app-body">
         @include('layouts.sidebar')
-        <main class="main">
+        <main class="main pt-4">
             @yield('content')
         </main>
     </div>
@@ -78,5 +83,23 @@
     let ajaxCallIsRunning = false;
 </script>
 <script src="{{ mix('assets/js/user_profile/user_profile.js') }}"></script>
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: rgb(112, 173, 13) !important;
+        border-color: rgb(112, 173, 13) !important;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+
+    .dataTables_paginate {
+        display: flex !important;
+        justify-content: center !important;
+        float: none !important;
+    }
+</style>
+@stack('script')
+
 
 </html>

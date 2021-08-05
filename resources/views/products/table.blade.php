@@ -11,3 +11,11 @@
     <tbody>
     </tbody>
 </table>
+@push('script')
+<script>
+    $('.dataTables_length').html('<b>Tabel Daftar Produk</b>')
+    $('.dataTables_filter').prepend(`<a href="{{ route('products.create') }}" class="btn btn-lightgreen">
+        Input Produk
+    </a>`)
+</script>
+@endpush

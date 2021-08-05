@@ -34,12 +34,12 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="card border-0 shadow-sm">
                     <div class="card-body">
 
                         <div class="row" style="font-size: 20px;">
                             <div class="col-md-6">
-                                <table style="width: 100%;">
+                                <table style="width: 100%;font-size: 14px;">
                                     <tr>
                                         <th style="width: 50%">Nama Kasir</th>
                                         <th>:</th>
@@ -114,7 +114,7 @@
                                 </table>
                             </div>
                             <div class="col-md-6">
-                                <table style="width: 100%">
+                                <table style="width: 100%; font-size: 14px;">
                                     <tr>
                                         <th style="width: 50%">Start Shift</th>
                                         <th>:</th>
@@ -141,37 +141,38 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col-md-4 ">
-                                @if ($shift != null)
-                                <button class="btn btn-block btn-secondary btn-shift" data-status="aktif"
-                                    style="padding: 10px;">Stop Shift</button>
+                        <div class="mt-4 d-flex justify-content-center align-items-center">
+
+                            @if ($shift != null)
+                            <button class="btn mx-2 btn-secondary btn-shift" data-status="aktif"
+                                style="padding: 10px;">Stop
+                                Shift</button>
 
 
-                                @else
+                            @else
 
-                                <button class="btn btn-block btn-primary btn-shift pt-2 pb-2" data-status="nonaktif" {!!
-                                    checkAvailableToStartShift() ? '' : 'style="
+                            <button class="btn mx-2 btn-lightgreen btn-shift" data-status="nonaktif" {!!
+                                checkAvailableToStartShift() ? '' : 'style="
                                     cursor:no-drop;" ' !!}" {!! checkAvailableToStartShift() ? '' : ' disabled '
-                                    !!}>Start</button>
+                                !!}>Start</button>
 
-                                @endif
-                            </div>
+                            @endif
+
                             @if ($shift != null)
                             @if (checkAvailableToStartShift())
-                            <div class="col-md-4">
-                                <button class="btn btn-block btn-primary btn-setor">
-                                    <b>Setor Uang</b>
-                                </button>
-                            </div>
+
+                            <button class="btn mx-2 btn-lightgreen btn-setor">
+                                <b>Setor Uang</b>
+                            </button>
+
                             @endif
                             @endif
                             @if (auth()->user()->hasRole(['owner']))
-                            <div class="col-md-4">
-                                <button class="btn btn-block btn-primary btn-cash-add">
-                                    <b>Tambahkan Kas</b>
-                                </button>
-                            </div>
+
+                            <button class="btn mx-2 btn-lightgreen btn-cash-add">
+                                <b>Tambahkan Kas</b>
+                            </button>
+
                             @endif
                         </div>
                     </div>
@@ -182,20 +183,20 @@
     @if (auth()->user()->hasRole(['owner']))
 
     <div class="row">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-7">
+            <div class="card border-0 shadow-sm">
 
                 <div class="card-body">
                     <canvas id="canvas" height="280" width="600">
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h4 class="text-center">Top 5 Produk Terlaris</h4>
-                    <p class="text-center">(Berdasarkan Omzet)</p>
-                    <table class="table table-hover">
+                    <h6 class="font-weight-bold">Top 5 Produk Terlaris</h6>
+                    {{-- <p class="text-center">(Berdasarkan Omzet)</p> --}}
+                    <table class="table table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>Produk</th>
@@ -218,7 +219,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="general" height="280" width="600">
                 </div>
@@ -226,21 +227,21 @@
         </div>
 
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="family_planning" height="280" width="600">
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="pregnancy" height="280" width="600">
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="laboratory" height="280" width="600">
                 </div>
@@ -248,35 +249,35 @@
         </div>
 
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="immunization" height="280" width="600">
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="parturition" height="280" width="600">
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="inpatient" height="280" width="600">
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="ekg" height="280" width="600">
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <canvas id="administration" height="280" width="600">
                 </div>
@@ -287,63 +288,63 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h5>Laporan Perbulan</h5>
+                    <h5 class="font-weight-bold">Laporan Perbulan</h5>
                     <p>Generate Laporan Bulanan</p>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <select name="month_start" id="month_start" class="form-control">
-                                <option value="01">Januari</option>
-                                <option value="02">Februari</option>
-                                <option value="03">Maret</option>
-                                <option value="04">April</option>
-                                <option value="05">Mei</option>
-                                <option value="06">Juni</option>
-                                <option value="07">Juli</option>
-                                <option value="08">Agustus</option>
-                                <option value="09">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">Desember</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
+                    <div class="d-flex">
 
-                            <select name="year_start" id="year_start" class="form-control">
-                                @foreach (getYears() as $year)
-                                <option value="{{ $year }}">{{ $year }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <select name="month_start" id="month_start" class="form-control mx-1">
+                            <option value="01">Januari</option>
+                            <option value="02">Februari</option>
+                            <option value="03">Maret</option>
+                            <option value="04">April</option>
+                            <option value="05">Mei</option>
+                            <option value="06">Juni</option>
+                            <option value="07">Juli</option>
+                            <option value="08">Agustus</option>
+                            <option value="09">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+
+
+
+                        <select name="year_start" id="year_start" class="form-control mx-1">
+                            @foreach (getYears() as $year)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+
                         -
-                        <div class="col-md-2">
-                            <select name="month_end" id="month_end" class="form-control">
-                                <option value="01">Januari</option>
-                                <option value="02">Februari</option>
-                                <option value="03">Maret</option>
-                                <option value="04">April</option>
-                                <option value="05">Mei</option>
-                                <option value="06">Juni</option>
-                                <option value="07">Juli</option>
-                                <option value="08">Agustus</option>
-                                <option value="09">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">Desember</option>
-                            </select>
 
-                        </div>
-                        <div class="col-md-2">
-                            <select name="year_end" id="year_end" class="form-control">
-                                @foreach (getYears() as $year)
-                                <option value="{{ $year }}">{{ $year }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary btn-sm btn-generate">Generate</button>
-                        </div>
+                        <select name="month_end" id="month_end" class="form-control mx-1">
+                            <option value="01">Januari</option>
+                            <option value="02">Februari</option>
+                            <option value="03">Maret</option>
+                            <option value="04">April</option>
+                            <option value="05">Mei</option>
+                            <option value="06">Juni</option>
+                            <option value="07">Juli</option>
+                            <option value="08">Agustus</option>
+                            <option value="09">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+
+
+
+                        <select name="year_end" id="year_end" class="form-control mx-1">
+                            @foreach (getYears() as $year)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+
+
+                        <button class="btn btn-lightgreen btn-sm btn-generate">Generate</button>
+
                     </div>
                 </div>
             </div>
@@ -415,7 +416,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="card border-0 shadow-sm">
                     <div class="card-body">
                         <h4>Tabel Produk</h4>
                         <table class="table table-hover table-bordered table-stripped" id="product-table">

@@ -6,18 +6,13 @@ Detail Pasien
 <link href="{{ asset('assets/css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid mt-4">
     <div class="animated fadeIn">
         @include('flash::message')
-        <div class="d-flex justify-content-end py-2">
-            <div>
-                <a href="{{ url()->previous() }}" class="btn btn-primary pull-right">{{ 'Kembali' }}</a>
-            </div>
-        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-white border-0">
                         <strong>Detail Pasien</strong>
                     </div>
                     <div class="card-body">
@@ -31,6 +26,7 @@ Detail Pasien
 <input type="hidden" id="service-url"
     value="{{ route('patients.service',['patient'=>$data->id,'service'=>':service-name']) }}">
 @endsection
+
 @section('page_scripts')
 <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ mix('assets/js/custom/custom-datatable.js') }}"></script>
@@ -78,4 +74,5 @@ Detail Pasien
         });
     });
 </script>
+
 @endsection

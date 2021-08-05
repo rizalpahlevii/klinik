@@ -1,20 +1,27 @@
-<header class="app-header navbar">
+<header class="app-header navbar border-0 shadow-sm">
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#" data-toggle="tooltip" data-placement="right" title="{{ getAppName() }}">
+    <a class="navbar-brand d-none d-md-flex" href="#" data-toggle="tooltip" data-placement="right"
+        title="{{ getAppName() }}">
         <img class="navbar-brand-full" src="{{getLogoUrl()}}" width="50px" alt="">&nbsp;<span
-            class="navbar-brand-full-name">{{ getAppName() }}</span>
+            class="navbar-brand-full-name" style="color: black; font-weight: bold;">{{ getAppName() }}</span>
         <img class="navbar-brand-minimized" src="{{getLogoUrl()}}" width="50px" alt="">
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
     </button>
 
+    <div class="navbar-brand d-none d-md-flex ml-1 font-weight-bold">
+        Dashboard
+    </div>
+
+
+
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item dropdown header-navbar">
             <a href="#" data-toggle="dropdown" class="nav-link notification-toggle open nav-link-lg"><i
-                    class="far fa-bell"></i><span class="badge bg-primary"
+                    class="far fa-bell"></i><span class="badge bg-danger"
                     id="counter">{{ count(getNotification(Auth::user()->roles->pluck('name')->first())) }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right ml-4 dropdown-menu-width" id="dropdown">

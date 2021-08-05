@@ -1,4 +1,4 @@
-<table class="table table-responsive-sm table-striped table-bordered" id="patientsTable">
+<table class="table table-responsive-sm table-striped" id="patientsTable">
     <thead>
         <tr>
             <th>Nomor</th>
@@ -13,3 +13,12 @@
     <tbody>
     </tbody>
 </table>
+@push('script')
+<style>
+
+</style>
+<script>
+    $('.dataTables_length').html('<b>Tabel Daftar Pasien</b>')
+    $('.dataTables_filter').prepend(`<a class="btn btn-lightgreen mr-2" href="{{ route('patients.create') }}">Input Pasien</a>`)
+</script>
+@endpush

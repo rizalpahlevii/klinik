@@ -49,26 +49,13 @@
 <hr>
 
 <div class="row">
-    <div class="col-lg-12">
-        <h4>Detail Pasien</h4>
+    <div class="col-lg-12 mb-3">
+        <b>Detail Pasien</b>
     </div>
     <div class="col-lg-12">
         <div class="row">
             <div class="col-md-5">
-                <div class="form-group">
-                    <label for="service">Tipe Layanan</label>
-                    <select name="service" id="service" class="form-control">
-                        <option disabled selected>Pilih Tipe Layanan</option>
-                        <option value="generals">Umum</option>
-                        <option value="family-plannings">Keluarga Berencana</option>
-                        <option value="pregnancies">Kehamilan</option>
-                        <option value="laboratories">Laboratorium</option>
-                        <option value="immunizations">Imunisasi</option>
-                        <option value="parturitions">Partus</option>
-                        <option value="electrocardiograms">EKG</option>
-                        <option value="administrations">Administrasi</option>
-                    </select>
-                </div>
+
             </div>
         </div>
     </div>
@@ -97,3 +84,24 @@
         </div>
     </div>
 </div>
+@push('script')
+<script>
+    $(document).ready(function(){
+        $('.dataTables_length').html(`<div class="form-group">
+            <label for="service">Tipe Layanan</label>
+            <select name="service" id="service" class="form-control">
+                <option disabled selected>Pilih Tipe Layanan</option>
+                <option value="generals">Umum</option>
+                <option value="family-plannings">Keluarga Berencana</option>
+                <option value="pregnancies">Kehamilan</option>
+                <option value="laboratories">Laboratorium</option>
+                <option value="immunizations">Imunisasi</option>
+                <option value="parturitions">Partus</option>
+                <option value="electrocardiograms">EKG</option>
+                <option value="administrations">Administrasi</option>
+            </select>
+        </div>`)
+    })
+    
+</script>
+@endpush

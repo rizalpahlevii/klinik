@@ -14,7 +14,7 @@ Edit Layanan EGG
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-white border-sm">
                         <strong>Edit Layanan EGG</strong>
                     </div>
                     <div class="card-body">
@@ -24,7 +24,7 @@ Edit Layanan EGG
                         @include('services.electrocardiograms.edit_fields')
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-lightgreen">Simpan</button>
                                 <a href="{{ route('services.electrocardiograms.index') }}"
                                     class="btn btn-secondary">Batal</a>
                             </div>

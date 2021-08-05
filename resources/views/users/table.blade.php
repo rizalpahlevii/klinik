@@ -13,3 +13,9 @@
     <tbody>
     </tbody>
 </table>
+@push('script')
+<script>
+    $('.dataTables_length').html('<b>Tabel Daftar Pengguna</b>')
+    $('.dataTables_filter').prepend(`<a href="{{ route('users.create') }}" class="btn btn-primary">Tambah Pengguna</a>`)
+</script>
+@endpush

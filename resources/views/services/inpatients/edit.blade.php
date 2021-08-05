@@ -14,7 +14,7 @@ Edit Layanan Rawat Inap
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-white border-0">
                         <strong>Edit Layanan Rawat Inap</strong>
                     </div>
                     <div class="card-body">
@@ -24,7 +24,7 @@ Edit Layanan Rawat Inap
                         @include('services.inpatients.edit_fields')
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-lightgreen">Simpan</button>
                                 <a href="{{ route('services.inpatients.index') }}" class="btn btn-secondary">Batal</a>
                             </div>
                         </div>

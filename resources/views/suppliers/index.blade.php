@@ -10,7 +10,7 @@ Supplier
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        <div class="page-header">
+        {{-- <div class="page-header">
             <h3 class="page__heading">Supplier</h3>
             <div class="filter-container">
 
@@ -21,30 +21,30 @@ Supplier
                         </button>
                         <div class="dropdown-menu" aria-labelledby="patientActions" x-placement="bottom-start">
                             <a href="{{ route('suppliers.create') }}" class="dropdown-item">
-                                Input Supplier
-                            </a>
+        Input Supplier
+        </a>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                @include('flash::message')
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        @include('suppliers.table')
-                    </div>
-                </div>
+    </div>
+</div>
+</div>
+</div>
+</div> --}}
+<div class="row">
+    <div class="col-md-12">
+        @include('flash::message')
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                @include('suppliers.table')
             </div>
         </div>
     </div>
-    @include('suppliers.templates.templates')
+</div>
+</div>
+@include('suppliers.templates.templates')
 </div>
 @endsection
 

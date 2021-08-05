@@ -11,7 +11,7 @@ Data Pengeluaran
 <div class="container-fluid">
     <div class="animated fadeIn">
         <div class="page-header">
-            <h3 class="page__heading">Data Pengeluaran</h3>
+
             <div class="filter-container">
                 @if (session()->has('newurl'))
                 <input type="hidden" value="{{ session()->get('newurl') }}" name="newurl" id="newurl">
@@ -38,8 +38,11 @@ Data Pengeluaran
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
+
                             <div class="col-md-12">
-                                <div class="row">
+                                <b class="page__heading">Tabel Pembelian</b>
+                                <div class="row mt-3">
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="start">Dari Tanggal <span class="required"></span></label>
@@ -68,11 +71,18 @@ Data Pengeluaran
                                     </div>
 
                                     <div class="col-md-3">
-                                        <button type="button" id="btn-filter" class="btn btn-success mt-4">
+                                        <button type="button" id="btn-filter" class="btn btn-primary mt-4">
                                             Cek Mutasi</button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mt-4 mb-2">
+                            <div class="col-12">
+                                <b>Jenis Pengeluaran</b>
+
+                            </div>
+
                         </div>
                         @include('spendings.table')
                     </div>
@@ -104,3 +114,14 @@ Data Pengeluaran
 
 <script src="{{ mix('assets/js/custom/delete.js') }}"></script>
 @endsection
+@push('script')
+<script>
+    $('.dataTables_length').html(`<div class="d-flex">
+        <a class="btn rounded-0 btn-lightgreen">Semua</a>
+        <a class="btn rounded-0 btn-secondary">Gaji</a>
+        <a class="btn rounded-0 btn-secondary">Keperluan Kantor</a>
+        <a class="btn rounded-0 btn-secondary">Operasional</a>
+        <a class="btn rounded-0 btn-secondary">Non Operasional</a>
+    </div>`)
+</script>
+@endpush

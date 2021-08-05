@@ -10,7 +10,7 @@ Produk
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        <div class="page-header">
+        {{-- <div class="page-header">
             <h3 class="page__heading">Produk</h3>
             <div class="filter-container">
 
@@ -21,29 +21,29 @@ Produk
                         </button>
                         <div class="dropdown-menu" aria-labelledby="productActions" x-placement="bottom-start">
                             <a href="{{ route('products.create') }}" class="dropdown-item">
-                                Input Produk
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                @include('flash::message')
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        @include('products.table')
-                    </div>
-                </div>
+        Input Produk
+        </a>
+    </div>
+</div>
+</div>
+</div>
+</div> --}}
+<div class="row">
+    <div class="col-md-12">
+        @include('flash::message')
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                @include('products.table')
             </div>
         </div>
     </div>
-    @include('products.templates.templates')
+</div>
+</div>
+@include('products.templates.templates')
 </div>
 @endsection
 

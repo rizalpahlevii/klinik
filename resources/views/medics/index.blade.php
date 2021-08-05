@@ -10,24 +10,7 @@ Dokter
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        <div class="page-header">
-            <h3 class="page__heading">Dokter</h3>
-            <div class="filter-container">
 
-                <div class="mr-0 actions-btn">
-                    <div class="btn-group" role="group">
-                        <button id="patientActions" type="button" class="btn btn-primary dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="patientActions" x-placement="bottom-start">
-                            <a href="{{ route('medics.create') }}" class="dropdown-item">
-                                Input Dokter
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-12">
                 @include('flash::message')

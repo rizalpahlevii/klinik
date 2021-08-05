@@ -11,10 +11,10 @@ Input Pasien
     <div class="animated fadeIn">
         @include('flash::message')
 
-        <div class="row mt-4">
+        <div class="row ">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header py-3 bg-white border-sm">
                         <strong>Input Pasien</strong>
                     </div>
                     <div class="card-body">
@@ -32,7 +32,7 @@ Input Pasien
                         @include('patients.fields')
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-lightgreen">Simpan</button>
                                 <a href="{{ route('patients.index') }}" class="btn btn-secondary">Batal</a>
                             </div>
                         </div>

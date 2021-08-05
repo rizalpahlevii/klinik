@@ -1,0 +1,88 @@
+.btn-lightgreen {
+    background-color: #9fbb5f !important;
+    color: white !important;
+}
+body {
+    font-family: "Poppins", sans-serif !important;
+    font-family: "Roboto", sans-serif;
+}
+.main {
+    background-color: white;
+}
+.border-sm {
+    border-bottom: 1px solid rgb(224, 224, 224) !important;
+}
+.btn-shift,
+.btn-setor,
+.btn-cash-add {
+    width: 25% !important;
+}
+.sidebar .nav-link.active {
+    background-color: #9fbb5f !important;
+    color: white !important;
+}
+.sidebar .nav-link.active .nav-icon {
+    color: white !important;
+}
+.sidebar .nav-link {
+    color: rgb(170, 170, 170) !important;
+}
+.sidebar .nav-dropdown.open {
+    background: white !important;
+}
+.sidebar .nav-link:hover {
+    background: #9fbb5f !important;
+    color: white !important;
+}
+ul.nav-dropdown-items {
+    border-left: 2px solid #9fbb5f !important;
+}
+ul.nav-dropdown-items .side-menus a {
+    padding: 3px !important;
+    margin: 4px !important;
+}
+ul.nav-dropdown-items .side-menus {
+    margin: 0 !important;
+}
+ul.nav-dropdown-items {
+    margin-left: 17px !important;
+    padding-left: 10px !important;
+    margin-top: 10px !important;
+}
+ul.nav-dropdown-items .nav-link.active {
+    color: #9fbb5f !important;
+    background: white !important;
+}
+ul.nav-dropdown-items .nav-link:hover {
+    background: white !important;
+    color: black !important;
+}
+.btn-primary {
+    background-color: #9fbb5f !important;
+    border-color: #9fbb5f !important;
+}
+.bg-lightgreen {
+    background-color: #9fbb5f !important;
+}
+.modal-header {
+    background-color: #9fbb5f !important;
+}
+.table.dataTable,
+.table.dataTable tr,
+.table.dataTable td,
+.table.dataTable th {
+    border: none !important;
+}
+.card {
+    border: none !important;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+.odd {
+    background-color: white !important;
+}
+thead {
+    background-color: #f1f3f9 !important;
+}
+.even {
+    background-color: #f7fafc !important;
+}

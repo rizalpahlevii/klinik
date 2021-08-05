@@ -98,6 +98,7 @@
 
 var tableName = "#salesTable";
 var tbl = $("#salesTable").DataTable({
+  lengthChange: false,
   processing: true,
   serverSide: true,
   order: [[1, "asc"]],

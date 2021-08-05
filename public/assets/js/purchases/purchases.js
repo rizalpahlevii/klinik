@@ -98,6 +98,7 @@
 
 var tableName = "#purchasesTable";
 var tbl = $("#purchasesTable").DataTable({
+  lengthChange: false,
   processing: true,
   serverSide: true,
   order: [[1, "asc"]],

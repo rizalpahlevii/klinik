@@ -14,3 +14,9 @@
     <tbody>
     </tbody>
 </table>
+@push('script')
+<script>
+    $('.dataTables_length').html('<b>Tabel Daftar Dokter</b>')
+    $('.dataTables_filter').prepend(`<a class="btn btn-lightgreen mr-2" href="{{ route('medics.create') }}">Input Dokter</a>`)
+</script>
+@endpush
