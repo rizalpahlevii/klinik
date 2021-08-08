@@ -10,7 +10,7 @@ Daftar Layanan Laboratorium
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        {{-- <div class="page-header">
+        <div class="page-header">
             <h3 class="page__heading">Daftar Layanan Laboratorium</h3>
             <div class="filter-container">
                 @if (auth()->user()->hasRole(['owner','cashier']))
@@ -22,7 +22,7 @@ Daftar Layanan Laboratorium
     @endif
     @endif
 </div>
-</div> --}}
+</div>
 <div class="row">
     <div class="col-md-12">
         @include('flash::message')

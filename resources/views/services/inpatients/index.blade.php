@@ -10,7 +10,7 @@ Daftar Layanan Rawat Inap
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        {{-- <div class="page-header">
+        <div class="page-header">
             <h3 class="page__heading">Daftar Layanan Rawat Inap</h3>
             <div class="filter-container">
 
@@ -23,7 +23,7 @@ Daftar Layanan Rawat Inap
     @endif
     @endif
 </div>
-</div> --}}
+</div>
 <div class="row">
     <div class="col-md-12">
         @include('flash::message')

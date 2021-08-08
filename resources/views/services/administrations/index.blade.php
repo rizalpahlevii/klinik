@@ -10,25 +10,25 @@ Daftar Layanan Administrasi
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        {{-- <div class="page-header">
+        <div class="page-header">
             <h3 class="page__heading">Daftar Layanan Administrasi</h3>
             <div class="filter-container">
 
                 @if (auth()->user()->hasRole(['owner','cashier']))
-                @if (getShift())
+                    @if (getShift())
 
-                <div class="mr-0 actions-btn">
-                    <a href="{{ route('services.administrations.create') }}" class="btn btn-primary">Layanan Baru</a>
-    </div>
-    @endif
-    @endif
-</div>
-</div> --}}
-<div class="row">
-    <div class="col-md-12">
-        @include('flash::message')
-    </div>
-</div>
+                        <div class="mr-0 actions-btn">
+                            <a href="{{ route('services.administrations.create') }}" class="btn btn-primary">Layanan Baru</a>
+                        </div>
+                    @endif
+                @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @include('flash::message')
+            </div>
+        </div>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">

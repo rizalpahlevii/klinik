@@ -10,7 +10,7 @@ Daftar Layanan EGG
 @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
-        {{-- <div class="page-header">
+        <div class="page-header">
             <h3 class="page__heading">Daftar Layanan EGG</h3>
             <div class="filter-container">
 
@@ -24,7 +24,7 @@ Daftar Layanan EGG
     @endif
     @endif
 </div>
-</div> --}}
+</div>
 <div class="row">
     <div class="col-md-12">
         @include('flash::message')
