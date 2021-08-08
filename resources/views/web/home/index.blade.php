@@ -15,7 +15,8 @@
             <div class="carousel-item active"
                 style="background-image: url({{asset('medicio/assets/img/slide/slide-1.jpg')}})">
                 <div class="container">
-                    <h2>Selamat Datang di <span>Medicio</span></h2>
+                    <b>Selamat Datang di</b>
+                    <h2><span>GANESHA HUSADA</span></h2>
                     <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut
                         aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque
                         accusamus repellendus deleniti vel.</p>
@@ -62,52 +63,6 @@
 
 <main id="main">
 
-    <!-- ======= Featured Services Section ======= -->
-    <section id="featured-services" class="featured-services">
-        <div class="container" data-aos="fade-up">
-
-            <div class="row">
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon"><i class="icofont-heart-beat"></i></div>
-                        <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias
-                            excepturi</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-                        <div class="icon"><i class="icofont-drug"></i></div>
-                        <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon"><i class="icofont-thermometer-alt"></i></div>
-                        <h4 class="title"><a href="">Magni Dolores</a></h4>
-                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                            officia</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon"><i class="icofont-dna-alt-1"></i></div>
-                        <h4 class="title"><a href="">Nemo Enim</a></h4>
-                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                            blanditiis</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Featured Services Section -->
-
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
         <div class="container" data-aos="zoom-in">
@@ -139,28 +94,26 @@
                     <img src="{{asset('medicio/assets/img/about.jpg')}}" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                    <h3>KLINIK PRATAMA RAWAT INAP DAN PERSALINAN “GANESHA HUSADA”</h3>
                     <p class="font-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore
-                        magna aliqua.
+                        Tujuan berdirinya KLINIK PRATAMA RAWAT INAP DAN PERSALINAN “GANESHA HUSADA” adalah :
                     </p>
                     <ul>
-                        <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.</li>
-                        <li><i class="icofont-check-circled"></i> Duis aute irure dolor in reprehenderit in
-                            voluptate velit.</li>
-                        <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda
-                            mastiro dolore eu fugiat nulla pariatur.</li>
+                        <li><i class="icofont-check-circled"></i> Memberikan jasa pelayanan kesehatan yang murah dan
+                            mudah dijangkau masyarakat pra-sejahtera</li>
+                        <li><i class="icofont-check-circled"></i> Membangun ketahanan kesehatan yang menyeluruh
+                            (holistic) dan kesinambungan sebagai tindakan preventif</li>
+                        <li><i class="icofont-check-circled"></i> Menjaga dan memelihara lingkungan masyarakat agar
+                            tetap sehat</li>
+                        <li><i class="icofont-check-circled"></i>Membantu pemerintah dalam memberikan pelayanan
+                            kesehatan bagi masyarakat</li>
+                        <li><i class="icofont-check-circled"></i> Membangun praktek dokter keluarga yang profesional dan
+                            amanah</li>
+                        <li><i class="icofont-check-circled"></i>Termotivasinya masyarakat untuk melaksanakan pola
+                            hidup sehat</li>
+
                     </ul>
-                    <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum
-                    </p>
+
                 </div>
             </div>
 
@@ -315,7 +268,7 @@
                             <h3>Cardiology</h3>
                             <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde
                                 sonata raqer a videna mareta paulona marka</p>
-                            <img src="assets/img/departments-1.jpg" alt="" class="img-fluid">
+                            <img src="{{asset('medicio/assets/img/departments-1.jpg')}}" alt="" class="img-fluid">
                             <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos
                                 ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima
                                 eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique
@@ -325,7 +278,7 @@
                             <h3>Neurology</h3>
                             <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde
                                 sonata raqer a videna mareta paulona marka</p>
-                            <img src="assets/img/departments-2.jpg" alt="" class="img-fluid">
+                            <img src="{{asset('medicio/assets/img/departments-2.jpg')}}" alt="" class="img-fluid">
                             <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos
                                 ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima
                                 eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique
@@ -335,7 +288,7 @@
                             <h3>Hepatology</h3>
                             <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde
                                 sonata raqer a videna mareta paulona marka</p>
-                            <img src="assets/img/departments-3.jpg" alt="" class="img-fluid">
+                            <img src="{{asset('medicio/assets/img/departments-3.jpg')}}" alt="" class="img-fluid">
                             <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos
                                 ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima
                                 eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique
@@ -345,7 +298,7 @@
                             <h3>Pediatrics</h3>
                             <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde
                                 sonata raqer a videna mareta paulona marka</p>
-                            <img src="assets/img/departments-4.jpg" alt="" class="img-fluid">
+                            <img src="{{asset('medicio/assets/img/departments-4.jpg')}}" alt="" class="img-fluid">
                             <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos
                                 ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima
                                 eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique
@@ -374,7 +327,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
-                            <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
+                            <img src="{{asset('medicio/assets/img/doctors/doctors-1.jpg')}}" class="img-fluid" alt="">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -392,7 +345,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt="">
+                            <img src="{{asset('medicio/assets/img/doctors/doctors-2.jpg')}}" class="img-fluid" alt="">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -410,7 +363,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="300">
                         <div class="member-img">
-                            <img src="assets/img/doctors/doctors-3.jpg" class="img-fluid" alt="">
+                            <img src="{{asset('medicio/assets/img/doctors/doctors-3.jpg')}}" class="img-fluid" alt="">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -428,7 +381,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="400">
                         <div class="member-img">
-                            <img src="assets/img/doctors/doctors-4.jpg" class="img-fluid" alt="">
+                            <img src="{{asset('medicio/assets/img/doctors/doctors-4.jpg')}}" class="img-fluid" alt="">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>

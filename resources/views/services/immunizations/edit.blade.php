@@ -14,7 +14,7 @@ Edit Layanan Imunisasi
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header bg-white border-sm">
+                    <div class="card-header bg-white border-0">
                         <strong>Edit Layanan Imunisasi</strong>
                     </div>
                     <div class="card-body">

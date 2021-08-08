@@ -1,4 +1,4 @@
-<table class="table table-bordered table-hover">
+<table class="table table-hover">
     <thead>
         <tr>
             <th style="width: 15%;">Kode Produk</th>

@@ -14,7 +14,7 @@ Input Layanan Partus
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-white border-sm">
                         <strong>Input Layanan Partus</strong>
                     </div>
                     <div class="card-body">
