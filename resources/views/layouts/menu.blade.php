@@ -221,7 +221,7 @@
 @endif
 @endif
 
-@if (auth()->user()->hasRole(['owner']))
+@if (auth()->user()->hasRole(['owner', 'cashier']))
 {{-- Penjualan Obat --}}
 <li class="nav-item side-menus nav-dropdown">
     <a class="nav-link nav-dropdown-toggle menu-text-wrap {{ Request::is('sales.datas*') || Request::is('sales.cashiers*') ? 'active' : '' }}"
