@@ -112,6 +112,8 @@
     </li>
     @endif
 @else
+
+
 <li class="nav-item side-menus nav-dropdown">
     <a class="nav-link nav-dropdown-toggle menu-text-wrap {{ Request::is('services*') ? 'active' : '' }}" href="#"
         data-toggle="tooltip" data-placement="bottom" title="Layanan" data-delay='{"show":"500", "hide":"50"}'
@@ -218,7 +220,35 @@
         <span>Pengeluaran</span>
     </a>
 </li>
+
 @endif
+<li class="nav-item side-menus nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle menu-text-wrap {{ Request::is('categories*') || Request::is('suppliers*') || Request::is('brands*') || Request::is('products*') ? 'active' : '' }}"
+        href="#" data-toggle="tooltip" data-placement="bottom" title="Produk" data-delay='{"show":"500", "hide":"50"}'
+        data-trigger="hover">
+        <i class="nav-icon fas fa-list"></i>
+        Produk
+    </a>
+    <ul class="nav-dropdown-items">
+       
+        <li class="nav-item side-menus {{ Request::is('products*') ? 'active' : '' }}">
+            <a class="nav-link menu-text-wrap" href="{{ route('products.index') }}" data-toggle="tooltip"
+                data-placement="bottom" title="Produk" data-delay='{"show":"500", "hide":"50"}'>
+                <span>Daftar Produk</span>
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li class="nav-item side-menus {{ Request::is('purchases*') ? 'active' : '' }}">
+    <a class="nav-link menu-text-wrap" href="{{ route('purchases.index') }}" data-toggle="tooltip"
+        data-placement="bottom" title="Pembelian" data-delay='{"show":"500", "hide":"50"}'>
+        <i class="nav-icon fas fa-chart-pie"></i>
+        <span>Pembelian</span>
+    </a>
+</li>
+
+
 @endif
 
 @if (auth()->user()->hasRole(['owner', 'cashier']))

@@ -48,7 +48,6 @@ class SaleItem extends Model
     {
         parent::boot();
         // self::observe(SaleItem::class);
-
         self::creating(function ($model) {
             $model->id = (string) Uuid::generate(4);
         });

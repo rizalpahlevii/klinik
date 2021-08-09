@@ -226,7 +226,7 @@ Route::group(['middleware' => ['auth']], function () {
             });
         });
 
-        Route::prefix('purchases')->name('purchases.')->middleware('owner')->group(function () {
+        Route::prefix('purchases')->name('purchases.')->middleware('owner_or_cashier')->group(function () {
             Route::get('/', 'PurchaseController@index')->name('index');
             Route::get('/create', 'PurchaseController@create')->name('create');
             Route::post('/', 'PurchaseController@store')->name('store');
