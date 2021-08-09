@@ -6,47 +6,25 @@
 
         <div class="section-title">
             <h2>Profil Kami</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
-        <div class="row">
-            <div class="col-lg-6" data-aos="fade-right">
-                <img src="{{asset('medicio/assets/img/about.jpg')}}" class="img-fluid" alt="">
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-                <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-                <p class="font-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore
-                    magna aliqua.
-                </p>
-                <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                {{-- <ul>
-                    <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.</li>
-                    <li><i class="icofont-check-circled"></i> Duis aute irure dolor in reprehenderit in
-                        voluptate velit.</li>
-                    <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda
-                        mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul> --}}
-                <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum
-                </p>
-            </div>
-        </div>
+        <p>
+            <img style="width: 300px;" src="{{asset('web/img/7.jpg')}}" class="img-fluid float-left mr-3 mb-3" alt="">
+            Berdiri dari tahun 1989 dengan nama BPS Herowati Widjaja yang beralamatkan di Jalan Hayam Wuruk No.48 Rt 08/
+            Rw 08
+            Kelurahan Kalongan, Kecamatan Purwodadi, Kabupaten Grobogan. Pada tanggal 1 januari 2000, lokasi pindah di
+            Jalan Hayam
+            Wuruk No.53 Rt 08/ Rw 08 Kelurahan Kalongan, Kecamatan Purwodadi, Kabupaten Grobogan.
+            Sedangkan tanggal 10 januari 2001 berubah nama menjadi Rumah Bersalin (RB) dan Balai Pengobatan (BP) Ganesha
+            Husada
+            sampai sekarang. Dipimpin oleh Bambang Purwanto, SE. dan Pelaksana Harian Herowati Widjaja, AMd. Keb.
+            (sampai sekarang)
+            dan dr. Ruth Indah Kurniawati ( dari tahun 2012 sampai sekarang) serta Penanggung Jawab dr. Singgih (dari
+            tahun 2001 s/d
+            2006) dan dr. Iman Santoso, M.Kes (dari tahun 2007-2013) dengan ijin tetap penyelenggaraan Rumah Bersalin
+            (RB) No:
+            445.6/886/2007 dan Balai Pengobatan (BP) No: 445.5/865/2007
+        </p>
 
     </div>
 </section>

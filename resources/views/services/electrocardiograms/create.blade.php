@@ -14,7 +14,7 @@ Input Layanan EGG
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-white border-0">
                         <strong>Input Layanan EKG</strong>
                     </div>
                     <div class="card-body">
