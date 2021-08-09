@@ -166,7 +166,7 @@ $("#btn-filter").click(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\projects\klinik\resources\assets\js\sales\datas\datas.js */"./resources/assets/js/sales/datas/datas.js");
+module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/sales/datas/datas.js */"./resources/assets/js/sales/datas/datas.js");
 
 
 /***/ })

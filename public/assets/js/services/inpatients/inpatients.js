@@ -174,7 +174,7 @@ $(document).on("change", ".status", function (event) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\projects\klinik\resources\assets\js\services\inpatients\inpatients.js */"./resources/assets/js/services/inpatients/inpatients.js");
+module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/services/inpatients/inpatients.js */"./resources/assets/js/services/inpatients/inpatients.js");
 
 
 /***/ })

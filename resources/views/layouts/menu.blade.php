@@ -33,84 +33,84 @@
 </li>
 
 @if (auth()->user()->hasRole(['cashier']))
-@if (getShift())
-{{-- layanan --}}
-<li class="nav-item side-menus nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle menu-text-wrap {{ Request::is('services*') ? 'active' : '' }}" href="#"
-        data-toggle="tooltip" data-placement="bottom" title="Layanan" data-delay='{"show":"500", "hide":"50"}'
-        data-trigger="hover">
-        <i class="nav-icon fas fa-list"></i>
-        Layanan
-    </a>
-    <ul class="nav-dropdown-items">
-        <li class="nav-item side-menus {{ Request::is('services.generals*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.generals.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Umum" data-delay='{"show":"500", "hide":"50"}'>
+    @if (getShift())
+    {{-- layanan --}}
+    <li class="nav-item side-menus nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle menu-text-wrap {{ Request::is('services*') ? 'active' : '' }}" href="#"
+            data-toggle="tooltip" data-placement="bottom" title="Layanan" data-delay='{"show":"500", "hide":"50"}'
+            data-trigger="hover">
+            <i class="nav-icon fas fa-list"></i>
+            Layanan
+        </a>
+        <ul class="nav-dropdown-items">
+            <li class="nav-item side-menus {{ Request::is('services.generals*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.generals.index') }}" data-toggle="tooltip"
+                    data-placement="bottom" title="Umum" data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>Praktek Umum</span>
-            </a>
-        </li>
-        <li class="nav-item side-menus {{ Request::is('services.family_plannings*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.family_plannings.index') }}"
-                data-toggle="tooltip" data-placement="bottom" title="KB" data-delay='{"show":"500", "hide":"50"}'>
+                    <span>Praktek Umum</span>
+                </a>
+            </li>
+            <li class="nav-item side-menus {{ Request::is('services.family_plannings*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.family_plannings.index') }}"
+                    data-toggle="tooltip" data-placement="bottom" title="KB" data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>KB</span>
-            </a>
-        </li>
-        <li class="nav-item side-menus {{ Request::is('services.pregnancies*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.pregnancies.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Kehamilan" data-delay='{"show":"500", "hide":"50"}'>
+                    <span>KB</span>
+                </a>
+            </li>
+            <li class="nav-item side-menus {{ Request::is('services.pregnancies*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.pregnancies.index') }}" data-toggle="tooltip"
+                    data-placement="bottom" title="Kehamilan" data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>P. Kehamilan</span>
-            </a>
-        </li>
-        <li class="nav-item side-menus {{ Request::is('services.laboratories*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.laboratories.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                    <span>P. Kehamilan</span>
+                </a>
+            </li>
+            <li class="nav-item side-menus {{ Request::is('services.laboratories*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.laboratories.index') }}" data-toggle="tooltip"
+                    data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>Laboratorium</span>
-            </a>
-        </li>
-        <li class="nav-item side-menus {{ Request::is('services.immunizations*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.immunizations.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                    <span>Laboratorium</span>
+                </a>
+            </li>
+            <li class="nav-item side-menus {{ Request::is('services.immunizations*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.immunizations.index') }}" data-toggle="tooltip"
+                    data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>Imunisasi</span>
-            </a>
-        </li>
-        <li class="nav-item side-menus {{ Request::is('services.parturitions*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.parturitions.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                    <span>Imunisasi</span>
+                </a>
+            </li>
+            <li class="nav-item side-menus {{ Request::is('services.parturitions*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.parturitions.index') }}" data-toggle="tooltip"
+                    data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>Partus</span>
-            </a>
-        </li>
-        <li class="nav-item side-menus {{ Request::is('services.inpatients*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.inpatients.index') }}" data-toggle="tooltip"
-                data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
+                    <span>Partus</span>
+                </a>
+            </li>
+            <li class="nav-item side-menus {{ Request::is('services.inpatients*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.inpatients.index') }}" data-toggle="tooltip"
+                    data-placement="bottom" title="Laboratorium" data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>Rawat Inap</span>
-            </a>
-        </li>
-        <li class="nav-item side-menus {{ Request::is('services.electrocardiograms*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.electrocardiograms.index') }}"
-                data-toggle="tooltip" data-placement="bottom" title="Laboratorium"
-                data-delay='{"show":"500", "hide":"50"}'>
+                    <span>Rawat Inap</span>
+                </a>
+            </li>
+            <li class="nav-item side-menus {{ Request::is('services.electrocardiograms*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.electrocardiograms.index') }}"
+                    data-toggle="tooltip" data-placement="bottom" title="Laboratorium"
+                    data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>EKG</span>
-            </a>
-        </li>
-        <li class="nav-item side-menus {{ Request::is('services.administrations*') ? 'active' : '' }}">
-            <a class="nav-link menu-text-wrap" href="{{ route('services.administrations.index') }}"
-                data-toggle="tooltip" data-placement="bottom" title="Laboratorium"
-                data-delay='{"show":"500", "hide":"50"}'>
+                    <span>EKG</span>
+                </a>
+            </li>
+            <li class="nav-item side-menus {{ Request::is('services.administrations*') ? 'active' : '' }}">
+                <a class="nav-link menu-text-wrap" href="{{ route('services.administrations.index') }}"
+                    data-toggle="tooltip" data-placement="bottom" title="Laboratorium"
+                    data-delay='{"show":"500", "hide":"50"}'>
 
-                <span>Administrasi</span>
-            </a>
-        </li>
-    </ul>
-</li>
-@endif
+                    <span>Administrasi</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    @endif
 @else
 <li class="nav-item side-menus nav-dropdown">
     <a class="nav-link nav-dropdown-toggle menu-text-wrap {{ Request::is('services*') ? 'active' : '' }}" href="#"

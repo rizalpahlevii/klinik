@@ -249,7 +249,7 @@ window.renderData = function (id) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\projects\klinik\resources\assets\js\accounts\accounts.js */"./resources/assets/js/accounts/accounts.js");
+module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/accounts/accounts.js */"./resources/assets/js/accounts/accounts.js");
 
 
 /***/ })

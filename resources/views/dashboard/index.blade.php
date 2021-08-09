@@ -52,7 +52,7 @@
                                     <tr>
                                         <th>Nama Kasir Sebelumnya</th>
                                         <th>:</th>
-                                        <th>{{ $previousShift != null ? $previousShift->cashier->fullname : '-'  }}
+                                        <th>{{ $previousShift != null ? ($previousShift->cashier ? $previousShift->cashier->fullname : '?') : '-'  }}
                                         </th>
                                     </tr>
                                     <tr>
@@ -60,9 +60,9 @@
                                         <th>:</th>
                                         <th>
                                             @if ($shift)
-                                            @rupiah($shift->initial_cash)
+                                                @rupiah($shift->initial_cash)
                                             @else
-                                            @rupiah( $previousShift != null ? $previousShift->final_cash : 0 )
+                                                @rupiah( $previousShift != null ? $previousShift->final_cash : 0 )
                                             @endif
                                         </th>
                                     </tr>
@@ -71,9 +71,9 @@
                                         <th>:</th>
                                         <th>
                                             @if ($shift)
-                                            @rupiah($cashAdd)
+                                                @rupiah($cashAdd)
                                             @else
-                                            -
+                                                -
                                             @endif
                                         </th>
                                     </tr>
@@ -82,9 +82,9 @@
                                         <th>:</th>
                                         <th>
                                             @if ($shift)
-                                            @rupiah( $totalSales )
+                                                @rupiah( $totalSales )
                                             @else
-                                            -
+                                                -
                                             @endif
                                         </th>
                                     </tr>
@@ -93,9 +93,9 @@
                                         <th>:</th>
                                         <th>
                                             @if ($shift)
-                                            @rupiah($spending )
+                                                @rupiah($spending )
                                             @else
-                                            -
+                                                -
                                             @endif
                                         </th>
                                     </tr>
@@ -104,9 +104,9 @@
                                         <th>:</th>
                                         <th>
                                             @if ($shift)
-                                            @rupiah($finalCash - $spending + $cashAdd)
+                                                @rupiah($finalCash - $spending + $cashAdd)
                                             @else
-                                            @rupiah( $previousShift != null ? $previousShift->final_cash : 0 )
+                                                @rupiah( $previousShift != null ? $previousShift->final_cash : 0 )
                                             @endif
                                         </th>
                                     </tr>
@@ -120,9 +120,9 @@
                                         <th>:</th>
                                         <th style="width: 45%">
                                             @if ($shift)
-                                            {{ \Carbon\Carbon::parse($shift->start_shift)->isoFormat('LLLL') }}
+                                                {{ \Carbon\Carbon::parse($shift->start_shift)->isoFormat('LLLL') }}
                                             @else
-                                            -
+                                                -
                                             @endif
                                         </th>
                                     </tr>
@@ -131,9 +131,9 @@
                                         <th>:</th>
                                         <th style="width: 45%">
                                             @if ($shift)
-                                            {{ $shift->previous_end_shift != NULL ? \Carbon\Carbon::parse($shift->previous_end_shift)->isoFormat('LLLL') : '-' }}
+                                                {{ $shift->previous_end_shift != NULL ? \Carbon\Carbon::parse($shift->previous_end_shift)->isoFormat('LLLL') : '-' }}
                                             @else
-                                            {{ $previousShift != null ? \Carbon\Carbon::parse($previousShift->end_shift)->isoFormat('LLLL') : '-' }}
+                                                {{ $previousShift != null ? \Carbon\Carbon::parse($previousShift->end_shift)->isoFormat('LLLL') : '-' }}
                                             @endif
 
                                         </th>

@@ -193,7 +193,7 @@ window.updateStatus = function (id) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\projects\klinik\resources\assets\js\medics\medics.js */"./resources/assets/js/medics/medics.js");
+module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/medics/medics.js */"./resources/assets/js/medics/medics.js");
 
 
 /***/ })
