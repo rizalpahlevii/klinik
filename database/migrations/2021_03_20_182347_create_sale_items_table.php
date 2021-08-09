@@ -15,11 +15,23 @@ class CreateSaleItemsTable extends Migration
     {
         Schema::create('sale_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('sale_id');
+            
+            $table->uuid('sale_id')->nullable();
+            $table->foreign('sale_id')
+                ->references('id')
+                ->on('sales')
+                ->onDelete('SET NULL');
+
             $table->uuid('product_id');
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('CASCADE');
+
             $table->double('current_price', 15, 2);
             $table->integer('quantity');
             $table->double('total', 15, 2);
+            
             $table->timestamps();
             $table->softDeletes();
         });

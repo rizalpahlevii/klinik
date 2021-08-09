@@ -61,7 +61,7 @@ Data Pengeluaran
                                         <div class="form-group">
                                             <label for="type">Jenis Pengeluaran <span class="required"></span></label>
                                             <select name="type" id="type" class="form-control">
-                                                <option value="all">Semua</option>
+                                                <option value="">Semua</option>
                                                 <option value="salary">Gaji</option>
                                                 <option value="office_supplies">Keperluan Kantor</option>
                                                 <option value="operational">Operasional</option>

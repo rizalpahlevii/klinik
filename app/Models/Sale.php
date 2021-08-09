@@ -74,4 +74,25 @@ class Sale extends Model
     {
         return $this->belongsTo(Medic::class, 'doctor_id', 'id');
     }
+
+    public function countTotal()
+    {
+        $subtotal = $this->attributes['sub_total'];
+        $tax = $this->attributes['tax'];
+        $discount = $this->attributes['discount'];
+
+        return $this->attributes['grand_total'] = $subtotal + $tax - $discount;
+    }
+
+    public function increaseTotal($amount)
+    {
+        $this->attributes['sub_total'] += $amount;
+        $this->countTotal();
+    }
+
+    public function decreaseTotal($amount)
+    {
+        $this->attributes['sub_total'] -= $amount;
+        $this->countTotal();
+    }
 }

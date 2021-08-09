@@ -15,6 +15,13 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
+            /*$table->uuid('patient_id')->nullable();
+            $table->foreign('patient_id')
+                ->references('id')
+                ->on('patients')
+                ->onDelete('CASCADE');*/
+
             $table->string('receipt_code')->unique();
             $table->date('receipt_date');
             $table->string('buyer_type');

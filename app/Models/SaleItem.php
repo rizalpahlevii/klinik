@@ -47,6 +47,8 @@ class SaleItem extends Model
     public static function boot()
     {
         parent::boot();
+        // self::observe(SaleItem::class);
+
         self::creating(function ($model) {
             $model->id = (string) Uuid::generate(4);
         });
@@ -55,5 +57,10 @@ class SaleItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
     }
 }

@@ -48,15 +48,19 @@ class SpendingController extends AppBaseController
                     if ($row->type == "non_operational") {
                         return "Non Operasional";
                     }
-                })
-                ->filter(function ($query) use ($request) {
-                    if ($request->has('start_date') && $request->has('end_date')) {
-                        $query->whereDate('created_at', '>=', $request->start_date)->whereDate('created_at', '<=', $request->end_date);
+                })->filter(function ($query) use ($request) {
+                    $startDate = now()->startOfMonth();
+                    if ($_startDate = $request->input('start_date')) {
+                        $query->whereDate('created_at', '>=', $_startDate);
                     }
-                    if ($request->has('type')) {
-                        if ($request->type != "all") {
-                            $query->where('type', $request->type);
-                        }
+
+                    $endDate = now();
+                    if ($_endDate = $request->input('end_date')) {
+                        $query->whereDate('created_at', '<=', $_endDate);
+                    }
+
+                    if ($type = $request->input('type')) {
+                        $query->where('type', $type);
                     }
                 })->make(true);
         }
