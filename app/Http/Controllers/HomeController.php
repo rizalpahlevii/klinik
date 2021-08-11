@@ -9,6 +9,7 @@ use Illuminate\View\View;
 
 use App\Http\Requests\Shifts\ShiftCashTransfer;
 use App\Http\Requests\Shifts\TransferCashRequest;
+use App\Mail\SendSaleNotification;
 use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\Services\Administration;
@@ -32,6 +33,7 @@ use App\Repositories\StockAdjusmentRepository;
 use Auth;
 use DB;
 use Flash;
+use Mail;
 
 class HomeController extends AppBaseController
 {

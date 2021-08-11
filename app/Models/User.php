@@ -128,6 +128,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'start_working_date',
         'address',
         'role',
+        'email'
     ];
 
     /**

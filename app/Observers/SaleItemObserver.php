@@ -2,7 +2,10 @@
 
 namespace App\Observers;
 
-use App\SaleItem;
+use App\Mail\SendSaleNotification;
+use App\Models\SaleItem;
+use App\Models\User;
+use Mail;
 
 class SaleItemObserver
 {
@@ -15,12 +18,19 @@ class SaleItemObserver
     public function created(SaleItem $saleItem)
     {
         $sale = $saleItem->sale;
+
         $sale->increaseTotal($saleItem->total);
         $sale->save();
+
 
         $product = $saleItem->product;
         $product->current_stock -= $saleItem->quantity;
         $product->save();
+
+        $ownersEmail = User::role('owner')->get()->pluck('email')->toArray();
+        foreach ($ownersEmail as $email) {
+            if ($email != null) Mail::to($email)->send(new SendSaleNotification($sale, $email));
+        }
     }
 
     /**

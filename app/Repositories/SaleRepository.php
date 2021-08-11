@@ -54,9 +54,6 @@ class SaleRepository
         $sale->save();
 
         $saleItem = $this->updateSaleItems($input, $sale->id);
-        $sale->sub_total = $saleItem;
-        $sale->grand_total = $saleItem - $sale->tax - $sale->discount;
-        $sale->save();
         return $sale;
     }
 

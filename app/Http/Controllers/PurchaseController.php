@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePurchaseRequest;
 use App\Http\Requests\UpdatePurchaseRequest;
+use App\Models\User;
 use App\Queries\ProductDataTable;
 use App\Queries\PurchaseDataTable;
 use App\Repositories\ProductRepository;
@@ -29,6 +30,7 @@ class PurchaseController extends AppBaseController
 
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             return DataTables::of((new PurchaseDataTable())->get())
                 ->addIndexColumn()

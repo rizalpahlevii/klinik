@@ -38,7 +38,7 @@ class CashierController extends AppBaseController
             session()->flash('newurl', route('sales.datas.print', $sale->id));
         } catch (\Throwable $th) {
             DB::rollback();
-            Flash::error("Ada Kesalahan Dalam melakukan transaksi");
+            Flash::error("Ada Kesalahan Dalam melakukan transaksi" . $th->getMessage());
         }
         return redirect()->route('sales.cashiers.index');
     }

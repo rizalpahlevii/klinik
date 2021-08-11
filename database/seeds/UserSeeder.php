@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         $input = [
             [
                 'fullname'          => 'Super Admin',
+                'email'             => 'admin@mail.com',
                 'username'          => 'admin',
                 'password'          => Hash::make('123123123'),
                 'phone'             => '082158115949',
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
             [
                 'fullname'          => 'Kasir',
                 'username'          => 'kasir',
+                'email'             => 'kasir@mail.com',
                 'password'          => Hash::make('123123123'),
                 'phone'             => '012837187',
                 'gender'            => 'male',
@@ -38,6 +40,7 @@ class UserSeeder extends Seeder
             [
                 'fullname'          => 'Gudang',
                 'username'          => 'Gudang',
+                'email'             => 'gudang@mail.com',
                 'password'          => Hash::make('123123123'),
                 'phone'             => '19237891237',
                 'gender'            => 'male',
