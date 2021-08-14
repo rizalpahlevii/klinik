@@ -116,12 +116,13 @@ Data Pengeluaran
 @endsection
 @push('script')
 <script>
-    $('.dataTables_length').html(`<div class="d-flex">
-        <a class="btn rounded-0 btn-lightgreen">Semua</a>
-        <a class="btn rounded-0 btn-secondary">Gaji</a>
-        <a class="btn rounded-0 btn-secondary">Keperluan Kantor</a>
-        <a class="btn rounded-0 btn-secondary">Operasional</a>
-        <a class="btn rounded-0 btn-secondary">Non Operasional</a>
-    </div>`)
+    // $('.dataTables_length').html(`<div class="d-flex">
+    //     <a class="btn btn-type rounded-0 btn-secondary">Semua</a>
+    //     <a class="btn btn-type rounded-0 btn-secondary">Gaji</a>
+    //     <a class="btn btn-type rounded-0 btn-secondary">Keperluan Kantor</a>
+    //     <a class="btn btn-type rounded-0 btn-secondary">Operasional</a>
+    //     <a class="btn btn-type rounded-0 btn-secondary">Non Operasional</a>
+    // </div>`)
+    // $('.btn-type').
 </script>
 @endpush
