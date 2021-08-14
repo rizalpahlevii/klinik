@@ -87,7 +87,6 @@ class SaleRepository
             $item->total = $item->current_price * $item->quantity;
             $item->save();
             $total += $item->total;
-            $this->reduceStock($item->product_id, $item->quantity);
         }
         return $total;
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePurchaseRequest;
 use App\Http\Requests\UpdatePurchaseRequest;
+use App\Mail\SendPurchaseNotification;
 use App\Models\User;
 use App\Queries\ProductDataTable;
 use App\Queries\PurchaseDataTable;
@@ -14,6 +15,7 @@ use Cookie;
 use DB;
 use Flash;
 use Illuminate\Http\Request;
+use Mail;
 use Yajra\DataTables\DataTables;
 
 class PurchaseController extends AppBaseController
@@ -63,9 +65,12 @@ class PurchaseController extends AppBaseController
                 $request->merge(['photo' => 'uploads/purchases/' . $imageName]);
             }
             $purchase = $this->purchaseRepository->create($request->all());
+            $ownersEmail = User::role('owner')->get()->pluck('email')->toArray();
+            foreach ($ownersEmail as $email) {
+                if ($email != null) Mail::to($email)->send(new SendPurchaseNotification($purchase, $email));
+            }
             Flash::success("Berhasil melakukan transaksi pembelian produk");
             session()->flash('newurl', route('purchases.print', $purchase->id));
-
             DB::commit();
             Cookie::queue(Cookie::forget('klinik-purchases-carts'));
         } catch (\Exception $e) {

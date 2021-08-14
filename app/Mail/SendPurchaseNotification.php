@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,8 +18,10 @@ class SendPurchaseNotification extends Mailable
      * @return void
      */
     protected $purchase;
-    public function __construct($purchase)
+    protected $email;
+    public function __construct($purchase, $email)
     {
+        $this->email = $email;
         $this->purchase = $purchase;
     }
 
@@ -29,6 +32,7 @@ class SendPurchaseNotification extends Mailable
      */
     public function build()
     {
-        return $this->subject('Notifikasi Pembelian')->view('emails.purchase_notif', ['purchase' => $this->purchase]);
+        $user = User::where('email', $this->email)->first();
+        return $this->subject('Notifikasi Pembelian')->view('emails.purchase_notif', ['purchase' => $this->purchase, 'user' => $user]);
     }
 }
