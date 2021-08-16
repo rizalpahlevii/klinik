@@ -14,7 +14,7 @@ class CreateCashierShiftsTable extends Migration
     public function up()
     {
         Schema::create('cashier_shifts', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->uuid('cashier_id')->comment('user id');
             $table->uuid('previous_shift_id')->nullable();
             $table->dateTime('start_shift');
