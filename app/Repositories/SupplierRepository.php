@@ -77,7 +77,7 @@ class SupplierRepository extends BaseRepository
 
     public function getSupplierAssociatedData($supplier_id)
     {
-        return $this->supplier->with('salesmans')->findOrFail($supplier_id)->first();
+        return $this->supplier->with('salesmans')->findOrFail($supplier_id);
     }
 
     public function deleteSalesman($salesManId)
