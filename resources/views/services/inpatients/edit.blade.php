@@ -18,7 +18,15 @@ Edit Layanan Rawat Inap
                         <strong>Edit Layanan Rawat Inap</strong>
                     </div>
                     <div class="card-body">
-
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         {{ Form::open(['route' => ['services.inpatients.update', $data->id], 'method' => 'put','files' => 'true']) }}
 
                         @include('services.inpatients.edit_fields')

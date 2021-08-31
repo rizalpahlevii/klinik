@@ -129,6 +129,9 @@ var tbl = $("#patientsTable").DataTable({
     },
     name: "name"
   }, {
+    data: "registration_number",
+    name: "registration_number"
+  }, {
     data: "address",
     name: "address"
   }, {
@@ -188,7 +191,7 @@ window.updateStatus = function (id) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/patients/patients.js */"./resources/assets/js/patients/patients.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\klinik\resources\assets\js\patients\patients.js */"./resources/assets/js/patients/patients.js");
 
 
 /***/ })

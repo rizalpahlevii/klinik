@@ -25,6 +25,7 @@ class UpdatePatientRequest extends FormRequest
     public function rules()
     {
         $rules = Patient::$rules;
+        $rules['registration_number'] = 'required|min:3|unique:patients,registration_number,' . $this->patient;
         return $rules;
     }
 }

@@ -78,6 +78,7 @@ class Patient extends Model
         'gender',
         'blood_group',
         'address',
+        'registration_number',
         'city'
     ];
     public static $rules = [
@@ -87,7 +88,7 @@ class Patient extends Model
         'gender_form' => 'required',
         'blood_group' => 'nullable',
         'address_form' => 'required|min:4',
-        'city' => 'required:min:2'
+        'city' => 'required|min:2'
     ];
 
     protected $keyType = 'string';

@@ -18,7 +18,15 @@ Edit Layanan Imunisasi
                         <strong>Edit Layanan Imunisasi</strong>
                     </div>
                     <div class="card-body">
-
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         {{ Form::open(['route' => ['services.immunizations.update', $data->id], 'method' => 'put','files' => 'true']) }}
 
                         @include('services.immunizations.edit_fields')

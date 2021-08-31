@@ -7,6 +7,14 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
+            <label for="registration_number">Nomor Registrasi <span class="required">*</span></label>
+            <input type="text" class="form-control" name="registration_number" id="registration_number" required
+                value="{{ $patient->registration_number }}">
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
             <label for="birth_date">Tanggal Kelahiran <span class="required">*</span></label>
             <input type="date" class="form-control" name="birth_date" id="birth_date"
                 value="{{ $patient->birth_date }}">

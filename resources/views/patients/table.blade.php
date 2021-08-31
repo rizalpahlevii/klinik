@@ -3,6 +3,7 @@
         <tr>
             <th>Nomor</th>
             <th>Nama Pasien</th>
+            <th>Nomor Registrasi</th>
             <th>Alamat</th>
             <th>No. Telp</th>
             <th>Golongan Darah</th>

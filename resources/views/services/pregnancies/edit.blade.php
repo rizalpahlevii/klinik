@@ -18,7 +18,15 @@ Edit Layanan Kehamilan
                         <strong>Edit Layanan Kehamilan</strong>
                     </div>
                     <div class="card-body">
-
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         {{ Form::open(['route' => ['services.pregnancies.update', $data->id], 'method' => 'put','files' => 'true']) }}
 
                         @include('services.pregnancies.edit_fields')

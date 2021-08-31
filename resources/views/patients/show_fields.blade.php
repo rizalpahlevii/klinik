@@ -7,6 +7,12 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
+            {{ Form::label('registration_number', __('Nomor Registrasi').':', ['class' => 'font-weight-bold']) }}
+            <p>{{ $data->registration_number }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
             {{ Form::label('phone', __('No.Telp Pasien').':', ['class' => 'font-weight-bold']) }}
             <p>{{ !empty($data->phone)?$data->phone:__('messages.common.n/a') }}</p>
         </div>
@@ -102,6 +108,6 @@
             </select>
         </div>`)
     })
-    
+
 </script>
 @endpush

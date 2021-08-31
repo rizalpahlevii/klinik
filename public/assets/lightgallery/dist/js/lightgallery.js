@@ -1,4 +1,4 @@
-/*! lightgallery - v1.10.0 - 2020-11-07
+/*! lightgallery - v1.8.3 - 2020-09-19
 * http://sachinchoolur.github.io/lightGallery/
 * Copyright (c) 2020 Sachin N; Licensed GPLv3 */
 (function (root, factory) {
@@ -35,8 +35,6 @@
         addClass: '',
         startClass: 'lg-start-zoom',
         backdropDuration: 150,
-
-        // Set 0, if u don't want to hide the controls 
         hideBarsDelay: 6000,
 
         useLeft: false,
@@ -65,7 +63,7 @@
 
         /**
          * @desc number of preload slides
-         * will execute only after the current slide is fully loaded.
+         * will exicute only after the current slide is fully loaded.
          *
          * @ex you clicked on 4th image and if preload = 1 then 3rd slide and 5th
          * slide will be loaded in the background after the 4th slide is fully loaded..
@@ -94,8 +92,7 @@
 
         dynamic: false,
         dynamicEl: [],
-        galleryId: 1,
-        supportLegacyBrowser: true
+        galleryId: 1
     };
 
     function Plugin(element, options) {
@@ -123,7 +120,7 @@
         this.lgBusy = false;
 
         // Timeout function for hiding controls;
-        this.hideBarTimeout = false;
+        this.hideBartimeout = false;
 
         // To determine browser supports for touch events;
         this.isTouch = ('ontouchstart' in document.documentElement);
@@ -269,21 +266,18 @@
         _this.$el.trigger('onAfterOpen.lg');
 
         // Hide controllers if mouse doesn't move for some period
-        if (_this.s.hideBarsDelay > 0) {
+        _this.$outer.on('mousemove.lg click.lg touchstart.lg', function() {
 
-            // Hide controllers if mouse doesn't move for some period
-            _this.$outer.on('mousemove.lg click.lg touchstart.lg', function () {
-                _this.$outer.removeClass('lg-hide-items');
+            _this.$outer.removeClass('lg-hide-items');
 
-                clearTimeout(_this.hideBarTimeout);
+            clearTimeout(_this.hideBartimeout);
 
-                // Timeout will be cleared on each slide movement also
-                _this.hideBarTimeout = setTimeout(function () {
-                    _this.$outer.addClass('lg-hide-items');
-                }, _this.s.hideBarsDelay);
+            // Timeout will be cleared on each slide movement also
+            _this.hideBartimeout = setTimeout(function() {
+                _this.$outer.addClass('lg-hide-items');
+            }, _this.s.hideBarsDelay);
 
-            });
-        }
+        });
 
         _this.$outer.trigger('mousemove.lg');
 
@@ -463,7 +457,7 @@
         }
 
         var youtube = src.match(/\/\/(?:www\.)?youtu(?:\.be|be\.com|be-nocookie\.com)\/(?:watch\?v=|embed\/)?([a-z0-9\-\_\%]+)/i);
-        var vimeo = src.match(/\/\/(?:www\.)?(?:player\.)?vimeo.com\/(?:video\/)?([0-9a-z\-_]+)/i);
+        var vimeo = src.match(/\/\/(?:www\.)?vimeo.com\/([0-9a-z\-_]+)/i);
         var dailymotion = src.match(/\/\/(?:www\.)?dai.ly\/([0-9a-z\-_]+)/i);
         var vk = src.match(/\/\/(?:www\.)?(?:vk\.com|vkontakte\.ru)\/(?:video_ext\.php\?)(.*)/i);
 
@@ -720,14 +714,12 @@
 
             if (_srcset) {
                 _$img.attr('srcset', _srcset);
-                if (this.s.supportLegacyBrowser) {
-                    try {
-                        picturefill({
-                            elements: [_$img[0]]
-                        });
-                    } catch (e) {
-                        console.warn('lightGallery :- If you want srcset to be supported for older browser please include picturefil version 2 javascript library in your document.');
-                    }
+                try {
+                    picturefill({
+                        elements: [_$img[0]]
+                    });
+                } catch (e) {
+                    console.warn('lightGallery :- If you want srcset to be supported for older browser please include picturefil version 2 javascript library in your document.');
                 }
             }
 
@@ -832,7 +824,7 @@
 
             _this.lgBusy = true;
 
-            clearTimeout(_this.hideBarTimeout);
+            clearTimeout(_this.hideBartimeout);
 
             // Add title if this.s.appendSubHtmlTo === lg-sub-html
             if (this.s.appendSubHtmlTo === '.lg-sub-html') {
@@ -1338,8 +1330,8 @@
 
         this.lGalleryOn = false;
 
-        clearTimeout(_this.hideBarTimeout);
-        this.hideBarTimeout = false;
+        clearTimeout(_this.hideBartimeout);
+        this.hideBartimeout = false;
         $(window).off('.lg');
         $('body').removeClass('lg-on lg-from-hash');
 
@@ -1372,7 +1364,7 @@
                 try {
                     $(this).data('lightGallery').init();
                 } catch (err) {
-                    console.error('lightGallery has not initiated properly', err);
+                    console.error('lightGallery has not initiated properly');
                 }
             }
         });

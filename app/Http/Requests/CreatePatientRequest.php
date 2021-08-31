@@ -24,6 +24,8 @@ class CreatePatientRequest extends FormRequest
      */
     public function rules()
     {
-        return Patient::$rules;
+        $rules = Patient::$rules;
+        $rules['registration_number'] = 'required|min:3|unique:patients,registration_number';
+        return $rules;
     }
 }

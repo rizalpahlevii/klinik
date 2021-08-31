@@ -17,6 +17,15 @@ Edit Pasien
                         <strong>Edit Pasien</strong>
                     </div>
                     <div class="card-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         {{ Form::model($patient, ['route' => ['patients.update', $patient->id], 'method' => 'patch', 'files' => 'true', 'id' => 'editPatientForm']) }}
 
                         @include('patients.edit_fields')

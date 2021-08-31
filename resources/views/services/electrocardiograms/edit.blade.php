@@ -18,7 +18,15 @@ Edit Layanan EGG
                         <strong>Edit Layanan EGG</strong>
                     </div>
                     <div class="card-body">
-
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         {{ Form::open(['route' => ['services.electrocardiograms.update', $data->id], 'method' => 'put','files' => 'true']) }}
 
                         @include('services.electrocardiograms.edit_fields')

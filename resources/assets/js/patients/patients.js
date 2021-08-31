@@ -41,6 +41,10 @@ let tbl = $("#patientsTable").DataTable({
             name: "name"
         },
         {
+            data: "registration_number",
+            name: "registration_number"
+        },
+        {
             data: "address",
             name: "address"
         },

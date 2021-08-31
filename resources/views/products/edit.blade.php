@@ -18,6 +18,15 @@ Edit Produk
                         <strong>Edit Produk</strong>
                     </div>
                     <div class="card-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         {{ Form::model($product, ['route' => ['products.update', $product->id], 'method' => 'put', 'files' => 'true', 'id' => 'editPatientForm']) }}
 
                         @include('products.edit_fields')

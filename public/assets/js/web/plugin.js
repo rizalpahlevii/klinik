@@ -107,7 +107,7 @@ $('.lightgallery').lightGallery({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/web/plugin.js */"./resources/assets/js/web/plugin.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\klinik\resources\assets\js\web\plugin.js */"./resources/assets/js/web/plugin.js");
 
 
 /***/ })
