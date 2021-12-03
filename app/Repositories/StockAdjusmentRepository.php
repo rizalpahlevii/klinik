@@ -56,7 +56,13 @@ class StockAdjusmentRepository
     public function destroy($id)
     {
         $stockAdjusment = $this->stockAdjusment->find($id);
-        $this->product->find($stockAdjusment->product_id)->decrement('current_stock', $stockAdjusment->quantity);
+        if($stockAdjusment->type == "addition"){
+            $this->product->find($stockAdjusment->product_id)->decrement('current_stock',$stockAdjusment->quantity); 
+        }else{
+
+        
+        $this->product->find($stockAdjusment->product_id)->increment('current_stock', $stockAdjusment->quantity);
+        }
         $stockAdjusment->delete();
         return $stockAdjusment;
     }
