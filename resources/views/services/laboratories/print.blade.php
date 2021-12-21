@@ -12,13 +12,22 @@
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <p>www.klinikpratamaganeshautama.com</p>
-                <p style="margin-top: -20px;">Jl. Kolonel Sugiono. 285</p>
-                <p style="margin-top: -20px;">Purwodadi</p>
+        <div class="row mt-5">
+            <div class="col-md-12 text-center" style="font-family: 'Times New Roman', Times, serif">
+                <h4>
+                    <b> KLINIK PRATAMA RAWAT INAP DAN PERSALINAN</b>
+                </h4>
+                <h2 class="mb-4">
+                    <b>
+                        “GANESHA HUSADA“
+                    </b>
+                </h2>
+                <p style="margin-top: -20px;">Jl. Hayam Wuruk No.53 Purwodadi</p>
+                <p style="margin-top: -20px;">Telp (0292) 421697 - 423469</p>
+                <h5 style="margin-top: -10px;"><b> Grobogan</b></h5>
             </div>
         </div>
+        <hr style="border: 1px solid black;">
         <div class="row">
             <div class="col-md-12 text-center">
                 <h4>Rincian Layanan Laboratorium</h4>
