@@ -23,7 +23,7 @@
                     </b>
                 </h2>
                 <p style="margin-top: -20px;">Jl. Hayam Wuruk No.53 Purwodadi</p>
-                <p style="margin-top: -20px;">Telp (0292) 421697 - 423469</p>
+                <p style="margin-top: -20px;">Telp (0292) 421697</p>
                 <h5 style="margin-top: -10px;"><b> Grobogan</b></h5>
             </div>
         </div>
