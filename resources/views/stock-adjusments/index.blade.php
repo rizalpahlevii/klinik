@@ -9,13 +9,13 @@ Penyesuaian Stok
 <div class="container-fluid">
     <div class="animated fadeIn">
         @include('flash::message')
-        {{-- <div class="page-header">
+        <div class="page-header">
             <h3 class="page__heading">Penyesuaian Stok</h3>
             <div class="flex-end-sm">
                 <a href="#" class="btn btn-primary btn-stock-adjusment">Tambah Penyesuaian
                     Stok</a>
             </div>
-        </div> --}}
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">

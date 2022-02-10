@@ -14,7 +14,7 @@ class AddEmailToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('email')->unique()->after('username');
+            $table->string('email')->nullable();
         });
     }
 
