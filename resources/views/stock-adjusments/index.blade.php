@@ -41,7 +41,7 @@ Penyesuaian Stok
                                         <td>{{ $stockAdjusment->created_at->format('[H:i:s] d F Y') }}</td>
                                         <td>{{ $stockAdjusment->product ? $stockAdjusment->product->name : '' }}
                                         </td>
-                                        <td>{{ $stockAdjusment->type == "addition" ? "Penambahan"  :"Pengurangan" }}
+                                        <td>{{ $stockAdjusment->type == "addition" ? "Penambahan" :"Pengurangan" }}
                                         </td>
                                         <td>{{ $stockAdjusment->quantity }}</td>
                                         <td>{{ $stockAdjusment->note }}</td>
@@ -121,7 +121,9 @@ Penyesuaian Stok
                         </div>
                     </div>
                     <div class="text-right">
-                        {{ Form::button(__('Simpan'), ['type'=>'submit','class' => 'btn btn-primary','id'=>'btnSave','data-loading-text'=>"<span class='spinner-border spinner-border-sm'></span> Processing..."]) }}
+                        {{ Form::button(__('Simpan'), ['type'=>'submit','class' => 'btn
+                        btn-primary','id'=>'btnSave','data-loading-text'=>"<span
+                            class='spinner-border spinner-border-sm'></span> Processing..."]) }}
                         <button type="button" class="btn btn-light ml-1" data-dismiss="modal">{{ __('Batal') }}</button>
                     </div>
                 </div>
@@ -171,7 +173,9 @@ Penyesuaian Stok
                         </div>
                     </div>
                     <div class="text-right">
-                        {{ Form::button(__('Simpan'), ['type'=>'submit','class' => 'btn btn-primary','id'=>'btnSave','data-loading-text'=>"<span class='spinner-border spinner-border-sm'></span> Processing..."]) }}
+                        {{ Form::button(__('Simpan'), ['type'=>'submit','class' => 'btn
+                        btn-primary','id'=>'btnSave','data-loading-text'=>"<span
+                            class='spinner-border spinner-border-sm'></span> Processing..."]) }}
                         <button type="button" class="btn btn-light ml-1" data-dismiss="modal">{{ __('Batal') }}</button>
                     </div>
                 </div>
@@ -188,22 +192,23 @@ Penyesuaian Stok
 <script>
     $('#stock-adjusment-datatable').dataTable();
     $('.btn-delete').click(function (e) {
-                $(this).siblings('form').submit();
-
-        });
+        $(this).siblings('form').submit();
+    });
     $(document).on('click','.btn-edit',function(){
-            $('#quantity_edit').val($(this).data('quantity'));
-            $('#note_edit').val($(this).data('note'))
-            $('#product_id_edit').val($(this).data('product-id'));
-            let url = `{{ route('stock_adjusments.update',':id') }}`;
-            url = url.replace(':id',$(this).data('id'));
-            $('#stock-adjument-edit').attr('action',url);
-            $('#stockAdjusmentModalEdit').modal('show');
+        $('#quantity_edit').val($(this).data('quantity'));
+        $('#note_edit').val($(this).data('note'))
+        $('#product_id_edit').val($(this).data('product-id'));
+        let url = `{{ route('stock_adjusments.update',':id') }}`;
+        url = url.replace(':id',$(this).data('id'));
+        $('#stock-adjument-edit').attr('action',url);
+        $('#stockAdjusmentModalEdit').modal('show');
 
-        });
+    });
+    $(document).ready(function(){
         $('.btn-stock-adjusment').click(function(){
             $('#stockAdjusmentModal').modal('show');
         });
+    });
 </script>
 @endsection
 @push('script')
