@@ -187,7 +187,7 @@ $(".btn-save-salesman").click(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\klinik\resources\assets\js\suppliers\suppliers_data_listing.js */"./resources/assets/js/suppliers/suppliers_data_listing.js");
+module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/suppliers/suppliers_data_listing.js */"./resources/assets/js/suppliers/suppliers_data_listing.js");
 
 
 /***/ })

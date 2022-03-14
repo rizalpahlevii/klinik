@@ -180,7 +180,7 @@ window.editRecordWithForm = function (data, loadingButton) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\klinik\resources\assets\js\custom\new-edit-modal-form.js */"./resources/assets/js/custom/new-edit-modal-form.js");
+module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/custom/new-edit-modal-form.js */"./resources/assets/js/custom/new-edit-modal-form.js");
 
 
 /***/ })
