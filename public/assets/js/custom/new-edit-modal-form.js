@@ -1,1 +1,188 @@
-!function(e){var t={};function r(o){if(t[o])return t[o].exports;var n=t[o]={i:o,l:!1,exports:{}};return e[o].call(n.exports,n,n.exports,r),n.l=!0,n.exports}r.m=e,r.c=t,r.d=function(e,t,o){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(r.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)r.d(o,n,function(t){return e[t]}.bind(null,n));return o},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="/",r(r.s=3)}({3:function(e,t,r){e.exports=r("gx3l")},gx3l:function(e,t,r){"use strict";window.newRecord=function(e,t){var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"#AddModal",o=""===e.formSelector?e.formData:new FormData($(e.formSelector)[0]);$.ajax({url:e.url,type:e.type,dataType:"json",data:o,processData:!1,contentType:!1,success:function(t){t.success&&(displaySuccessMessage(t.message),$(r).modal("hide"),$(e.tableSelector).DataTable().ajax.reload(null,!1))},error:function(e){printErrorMessage("#validationErrorsBox",e)},complete:function(){t.button("reset")}})},window.editRecord=function(e,t){var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"#EditModal",o=arguments.length>3&&void 0!==arguments[3]?arguments[3]:"",n=""===e.formSelector?e.formData:new FormData($(e.formSelector)[0]);$.ajax({url:e.url,type:e.type,data:n,processData:!1,contentType:!1,success:function(t){t.success&&(displaySuccessMessage(t.message),$(r).modal("hide"),$(e.tableSelector).DataTable().ajax.reload(null,!1))},error:function(e){UnprocessableInputError(e)},complete:function(){t.button("reset"),$(o).attr("disabled",!0)}})},window.editRecordWithForm=function(e,t){var r=""===e.formSelector?e.formData:$(e.formSelector).serialize();$.ajax({url:e.url,type:e.type,data:r,success:function(t){t.success&&(displaySuccessMessage(t.message),$("#EditModal").modal("hide"),$(e.tableSelector).DataTable().ajax.reload(null,!1))},error:function(e){UnprocessableInputError(e)},complete:function(){t.button("reset")}})}}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/assets/js/custom/new-edit-modal-form.js":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/custom/new-edit-modal-form.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+window.newRecord = function (data, loadingButton) {
+  var modalSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '#AddModal';
+  var formData = data.formSelector === '' ? data.formData : new FormData($(data.formSelector)[0]);
+  $.ajax({
+    url: data.url,
+    type: data.type,
+    dataType: 'json',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function success(result) {
+      if (result.success) {
+        displaySuccessMessage(result.message);
+        $(modalSelector).modal('hide');
+        $(data.tableSelector).DataTable().ajax.reload(null, false);
+      }
+    },
+    error: function error(result) {
+      printErrorMessage("#validationErrorsBox", result);
+    },
+    complete: function complete() {
+      loadingButton.button('reset');
+    }
+  });
+};
+
+window.editRecord = function (data, loadingButton) {
+  var modalSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '#EditModal';
+  var btnToDisabledSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  var formData = data.formSelector === '' ? data.formData : new FormData($(data.formSelector)[0]);
+  $.ajax({
+    url: data.url,
+    type: data.type,
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function success(result) {
+      if (result.success) {
+        displaySuccessMessage(result.message);
+        $(modalSelector).modal('hide');
+        $(data.tableSelector).DataTable().ajax.reload(null, false);
+      }
+    },
+    error: function error(result) {
+      UnprocessableInputError(result);
+    },
+    complete: function complete() {
+      loadingButton.button('reset');
+      $(btnToDisabledSelector).attr('disabled', true);
+    }
+  });
+};
+
+window.editRecordWithForm = function (data, loadingButton) {
+  var formData = data.formSelector === '' ? data.formData : $(data.formSelector).serialize();
+  $.ajax({
+    url: data.url,
+    type: data.type,
+    data: formData,
+    success: function success(result) {
+      if (result.success) {
+        displaySuccessMessage(result.message);
+        $('#EditModal').modal('hide');
+        $(data.tableSelector).DataTable().ajax.reload(null, false);
+      }
+    },
+    error: function error(result) {
+      UnprocessableInputError(result);
+    },
+    complete: function complete() {
+      loadingButton.button('reset');
+    }
+  });
+};
+
+/***/ }),
+
+/***/ 3:
+/*!*****************************************************************!*\
+  !*** multi ./resources/assets/js/custom/new-edit-modal-form.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! /var/www/html/rizal-ganeshahusada/resources/assets/js/custom/new-edit-modal-form.js */"./resources/assets/js/custom/new-edit-modal-form.js");
+
+
+/***/ })
+
+/******/ });
